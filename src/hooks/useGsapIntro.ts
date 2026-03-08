@@ -1,0 +1,225 @@
+'use client'
+
+import { useEffect, type RefObject } from 'react'
+import gsap from 'gsap'
+
+declare global {
+  interface Window {
+    __cardsReady?: boolean
+  }
+}
+
+export function useGsapIntro(
+  containerRef: RefObject<HTMLElement | null>,
+  onComplete: () => void
+) {
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    const monogram = el.querySelector<HTMLElement>('[data-intro-monogram]')
+    const title = el.querySelector<HTMLElement>('[data-intro-title]')
+    const line = el.querySelector<HTMLElement>('[data-intro-line]')
+    const scrollEl = el.querySelector<HTMLElement>('[data-intro-scroll]')
+
+    if (!monogram || !title || !line || !scrollEl) return
+
+    const ctx = gsap.context(() => {
+      // ── Step 1: "C" fades in first ──────────────────────────────────────
+      const introTl = gsap.timeline()
+
+      introTl.to(monogram, {
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.out',
+      })
+
+      // ── Step 2: After 1.2s delay, reveal the rest ──────────────────────
+      introTl.to(
+        title,
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+        },
+        '+=1.2'
+      )
+
+      introTl.to(
+        line,
+        {
+          scaleX: 1,
+          duration: 0.6,
+          transformOrigin: 'left center',
+        },
+        '<'
+      )
+
+      introTl.to(
+        scrollEl,
+        {
+          opacity: 0.3,
+          scale: 1,
+          duration: 0.6,
+          ease: 'power2.out',
+          onComplete: () => {
+            gsap.fromTo(
+              scrollEl,
+              { opacity: 0.3 },
+              {
+                opacity: 1,
+                duration: 1.8,
+                ease: 'power2.inOut',
+                repeat: -1,
+                yoyo: true,
+              }
+            )
+          },
+        },
+        '<+=0.2'
+      )
+
+      // ── Scroll / touch driven exit ─────────────────────────────────────
+      let accumulated = 0
+      const threshold = window.innerHeight * 0.4
+      let exiting = false
+
+      function playExitAnimation() {
+        if (exiting) return
+        exiting = true
+
+        gsap.killTweensOf(scrollEl)
+
+        // ── Measure navbar targets ──────────────────────────────────────
+        const navMono = document.querySelector<HTMLElement>('[data-nav-monogram]')
+        const navTitle = document.querySelector<HTMLElement>('[data-nav-title]')
+
+        if (!navMono || !navTitle) {
+          onComplete()
+          return
+        }
+
+        const navMonoRect = navMono.getBoundingClientRect()
+        const navTitleRect = navTitle.getBoundingClientRect()
+        const monoRect = monogram!.getBoundingClientRect()
+        const titleRect = title!.getBoundingClientRect()
+
+        // Monogram: fly from current center to navbar monogram center
+        const monoDx = (navMonoRect.left + navMonoRect.width / 2) - (monoRect.left + monoRect.width / 2)
+        const monoDy = (navMonoRect.top + navMonoRect.height / 2) - (monoRect.top + monoRect.height / 2)
+        const monoScale = navMonoRect.height / monoRect.height
+
+        // Title: fly from current center to navbar title center
+        const titleDx = (navTitleRect.left + navTitleRect.width / 2) - (titleRect.left + titleRect.width / 2)
+        const titleDy = (navTitleRect.top + navTitleRect.height / 2) - (titleRect.top + titleRect.height / 2)
+        const titleScale = navTitleRect.height / titleRect.height
+
+        // ── Build the choreographed exit timeline ───────────────────────
+        const exitTl = gsap.timeline({
+          onComplete: () => {
+            onComplete()
+          },
+        })
+
+        // t=0.0 — Fade out scroll text + line (0.25s)
+        exitTl.to([line, scrollEl], {
+          opacity: 0,
+          duration: 0.25,
+          ease: 'power2.out',
+        }, 0)
+
+        // t=0.0 — Logo starts moving toward navbar (0.9s)
+        exitTl.to(
+          monogram,
+          {
+            x: monoDx,
+            y: monoDy,
+            scale: monoScale,
+            duration: 0.9,
+            ease: 'expo.inOut',
+          },
+          0
+        )
+
+        exitTl.to(
+          title,
+          {
+            x: titleDx,
+            y: titleDy,
+            scale: titleScale,
+            duration: 0.9,
+            ease: 'expo.inOut',
+          },
+          0
+        )
+
+        // t=0.0 — Fade bg to transparent so cards show through
+        exitTl.to(
+          el,
+          {
+            backgroundColor: 'rgba(0,0,0,0)',
+            duration: 0.6,
+            ease: 'power2.in',
+          },
+          0.3
+        )
+
+        // t=0.5 — Cards begin fading in from below
+        exitTl.call(() => {
+          window.__cardsReady = true
+          window.dispatchEvent(new CustomEvent('intro:showCards'))
+        }, [], 0.5)
+
+        // t=0.85 — Hamburger + sound button fade in
+        exitTl.call(() => {
+          window.dispatchEvent(new CustomEvent('intro:navControls'))
+        }, [], 0.85)
+
+        // t=0.9 — Logo arrives: invisible swap
+        exitTl.call(() => {
+          // Swap: show nav logo, hide intro logo — same frame
+          window.dispatchEvent(new CustomEvent('intro:logoMoved'))
+          gsap.set(monogram, { opacity: 0 })
+          gsap.set(title, { opacity: 0 })
+        }, [], 0.9)
+      }
+
+      const onWheel = (e: WheelEvent) => {
+        accumulated += e.deltaY
+        if (accumulated >= threshold) {
+          window.removeEventListener('wheel', onWheel)
+          window.removeEventListener('touchmove', onTouch)
+          playExitAnimation()
+        }
+      }
+
+      let touchStartY = 0
+      const onTouchStart = (e: TouchEvent) => {
+        touchStartY = e.touches[0].clientY
+      }
+      const onTouch = (e: TouchEvent) => {
+        const delta = touchStartY - e.touches[0].clientY
+        accumulated += delta
+        touchStartY = e.touches[0].clientY
+        if (accumulated >= threshold) {
+          window.removeEventListener('wheel', onWheel)
+          window.removeEventListener('touchmove', onTouch)
+          playExitAnimation()
+        }
+      }
+
+      window.addEventListener('wheel', onWheel, { passive: true })
+      window.addEventListener('touchstart', onTouchStart, { passive: true })
+      window.addEventListener('touchmove', onTouch, { passive: true })
+
+      return () => {
+        window.removeEventListener('wheel', onWheel)
+        window.removeEventListener('touchstart', onTouchStart)
+        window.removeEventListener('touchmove', onTouch)
+      }
+    }, el)
+
+    return () => ctx.revert()
+  }, [containerRef, onComplete])
+}
