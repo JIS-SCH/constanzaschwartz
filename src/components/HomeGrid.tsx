@@ -47,13 +47,13 @@ function preloadTexture(src: string): Promise<THREE.Texture> {
     img.onload = () => {
       const tex = new THREE.Texture(img)
       tex.colorSpace = THREE.SRGBColorSpace
-      tex.flipY = false
+      tex.flipY = true
       tex.needsUpdate = true
       resolve(tex)
     }
     img.onerror = () => {
       const fallback = new THREE.Texture()
-      fallback.flipY = false
+      fallback.flipY = true
       resolve(fallback)
     }
     img.src = src
@@ -88,7 +88,7 @@ function createOverlayTexture(project: Project, index: number): THREE.CanvasText
 
   const tex = new THREE.CanvasTexture(canvas)
   tex.colorSpace = THREE.SRGBColorSpace
-  tex.flipY = false
+  tex.flipY = true
   return tex
 }
 
