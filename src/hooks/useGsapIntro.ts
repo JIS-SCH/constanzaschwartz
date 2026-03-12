@@ -96,6 +96,8 @@ export function useGsapIntro(
         const navTitle = document.querySelector<HTMLElement>('[data-nav-title]')
 
         if (!navMono || !navTitle) {
+          el!.style.visibility = 'hidden'
+          el!.style.pointerEvents = 'none'
           onComplete()
           return
         }
@@ -105,83 +107,71 @@ export function useGsapIntro(
         const monoRect = monogram!.getBoundingClientRect()
         const titleRect = title!.getBoundingClientRect()
 
-        // Monogram: fly from current center to navbar monogram center
         const monoDx = (navMonoRect.left + navMonoRect.width / 2) - (monoRect.left + monoRect.width / 2)
         const monoDy = (navMonoRect.top + navMonoRect.height / 2) - (monoRect.top + monoRect.height / 2)
         const monoScale = navMonoRect.height / monoRect.height
 
-        // Title: fly from current center to navbar title center
         const titleDx = (navTitleRect.left + navTitleRect.width / 2) - (titleRect.left + titleRect.width / 2)
         const titleDy = (navTitleRect.top + navTitleRect.height / 2) - (titleRect.top + titleRect.height / 2)
         const titleScale = navTitleRect.height / titleRect.height
 
-        // ── Build the choreographed exit timeline ───────────────────────
+        // ── Single choreographed exit timeline ──────────────────────────
         const exitTl = gsap.timeline({
           onComplete: () => {
+            // All animation done — hide intro layer permanently
+            el!.style.visibility = 'hidden'
+            el!.style.pointerEvents = 'none'
             onComplete()
           },
         })
 
-        // t=0.0 — Fade out scroll text + line (0.25s)
+        // t=0.0 — Fade out scroll text + line
         exitTl.to([line, scrollEl], {
           opacity: 0,
           duration: 0.25,
           ease: 'power2.out',
         }, 0)
 
-        // t=0.0 — Logo starts moving toward navbar (0.9s)
-        exitTl.to(
-          monogram,
-          {
-            x: monoDx,
-            y: monoDy,
-            scale: monoScale,
-            duration: 0.9,
-            ease: 'expo.inOut',
-          },
-          0
-        )
+        // t=0.0 — Logo flies toward navbar
+        exitTl.to(monogram, {
+          x: monoDx,
+          y: monoDy,
+          scale: monoScale,
+          duration: 0.9,
+          ease: 'expo.inOut',
+        }, 0)
 
-        exitTl.to(
-          title,
-          {
-            x: titleDx,
-            y: titleDy,
-            scale: titleScale,
-            duration: 0.9,
-            ease: 'expo.inOut',
-          },
-          0
-        )
+        exitTl.to(title, {
+          x: titleDx,
+          y: titleDy,
+          scale: titleScale,
+          duration: 0.9,
+          ease: 'expo.inOut',
+        }, 0)
 
-        // t=0.0 — Fade bg to transparent so cards show through
-        exitTl.to(
-          el,
-          {
-            backgroundColor: 'rgba(0,0,0,0)',
-            duration: 0.6,
-            ease: 'power2.in',
-          },
-          0.3
-        )
+        // t=0.3 — Background fades to transparent
+        exitTl.to(el, {
+          backgroundColor: 'rgba(0,0,0,0)',
+          duration: 0.6,
+          ease: 'power2.in',
+        }, 0.3)
 
-        // t=0.5 — Cards begin fading in from below
+        // t=0.5 — Cards fade in from below
         exitTl.call(() => {
           window.__cardsReady = true
           window.dispatchEvent(new CustomEvent('intro:showCards'))
         }, [], 0.5)
 
-        // t=0.85 — Hamburger + sound button fade in
+        // t=0.85 — Nav controls fade in + intro logo fades out
         exitTl.call(() => {
           window.dispatchEvent(new CustomEvent('intro:navControls'))
         }, [], 0.85)
+        exitTl.to(monogram, { opacity: 0, duration: 0.05 }, 0.85)
+        exitTl.to(title, { opacity: 0, duration: 0.05 }, 0.85)
 
-        // t=0.9 — Logo arrives: invisible swap
+        // t=0.9 — Nav logo revealed
         exitTl.call(() => {
-          // Swap: show nav logo, hide intro logo — same frame
           window.dispatchEvent(new CustomEvent('intro:logoMoved'))
-          gsap.set(monogram, { opacity: 0 })
-          gsap.set(title, { opacity: 0 })
         }, [], 0.9)
       }
 
@@ -220,6 +210,7 @@ export function useGsapIntro(
       }
     }, el)
 
-    return () => ctx.revert()
+    // Cleanup only runs on page destroy, never during transition
+    return () => ctx.kill()
   }, [containerRef, onComplete])
 }
