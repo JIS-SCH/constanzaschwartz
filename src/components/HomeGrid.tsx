@@ -6,10 +6,11 @@ import gsap from 'gsap'
 import { isMobile } from '@/src/utils/detect'
 import { setupResize } from '@/src/utils/resize'
 import type { Project } from '@/src/data/projects'
+import type { OriginRect } from '@/src/context/TransitionContext'
 
 interface HomeGridProps {
   projects: Project[]
-  onProjectClick: (index: number) => void
+  onProjectClick: (index: number, rect: OriginRect) => void
 }
 
 // ─── Layout constants ────────────────────────────────────────────────────────
@@ -21,19 +22,6 @@ const GROUP_ROTATION = -Math.PI / 12  // global offset
 const CARD_W = 9.8
 const CARD_H = 8.0
 const REFLECTION_H = 2.4
-
-// Images from public/
-const IMAGES = [
-  '/image1.jpg',
-  '/image2.jpg',
-  '/image3.png',
-  '/image4.jpg',
-  '/image5.jpg',
-]
-
-function getImage(index: number): string {
-  return IMAGES[index % IMAGES.length]
-}
 
 function getTitle(index: number): string {
   return `Project ${String(index + 1).padStart(2, '0')}`
@@ -90,6 +78,50 @@ function createOverlayTexture(project: Project, index: number): THREE.CanvasText
   tex.colorSpace = THREE.SRGBColorSpace
   tex.flipY = true
   return tex
+}
+
+// ─── Project 3D card corners to screen rect ──────────────────────────────────
+function getCardScreenRect(
+  group: THREE.Group,
+  camera: THREE.Camera
+): OriginRect {
+  const halfW = CARD_W / 2
+  const halfH = CARD_H / 2
+  const mesh = group.children[0] as THREE.Mesh
+
+  const corners = [
+    new THREE.Vector3(-halfW, -halfH, 0),
+    new THREE.Vector3(halfW, -halfH, 0),
+    new THREE.Vector3(-halfW, halfH, 0),
+    new THREE.Vector3(halfW, halfH, 0),
+  ]
+
+  let minX = Infinity
+  let minY = Infinity
+  let maxX = -Infinity
+  let maxY = -Infinity
+
+  corners.forEach((corner) => {
+    // Local → world
+    mesh.localToWorld(corner)
+    // World → NDC
+    corner.project(camera)
+    // NDC → screen pixels
+    const sx = ((corner.x + 1) / 2) * window.innerWidth
+    const sy = ((-corner.y + 1) / 2) * window.innerHeight
+
+    minX = Math.min(minX, sx)
+    minY = Math.min(minY, sy)
+    maxX = Math.max(maxX, sx)
+    maxY = Math.max(maxY, sy)
+  })
+
+  return {
+    left: minX,
+    top: minY,
+    width: maxX - minX,
+    height: maxY - minY,
+  }
 }
 
 export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
@@ -193,8 +225,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     })
 
     // ── Preload all images, then apply textures + fade in ────────────────
-    // Deduplicate image URLs so each file is fetched only once
-    const uniqueUrls = [...new Set(projects.map((_, i) => getImage(i)))]
+    const uniqueUrls = [...new Set(projects.map((p) => p.image))]
     const texturePromises = uniqueUrls.map((url) => preloadTexture(url))
 
     Promise.all(texturePromises).then((textures) => {
@@ -202,8 +233,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       uniqueUrls.forEach((url, i) => textureMap.set(url, textures[i]))
 
       // Apply loaded textures to card + reflection materials
-      projects.forEach((_, i) => {
-        const tex = textureMap.get(getImage(i))
+      projects.forEach((p, i) => {
+        const tex = textureMap.get(p.image)
         if (!tex || !tex.image) return
 
         cardMats[i].map = tex
@@ -226,8 +257,10 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       )
     }
 
-    // If intro already dispatched the event before we mounted, fade in now
-    if (window.__cardsReady) {
+    // If intro already completed (back from project, refresh), show immediately
+    if (sessionStorage.getItem('introComplete')) {
+      if (containerRef.current) gsap.set(containerRef.current, { opacity: 1 })
+    } else if (window.__cardsReady) {
       fadeInCards()
     }
 
@@ -301,7 +334,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     }
     if (!mobile) canvas.addEventListener('mousemove', onHoverCheck)
 
-    // Click / tap
+    // Click / tap — compute screen rect and fire callback
     const onClick = (e: MouseEvent) => {
       const group = getHitGroup(e.clientX, e.clientY)
       if (!group) {
@@ -311,17 +344,24 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
         }
         return
       }
+
+      const triggerProject = (g: THREE.Group) => {
+        const idx = g.userData.index as number
+        const rect = getCardScreenRect(g, camera)
+        onProjectClick(idx, rect)
+      }
+
       if (mobile) {
         // First tap → hover; second tap → open
         if (mobileActiveGroup === group) {
-          onProjectClick(group.userData.index as number)
+          triggerProject(group)
           return
         }
         if (mobileActiveGroup) removeHover(mobileActiveGroup)
         applyHover(group)
         mobileActiveGroup = group
       } else {
-        onProjectClick(group.userData.index as number)
+        triggerProject(group)
       }
     }
     canvas.addEventListener('click', onClick)

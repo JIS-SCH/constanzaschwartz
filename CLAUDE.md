@@ -21,7 +21,7 @@ Immersive scroll-based web experience where the user travels through a 3D nature
 |---|---|---|
 | 3D / WebGL | Three.js | Core renderer. Flat planes along Z axis to simulate tunnel depth |
 | Scroll | Lenis | Smooth scroll driver. Feeds scroll progress to GSAP |
-| Animation | GSAP + ScrollTrigger | Controls all parallax, transitions and timeline scrubbing |
+| Animation | GSAP + @gsap/react + ScrollTrigger + Flip | Controls all parallax, transitions, timeline scrubbing and layout animations |
 | Asset delivery | Cloudinary | All PNGs and video served from there. Never serve raw local assets in production |
 | Hosting | Netlify | Auto-deploy from GitHub. Static build |
 | Repo | GitHub | Under client account. Client owns the repo |
