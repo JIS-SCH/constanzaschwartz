@@ -2,43 +2,40 @@
 
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import gsap from 'gsap'
 import { useTransition } from '@/src/context/TransitionContext'
+import { useAudio } from '@/src/contexts/AudioContext'
+import { CloseIcon } from './icons/CloseIcon'
+import { WaveformIcon } from './icons/WaveformIcon'
 
-export function Navbar() {
+interface NavbarProps {
+  menuOpen: boolean
+  onMenuToggle: () => void
+}
+
+export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
   const navRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
   const { close } = useTransition()
-
-  // Check if intro already completed (direct nav, refresh, back from project)
-  const introComplete = typeof window !== 'undefined' && sessionStorage.getItem('introComplete')
+  const { isMuted, toggleMute } = useAudio()
 
   useEffect(() => {
     const nav = navRef.current
     if (!nav) return
 
-    const monoEl = nav.querySelector<HTMLElement>('[data-nav-monogram]')
-    const titleEl = nav.querySelector<HTMLElement>('[data-nav-title]')
-    const hamburger = nav.querySelector<HTMLElement>('[data-nav-hamburger]')
-    const sound = nav.querySelector<HTMLElement>('[data-nav-sound]')
+    const logo = nav.querySelector<HTMLElement>('[data-nav-logo]')
+    const left = nav.querySelector<HTMLElement>('[data-nav-left]')
+    const right = nav.querySelector<HTMLElement>('[data-nav-right]')
 
-    // If intro already ran, show everything immediately
     if (sessionStorage.getItem('introComplete')) {
-      if (monoEl) gsap.set(monoEl, { opacity: 1 })
-      if (titleEl) gsap.set(titleEl, { opacity: 1 })
-      gsap.set([hamburger, sound].filter(Boolean), { opacity: 1 })
+      gsap.set([logo, left, right].filter(Boolean), { opacity: 1 })
       return
     }
 
-    // Logo swap: intro "C" lands on top, then we reveal nav logo
-    const onLogoMoved = () => {
-      if (monoEl) gsap.set(monoEl, { opacity: 1 })
-      if (titleEl) gsap.set(titleEl, { opacity: 1 })
-    }
-
-    // Hamburger + sound fade in at t=0.85 of exit timeline
+    const onLogoMoved = () => gsap.set(logo, { opacity: 1 })
     const onNavControls = () => {
-      gsap.to([hamburger, sound].filter(Boolean), {
+      gsap.to([left, right].filter(Boolean), {
         opacity: 1,
         duration: 0.4,
         ease: 'power2.out',
@@ -54,9 +51,7 @@ export function Navbar() {
   }, [])
 
   const handleLogoClick = () => {
-    if (pathname !== '/') {
-      close()
-    }
+    if (pathname !== '/') close()
   }
 
   return (
@@ -68,20 +63,20 @@ export function Navbar() {
         left: 0,
         right: 0,
         zIndex: 50,
-        padding: '20px 24px',
+        padding: '20px 28px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      {/* Hamburger — left */}
+      {/* Left — MENU / close toggle */}
       <button
-        data-nav-hamburger
-        aria-label="Menu"
-        className="text-white"
+        data-nav-left
+        onClick={onMenuToggle}
+        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         style={{
           position: 'absolute',
-          left: '24px',
+          left: '28px',
           top: '50%',
           transform: 'translateY(-50%)',
           background: 'none',
@@ -89,69 +84,99 @@ export function Navbar() {
           opacity: 0,
           cursor: 'pointer',
           display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '48px',
+          height: '24px',
         }}
       >
-        <span style={{ display: 'block', width: '18px', height: '1px', background: '#fff' }} />
-        <span style={{ display: 'block', width: '18px', height: '1px', background: '#fff' }} />
+        <span
+          style={{
+            position: 'absolute',
+            color: '#fff',
+            fontSize: '10px',
+            fontWeight: 200,
+            letterSpacing: '0.2em',
+            fontFamily: 'HelveticaLTStd, Helvetica Neue, sans-serif',
+            transition: 'opacity 0.25s ease, transform 0.25s ease',
+            opacity: menuOpen ? 0 : 1,
+            transform: menuOpen ? 'translateY(4px)' : 'translateY(0)',
+          }}
+        >
+          MENU
+        </span>
+        <span
+          style={{
+            position: 'absolute',
+            color: '#fff',
+            display: 'flex',
+            alignItems: 'center',
+            transition: 'opacity 0.25s ease, transform 0.25s ease',
+            opacity: menuOpen ? 1 : 0,
+            transform: menuOpen ? 'translateY(0)' : 'translateY(-4px)',
+          }}
+        >
+          <CloseIcon size={14} color="#fff" />
+        </span>
       </button>
 
-      {/* Center logo — clickable, navigates to home */}
+      {/* Center — logo as file */}
       <button
+        data-nav-logo
         onClick={handleLogoClick}
+        aria-label="Home"
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
           background: 'none',
           border: 'none',
           cursor: pathname !== '/' ? 'pointer' : 'default',
           padding: 0,
+          opacity: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <span
-          data-nav-monogram
-          className="text-white select-none"
-          style={{ fontSize: '14px', fontWeight: 200, opacity: introComplete ? 1 : 0 }}
-        >
-          C
-        </span>
-        <span
-          data-nav-title
-          className="text-white uppercase select-none"
-          style={{
-            fontSize: '11px',
-            fontWeight: 200,
-            letterSpacing: '0.3em',
-            opacity: introComplete ? 1 : 0,
-          }}
-        >
-          Constanza Schwartz
-        </span>
+        <Image
+          src="/CONSTANZA SCHWARTZ_logowhitevertical.svg"
+          alt="Constanza Schwartz"
+          width={32}
+          height={22}
+          style={{ objectFit: 'contain' }}
+          priority
+        />
       </button>
 
-      {/* Sound toggle — right */}
+      {/* Right — waveform + MUTE/SOUND */}
       <button
-        data-nav-sound
-        aria-label="Toggle sound"
-        className="text-white"
+        data-nav-right
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Unmute sound' : 'Mute sound'}
         style={{
           position: 'absolute',
-          right: '24px',
+          right: '28px',
           top: '50%',
           transform: 'translateY(-50%)',
           background: 'none',
           border: 'none',
           opacity: 0,
           cursor: 'pointer',
-          fontSize: '10px',
-          letterSpacing: '0.15em',
-          fontWeight: 200,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          color: '#fff',
         }}
       >
-        SOUND
+        <WaveformIcon width={18} color="#fff" />
+        <span
+          style={{
+            fontSize: '10px',
+            fontWeight: 200,
+            letterSpacing: '0.2em',
+            fontFamily: 'HelveticaLTStd, Helvetica Neue, sans-serif',
+          }}
+        >
+          {isMuted ? 'MUTE' : 'SOUND'}
+        </span>
       </button>
     </nav>
   )

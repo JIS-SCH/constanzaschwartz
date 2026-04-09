@@ -96,9 +96,25 @@ export function useGsapIntro(
         const navTitle = document.querySelector<HTMLElement>('[data-nav-title]')
 
         if (!navMono || !navTitle) {
-          el!.style.visibility = 'hidden'
-          el!.style.pointerEvents = 'none'
-          onComplete()
+          // Logo as file — no fly-to-navbar animation, just fade out and reveal
+          const tl = gsap.timeline({
+            onComplete: () => {
+              el!.style.visibility = 'hidden'
+              el!.style.pointerEvents = 'none'
+              onComplete()
+            },
+          })
+          tl.to([line, scrollEl], { opacity: 0, duration: 0.25, ease: 'power2.out' }, 0)
+          tl.to([monogram, title], { opacity: 0, duration: 0.4, ease: 'power2.out' }, 0)
+          tl.to(el, { backgroundColor: 'rgba(0,0,0,0)', duration: 0.5, ease: 'power2.in' }, 0.2)
+          tl.call(() => {
+            window.__cardsReady = true
+            window.dispatchEvent(new CustomEvent('intro:showCards'))
+          }, [], 0.35)
+          tl.call(() => {
+            window.dispatchEvent(new CustomEvent('intro:navControls'))
+            window.dispatchEvent(new CustomEvent('intro:logoMoved'))
+          }, [], 0.55)
           return
         }
 

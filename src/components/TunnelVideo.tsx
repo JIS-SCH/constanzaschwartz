@@ -13,64 +13,105 @@ interface TunnelVideoProps {
 export function TunnelVideo({ onComplete }: TunnelVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const stRef = useRef<ScrollTrigger | undefined>(undefined)
   const completedRef = useRef(false)
   const [isReady, setIsReady] = useState(false)
 
-  const handleComplete = useCallback(() => {
-    if (completedRef.current) return
-    completedRef.current = true
+  const killST = useCallback(() => {
+    if (!stRef.current) return
+    stRef.current.kill()
+    stRef.current = undefined
+  }, [])
+
+  const doComplete = useCallback(() => {
+    killST()
 
     const container = containerRef.current
     if (container) {
-      const pinWrapper = container.parentElement?.classList.contains('pin-spacer')
-        ? container.parentElement
-        : container
-      pinWrapper.style.display = 'none'
+      container.style.display = 'none'
     }
 
     window.scrollTo(0, 0)
     onComplete()
-  }, [onComplete])
+  }, [killST, onComplete])
 
   useEffect(() => {
     const video = videoRef.current
     const container = containerRef.current
-    if (!video || !container) return
+    const overlay = overlayRef.current
+    if (!video || !container || !overlay) return
 
-    let tl: gsap.core.Timeline | undefined
+    const canFastSeek = typeof (video as HTMLVideoElement & { fastSeek?: (t: number) => void }).fastSeek === 'function'
 
     const setupAnimation = () => {
       const duration = video.duration
+      const scrollDist = Math.round(duration * 180)
 
-      tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: 'top top',
-          end: `+=${duration * 150}px`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-          onLeave: handleComplete,
+      const seekProxy = { t: 0 }
+
+      const tl = gsap.timeline({ paused: true })
+
+      // Drive video time via fastSeek (Firefox/Safari) or currentTime (Chrome).
+      // Using a proxy + onUpdate avoids GSAP's default property setter overhead.
+      tl.to(seekProxy, {
+        t: duration,
+        duration,
+        ease: 'none',
+        onUpdate() {
+          if (canFastSeek) {
+            (video as HTMLVideoElement & { fastSeek: (t: number) => void }).fastSeek(seekProxy.t)
+          } else {
+            video.currentTime = seekProxy.t
+          }
+        },
+      }, 0)
+
+      // Fade to black starting at 80% of the timeline → fully black at 100%
+      tl.fromTo(
+        overlay,
+        { opacity: 0 },
+        { opacity: 1, duration: duration * 0.2, ease: 'power2.in' },
+        duration * 0.8
+      )
+
+      stRef.current = ScrollTrigger.create({
+        trigger: container,
+        start: 'top top',
+        end: `+=${scrollDist}`,
+        pin: true,
+        anticipatePin: 1,
+        scrub: 0.5,
+        animation: tl,
+        onUpdate: (self) => {
+          if (self.progress >= 0.97 && !completedRef.current) {
+            completedRef.current = true
+            gsap.to(overlay, {
+              opacity: 1,
+              duration: 0.2,
+              ease: 'none',
+              onComplete: doComplete,
+            })
+          }
         },
       })
-
-      tl.to(video, { currentTime: duration, duration, ease: 'none' }, 0)
 
       setIsReady(true)
     }
 
-    if (video.readyState >= 2) {
+    // canplaythrough = buffer is full, not just first frame ready.
+    // Avoids seeking stalls on the first scroll interaction.
+    if (video.readyState >= 4) {
       setupAnimation()
     } else {
-      video.addEventListener('canplay', setupAnimation, { once: true })
+      video.addEventListener('canplaythrough', setupAnimation, { once: true })
     }
 
     return () => {
-      video.removeEventListener('canplay', setupAnimation)
-      tl?.scrollTrigger?.kill()
-      tl?.kill()
+      video.removeEventListener('canplaythrough', setupAnimation)
+      killST()
     }
-  }, [handleComplete])
+  }, [doComplete, killST])
 
   return (
     <div
@@ -84,12 +125,17 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         muted
         playsInline
       >
-        <source src="/walk-optimized.mp4" type="video/mp4" />
-        <source src="/walk.mp4" type="video/mp4" />
+        <source src="/tunel/tunel-optimized.mp4" type="video/mp4" />
       </video>
 
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 bg-black pointer-events-none"
+        style={{ opacity: 0 }}
+      />
+
       {!isReady && (
-        <div className="absolute inset-0 bg-black animate-pulse" />
+        <div className="absolute inset-0 bg-black" />
       )}
     </div>
   )

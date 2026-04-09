@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { ComingSoon } from "@/src/components/ComingSoon";
-// -- Temporarily hidden while Coming Soon is active --
-// import { Cursor } from "@/src/components/Cursor";
-// import { GsapProvider } from "@/src/components/GsapProvider";
-// import { TransitionProvider } from "@/src/context/TransitionContext";
-// import { TransitionOverlay } from "@/src/components/TransitionOverlay";
-// import { Navbar } from "@/src/components/Navbar";
+import { Cursor } from "@/src/components/Cursor";
+import { GsapProvider } from "@/src/components/GsapProvider";
+import { ParallaxProvider } from "@/src/contexts/ParallaxContext";
+import { AudioProvider } from "@/src/contexts/AudioContext";
+import { TransitionProvider } from "@/src/context/TransitionContext";
+import { TransitionOverlay } from "@/src/components/TransitionOverlay";
+import { NavController } from "@/src/components/NavController";
 
 export const metadata: Metadata = {
   title: "Constanza Schwartz",
@@ -34,17 +35,20 @@ export default function RootLayout({
             gtag('config', 'G-LBHSXVNS1R');
           `}
         </Script>
-        <ComingSoon />
-        {/* -- Temporarily hidden while Coming Soon is active --
+        {/* <ComingSoon /> */}
         <GsapProvider>
-          <TransitionProvider>
-            <Navbar />
-            {children}
-            <TransitionOverlay />
-          </TransitionProvider>
+          <AudioProvider>
+            <ParallaxProvider>
+              <TransitionProvider>
+                <NavController />
+                {children}
+                <TransitionOverlay />
+              </TransitionProvider>
+            </ParallaxProvider>
+          </AudioProvider>
         </GsapProvider>
         <Cursor />
-        */}
+
       </body>
     </html>
   );

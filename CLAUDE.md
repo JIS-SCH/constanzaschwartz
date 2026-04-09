@@ -34,8 +34,13 @@ Immersive scroll-based web experience where the user travels through a 3D nature
 /
 ├── CLAUDE.md               ← you are here
 ├── index.html
+├── app/
+│   ├── layout.tsx          ← root layout with ParallaxProvider
+│   └── page.tsx            ← main page
 ├── src/
 │   ├── main.js             ← entry point, initializes everything
+│   ├── contexts/
+│   │   └── ParallaxContext.tsx  ← scroll progress state provider
 │   ├── tunnel/
 │   │   ├── scene.js        ← Three.js scene setup (camera, renderer, lights)
 │   │   ├── layers.js       ← parallax layer construction and Z positioning
@@ -44,8 +49,17 @@ Immersive scroll-based web experience where the user travels through a 3D nature
 │   ├── scroll/
 │   │   ├── lenis.js        ← Lenis instance and config
 │   │   └── scrub.js        ← connects Lenis progress to GSAP ScrollTrigger
-│   ├── animations/
-│   │   └── timeline.js     ← main GSAP timeline, all scroll-driven motion
+│   ├── hooks/
+│   │   ├── useScrollProgress.ts ← connects ScrollTrigger to ParallaxContext
+│   │   ├── useParallax.ts  ← calculates offset based on scroll + speed
+│   │   └── ...
+│   ├── components/
+│   │   ├── ParallaxSection.tsx  ← section wrapper for parallax groups
+│   │   ├── ParallaxLayer.tsx    ← individual parallax layer (image/video/text)
+│   │   ├── ProjectPage.tsx     ← project page consuming parallaxConfig
+│   │   └── ...
+│   ├── data/
+│   │   └── projects.ts     ← project data with parallaxConfig per project
 │   └── utils/
 │       ├── cloudinary.js   ← URL builder for Cloudinary assets
 │       ├── resize.js       ← responsive handler (camera, renderer, canvas)
@@ -53,6 +67,7 @@ Immersive scroll-based web experience where the user travels through a 3D nature
 ├── assets/
 │   └── placeholder/        ← temp mockup assets only, replaced by client PNGs
 └── public/
+    └── project5/           ← sample project assets
 ```
 
 ---
@@ -102,6 +117,101 @@ gsap.to(camera.position, {
 ### End transition
 
 At scroll progress ~0.9, a full-screen blackout plane (Three.js PlaneGeometry filling viewport) fades in and then fades out revealing the portfolio home section below the canvas. The canvas then gets `pointer-events: none` and the portfolio takes over.
+
+---
+
+## Portfolio Project Parallax System
+
+Each project in the portfolio can have custom parallax sections with multiple layers (images, videos, text) that move at different speeds as the user scrolls.
+
+### Architecture
+
+```
+Scroll Progress (0 → 1)
+        ↓
+  [ParallaxProvider] — Context that provides scroll progress global
+        ↓
+  [ProjectPage] — Renders sections based on parallaxConfig
+        ↓
+  [ParallaxSection] — Section wrapper (100vh+ per section)
+        ↓
+  [ParallaxLayer] — Individual layer with parallax effect
+```
+
+### Project Configuration
+
+Each project in `src/data/projects.ts` can include a `parallaxConfig`:
+
+```typescript
+interface Project {
+  date: string
+  title: string
+  slug: string
+  image: string
+  parallaxConfig?: {
+    sections: Section[]
+  }
+}
+
+interface Section {
+  id: string
+  minHeight?: string        // '100vh', '150vh', etc.
+  height?: string
+  layers: Layer[]
+}
+
+interface Layer {
+  type: 'image' | 'video' | 'text'
+  src?: string              // path or URL
+  content?: string          // for text layers
+  speed: number             // 0.5 = slow, 1.0 = normal, 1.5 = fast
+  direction?: 'y' | 'x' | 'both'
+  objectFit?: 'cover' | 'contain' | 'fill'
+  autoPlay?: boolean        // for video
+  loop?: boolean            // for video
+  muted?: boolean           // for video
+  alt?: string              // for images
+}
+```
+
+### Example: project5
+
+```typescript
+{
+  slug: 'project5',
+  parallaxConfig: {
+    sections: [
+      {
+        id: 'hero',
+        minHeight: '100vh',
+        layers: [
+          { type: 'image', src: '/image5.jpg', speed: 0.3 },           // slow bg
+          { type: 'image', src: '/project5/Group 458.png', speed: 0.8 }, // faster fg
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Speed Guidelines
+
+| Speed | Use case |
+|-------|----------|
+| 0.3 - 0.5 | Background layers, large hero images |
+| 0.7 - 1.0 | Mid-ground elements |
+| 1.2 - 1.5 | Foreground elements, text overlays |
+
+### Implementation Files
+
+| File | Purpose |
+|------|---------|
+| `src/contexts/ParallaxContext.tsx` | Global scroll progress state |
+| `src/hooks/useScrollProgress.ts` | Hook to sync ScrollTrigger with context |
+| `src/hooks/useParallax.ts` | Core hook for individual layer parallax |
+| `src/components/ParallaxSection.tsx` | Section wrapper component |
+| `src/components/ParallaxLayer.tsx` | Image/video/text layer component |
+| `src/components/ProjectPage.tsx` | Page component that renders parallax config |
 
 ---
 
