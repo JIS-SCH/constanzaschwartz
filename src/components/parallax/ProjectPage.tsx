@@ -1,56 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ParallaxSection } from './ParallaxSection'
-import { ParallaxLayer } from './ParallaxLayer'
-import { VideoPlayer } from './VideoPlayer'
-import { OffsetLayout } from './sections/OffsetLayout'
-import { OverlayComposition } from './sections/OverlayComposition'
+import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
+import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { VideoPlayer } from '@/src/components/media/VideoPlayer'
+import { OffsetLayout } from '@/src/components/parallax/sections/OffsetLayout'
+import { OverlayComposition } from '@/src/components/parallax/sections/OverlayComposition'
+import type { ParallaxConfig, Section, Layer } from '@/src/types/parallax'
 
-export interface CreditEntry {
-  role: string
-  name: string
-}
-
-export interface Layer {
-  type: 'image' | 'video' | 'text' | 'marquee' | 'credits'
-  src?: string
-  content?: string
-  speed: number
-  direction?: 'y' | 'x' | 'both'
-  multiplier?: number
-  objectFit?: 'cover' | 'contain' | 'fill'
-  autoPlay?: boolean
-  loop?: boolean
-  muted?: boolean
-  alt?: string
-  className?: string
-  isHero?: boolean
-  subtitle?: string
-  credits?: CreditEntry[]
-  position?: {
-    top?: string
-    left?: string
-    right?: string
-    bottom?: string
-    width?: string
-    height?: string
-    zIndex?: number
-  }
-}
-
-export interface Section {
-  id: string
-  height?: string
-  minHeight?: string
-  type?: 'standard' | 'offset' | 'fullwidth-video' | 'overlay'
-  variant?: 'default' | 'inverted'
-  layers: Layer[]
-}
-
-export interface ParallaxConfig {
-  sections: Section[]
-}
+export type { ParallaxConfig, Section, Layer } from '@/src/types/parallax'
 
 interface ProjectPageProps {
   parallaxConfig: ParallaxConfig

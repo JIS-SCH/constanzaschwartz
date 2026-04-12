@@ -1,0 +1,26 @@
+Mask group
+azstill18 1
+H4 Marquee/Scrolling Text 4 DEKSTOP
+St1-07 1
+ytclip4 1
+ytclip1 1
+pdsclip1 1
+04-azclip1 1
+Group 458
+clipinv3 2 1
+10 inv 1 1
+invstill11 1
+PHOTO-2025-04-09-14-50-34 1
+PHOTO-2025-04-09-14-53-45 1
+St1-06 2
+St1-06 1
+invstill12 1
+invstill4 1
+invstill6 1
+St1-04 1
+St1-02 1
+St1-03 1
+azclip2 1
+azstill12 1
+Dirección: Jero Pokle @jeropokle / Dirección de Producción: Mel Flood meelflood / Producción General: Joaquín Toledo Torres @joacotoledotorres / Dirección de Fotografía: Nahuel Varela @nahue.var / Dirección de Arte y Efectos Lumínicos: Constanza Schwartz @constanza.schwartz / Estilismo & Vestuario: Sophie Etchegoyen @sophietchegoyen / Make Up & Pelo: María José Baez @majobaezd / Edición: Franco Farias @franfa_ / 2do de Cámara: Daniel Hernández @_danohernandez / Gaffer: Mauro Tedeschi @mauret_tedeschi / Asistente de Arte: Matilda Mayer @matumayer_ / Asistente de Vestuario: Luna Goldin @lunagoldin / Diseño de Visuales: Manuel Blanco @__manublanco / Edición & VFX de Visuales: Franco Farias @franfa_ / Foto Fija: Juan Larrazabal @juanlarrazabal.ph / Mapping: Mauro Parissenti @mauroparissenti & EMEPE Audiovisuales @emepeaudiovisuales / Diseño Gráfico: Manuel Blanco @__manublanco & RGII @rg.2nd / Comercial: Franco Panaro @fgpanaro / Artistas:  Justo Fernández Madero @justo.fm Lucas Grasso @lucobyluco Fernando Laprida @byferla Francisco Nicholson @franjnicholson
+NAVBAR DESKTOP

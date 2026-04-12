@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { createScene } from '../tunnel/scene';
-import { createLayers } from '../tunnel/layers';
-import { createBlackout } from '../tunnel/transition';
-import { initLenis, destroyLenis } from '../scroll/lenis';
-import { initScrub } from '../scroll/scrub';
-import { setupResize } from '../utils/resize';
-import { prefersReducedMotion } from '../utils/detect';
+import { createScene } from '../../tunnel/scene';
+import { createLayers } from '../../tunnel/layers';
+import { createBlackout } from '../../tunnel/transition';
+import { initLenis, destroyLenis } from '../../scroll/lenis';
+import { initScrub } from '../../scroll/scrub';
+import { setupResize } from '../../utils/resize';
+import { prefersReducedMotion } from '../../utils/detect';
 
 export default function TunnelCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);

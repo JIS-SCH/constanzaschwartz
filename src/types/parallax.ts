@@ -1,0 +1,53 @@
+// ─── Parallax System Types ─────────────────────────────────────────────────────
+
+export interface CreditEntry {
+  role: string
+  name: string
+}
+
+export interface Layer {
+  type: 'image' | 'video' | 'text' | 'marquee' | 'credits'
+  src?: string
+  content?: string
+  speed: number
+  direction?: 'y' | 'x' | 'both'
+  multiplier?: number
+  objectFit?: 'cover' | 'contain' | 'fill'
+  autoPlay?: boolean
+  loop?: boolean
+  muted?: boolean
+  alt?: string
+  className?: string
+  isHero?: boolean
+  subtitle?: string
+  credits?: CreditEntry[]
+  position?: {
+    top?: string
+    left?: string
+    right?: string
+    bottom?: string
+    width?: string
+    height?: string
+    zIndex?: number
+  }
+}
+
+export interface Section {
+  id: string
+  height?: string
+  minHeight?: string
+  type?: 'standard' | 'offset' | 'fullwidth-video' | 'overlay'
+  variant?: 'default' | 'inverted'
+  layers: Layer[]
+}
+
+export interface ParallaxConfig {
+  sections: Section[]
+}
+
+export interface GalleryImage {
+  src: string
+  alt: string
+  position: 'left' | 'center' | 'right'
+  size: 'sm' | 'md' | 'lg'
+}

@@ -2,12 +2,12 @@
 
 import { useCallback, useState } from 'react'
 import type { AppPhase } from '@/src/types/app'
-import { TunnelVideo } from '@/src/components/TunnelVideo'
-import { IntroScreen } from '@/src/components/IntroScreen'
-import { HomeGrid } from '@/src/components/HomeGrid'
+import { TunnelVideo } from '@/src/components/tunnel/TunnelVideo'
+import { IntroScreen } from '@/src/components/home/IntroScreen'
+import { HomeGrid } from '@/src/components/home/HomeGrid'
 import { projects } from '@/src/data/projects'
-import { useTransition } from '@/src/context/TransitionContext'
-import type { OriginRect } from '@/src/context/TransitionContext'
+import { useTransition } from '@/src/contexts/TransitionContext'
+import type { OriginRect } from '@/src/contexts/TransitionContext'
 
 function getInitialPhase(): AppPhase {
   if (typeof window !== 'undefined' && sessionStorage.getItem('introComplete')) {

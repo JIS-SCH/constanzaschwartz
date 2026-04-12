@@ -35,39 +35,76 @@ Immersive scroll-based web experience where the user travels through a 3D nature
 ├── CLAUDE.md               ← you are here
 ├── index.html
 ├── app/
-│   ├── layout.tsx          ← root layout with ParallaxProvider
-│   └── page.tsx            ← main page
+│   ├── layout.tsx          ← root layout with providers
+│   ├── page.tsx            ← main page
+│   └── project/[slug]/     ← dynamic project pages
 ├── src/
-│   ├── main.js             ← entry point, initializes everything
-│   ├── contexts/
-│   │   └── ParallaxContext.tsx  ← scroll progress state provider
-│   ├── tunnel/
-│   │   ├── scene.js        ← Three.js scene setup (camera, renderer, lights)
-│   │   ├── layers.js       ← parallax layer construction and Z positioning
-│   │   ├── materials.js    ← shader materials and texture loading
-│   │   └── transition.js   ← blackout / end-of-tunnel effect
-│   ├── scroll/
-│   │   ├── lenis.js        ← Lenis instance and config
-│   │   └── scrub.js        ← connects Lenis progress to GSAP ScrollTrigger
-│   ├── hooks/
-│   │   ├── useScrollProgress.ts ← connects ScrollTrigger to ParallaxContext
-│   │   ├── useParallax.ts  ← calculates offset based on scroll + speed
-│   │   └── ...
 │   ├── components/
-│   │   ├── ParallaxSection.tsx  ← section wrapper for parallax groups
-│   │   ├── ParallaxLayer.tsx    ← individual parallax layer (image/video/text)
-│   │   ├── ProjectPage.tsx     ← project page consuming parallaxConfig
-│   │   └── ...
+│   │   ├── GsapProvider.tsx       ← GSAP context provider
+│   │   ├── layout/               ← persistent UI (nav, cursor, transitions)
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── NavMenu.tsx
+│   │   │   ├── NavController.tsx
+│   │   │   ├── Cursor.tsx
+│   │   │   ├── TransitionOverlay.tsx
+│   │   │   ├── ContactSection.tsx
+│   │   │   └── index.ts
+│   │   ├── home/                  ← home page components
+│   │   │   ├── HomeGrid.tsx       ← 3D project gallery
+│   │   │   ├── IntroScreen.tsx
+│   │   │   ├── ComingSoon.tsx
+│   │   │   └── index.ts
+│   │   ├── tunnel/                ← tunnel experience components
+│   │   │   ├── TunnelCanvas.tsx
+│   │   │   ├── TunnelVideo.tsx
+│   │   │   └── index.ts
+│   │   ├── parallax/              ← parallax system components
+│   │   │   ├── ParallaxSection.tsx
+│   │   │   ├── ParallaxLayer.tsx
+│   │   │   ├── ParallaxGallery.tsx
+│   │   │   ├── ProjectPage.tsx
+│   │   │   ├── sections/
+│   │   │   │   ├── OffsetLayout.tsx
+│   │   │   │   └── OverlayComposition.tsx
+│   │   │   └── index.ts
+│   │   ├── media/                 ← media components
+│   │   │   ├── VideoPlayer.tsx
+│   │   │   └── index.ts
+│   │   └── icons/                 ← SVG icon components
+│   │       ├── CloseIcon.tsx
+│   │       ├── WaveformIcon.tsx
+│   │       └── index.ts
+│   ├── contexts/
+│   │   ├── ParallaxContext.tsx    ← scroll progress state provider
+│   │   ├── AudioContext.tsx        ← audio state provider
+│   │   └── TransitionContext.tsx   ← page transition state
+│   ├── hooks/
+│   │   ├── useScrollProgress.ts    ← connects ScrollTrigger to ParallaxContext
+│   │   ├── useParallax.ts          ← calculates offset based on scroll + speed
+│   │   ├── useGsapIntro.ts         ← intro screen animations
+│   │   ├── useGsapProject.ts       ← project page animations
+│   │   └── useGsapCursor.ts        ← cursor animations
+│   ├── tunnel/                     ← Three.js tunnel system (.ts files)
+│   │   ├── scene.ts                ← Three.js scene setup
+│   │   ├── layers.ts               ← parallax layer construction
+│   │   ├── materials.ts            ← shader materials
+│   │   └── transition.ts           ← blackout effect
+│   ├── scroll/
+│   │   ├── lenis.ts                ← Lenis instance
+│   │   └── scrub.ts                ← Lenis → ScrollTrigger bridge
 │   ├── data/
-│   │   └── projects.ts     ← project data with parallaxConfig per project
+│   │   └── projects.ts             ← project data with parallaxConfig
+│   ├── types/
+│   │   ├── app.ts                  ← app-wide types
+│   │   └── parallax.ts             ← parallax system types
 │   └── utils/
-│       ├── cloudinary.js   ← URL builder for Cloudinary assets
-│       ├── resize.js       ← responsive handler (camera, renderer, canvas)
-│       └── detect.js       ← mobile detection, reduced motion check
+│       ├── cloudinary.ts            ← URL builder for Cloudinary
+│       ├── resize.ts               ← responsive handler
+│       └── detect.ts                ← mobile / reduced motion detection
 ├── assets/
-│   └── placeholder/        ← temp mockup assets only, replaced by client PNGs
+│   └── placeholder/                ← temp mockup assets only
 └── public/
-    └── project5/           ← sample project assets
+    └── project5/                    ← sample project assets
 ```
 
 ---
@@ -140,28 +177,24 @@ Scroll Progress (0 → 1)
 
 ### Project Configuration
 
-Each project in `src/data/projects.ts` can include a `parallaxConfig`:
+Each project in `src/data/projects.ts` can include a `parallaxConfig`. Types are centralized in `src/types/parallax.ts`:
 
 ```typescript
-interface Project {
-  date: string
-  title: string
-  slug: string
-  image: string
-  parallaxConfig?: {
-    sections: Section[]
-  }
+// src/types/parallax.ts
+export interface ParallaxConfig {
+  sections: Section[]
 }
 
-interface Section {
+export interface Section {
   id: string
   minHeight?: string        // '100vh', '150vh', etc.
   height?: string
+  type?: 'standard' | 'offset' | 'fullwidth-video' | 'overlay'
   layers: Layer[]
 }
 
-interface Layer {
-  type: 'image' | 'video' | 'text'
+export interface Layer {
+  type: 'image' | 'video' | 'text' | 'marquee' | 'credits'
   src?: string              // path or URL
   content?: string          // for text layers
   speed: number             // 0.5 = slow, 1.0 = normal, 1.5 = fast
@@ -171,6 +204,13 @@ interface Layer {
   loop?: boolean            // for video
   muted?: boolean           // for video
   alt?: string              // for images
+  position?: {              // CSS-like positioning
+    top?: string
+    left?: string
+    width?: string
+    height?: string
+    zIndex?: number
+  }
 }
 ```
 

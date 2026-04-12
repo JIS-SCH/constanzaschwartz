@@ -4,10 +4,10 @@ import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import gsap from 'gsap'
-import { useTransition } from '@/src/context/TransitionContext'
+import { useTransition } from '@/src/contexts/TransitionContext'
 import { useAudio } from '@/src/contexts/AudioContext'
-import { CloseIcon } from './icons/CloseIcon'
-import { WaveformIcon } from './icons/WaveformIcon'
+import { CloseIcon } from '@/src/components/icons/CloseIcon'
+import { WaveformIcon } from '@/src/components/icons/WaveformIcon'
 
 interface NavbarProps {
   menuOpen: boolean
@@ -139,8 +139,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         <Image
           src="/CONSTANZA SCHWARTZ_logowhitevertical.svg"
           alt="Constanza Schwartz"
-          width={32}
-          height={22}
+          width={71}
+          height={56}
           style={{ objectFit: 'contain' }}
           priority
         />

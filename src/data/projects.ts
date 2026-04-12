@@ -1,5 +1,4 @@
-import type { ParallaxConfig } from '@/src/components/ProjectPage'
-import type { GalleryImage } from '@/src/components/ParallaxGallery'
+import type { ParallaxConfig, GalleryImage } from '@/src/types/parallax'
 
 export interface Project {
   date: string
@@ -12,124 +11,10 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  { date: 'JUL 2020', title: 'change-host', slug: 'change-host', image: '/image1.jpg' },
-  { date: 'MAY 2021', title: 'Vaccine Slots Discord Bot', slug: 'vaccine-slots', image: '/image2.jpg' },
-  { date: 'AUG 2024', title: 'Chat bot', slug: 'chat-bot', image: '/image3.png' },
-  { date: 'OCT 2024', title: 'Word Game', slug: 'word-game', image: '/image4.jpg' },
-  {
-    date: 'MAR 2025',
-    title: 'DJ Gig',
-    slug: 'dj-gig',
-    image: '/image5.jpg',
-    parallaxConfig: {
-      sections: [
-        // Section 1: Hero — image + marquee ticker
-        {
-          id: 'hero',
-          minHeight: '115vh',
-          layers: [
-            { type: 'image', src: '/image5.jpg', speed: 0.8, isHero: true,
-              position: { top: '80px', left: '8%', width: '84%', height: '70vh', zIndex: 1 } },
-            { type: 'marquee', content: 'DIRECCIÓN DE ARTE Y EFECTOS LUMÍNICOS.', speed: 0, multiplier: 22,
-              position: { top: '86vh', left: '0', width: '100%', height: '72px', zIndex: 2 } },
-          ]
-        },
-        // Section 2: Vertical gallery — teal stills (with subtitle on middle image)
-        {
-          id: 'gallery-teal',
-          minHeight: '130vh',
-          layers: [
-            { type: 'image', src: '/project5/azstill4.jpg', speed: 0,
-              position: { top: '5vh', left: 'calc(50% - 233px)', width: '466px', height: '245px', zIndex: 1 } },
-            { type: 'image', src: '/project5/09-azstill2.jpg', speed: 0,
-              position: { top: 'calc(5vh + 265px)', left: 'calc(50% - 233px)', width: '466px', height: '245px', zIndex: 1 } },
-            { type: 'text', content: 'Quiero explorar todo tu cuerpo', speed: 0,
-              position: { top: 'calc(5vh + 470px)', left: 'calc(50% - 233px)', width: '466px', height: '30px', zIndex: 2 } },
-            { type: 'image', src: '/project5/azstill1.jpg', speed: 0,
-              position: { top: 'calc(5vh + 530px)', left: 'calc(50% - 233px)', width: '466px', height: '245px', zIndex: 1 } },
-          ]
-        },
-        // Section 3: Parallax offset — teal (left lower, right higher)
-        {
-          id: 'offset-teal',
-          minHeight: '100vh',
-          type: 'offset',
-          variant: 'default',
-          layers: [
-            { type: 'image', src: '/project5/azstill18 1.png', speed: 0, alt: 'Teal still left' },
-            { type: 'image', src: '/project5/invstill4 1.png', speed: 0, alt: 'Teal still right' },
-          ]
-        },
-        // Section 4: Vertical gallery — orange stills
-        {
-          id: 'gallery-orange',
-          minHeight: '130vh',
-          layers: [
-            { type: 'image', src: '/project5/St1-02 1.png', speed: 0,
-              position: { top: '5vh', left: 'calc(50% - 233px)', width: '466px', height: '245px', zIndex: 1 } },
-            { type: 'image', src: '/project5/St1-04 1.png', speed: 0,
-              position: { top: 'calc(5vh + 265px)', left: 'calc(50% - 233px)', width: '466px', height: '245px', zIndex: 1 } },
-            { type: 'image', src: '/project5/St1-06 1.png', speed: 0,
-              position: { top: 'calc(5vh + 530px)', left: 'calc(50% - 233px)', width: '466px', height: '245px', zIndex: 1 } },
-          ]
-        },
-        // Section 5: Fullwidth video — violet band
-        {
-          id: 'fullwidth-violet',
-          minHeight: '80vh',
-          type: 'fullwidth-video',
-          layers: [
-            { type: 'video', src: '/project5/04-azclip1.mp4', speed: 0, autoPlay: true, loop: false, muted: true },
-          ]
-        },
-        // Section 6: Parallax offset — violet (inverted: left higher, right lower)
-        {
-          id: 'offset-violet',
-          minHeight: '100vh',
-          type: 'offset',
-          variant: 'inverted',
-          layers: [
-            { type: 'video', src: '/project5/04-azclip1.mp4', speed: 0, autoPlay: true, loop: true, muted: true },
-            { type: 'video', src: '/project5/04-azclip1.mp4', speed: 0, autoPlay: true, loop: true, muted: true },
-          ]
-        },
-        // Section 7: Centered video — orange (smaller, 65% width)
-        {
-          id: 'centered-orange',
-          minHeight: '80vh',
-          layers: [
-            { type: 'video', src: '/project5/04-azclip1.mp4', speed: 0, autoPlay: true, loop: false, muted: true,
-              position: { top: '10vh', left: '17.5%', width: '65%', height: '60vh', zIndex: 1 } },
-          ]
-        },
-        // Section 8: Overlay composition — small video + large video
-        {
-          id: 'overlay-composition',
-          minHeight: '120vh',
-          type: 'overlay',
-          layers: [
-            { type: 'video', src: '/project5/04-azclip1.mp4', speed: 0, autoPlay: true, loop: true, muted: true },
-            { type: 'text', content: 'Algo invisible', speed: 0 },
-            { type: 'video', src: '/project5/04-azclip1.mp4', speed: 0, autoPlay: true, loop: true, muted: true },
-          ]
-        },
-      ]
-    },
-    gallery: [
-      { src: '/project5/St1-02 1.png',                      alt: 'Still 02',    position: 'left',   size: 'lg' },
-      { src: '/project5/azstill12 1.png',                   alt: 'Az Still 12', position: 'right',  size: 'md' },
-      { src: '/project5/invstill4 1.png',                   alt: 'Inv Still 4', position: 'center', size: 'lg' },
-      { src: '/project5/St1-04 1.png',                      alt: 'Still 04',    position: 'right',  size: 'sm' },
-      { src: '/project5/invstill11 1.png',                  alt: 'Inv Still 11',position: 'left',   size: 'md' },
-      { src: '/project5/azclip2 1.png',                     alt: 'Az Clip 2',   position: 'center', size: 'md' },
-      { src: '/project5/St1-06 1.png',                      alt: 'Still 06',    position: 'right',  size: 'lg' },
-      { src: '/project5/invstill6 1.png',                   alt: 'Inv Still 6', position: 'left',   size: 'sm' },
-    ]
-  },
   {
     date: 'APR 2025',
-    title: 'ALTEREGO . SILVESTRE Y LA NARANJA',
-    slug: 'project5',
+    title: 'MÁS ALLÁ DEL INFINITO',
+    slug: 'mas-alla-del-infinito',
     image: '/project5/azstill18 1.png',
     category: 'Dirección de Arte y Efectos Lumínicos',
     parallaxConfig: {
@@ -315,237 +200,6 @@ export const projects: Project[] = [
       { src: '/project5/St1-03 1.png',       alt: 'Still 03',    position: 'right',  size: 'md' },
     ]
   },
-
-  // ─────────────────────────────────────────────────────────
-  // MÁS ALLÁ DEL INFINITO
-  // ─────────────────────────────────────────────────────────
-  {
-    date: '2025',
-    title: 'MÁS ALLÁ DEL INFINITO',
-    slug: 'mas-alla-del-infinito',
-    image: '/mas-alla-del-infinito/web003.jpg',
-    category: 'Fotografía de Obra',
-    parallaxConfig: {
-      sections: [
-        // Hero — masked image + marquee
-        {
-          id: 'hero',
-          minHeight: '115vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web003.jpg', speed: 0.8, isHero: true,
-              position: { top: '80px', left: '4.25%', width: '91.5%', height: '561px', zIndex: 1 } },
-            { type: 'marquee', content: 'FOTOGRAFÍA DE OBRA.', speed: 0, multiplier: 22,
-              position: { top: '86vh', left: '0', width: '100%', height: '72px', zIndex: 2 } },
-          ]
-        },
-        // Heading + offset pair
-        {
-          id: 'offset-1',
-          minHeight: '100vh',
-          layers: [
-            { type: 'text', content: 'Somos responsables de los mundos que creamos', speed: 0,
-              position: { top: '2vh', left: '8.47%', width: '57.5%', height: '96px', zIndex: 3 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web009.jpg', speed: 0.3,
-              position: { top: '10vh', left: '16.88%', width: '40.83%', height: '392px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web028.jpg', speed: 0.5,
-              position: { top: '5vh', left: '59.1%', width: '23.96%', height: '517px', zIndex: 2 } },
-          ]
-        },
-        // Text block
-        {
-          id: 'text-intro',
-          minHeight: '50vh',
-          layers: [
-            { type: 'text', content: 'Dado que la objetividad es un proyecto inalcanzable, para dar cuenta de esta obra propongo un acto de escritura situado en la experiencia sensible de quien la transita.', speed: 0,
-              position: { top: '10vh', left: '21.11%', width: '32.43%', height: 'auto', zIndex: 1 } },
-          ]
-        },
-        // Full-width image + text overlay
-        {
-          id: 'fw-1',
-          minHeight: '90vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web030.jpg', speed: 0.2,
-              position: { top: '0', left: '0', width: '100%', height: '960px', zIndex: 1 } },
-            { type: 'text', content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.', speed: 0,
-              position: { top: '85%', left: '8.47%', width: '54.93%', height: 'auto', zIndex: 2 } },
-          ]
-        },
-        // Text + right image
-        {
-          id: 'text-right-img',
-          minHeight: '90vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web008.jpg', speed: 0.5,
-              position: { top: '0', left: '63.33%', width: '23.96%', height: '517px', zIndex: 1 } },
-            { type: 'text', content: 'La obra de Constanza insistirá entonces en un proyecto de creación de mundos, desplegando un universo visual, sensorial y narrativo.', speed: 0,
-              position: { top: '55%', left: '21.11%', width: '32.43%', height: 'auto', zIndex: 1 } },
-          ]
-        },
-        // Large + small below + text right
-        {
-          id: 'trio-1',
-          minHeight: '110vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web025.jpg', speed: 0.3,
-              position: { top: '5vh', left: '16.88%', width: '66.25%', height: '636px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web023.jpg', speed: 0.5,
-              position: { top: '70vh', left: '4.17%', width: '32.43%', height: '311px', zIndex: 1 } },
-            { type: 'text', content: 'Extraños testigos de metal espejados que nos devuelven nuestra propia mirada, escondida entre la niebla.', speed: 0,
-              position: { top: '75vh', left: '59.03%', width: '32.43%', height: 'auto', zIndex: 1 } },
-          ]
-        },
-        // 3-column cascading stagger
-        {
-          id: 'staggered-3col',
-          minHeight: '120vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web012.jpg', speed: 0.3,
-              position: { top: '5vh', left: '4.17%', width: '23.96%', height: '517px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web011.jpg', speed: 0.5,
-              position: { top: '20vh', left: '37.99%', width: '23.96%', height: '517px', zIndex: 2 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web007.jpg', speed: 0.7,
-              position: { top: '38vh', left: '71.81%', width: '23.96%', height: '518px', zIndex: 3 } },
-          ]
-        },
-        // Full-width still/video
-        {
-          id: 'fw-video',
-          minHeight: '80vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/Still_191138.jpg', speed: 0.2,
-              position: { top: '0', left: '0', width: '100%', height: '810px', zIndex: 1 } },
-            { type: 'text', content: '¿cómo seguir habitando el planeta?', speed: 0,
-              position: { top: '90%', left: '8.47%', width: '45.07%', height: 'auto', zIndex: 2 } },
-          ]
-        },
-        // Center-left image + text right
-        {
-          id: 'wide-text',
-          minHeight: '90vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web026.jpg', speed: 0.3,
-              position: { top: '5vh', left: '16.88%', width: '66.25%', height: '636px', zIndex: 1 } },
-            { type: 'text', content: 'Numerosas cuestiones sobre cómo seguir habitando el planeta se condensan en esta experiencia.', speed: 0,
-              position: { top: '75vh', left: '58.54%', width: '32.43%', height: 'auto', zIndex: 1 } },
-          ]
-        },
-        // 4-image scattered composition
-        {
-          id: 'scattered-4',
-          minHeight: '130vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web016.jpg', speed: 0.4,
-              position: { top: '5vh', left: '21.11%', width: '23.96%', height: '517px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web017.jpg', speed: 0.6,
-              position: { top: '35vh', left: '42.22%', width: '20.42%', height: '441px', zIndex: 2 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web018.jpg', speed: 0.5,
-              position: { top: '35vh', left: '62.64%', width: '20.42%', height: '441px', zIndex: 2 } },
-          ]
-        },
-        // Full-width
-        {
-          id: 'fw-2',
-          minHeight: '90vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web031.jpg', speed: 0.2,
-              position: { top: '0', left: '0', width: '100%', height: '960px', zIndex: 1 } },
-          ]
-        },
-        // 3-image diagonal stagger
-        {
-          id: 'staggered-diag',
-          minHeight: '130vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web014.jpg', speed: 0.3,
-              position: { top: '5vh', left: '8.47%', width: '23.96%', height: '517px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web013.jpg', speed: 0.5,
-              position: { top: '45vh', left: '28.19%', width: '32.43%', height: '311px', zIndex: 2 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web015.jpg', speed: 0.7,
-              position: { top: '60vh', left: '50.63%', width: '40.83%', height: '392px', zIndex: 3 } },
-          ]
-        },
-        // Triptych — 3 images edge-to-edge
-        {
-          id: 'triptych',
-          minHeight: '70vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web040.jpg', speed: 0,
-              position: { top: '5vh', left: '0', width: '33.33%', height: '719px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web037.jpg', speed: 0,
-              position: { top: '5vh', left: '33.38%', width: '33.33%', height: '719px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web039.jpg', speed: 0,
-              position: { top: '5vh', left: '66.71%', width: '33.33%', height: '719px', zIndex: 1 } },
-          ]
-        },
-        // 2-image overlap + text
-        {
-          id: 'overlap-pair',
-          minHeight: '110vh',
-          layers: [
-            { type: 'text', content: 'De esas raíces y las tensiones entre lo que es, lo que fue y lo que puede llegar a ser.', speed: 0,
-              position: { top: '10vh', left: '10.69%', width: '32.43%', height: 'auto', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web050.jpg', speed: 0.4,
-              position: { top: '5vh', left: '59.1%', width: '32.43%', height: '700px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web054.jpg', speed: 0.6,
-              position: { top: '55vh', left: '37.99%', width: '32.43%', height: '311px', zIndex: 2 } },
-          ]
-        },
-        // Single medium image
-        {
-          id: 'medium-centered',
-          minHeight: '70vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web047.jpg', speed: 0.3,
-              position: { top: '5vh', left: '4.24%', width: '57.71%', height: '554px', zIndex: 1 } },
-          ]
-        },
-        // 2-image side by side + text
-        {
-          id: 'offset-pair-2',
-          minHeight: '80vh',
-          layers: [
-            { type: 'text', content: 'La ciencia y la técnica han triunfado sobre la naturaleza y la tradición.', speed: 0,
-              position: { top: '0', left: '59.17%', width: '32.43%', height: 'auto', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web048.jpg', speed: 0.3,
-              position: { top: '20vh', left: '31.11%', width: '44.77%', height: '430px', zIndex: 1 } },
-            { type: 'image', src: '/mas-alla-del-infinito/web055.jpg', speed: 0.5,
-              position: { top: '20vh', left: '75.89%', width: '19.91%', height: '430px', zIndex: 2 } },
-          ]
-        },
-        // Closing text
-        {
-          id: 'closing-text',
-          minHeight: '40vh',
-          layers: [
-            { type: 'text', content: 'La vibración de esta obra persiste en nuestros sentidos mucho después de haberla transitado.', speed: 0,
-              position: { top: '10vh', left: '21.11%', width: '32.43%', height: 'auto', zIndex: 1 } },
-          ]
-        },
-        // Full-width closing image
-        {
-          id: 'fw-3',
-          minHeight: '90vh',
-          layers: [
-            { type: 'image', src: '/mas-alla-del-infinito/web053.jpg', speed: 0.2,
-              position: { top: '0', left: '0', width: '100%', height: '960px', zIndex: 1 } },
-          ]
-        },
-        // Credits
-        {
-          id: 'credits',
-          minHeight: '60vh',
-          layers: [
-            { type: 'credits' as const, speed: 0.4, credits: [
-              { role: 'Fotografía de Obra', name: 'Constanza Schwartz' },
-            ],
-              position: { top: '10vh', left: '0', width: '100%', height: 'auto', zIndex: 1 } },
-          ]
-        },
-      ]
-    },
-  },
-
   // ─────────────────────────────────────────────────────────
   // MUTEK
   // ─────────────────────────────────────────────────────────
@@ -1051,5 +705,84 @@ export const projects: Project[] = [
         },
       ]
     },
+  },
+  // ─────────────────────────────────────────────────────────
+  // SILVESTRE Y LA NARANJA "ALTEREGO"
+  // ─────────────────────────────────────────────────────────
+  {
+    date: '2025',
+    title: 'ALTEREGO . SILVESTRE Y LA NARANJA',
+    slug: 'silvestre-y-la-naranja-alterego',
+    image: '/project5/azstill18 1.png',
+    category: 'Dirección de Arte',
+    parallaxConfig: {
+      sections: [
+        {
+          id: 'hero',
+          minHeight: '115vh',
+          layers: [
+            { type: 'image', src: '/project5/azstill18 1.png', speed: 0.8, isHero: true,
+              position: { top: '80px', left: '4.25%', width: '91.5%', height: '561px', zIndex: 1 } },
+            { type: 'marquee', content: 'DIRECCIÓN DE ARTE . ALTEREGO', speed: 0, multiplier: 22,
+              position: { top: '86vh', left: '0', width: '100%', height: '72px', zIndex: 2 } },
+          ]
+        },
+        {
+          id: 'medium-1',
+          minHeight: '80vh',
+          layers: [
+            { type: 'image', src: '/project5/azstill18 1.png', speed: 0.3,
+              position: { top: '5vh', left: '16.67%', width: '66.25%', height: '503px', zIndex: 1 } },
+          ]
+        },
+        {
+          id: 'fw-video-1',
+          minHeight: '80vh',
+          type: 'fullwidth-video',
+          layers: [
+            { type: 'video', src: '/project5/04-azclip1.mp4', speed: 0, autoPlay: true, loop: false, muted: true },
+          ]
+        },
+        {
+          id: 'overlap-1',
+          minHeight: '90vh',
+          layers: [
+            { type: 'image', src: '/project5/PHOTO-2025-04-09-14-50-34 1.png', speed: 0.6,
+              position: { top: '5vh', left: '45.83%', width: '466px', height: '246px', zIndex: 2 } },
+            { type: 'image', src: '/project5/PHOTO-2025-04-09-14-53-45 1.png', speed: 0.2,
+              position: { top: '20vh', left: '16.67%', width: '466px', height: '246px', zIndex: 1 } },
+          ]
+        },
+        {
+          id: 'scattered',
+          minHeight: '300vh',
+          layers: [
+            { type: 'image', src: '/project5/invstill11 1.png', speed: 0.8,
+              position: { top: '2%', left: '8.33%', width: '466px', height: '246px', zIndex: 2 } },
+            { type: 'image', src: '/project5/clipinv3 2 1.png', speed: 0,
+              position: { top: '12%', left: '0', width: '100%', height: '50vw', zIndex: 1 } },
+            { type: 'image', src: '/project5/10 inv 1 1.png', speed: 0.5,
+              position: { top: '35%', left: '62.5%', width: '466px', height: '245px', zIndex: 2 } },
+            { type: 'image', src: '/project5/invstill4 1.png', speed: 0.3,
+              position: { top: '50%', left: 'calc(50% - 233px)', width: '466px', height: '245px', zIndex: 2 } },
+            { type: 'image', src: '/project5/invstill6 1.png', speed: 0.7,
+              position: { top: '65%', left: '8.33%', width: '466px', height: '245px', zIndex: 2 } },
+            { type: 'image', src: '/project5/invstill12 1.png', speed: 0.4,
+              position: { top: '80%', left: '58.33%', width: '466px', height: '246px', zIndex: 2 } },
+          ]
+        },
+        {
+          id: 'credits',
+          minHeight: '60vh',
+          layers: [
+            { type: 'credits' as const, speed: 0.4, credits: [
+              { role: 'Dirección de Arte', name: 'Constanza Schwartz' },
+              { role: 'Banda', name: 'Silvestre y la Naranja' },
+            ],
+              position: { top: '10vh', left: '0', width: '100%', height: 'auto', zIndex: 1 } },
+          ]
+        },
+      ]
+    }
   },
 ]

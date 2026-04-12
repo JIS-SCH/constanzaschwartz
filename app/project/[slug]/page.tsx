@@ -3,9 +3,9 @@
 import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { projects } from '@/src/data/projects'
-import { useTransition } from '@/src/context/TransitionContext'
-import { ProjectPage as ParallaxProjectPage } from '@/src/components/ProjectPage'
-import { ParallaxGallery } from '@/src/components/ParallaxGallery'
+import { useTransition } from '@/src/contexts/TransitionContext'
+import { ProjectPage as ParallaxProjectPage } from '@/src/components/parallax/ProjectPage'
+import { ParallaxGallery } from '@/src/components/parallax/ParallaxGallery'
 
 export default function ProjectPage() {
   const params = useParams<{ slug: string }>()

@@ -6,7 +6,7 @@ import gsap from 'gsap'
 import { isMobile } from '@/src/utils/detect'
 import { setupResize } from '@/src/utils/resize'
 import type { Project } from '@/src/data/projects'
-import type { OriginRect } from '@/src/context/TransitionContext'
+import type { OriginRect } from '@/src/contexts/TransitionContext'
 
 interface HomeGridProps {
   projects: Project[]

@@ -5,15 +5,11 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { getLenis } from '@/src/scroll/lenis'
+import type { GalleryImage } from '@/src/types/parallax'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export interface GalleryImage {
-  src: string
-  alt: string
-  position: 'left' | 'center' | 'right'
-  size: 'sm' | 'md' | 'lg'
-}
+export type { GalleryImage } from '@/src/types/parallax'
 
 interface ParallaxGalleryProps {
   images: GalleryImage[]

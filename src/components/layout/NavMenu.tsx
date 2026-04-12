@@ -14,9 +14,10 @@ const MENU_ITEMS = ['PROJECTS', 'PROFILE', 'CONTACT'] as const
 
 interface NavMenuProps {
   isOpen: boolean
+  onContactClick: () => void
 }
 
-export function NavMenu({ isOpen }: NavMenuProps) {
+export function NavMenu({ isOpen, onContactClick }: NavMenuProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
   const itemWrappers = useRef<(HTMLDivElement | null)[]>([])
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
@@ -118,6 +119,9 @@ export function NavMenu({ isOpen }: NavMenuProps) {
             <div style={{ overflow: 'hidden' }}>
               <div ref={(el) => { itemWrappers.current[i] = el }}>
                 <button
+                  onClick={() => {
+                    if (item === 'CONTACT') onContactClick()
+                  }}
                   style={{
                     background: 'none',
                     border: 'none',

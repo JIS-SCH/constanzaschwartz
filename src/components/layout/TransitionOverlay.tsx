@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import gsap from 'gsap'
 import { Flip } from 'gsap/Flip'
-import { useTransition } from '@/src/context/TransitionContext'
+import { useTransition } from '@/src/contexts/TransitionContext'
 
 export function TransitionOverlay() {
   const { state, setExpanded, setDone, setClosed, reset } = useTransition()

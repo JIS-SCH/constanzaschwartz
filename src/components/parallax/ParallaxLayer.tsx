@@ -2,7 +2,7 @@
 
 import { useRef, useMemo } from 'react'
 import { useParallax } from '@/src/hooks/useParallax'
-import { VideoPlayer } from './VideoPlayer'
+import { VideoPlayer } from '@/src/components/media/VideoPlayer'
 
 export type LayerType = 'image' | 'video' | 'text' | 'marquee' | 'credits'
 
