@@ -20,8 +20,7 @@ export default function Home() {
   const [phase, setPhase] = useState<AppPhase>(getInitialPhase)
   const { start } = useTransition()
 
-  // Track if tunnel was ever started — if so, keep it mounted (hidden) to avoid
-  // React vs ScrollTrigger pin DOM conflict on unmount
+
   const [tunnelStarted] = useState(() => phase === 'tunnel')
 
   const handleProjectClick = useCallback(
