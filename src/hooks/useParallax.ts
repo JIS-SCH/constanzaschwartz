@@ -33,13 +33,9 @@ export function useParallax(
       start: 'top bottom',
       end: 'bottom top',
       onUpdate: (self) => {
-        // progress 0→1 as element crosses viewport
-        // offset goes from +range to -range (centered at viewport middle)
         const offset = (1 - self.progress * 2) * range
-
         const xVal = direction === 'x' || direction === 'both' ? offset : 0
         const yVal = direction === 'y' || direction === 'both' ? offset : 0
-
         gsap.set(element, { x: xVal, y: yVal })
       },
     })

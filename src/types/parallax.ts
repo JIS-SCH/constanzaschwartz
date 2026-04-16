@@ -36,8 +36,9 @@ export interface Section {
   id: string
   height?: string
   minHeight?: string
-  type?: 'standard' | 'offset' | 'fullwidth-video' | 'overlay'
+  type?: 'standard' | 'offset' | 'fullwidth-video' | 'overlay' | 'carousel'
   variant?: 'default' | 'inverted'
+  backgroundColor?: string
   layers: Layer[]
 }
 

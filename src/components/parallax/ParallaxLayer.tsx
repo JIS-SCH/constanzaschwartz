@@ -143,6 +143,8 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0 }: Pa
           <img
             src={layer.src}
             alt={layer.alt || ''}
+            loading={layer.isHero ? 'eager' : 'lazy'}
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',

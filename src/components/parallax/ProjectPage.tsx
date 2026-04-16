@@ -97,6 +97,40 @@ function renderFullwidthVideo(section: Section) {
   )
 }
 
+function renderCarouselSection(section: Section) {
+  const images = section.layers.filter((l) => l.type === 'image' && l.src)
+  const doubled = [...images, ...images]
+  const totalWidth = images.length * 588
+
+  return (
+    <div style={{ width: '100%', height: '331px', overflow: 'hidden', position: 'relative' }}>
+      <style>{`
+        @keyframes cs-carousel-scroll {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-${totalWidth}px); }
+        }
+      `}</style>
+      <div
+        style={{
+          display: 'flex',
+          animation: `cs-carousel-scroll ${images.length * 3.5}s linear infinite`,
+          width: 'max-content',
+        }}
+      >
+        {doubled.map((layer, i) => (
+          <div key={i} style={{ width: '588px', height: '331px', flexShrink: 0 }}>
+            <img
+              src={layer.src}
+              alt={layer.alt || ''}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function renderOverlaySection(section: Section) {
   const smallLayer = section.layers[0]
   const largeLayer = section.layers.find((_, i) => i > 0 && section.layers[i].type === 'video') || section.layers[1]
@@ -157,6 +191,9 @@ export function ProjectPage({ parallaxConfig }: ProjectPageProps) {
           case 'overlay':
             content = renderOverlaySection(section)
             break
+          case 'carousel':
+            content = renderCarouselSection(section)
+            break
           default:
             content = renderStandardSection(section)
         }
@@ -169,6 +206,7 @@ export function ProjectPage({ parallaxConfig }: ProjectPageProps) {
             style={{
               ...(section.height ? { height: section.height } : {}),
               minHeight: section.minHeight || '100vh',
+              ...(section.backgroundColor ? { backgroundColor: section.backgroundColor } : {}),
             }}
           >
             {content}
