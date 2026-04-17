@@ -34,13 +34,23 @@ export function Component() {
       {/* 1. HERO — Large centered sculpture */}
       <ParallaxSection
         id="hero"
-        style={{ minHeight: '115vh' }}
+        style={{ minHeight: '110vh' }}
       >
+        {/* Full-width black band behind the sculpture */}
         <ParallaxLayer
           sectionId="hero"
           layerIndex={0}
-          layer={{ type: 'image', src: ASSETS.hero, speed: 0.4, isHero: true }}
-          position={{ top: '10vh', left: '20%', width: '60%', height: '90vh', zIndex: 1 }}
+          layer={{ type: 'text', content: '', speed: 0.4 }}
+          position={{ top: '12vh', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
+        >
+          <div style={{ width: '100%', height: '100%', backgroundColor: '#000' }} />
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          sectionId="hero"
+          layerIndex={1}
+          layer={{ type: 'image', src: ASSETS.hero, speed: 0.4, isHero: true, objectFit: 'contain' }}
+          position={{ top: '12vh', left: '35%', width: '30%', height: '80vh', zIndex: 1 }}
         />
       </ParallaxSection>
 
