@@ -5,7 +5,7 @@ import type { AppPhase } from '@/src/types/app'
 import { TunnelVideo } from '@/src/components/tunnel/TunnelVideo'
 import { IntroScreen } from '@/src/components/home/IntroScreen'
 import { HomeGrid } from '@/src/components/home/HomeGrid'
-import { projects } from '@/src/data/projects'
+import { projectList } from '@/src/projects/registry'
 import { useTransition } from '@/src/contexts/TransitionContext'
 import type { OriginRect } from '@/src/contexts/TransitionContext'
 
@@ -20,12 +20,11 @@ export default function Home() {
   const [phase, setPhase] = useState<AppPhase>(getInitialPhase)
   const { start } = useTransition()
 
-
   const [tunnelStarted] = useState(() => phase === 'tunnel')
 
   const handleProjectClick = useCallback(
     (index: number, rect: OriginRect) => {
-      const project = projects[index]
+      const project = projectList[index]
       if (!project) return
       start({ slug: project.slug, imageSrc: project.image, rect })
     },
@@ -55,7 +54,7 @@ export default function Home() {
       )}
 
       <HomeGrid
-        projects={projects}
+        projects={projectList}
         onProjectClick={handleProjectClick}
       />
     </div>

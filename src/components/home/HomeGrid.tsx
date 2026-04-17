@@ -5,11 +5,11 @@ import * as THREE from 'three'
 import gsap from 'gsap'
 import { isMobile } from '@/src/utils/detect'
 import { setupResize } from '@/src/utils/resize'
-import type { Project } from '@/src/data/projects'
+import type { ProjectMeta } from '@/src/projects/types'
 import type { OriginRect } from '@/src/contexts/TransitionContext'
 
 interface HomeGridProps {
-  projects: Project[]
+  projects: ProjectMeta[]
   onProjectClick: (index: number, rect: OriginRect) => void
 }
 
@@ -49,7 +49,7 @@ function preloadTexture(src: string): Promise<THREE.Texture> {
 }
 
 // ─── Build an overlay canvas texture (dark + text) ───────────────────────────
-function createOverlayTexture(project: Project, index: number): THREE.CanvasTexture {
+function createOverlayTexture(project: ProjectMeta, index: number): THREE.CanvasTexture {
   const w = 512
   const h = 320
   const canvas = document.createElement('canvas')

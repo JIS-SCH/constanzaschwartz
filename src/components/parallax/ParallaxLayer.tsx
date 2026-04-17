@@ -60,6 +60,7 @@ interface ParallaxLayerProps {
   }
   sectionId?: string
   layerIndex?: number
+  children?: React.ReactNode
 }
 
 const TEXT_STYLE: React.CSSProperties = {
@@ -97,13 +98,15 @@ function MarqueeContent({ content, duration }: { content: string; duration: numb
   )
 }
 
-export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0 }: ParallaxLayerProps) {
+export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, children }: ParallaxLayerProps) {
   const elementRef = useRef<HTMLElement>(null)
   const isMarquee = layer.type === 'marquee'
 
   const { speed = 1, direction = 'y', multiplier = 200 } = layer
+  const marqueeHeight = position.height || '72px'
+  const isStickyMarquee = isMarquee && !position.top
 
-  const parallaxRef = isMarquee
+  const parallaxRef = isStickyMarquee
     ? ({ current: null } as unknown as React.RefObject<HTMLElement>)
     : (elementRef as React.RefObject<HTMLElement>)
 
@@ -113,28 +116,26 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0 }: Pa
     multiplier,
   })
 
-  const marqueeHeight = position.height || '72px'
-
-  const baseStyle: React.CSSProperties = isMarquee
+  const baseStyle: React.CSSProperties = isStickyMarquee
     ? {
-        position: 'sticky',
-        top: `calc(100vh - ${marqueeHeight})`,
-        width: '100%',
-        height: marqueeHeight,
-        zIndex: position.zIndex ?? 1,
-        transform: 'translate3d(0,0,0)',
-      }
+      position: 'sticky',
+      top: `calc(100vh - ${marqueeHeight})`,
+      width: '100%',
+      height: marqueeHeight,
+      zIndex: position.zIndex ?? 1,
+      transform: 'translate3d(0,0,0)',
+    }
     : {
-        position: 'absolute',
-        top: position.top,
-        left: position.left,
-        right: position.right,
-        bottom: position.bottom,
-        width: position.width,
-        height: position.height,
-        zIndex: position.zIndex,
-        willChange: 'transform',
-      }
+      position: 'absolute',
+      top: position.top,
+      left: position.left,
+      right: position.right,
+      bottom: position.bottom,
+      width: position.width,
+      height: position.height,
+      zIndex: position.zIndex,
+      willChange: 'transform',
+    }
 
   const renderedContent = useMemo(() => {
     switch (layer.type) {
@@ -217,12 +218,12 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0 }: Pa
 
   return (
     <div
-      ref={isMarquee ? undefined : elementRef as React.RefObject<HTMLDivElement>}
+      ref={isStickyMarquee ? undefined : elementRef as React.RefObject<HTMLDivElement>}
       style={baseStyle}
       className={layer.className}
       data-project-image={layer.isHero ? true : undefined}
     >
-      {renderedContent}
+      {children || renderedContent}
     </div>
   )
 }

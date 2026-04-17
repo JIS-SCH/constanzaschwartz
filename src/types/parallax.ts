@@ -29,6 +29,7 @@ export interface Layer {
     width?: string
     height?: string
     zIndex?: number
+    objectFit?: 'cover' | 'contain' | 'fill'
   }
 }
 

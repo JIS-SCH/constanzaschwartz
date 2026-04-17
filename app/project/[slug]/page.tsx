@@ -2,9 +2,8 @@
 
 import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { projects } from '@/src/data/projects'
+import { projectRegistry } from '@/src/projects/registry'
 import { useTransition } from '@/src/contexts/TransitionContext'
-import { ProjectPage as ParallaxProjectPage } from '@/src/components/parallax/ProjectPage'
 import { ParallaxGallery } from '@/src/components/parallax/ParallaxGallery'
 
 export default function ProjectPage() {
@@ -12,7 +11,7 @@ export default function ProjectPage() {
   const router = useRouter()
   const { state, reveal } = useTransition()
 
-  const project = projects.find((p) => p.slug === params.slug)
+  const mod = projectRegistry[params.slug]
 
   useEffect(() => {
     if (state.phase === 'expanded') {
@@ -23,7 +22,7 @@ export default function ProjectPage() {
     }
   }, [state.phase, reveal])
 
-  if (!project) {
+  if (!mod) {
     return (
       <div style={{ padding: '80px 24px', color: '#fff' }}>
         <p>Project not found.</p>
@@ -34,27 +33,12 @@ export default function ProjectPage() {
     )
   }
 
+  const { Component, gallery } = mod
+
   return (
     <div style={{ minHeight: '100vh', background: '#000', color: '#fff' }}>
-      {project.parallaxConfig ? (
-        <>
-          <ParallaxProjectPage parallaxConfig={project.parallaxConfig} />
-          {project.gallery && <ParallaxGallery images={project.gallery} />}
-        </>
-      ) : (
-        <div
-          data-project-image
-          style={{
-            width: 'calc(100% - 160px)',
-            maxWidth: '1200px',
-            aspectRatio: '16 / 9',
-            margin: '140px auto 0',
-            backgroundImage: `url(${project.image})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-      )}
+      <Component />
+      {gallery && <ParallaxGallery images={gallery} />}
     </div>
   )
 }
