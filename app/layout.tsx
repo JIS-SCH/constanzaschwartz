@@ -13,6 +13,15 @@ import { NavController } from "@/src/components/layout/NavController";
 export const metadata: Metadata = {
   title: "Constanza Schwartz",
   description: "Artist portfolio",
+  icons: {
+    icon: [
+      { url: "/CONSTANZASCHWARTZ_48X48_Favicon.png", sizes: "48x48", type: "image/png" },
+      { url: "/CONSTANZASCHWARTZ_FAVICON 192X192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "/CONSTANZASCHWARTZ_FAVICON 192X192.png", sizes: "192x192", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({

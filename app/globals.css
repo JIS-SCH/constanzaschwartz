@@ -1,9 +1,61 @@
 @import "tailwindcss";
 
+/* Helvetica Neue LT Std */
 @font-face {
-  font-family: 'HelveticaLTStd';
-  src: url('/HelveticaLTStd-Roman.woff') format('woff');
-  font-weight: normal;
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Th.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Th.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Lt.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Lt.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Roman.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Roman.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Md.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Md.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Space Grotesk */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-Light.woff2') format('woff2'),
+       url('/fonts/SpaceGrotesk/SpaceGrotesk-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-Regular.woff2') format('woff2'),
+       url('/fonts/SpaceGrotesk/SpaceGrotesk-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-Medium.woff2') format('woff2'),
+       url('/fonts/SpaceGrotesk/SpaceGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }

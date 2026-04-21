@@ -2,9 +2,9 @@ import type { ProjectMeta, ProjectModule } from './types'
 
 import * as alterego from './alterego'
 import * as designWeek from './design-week-mexico'
-import * as masAlla from './_legacy/mas-alla-del-infinito'
-import * as mutek from './_legacy/mutek'
-import * as eco from './_legacy/eco-al-infinito'
+import * as eco from './eco-al-infinito'
+import * as masAlla from './mas-alla-del-infinito'
+import * as mutek from './mutek'
 
 // Display order (matches the old `projects[]` array)
 const ORDERED: ProjectModule[] = [

@@ -17,7 +17,11 @@ export function NavController() {
   return (
     <>
       <Navbar menuOpen={menuOpen} onMenuToggle={() => setMenuOpen((prev) => !prev)} />
-      <NavMenu isOpen={menuOpen} onContactClick={handleContactClick} />
+      <NavMenu 
+        isOpen={menuOpen} 
+        onContactClick={handleContactClick} 
+        onClose={() => setMenuOpen(false)} 
+      />
       <ContactSection isOpen={contactOpen} onClose={() => setContactOpen(false)} />
     </>
   )

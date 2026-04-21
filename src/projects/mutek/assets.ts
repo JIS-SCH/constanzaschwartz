@@ -1,0 +1,15 @@
+export const ASSETS = {
+  hero: '/mutek/hero.png',
+  img1: '/mutek/1.jpg',
+  img2: '/mutek/2.jpg',
+  img3: '/mutek/3.jpg',
+  img4: '/mutek/4.jpg',
+  img5: '/mutek/5.jpg',
+  img6: '/mutek/6.jpg',
+  img7: '/mutek/7.jpg',
+  img8: '/mutek/8.jpg',
+  img9: '/mutek/9.jpg',
+  img10: '/mutek/10.jpg',
+  img11: '/mutek/11.jpg',
+  img12: '/mutek/12.jpg',
+} as const

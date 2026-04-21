@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, Fragment } from 'react'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import gsap from 'gsap'
 
@@ -15,9 +16,19 @@ const MENU_ITEMS = ['PROJECTS', 'PROFILE', 'CONTACT'] as const
 interface NavMenuProps {
   isOpen: boolean
   onContactClick: () => void
+  onClose: () => void
 }
 
-export function NavMenu({ isOpen, onContactClick }: NavMenuProps) {
+const SUB_ITEM_MAPPING: Record<string, string> = {
+  'MÁS ALLÁ DEL INFINITO': 'mas-alla-del-infinito',
+  'DESIGN WEEK MEXICO': 'design-week-mexico',
+  'MUTEK': 'mutek',
+  'ATRIO (NAMING WIP)': 'eco-al-infinito',
+  'SILVESTRE Y LA NARANJA "ALTEREGO"': 'silvestre-y-la-naranja-alterego',
+}
+
+export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
+  const router = useRouter()
   const overlayRef = useRef<HTMLDivElement>(null)
   const itemWrappers = useRef<(HTMLDivElement | null)[]>([])
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
@@ -120,7 +131,12 @@ export function NavMenu({ isOpen, onContactClick }: NavMenuProps) {
               <div ref={(el) => { itemWrappers.current[i] = el }}>
                 <button
                   onClick={() => {
-                    if (item === 'CONTACT') onContactClick()
+                    if (item === 'CONTACT') {
+                      onContactClick()
+                    } else if (item === 'PROFILE') {
+                      onClose()
+                      router.push('/profile')
+                    }
                   }}
                   style={{
                     background: 'none',
@@ -178,6 +194,13 @@ export function NavMenu({ isOpen, onContactClick }: NavMenuProps) {
                       {row.map((sub, subIdx) => (
                         <Fragment key={sub}>
                           <span
+                            onClick={() => {
+                              const slug = SUB_ITEM_MAPPING[sub]
+                              if (slug) {
+                                onClose()
+                                router.push(`/project/${slug}`)
+                              }
+                            }}
                             style={{
                               color: '#fff',
                               fontSize: '16px',
@@ -187,7 +210,10 @@ export function NavMenu({ isOpen, onContactClick }: NavMenuProps) {
                               fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
                               cursor: 'pointer',
                               whiteSpace: 'nowrap',
+                              transition: 'color 0.2s ease',
                             }}
+                            onMouseEnter={(e) => (e.currentTarget.style.color = '#FFDF00')}
+                            onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
                           >
                             {sub}
                           </span>
