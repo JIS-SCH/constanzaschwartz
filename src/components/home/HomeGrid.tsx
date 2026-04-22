@@ -14,13 +14,18 @@ interface HomeGridProps {
 }
 
 // ─── Layout constants ────────────────────────────────────────────────────────
-const BASE_Z = 11.5
-const ARC_DISTANCE = 20
-const GROUP_ROTATION = -Math.PI / 12  // global offset
+const BASE_Z = -45
+const ARC_DISTANCE = 65
+const GROUP_ROTATION = 0              // arc is symmetric in front of camera
+const ARC_FOV = Math.PI / 4           // total angular spread of the gallery arc
+const ARC_CENTER_ANGLE = Math.PI / 2  // arc symmetry axis (in front of camera)
+const MOUSE_ROTATION_RANGE = Math.PI / 10    // ±18° max camera yaw on desktop hover (enough to peek the clipped side cards)
+const DRAG_ROTATION_RANGE = Math.PI / 4      // full-window drag = ±45° on mobile
+const DRAG_TAP_THRESHOLD = 10                // px movement to count as drag (not tap)
 
-// Card geometry
-const CARD_W = 9.8
-const CARD_H = 8.0
+// Card geometry — bigger, slightly landscape to match Figma reference
+const CARD_W = 12
+const CARD_H = 9
 const REFLECTION_H = 2.4
 
 function getTitle(index: number): string {
@@ -144,7 +149,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       0.1,
       100
     )
-    camera.position.set(0, 0, 20)
+    camera.position.set(0, 0, -35)
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false })
     renderer.setSize(window.innerWidth, window.innerHeight)
@@ -169,10 +174,13 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     // Arc positions (stored for hover restore)
     const arcPositions: { x: number; z: number }[] = []
-    const fov = Math.PI
 
     projects.forEach((project, i) => {
-      const angle = (fov / count) * i
+      // Spread cards evenly across ARC_FOV, centered on ARC_CENTER_ANGLE so the
+      // gallery sits symmetrically in front of the camera.
+      const angle = count > 1
+        ? ARC_CENTER_ANGLE - ARC_FOV / 2 + (ARC_FOV / (count - 1)) * i
+        : ARC_CENTER_ANGLE
       const x = -ARC_DISTANCE * Math.cos(angle)
       const z = -ARC_DISTANCE * Math.sin(angle)
       const rotationY = Math.PI / 2 - angle
@@ -274,19 +282,50 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       ease: 'power2.out',
     })
 
-    // ── Pointer tracking ────────────────────────────────────────────────────
+    // ── Pointer / drag tracking ─────────────────────────────────────────────
+    // Desktop = mouse-follow (parallax). Mobile = touch-and-drag (rotates camera
+    // by drag delta; no rotation when finger isn't pressed).
     const pointer = { x: 0, y: 0 }
+    let cameraTargetRotY = 0
 
     const onMouseMove = (e: MouseEvent) => {
       pointer.x = (e.clientX / window.innerWidth) * 2 - 1
       pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
-    }
-    const onTouchMove = (e: TouchEvent) => {
-      pointer.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1
+      cameraTargetRotY = -pointer.x * MOUSE_ROTATION_RANGE
     }
 
-    if (!mobile) window.addEventListener('mousemove', onMouseMove)
-    else window.addEventListener('touchmove', onTouchMove, { passive: true })
+    let dragStart: { x: number; y: number; rot: number } | null = null
+    let didDrag = false
+
+    const onTouchStart = (e: TouchEvent) => {
+      dragStart = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        rot: cameraTargetRotY,
+      }
+      didDrag = false
+    }
+    const onTouchMove = (e: TouchEvent) => {
+      if (!dragStart) return
+      const dx = e.touches[0].clientX - dragStart.x
+      const dy = e.touches[0].clientY - dragStart.y
+      if (Math.abs(dx) > DRAG_TAP_THRESHOLD || Math.abs(dy) > DRAG_TAP_THRESHOLD) {
+        didDrag = true
+      }
+      cameraTargetRotY = dragStart.rot - (dx / window.innerWidth) * DRAG_ROTATION_RANGE * 2
+      pointer.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1
+    }
+    const onTouchEnd = () => {
+      dragStart = null
+    }
+
+    if (!mobile) {
+      window.addEventListener('mousemove', onMouseMove)
+    } else {
+      window.addEventListener('touchstart', onTouchStart, { passive: true })
+      window.addEventListener('touchmove', onTouchMove, { passive: true })
+      window.addEventListener('touchend', onTouchEnd, { passive: true })
+    }
 
     // ── Raycaster for hover + click ───────────────────────────────────────
     const raycaster = new THREE.Raycaster()
@@ -336,6 +375,11 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     // Click / tap — compute screen rect and fire callback
     const onClick = (e: MouseEvent) => {
+      // On mobile, swallow the click that follows a drag gesture
+      if (mobile && didDrag) {
+        didDrag = false
+        return
+      }
       const group = getHitGroup(e.clientX, e.clientY)
       if (!group) {
         if (mobile && mobileActiveGroup) {
@@ -376,14 +420,12 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       const delta = (now - lastTime) / 1000
       lastTime = now
 
-      // Camera Y rotation from mouse X
-      if (!mobile) {
-        camera.rotation.y = THREE.MathUtils.lerp(
-          camera.rotation.y,
-          -(pointer.x * Math.PI) / 4,
-          0.03
-        )
-      }
+      // Camera Y rotation: smoothly chase the target set by mouse (desktop) or drag (mobile)
+      camera.rotation.y = THREE.MathUtils.lerp(
+        camera.rotation.y,
+        cameraTargetRotY,
+        0.08
+      )
 
       // Camera Z depth from mouse Y
       camera.position.z = THREE.MathUtils.damp(
@@ -406,7 +448,9 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
         window.removeEventListener('mousemove', onMouseMove)
         canvas.removeEventListener('mousemove', onHoverCheck)
       } else {
+        window.removeEventListener('touchstart', onTouchStart)
         window.removeEventListener('touchmove', onTouchMove)
+        window.removeEventListener('touchend', onTouchEnd)
       }
       canvas.removeEventListener('click', onClick)
       window.removeEventListener('intro:showCards', onShowCards)
