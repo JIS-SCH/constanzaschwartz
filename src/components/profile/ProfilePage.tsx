@@ -431,7 +431,7 @@ const CSS = `
 
 .pr-list {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   font-size: 15px;
   line-height: 1.21;
   color: #fff;
@@ -453,11 +453,14 @@ const CSS = `
 /* Title overlays portrait */
 .pr-title {
   position: absolute;
-  top: calc(96px + 48px);
+  top: 84px; /* 48px margin-top del portrait + 36px de distancia */
   left: 21px;
   z-index: 10;
+  pointer-events: none;
   mix-blend-mode: difference;
+  -webkit-mix-blend-mode: difference;
 }
+
 
 .pr-statement  { padding: 32px 20px; }
 .pr-marquee-wrap { padding: 6px 0; }
@@ -492,7 +495,7 @@ const CSS = `
   overflow: visible;
   position: relative;
   z-index: 0;
-  margin-bottom: 150px;
+  margin-bottom: -35px;
   padding-top: 20px;
 }
 .pr-year-img img {
@@ -502,14 +505,14 @@ const CSS = `
 .pr-year-carousel {
   position: relative;
   z-index: 1;
-  margin-bottom: 150px;
+  margin-bottom: 40px;
 }
 
 .pr-year-events {
   position: relative;
   z-index: 2;
-  padding: 0 20px 150px;
-  background: #000; /* opaque so it covers carousel bleed */
+  padding: 0 20px 0;
+  background: transparent;
 }
 
 /* ═══ DESKTOP ════════════════════════════════════════════════════════════ */
@@ -615,7 +618,7 @@ const CSS = `
   .pr-bio-label {
     position: absolute;
     left: 143px;
-    top: 1984px; /* aligned with bio text top */
+    top: 2025px; /* adjusted to match Figma relative position */
     width: 200px;
     height: 432px;
     display: flex;
@@ -656,5 +659,5 @@ const CSS = `
     padding: 40px calc(8.33% + 2px) 120px;
   }
 
-  .pr-list { font-size: 26px; font-weight: 100; line-height: 1.21; }
+  .pr-list { font-size: 26px; font-weight: 200; line-height: 1.21; }
 }`
