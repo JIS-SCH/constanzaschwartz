@@ -1,4 +1,6 @@
 export const ALT = {
+  // portada
+  portada: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_portada_desktop_l1yfg1',
   // images
   1:  'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_1_pomaec',   // 4096x2160 — cone of light (teal)
   2:  'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_2_dd0vyv',   // 4096x2160 — man crouching spotlight

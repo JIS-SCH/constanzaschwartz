@@ -30,7 +30,7 @@ const legacyProjects: Project[] = [
           minHeight: '115vh',
           layers: [
             { type: 'image', src: '/project5/azstill18 1.png', speed: 0.8, isHero: true,
-              position: { top: '120px', left: '4.25%', width: '91.5%', height: '561px', zIndex: 1 } },
+              position: { top: '60px', left: '4.25%', width: '91.5%', height: '561px', zIndex: 1 } },
             { type: 'marquee', content: 'DIRECCIÓN DE ARTE Y EFECTOS LUMÍNICOS.', speed: 0, multiplier: 22,
               position: { top: '86vh', left: '0', width: '100%', height: '72px', zIndex: 2 } },
           ]
@@ -215,7 +215,7 @@ const legacyProjects: Project[] = [
           minHeight: '115vh',
           layers: [
             { type: 'image', src: '/mutek/_DSC3417.jpg', speed: 0.8, isHero: true,
-              position: { top: '120px', left: '4.25%', width: '91.5%', height: '623px', zIndex: 1 } },
+              position: { top: '60px', left: '4.25%', width: '91.5%', height: '623px', zIndex: 1 } },
             { type: 'marquee', content: 'DIRECCIÓN DE ARTE.', speed: 0, multiplier: 22,
               position: { top: '86vh', left: '0', width: '100%', height: '72px', zIndex: 2 } },
           ]
@@ -396,7 +396,7 @@ const legacyProjects: Project[] = [
           minHeight: '115vh',
           layers: [
             { type: 'image', src: '/eco-al-infinito/DSC_0664.jpg', speed: 0.8, isHero: true,
-              position: { top: '120px', left: '4.25%', width: '91.5%', height: '561px', zIndex: 1 } },
+              position: { top: '60px', left: '4.25%', width: '91.5%', height: '561px', zIndex: 1 } },
             { type: 'marquee', content: 'FOTOGRAFÍA DE OBRA.', speed: 0, multiplier: 22,
               position: { top: '86vh', left: '0', width: '100%', height: '72px', zIndex: 2 } },
           ]

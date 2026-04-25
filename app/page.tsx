@@ -3,7 +3,6 @@
 import { useCallback, useState } from 'react'
 import type { AppPhase } from '@/src/types/app'
 import { TunnelVideo } from '@/src/components/tunnel/TunnelVideo'
-import { IntroScreen } from '@/src/components/home/IntroScreen'
 import { HomeGrid } from '@/src/components/home/HomeGrid'
 import { projectList } from '@/src/projects/registry'
 import { useTransition } from '@/src/contexts/TransitionContext'
@@ -32,11 +31,11 @@ export default function Home() {
   )
 
   const handleTunnelComplete = useCallback(() => {
-    setPhase('intro')
-  }, [])
-
-  const handleIntroComplete = useCallback(() => {
     sessionStorage.setItem('introComplete', '1')
+    window.__cardsReady = true
+    window.dispatchEvent(new CustomEvent('intro:showCards'))
+    window.dispatchEvent(new CustomEvent('intro:navControls'))
+    window.dispatchEvent(new CustomEvent('intro:logoMoved'))
     setPhase('home')
   }, [])
 
@@ -46,11 +45,6 @@ export default function Home() {
           unmounting causes React removeChild errors). It hides itself on complete. */}
       {tunnelStarted && (
         <TunnelVideo onComplete={handleTunnelComplete} />
-      )}
-
-      {/* Intro overlay — starts after tunnel completes */}
-      {phase === 'intro' && (
-        <IntroScreen onComplete={handleIntroComplete} />
       )}
 
       <HomeGrid

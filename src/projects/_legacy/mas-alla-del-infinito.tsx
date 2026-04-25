@@ -1,6 +1,7 @@
 import { getLegacyProject } from '@/src/data/projects'
 import { LegacyProject } from './LegacyProject'
 import type { ProjectMeta } from '../types'
+import { cldImg } from '@/src/utils/cloudinary'
 
 const entry = getLegacyProject('mas-alla-del-infinito')
 
@@ -9,7 +10,7 @@ export const meta: ProjectMeta = {
   title: entry.title,
   date: entry.date,
   category: entry.category,
-  image: entry.image,
+  image: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_ko9vtv'),
 }
 
 export const gallery = entry.gallery

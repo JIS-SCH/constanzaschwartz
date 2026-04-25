@@ -36,7 +36,7 @@ export default function ProjectPage() {
   const { Component, gallery } = mod
 
   return (
-    <div style={{ minHeight: '100vh', background: '#000', color: '#fff' }}>
+    <div style={{ minHeight: '100vh', background: '#000', color: '#fff', paddingTop: '80px' }}>
       <Component />
       {gallery && <ParallaxGallery images={gallery} />}
     </div>

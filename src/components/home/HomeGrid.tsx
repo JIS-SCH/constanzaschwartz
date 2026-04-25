@@ -14,19 +14,27 @@ interface HomeGridProps {
 }
 
 // ─── Layout constants ────────────────────────────────────────────────────────
-const BASE_Z = -45
+const BASE_Z = -40
 const ARC_DISTANCE = 65
 const GROUP_ROTATION = 0              // arc is symmetric in front of camera
-const ARC_FOV = Math.PI / 4           // total angular spread of the gallery arc
+const ARC_FOV = Math.PI / 3            // 60° total spread — 5u gap between cards, outer cards 66% visible
 const ARC_CENTER_ANGLE = Math.PI / 2  // arc symmetry axis (in front of camera)
-const MOUSE_ROTATION_RANGE = Math.PI / 10    // ±18° max camera yaw on desktop hover (enough to peek the clipped side cards)
-const DRAG_ROTATION_RANGE = Math.PI / 4      // full-window drag = ±45° on mobile
+const MOUSE_ROTATION_RANGE = Math.PI / 10    // ±18° max camera yaw on desktop hover
+const DRAG_ROTATION_RANGE = Math.PI / 3      // full-window drag = ±60° on mobile
 const DRAG_TAP_THRESHOLD = 10                // px movement to count as drag (not tap)
 
-// Card geometry — bigger, slightly landscape to match Figma reference
+// Desktop card geometry
 const CARD_W = 12
 const CARD_H = 9
 const REFLECTION_H = 2.4
+
+// Mobile card geometry — smaller cards + tighter arc so 3 fit the narrow portrait viewport
+const MOBILE_CARD_W = 7
+const MOBILE_CARD_H = 5.25
+const MOBILE_REFLECTION_H = 1.4
+const MOBILE_ARC_FOV = Math.PI / 4   // 45° — slight spread for portrait
+const MOBILE_ARC_DISTANCE = 28
+const MOBILE_BASE_Z = -16
 
 function getTitle(index: number): string {
   return `Project ${String(index + 1).padStart(2, '0')}`
@@ -144,7 +152,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     scene.background = new THREE.Color(0x000000)
 
     const camera = new THREE.PerspectiveCamera(
-      75,
+      85,
       window.innerWidth / window.innerHeight,
       0.1,
       100
@@ -175,14 +183,18 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     // Arc positions (stored for hover restore)
     const arcPositions: { x: number; z: number }[] = []
 
+    const arcFov = mobile ? MOBILE_ARC_FOV : ARC_FOV
+    const arcDist = mobile ? MOBILE_ARC_DISTANCE : ARC_DISTANCE
+    const cardW = mobile ? MOBILE_CARD_W : CARD_W
+    const cardH = mobile ? MOBILE_CARD_H : CARD_H
+    const refH = mobile ? MOBILE_REFLECTION_H : REFLECTION_H
+
     projects.forEach((project, i) => {
-      // Spread cards evenly across ARC_FOV, centered on ARC_CENTER_ANGLE so the
-      // gallery sits symmetrically in front of the camera.
       const angle = count > 1
-        ? ARC_CENTER_ANGLE - ARC_FOV / 2 + (ARC_FOV / (count - 1)) * i
+        ? ARC_CENTER_ANGLE - arcFov / 2 + (arcFov / (count - 1)) * i
         : ARC_CENTER_ANGLE
-      const x = -ARC_DISTANCE * Math.cos(angle)
-      const z = -ARC_DISTANCE * Math.sin(angle)
+      const x = -arcDist * Math.cos(angle)
+      const z = -arcDist * Math.sin(angle)
       const rotationY = Math.PI / 2 - angle
 
       arcPositions.push({ x, z })
@@ -193,7 +205,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       group.userData = { index: i }
 
       // ── Image card ──────────────────────────────────────────────────────
-      const geo = new THREE.PlaneGeometry(CARD_W, CARD_H)
+      const geo = new THREE.PlaneGeometry(cardW, cardH)
       const mat = new THREE.MeshBasicMaterial({ color: 0x222222 })
       const mesh = new THREE.Mesh(geo, mat)
       mesh.userData = { index: i }
@@ -216,7 +228,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       overlayMats.push(overlayMat)
 
       // ── Reflection ──────────────────────────────────────────────────────
-      const refGeo = new THREE.PlaneGeometry(CARD_W, REFLECTION_H)
+      const refGeo = new THREE.PlaneGeometry(cardW, refH)
       const refMat = new THREE.MeshBasicMaterial({
         color: 0x222222,
         transparent: true,
@@ -224,7 +236,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       })
       const refMesh = new THREE.Mesh(refGeo, refMat)
       refMesh.scale.y = -1
-      refMesh.position.y = -(CARD_H / 2 + REFLECTION_H / 2)
+      refMesh.position.y = -(cardH / 2 + refH / 2)
       group.add(refMesh)
       refMats.push(refMat)
 
@@ -276,8 +288,9 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     window.addEventListener('intro:showCards', onShowCards)
 
     // ── Camera entrance animation ──────────────────────────────────────────
+    const targetZ = mobile ? MOBILE_BASE_Z : BASE_Z
     gsap.to(camera.position, {
-      z: BASE_Z,
+      z: targetZ,
       duration: 1,
       ease: 'power2.out',
     })
@@ -430,7 +443,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       // Camera Z depth from mouse Y
       camera.position.z = THREE.MathUtils.damp(
         camera.position.z,
-        BASE_Z - pointer.y,
+        targetZ - pointer.y,
         7,
         delta
       )

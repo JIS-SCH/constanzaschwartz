@@ -19,7 +19,7 @@ export function useParallax(
   const {
     speed = 1,
     direction = 'y',
-    multiplier = 200,
+    multiplier = 300,
   } = options
 
   useEffect(() => {

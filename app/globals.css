@@ -71,6 +71,7 @@ body {
   overflow-x: hidden;
   background: #0F0F0F;
   color: #ededed;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 html.lenis,
@@ -105,6 +106,7 @@ canvas {
 
 .marquee-track {
   display: flex;
+  width: max-content;
   animation: marquee-scroll linear infinite;
   will-change: transform;
 }

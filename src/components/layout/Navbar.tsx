@@ -63,7 +63,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         left: 0,
         right: 0,
         zIndex: 50,
-        padding: '20px 28px',
+        height: '40px',
+        padding: '0 21px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -76,7 +77,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         aria-label={menuOpen ? 'Close menu' : 'Open menu'}
         style={{
           position: 'absolute',
-          left: '28px',
+          left: '21px',
           top: '50%',
           transform: 'translateY(-50%)',
           background: 'none',
@@ -137,10 +138,10 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         }}
       >
         <Image
-          src="/CONSTANZA SCHWARTZ_logowhitevertical.svg"
+          src="/CONSTANZA SCHWARTZ_ISOTIPO_white.svg"
           alt="Constanza Schwartz"
-          width={71}
-          height={56}
+          width={13}
+          height={28}
           style={{ objectFit: 'contain' }}
           priority
         />
@@ -153,7 +154,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         aria-label={isMuted ? 'Unmute sound' : 'Mute sound'}
         style={{
           position: 'absolute',
-          right: '28px',
+          right: '21px',
           top: '50%',
           transform: 'translateY(-50%)',
           background: 'none',

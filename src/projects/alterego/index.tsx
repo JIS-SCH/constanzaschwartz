@@ -5,6 +5,7 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { VideoPlayer } from '@/src/components/media/VideoPlayer'
 import { cldImg, cldVideo } from '@/src/utils/cloudinary'
 import { ALT } from './assets'
+import { HERO_TOP } from '../shared'
 
 export { meta } from './meta'
 export { gallery } from './gallery'
@@ -35,7 +36,7 @@ export function Component() {
   return (
     <div style={{ width: '100%', position: 'relative' }}>
 
-      {/* 1. HERO ─── image5 + marquee sticky */}
+      {/* 1. HERO ─── img5 (two figures beam) + marquee */}
       <ParallaxSection
         id="hero"
         overflowHidden={false}
@@ -44,8 +45,8 @@ export function Component() {
         <ParallaxLayer
           sectionId="hero"
           layerIndex={0}
-          layer={{ type: 'image', src: '/image5.jpg', speed: 0.8, isHero: true }}
-          position={{ top: '120px', left: '4.25%', width: '91.5%', height: '490px', zIndex: 1 }}
+          layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: 0.8, isHero: true }}
+          position={{ top: HERO_TOP, left: '4.25%', width: '91.5%', height: '490px', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="hero"

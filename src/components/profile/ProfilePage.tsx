@@ -2,67 +2,73 @@
 
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { cldImg } from '@/src/utils/cloudinary'
 
-// ---------------------------------------------------------------------------
-// Figma asset URLs — valid 7 days. Replace with Cloudinary / /public paths.
-// ---------------------------------------------------------------------------
-const IMG_PORTRAIT   = 'https://www.figma.com/api/mcp/asset/4eafe89c-7a5b-40cb-905e-5e04bdd2b3a4'
-const IMG_PORTRAIT_2 = 'https://www.figma.com/api/mcp/asset/3a9aa890-6c80-4b16-95c8-60db820d3701'
-const IMG_YEAR_2021  = 'https://www.figma.com/api/mcp/asset/b1bfe3e9-0be0-44e7-bd84-43972dd5411c'
-const IMG_YEAR_2022  = 'https://www.figma.com/api/mcp/asset/eeab0f23-3268-44e1-9ff2-f3c387a384f5'
-const IMG_YEAR_2023  = 'https://www.figma.com/api/mcp/asset/11fc8a0e-7ea5-4201-8430-a166f57ed950'
-const IMG_YEAR_2024  = 'https://www.figma.com/api/mcp/asset/e1dbd8fc-eb6c-488d-99db-d886116c97bb'
-const IMG_YEAR_2025  = 'https://www.figma.com/api/mcp/asset/4c0f2ea4-4c42-4202-aaa5-5ae75e33bc0d'
-const IMG_YEAR_2026  = 'https://www.figma.com/api/mcp/asset/36dd7d3d-a454-4cba-9b0c-2382686bba1e'
+const IMG_PORTRAIT   = cldImg('CONSTANZASCHWARTZ_Profile_1_yx5v5r')
+const IMG_PORTRAIT_2 = cldImg('CONSTANZASCHWARTZ_Profile_2_uipjg1')
+const IMG_YEAR_2021  = cldImg('CONSTANZASCHWARTZ_Profile_2021_iqs673')
+const IMG_YEAR_2022  = cldImg('CONSTANZASCHWARTZ_Profile_2022_tjgl6h')
+const IMG_YEAR_2023  = cldImg('CONSTANZASCHWARTZ_Profile_2023_smey6p')
+const IMG_YEAR_2024  = cldImg('CONSTANZASCHWARTZ_Profile_2024_a0epdc')
+const IMG_YEAR_2025  = cldImg('CONSTANZASCHWARTZ_Profile_2025_hxpxl5')
+const IMG_YEAR_2026  = cldImg('CONSTANZASCHWARTZ_Profile_2026_mqgsln')
 
 const G2021 = [
-  'https://www.figma.com/api/mcp/asset/cafda851-c4db-48a0-a766-c063217e3753',
-  'https://www.figma.com/api/mcp/asset/2c2ebd72-ceee-43e0-aea4-8716c5763593',
-  'https://www.figma.com/api/mcp/asset/b7ce8b64-361d-4d48-87c7-25122006761f',
-  'https://www.figma.com/api/mcp/asset/9460f1de-95e6-4483-a1a6-eb785d347340',
-  'https://www.figma.com/api/mcp/asset/8436d8a6-f5a8-4068-b780-da98a1d69d8e',
-  'https://www.figma.com/api/mcp/asset/16dfa231-3720-4ed7-9f24-ddb919a73654',
-  'https://www.figma.com/api/mcp/asset/eed3f105-a577-4974-a35b-0095c69abe12',
-  'https://www.figma.com/api/mcp/asset/7fe3625c-a3b3-4646-a911-16a27374111f',
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-1_h2l1bp'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-2_oepyav'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-3_qgcnvq'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-4_ppwihw'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-5_mkr1om'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-6_nxjn9t'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-7_whiggv'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-8_puoc9z'),
 ]
 const G2022 = [
-  'https://www.figma.com/api/mcp/asset/55960c01-76ce-4873-8bc3-f15095ac316f',
-  'https://www.figma.com/api/mcp/asset/24b72493-0afc-4fae-8432-97e531ee4dae',
-  'https://www.figma.com/api/mcp/asset/410e016a-ea68-433b-9e61-7c1d6c00a134',
-  'https://www.figma.com/api/mcp/asset/9b8cf08f-684c-48f4-bcb1-46d7c828c2ab',
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2022-1_xoja9b'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2022-2_wsj1xc'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2022-3_qxasvk'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2022-4_ngxwbx'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2022-5_ig1thi'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2022-6_bjmgpg'),
 ]
 const G2023 = [
-  'https://www.figma.com/api/mcp/asset/370cfe71-f164-4ce8-ae04-68351cc3ee0d',
-  'https://www.figma.com/api/mcp/asset/e7a7f349-49cd-4526-863a-0f57059ef9e4',
-  'https://www.figma.com/api/mcp/asset/61e339b9-297e-44ba-b282-806476fda737',
-  'https://www.figma.com/api/mcp/asset/91b1ec3e-3b2f-4e9b-ac83-aba296d8c2fe',
-  'https://www.figma.com/api/mcp/asset/3a2a2aef-6fac-47fe-9337-146ca9c72f73',
-  'https://www.figma.com/api/mcp/asset/24d2ce22-90d8-467a-beaa-a3a4bf34ac13',
-  'https://www.figma.com/api/mcp/asset/0c490c49-d695-41aa-bd80-fb7100eb93e3',
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2023-1_e2vkwq'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2023-2_fy4n5r'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2023-3_f3exdc'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2023-4_yls0pm'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2023-5_nuu4hy'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2023-6_bmnmcj'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2023-7_wjs7jo'),
 ]
 const G2024 = [
-  'https://www.figma.com/api/mcp/asset/07bf478a-97bf-4337-b05f-6f9871ab880e',
-  'https://www.figma.com/api/mcp/asset/0a96d2e1-50a0-460b-a218-e3872a906411',
-  'https://www.figma.com/api/mcp/asset/827ba9b4-ec68-426b-9f2f-7c8f53bee110',
-  'https://www.figma.com/api/mcp/asset/d31be1cd-3e67-4e4e-b30f-069cd1dd6fc5',
-  'https://www.figma.com/api/mcp/asset/5aba3d35-5a40-4388-94c8-c6fde0c82466',
-  'https://www.figma.com/api/mcp/asset/28a02b90-e846-4a18-92d0-aaf88031625a',
-  'https://www.figma.com/api/mcp/asset/22bd843e-4c7d-4e54-badd-2e3c7f70bf30',
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-1_fdcyyk'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-2_v2axae'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-3_n7a34l'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-4_ylrpdo'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-5_qgc3xq'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-6_tn5ceu'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-7_omr7oc'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2024-8_dgwinm'),
 ]
 const G2025 = [
-  'https://www.figma.com/api/mcp/asset/de1a2242-fb8b-4ca6-bf60-fb1ceb87230f',
-  'https://www.figma.com/api/mcp/asset/41ca14f9-fea3-41a3-8c33-e824f8dbf23b',
-  'https://www.figma.com/api/mcp/asset/415eaf57-1567-4f71-aef0-a81fafbbff07',
-  'https://www.figma.com/api/mcp/asset/de1a2242-fb8b-4ca6-bf60-fb1ceb87230f',
-  'https://www.figma.com/api/mcp/asset/41ca14f9-fea3-41a3-8c33-e824f8dbf23b',
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-1_hzpfei'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-2_ihcd5j'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-3_mqmopi'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-4_o7q8pw'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-5_yqhv7l'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-6_qyemv3'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-7_fpcl9r'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-8_sq00ao'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-9_gpi00l'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2025-10_zi9esk'),
 ]
 const G2026 = [
-  'https://www.figma.com/api/mcp/asset/f080bb0f-2630-4e62-bd10-dec867131ced',
-  'https://www.figma.com/api/mcp/asset/30a463d6-b144-47eb-863b-0f0f9d659f3d',
-  'https://www.figma.com/api/mcp/asset/58e09741-deed-4de5-98d8-435fb550a4c3',
-  'https://www.figma.com/api/mcp/asset/548366ce-63da-4aaf-9f97-8d04ada3eb3a',
-  'https://www.figma.com/api/mcp/asset/a892f474-1ce4-43ad-b01b-7b52d37c255b',
-  'https://www.figma.com/api/mcp/asset/7fc85b27-36c4-422f-907b-3d0799bd1448',
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2026-1_dizgyq'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2026-2_l8d11z'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2026-3_oyz8vd'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2026-4_pdtaqb'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2026-5_uaxj0s'),
+  cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2026-6_ihh0da'),
 ]
 
 // ---------------------------------------------------------------------------

@@ -3,16 +3,9 @@
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { ASSETS } from './assets'
+import { TW, TEXT_BLOCK_STYLE, CH, HERO_TOP } from '../shared'
 
 export { meta } from './meta'
-// export { gallery } from './gallery'
-
-const TEXT_BLOCK_STYLE: React.CSSProperties = {
-  fontFamily: '"Space Grotesk", sans-serif',
-  fontWeight: 300,
-  lineHeight: 1.5,
-  color: '#fff',
-}
 
 const TITLE_STYLE: React.CSSProperties = {
   fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
@@ -27,7 +20,7 @@ export function Component() {
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="dw-container">
       <style dangerouslySetInnerHTML={{
         __html: `
-        /* TYPOGRAPHY SYSTEM - DESIGN WEEK MEXICO */
+        /* TYPOGRAPHY */
         .dw-container {
           --h1-d: 280px; --h1-m: 170px;
           --h2-d: 128px; --h2-m: 57px;
@@ -35,6 +28,34 @@ export function Component() {
           --h4-d: 36px;  --h4-m: 28px;
           --list-d: 26px; --list-m: 15px;
           --p-d: 16px;   --p-m: 15px;
+
+          /* ─── LAYOUT TOKENS — edit these, not the JSX ─── */
+          /* section heights */
+          --h-hero: 110vh; --h-intro: 60vh; --h-c1: 100vh;
+          --h-stmt: 100vh; --h-c2: 140vh;
+          /* intro — left text */
+          --it-l-t: 15vh;  --it-l-x: 12.71%; --it-l-w: 32.4305%;
+          /* intro — right text (ficha: 345px) */
+          --it-r-t: 15vh;  --it-r-x: 63.33%; --it-r-w: 23.96%;
+          /* collage-1 img2 (behind, left): left=425px, w=467px, h=451px */
+          --c1-a-t: 25vh;  --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 50vh;
+          /* collage-1 img1 (front, right): left=791px, w=588px — arranca en el top */
+          --c1-b-t: 0vh;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 48vh;
+          /* statement */
+          --stmt-x: 12.71%; --stmt-w: 76%;
+          /* collage-2 img3 */
+          --c2-a-t: 5vh;   --c2-a-x: 63.33%; --c2-a-w: 32.4305%;
+          /* collage-2 img4 */
+          --c2-b-t: 40vh;  --c2-b-x: 33.33%; --c2-b-w: 32.4305%;
+          /* finish staircase */
+          --f-img-w: 23.96%;
+          --f-img-h: auto; /* Pendiente: alto exacto de Figma */
+          --f-img1-x: 4.24%;
+          --f-img1-t: 65vh;
+          --f-img2-x: 38.12%;
+          --f-img2-t: calc(var(--f-img1-t) + 130px);
+          --f-img3-x: 71.81%;
+          --f-img3-t: calc(var(--f-img2-t) + 130px);
         }
 
         .dw-h1 { font-size: var(--h1-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
@@ -58,19 +79,48 @@ export function Component() {
           .dw-list { font-size: var(--list-d); line-height: 1.21; }
           .dw-p { font-size: var(--p-d); line-height: 1.5; }
         }
+
+        /* ─── MOBILE (≤ 768px) — edit numbers here to iterate fast ─── */
+        @media (max-width: 768px) {
+          .dw-container {
+            --h-hero: 70vh; --h-intro: 90vh; --h-c1: 110vh; --h-c2: 120vh;
+            /* intro — left text: full width, tight top */
+            --it-l-t: 9.5vh; --it-l-x: 20px; --it-l-w: calc(100% - 40px);
+            /* intro — right text: stacked below, same left */
+            --it-r-t: 38vh;  --it-r-x: 20px; --it-r-w: calc(100% - 40px);
+            /* collage-1: 140px + 280px */
+            --c1-a-t: 5vh;  --c1-a-x: 20px;  --c1-a-w: 140px; --c1-a-h: 50vh;
+            --c1-b-t: 15vh; --c1-b-x: 90px;  --c1-b-w: 280px; --c1-b-h: 50vh;
+            /* statement */
+            --stmt-x: 20px; --stmt-w: calc(100% - 40px);
+            /* collage-2: 183px + 183px side by side */
+            --c2-a-t: 5vh;  --c2-a-x: 187px; --c2-a-w: 183px;
+            --c2-b-t: 15vh; --c2-b-x: 20px;  --c2-b-w: 183px;
+            
+            /* finish staircase mobile */
+            --f-img-w: 280px;
+            --f-img-h: 380px;
+            --f-img1-x: 20px;
+            --f-img1-t: 40vh;
+            --f-img2-x: 60px;
+            --f-img2-t: calc(var(--f-img1-t) + 80px);
+            --f-img3-x: 100px;
+            --f-img3-t: calc(var(--f-img2-t) + 80px);
+          }
+        }
       `}} />
 
       {/* 1. HERO — Large centered sculpture */}
       <ParallaxSection
         id="hero"
-        style={{ minHeight: '110vh' }}
+        style={{ minHeight: 'var(--h-hero)' }}
       >
         {/* Full-width black band behind the sculpture */}
         <ParallaxLayer
           sectionId="hero"
           layerIndex={0}
           layer={{ type: 'text', content: '', speed: 0.4 }}
-          position={{ top: '12vh', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
+          position={{ top: HERO_TOP, left: '0', width: '100%', height: '80vh', zIndex: 0 }}
         >
           <div style={{ width: '100%', height: '100%', backgroundColor: '#000' }} />
         </ParallaxLayer>
@@ -78,21 +128,21 @@ export function Component() {
         <ParallaxLayer
           sectionId="hero"
           layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.hero, speed: 0.4, isHero: true, objectFit: 'contain' }}
-          position={{ top: '12vh', left: '35%', width: '30%', height: '80vh', zIndex: 1 }}
+          layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'contain' }}
+          position={{ top: HERO_TOP, left: '35%', width: '30%', height: '80vh', zIndex: 1 }}
         />
       </ParallaxSection>
 
       {/* 2. INTRO — Two columns of text */}
       <ParallaxSection
         id="intro-texts"
-        style={{ minHeight: '60vh' }}
+        style={{ minHeight: 'var(--h-intro)' }}
       >
         <ParallaxLayer
           sectionId="intro-texts"
           layerIndex={0}
-          layer={{ type: 'text', content: '', speed: 0 }} // We use children for custom rendering
-          position={{ top: '15vh', left: '12%', width: '38%', height: 'auto', zIndex: 1 }}
+          layer={{ type: 'text', content: '', speed: 0 }}
+          position={{ top: 'var(--it-l-t)', left: 'var(--it-l-x)', width: 'var(--it-l-w)', height: 'auto', zIndex: 1 }}
         >
           <div style={TEXT_BLOCK_STYLE} className="dw-list">
             En el marco de Design Week Mexico 2025, Argentina fue el país invitado.
@@ -106,7 +156,7 @@ export function Component() {
           sectionId="intro-texts"
           layerIndex={1}
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '15vh', left: '60%', width: '30%', height: 'auto', zIndex: 1 }}
+          position={{ top: 'var(--it-r-t)', left: 'var(--it-r-x)', width: 'var(--it-r-w)', height: 'auto', zIndex: 1 }}
         >
           <div style={TEXT_BLOCK_STYLE} className="dw-list">
             <p><strong>Título:</strong> Ensayo de Espejismo</p>
@@ -119,36 +169,36 @@ export function Component() {
 
       <ParallaxSection
         id="collage-1"
-        style={{ minHeight: '140vh' }}
+        style={{ minHeight: 'var(--h-c1)' }}
       >
         <ParallaxLayer
           sectionId="collage-1"
           layerIndex={0}
-          layer={{ type: 'image', src: ASSETS.img1, speed: 0.2 }}
-          position={{ top: '20vh', left: '15%', width: '32.4%', height: '90vh', zIndex: 1 }}
+          layer={{ type: 'image', src: ASSETS.img2, speed: 0.3 }}
+          position={{ top: 'var(--c1-a-t)', left: 'var(--c1-a-x)', width: 'var(--c1-a-w)', height: 'var(--c1-a-h)', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="collage-1"
           layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img2, speed: 0.6 }}
-          position={{ top: '5vh', left: '40.4%', width: '40.8%', height: '60vh', zIndex: 2 }}
+          layer={{ type: 'image', src: ASSETS.img1, speed: 0.3 }}
+          position={{ top: 'var(--c1-b-t)', left: 'var(--c1-b-x)', width: 'var(--c1-b-w)', height: 'var(--c1-b-h)', zIndex: 2 }}
         />
       </ParallaxSection>
 
       {/* 4. STATEMENT — Title + Two Paragraphs */}
       <ParallaxSection
         id="statement"
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: 'var(--h-stmt)' }}
       >
         <ParallaxLayer
           sectionId="statement"
           layerIndex={0}
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '10vh', left: '12%', width: '76%', height: 'auto', zIndex: 1 }}
+          position={{ top: '10vh', left: 'var(--stmt-x)', width: 'var(--stmt-w)', height: 'auto', zIndex: 1 }}
         >
           <h2 style={TITLE_STYLE} className="dw-h2">STATEMENT</h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '800px', marginTop: '4rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '800px', marginTop: '40px' }}>
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
               Pocas personas desconocen totalmente los órganos de los sentidos, pero no todas
               comprenden la magnitud que tienen en nuestra conexión con el mundo/ la realidad.
@@ -164,19 +214,19 @@ export function Component() {
       {/* 5. IMAGES 3 & 4 + MARQUEE */}
       <ParallaxSection
         id="collage-2"
-        style={{ minHeight: '140vh' }}
+        style={{ minHeight: 'var(--h-c2)' }}
       >
         <ParallaxLayer
           sectionId="collage-2"
           layerIndex={0}
-          layer={{ type: 'image', src: ASSETS.img3, speed: 0.4 }}
-          position={{ top: '5vh', left: '63.3%', width: '32.4%', height: '80vh', zIndex: 1 }}
+          layer={{ type: 'image', src: ASSETS.img3, speed: 0.3 }}
+          position={{ top: 'var(--c2-a-t)', left: 'var(--c2-a-x)', width: 'var(--c2-a-w)', height: '80vh', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="collage-2"
           layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img4, speed: 0.6 }}
-          position={{ top: '40vh', left: '33.7%', width: '32.4%', height: '80vh', zIndex: 2 }}
+          layer={{ type: 'image', src: ASSETS.img4, speed: 0.3 }}
+          position={{ top: 'var(--c2-b-t)', left: 'var(--c2-b-x)', width: 'var(--c2-b-w)', height: '80vh', zIndex: 2 }}
         />
         <ParallaxLayer
           sectionId="collage-2"
@@ -195,7 +245,7 @@ export function Component() {
           sectionId="paragraphs-carousel"
           layerIndex={0}
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '10vh', left: '55%', width: '35%', height: 'auto', zIndex: 1 }}
+          position={{ top: '10vh', left: '55%', width: TW, height: 'auto', zIndex: 1 }}
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
@@ -215,26 +265,21 @@ export function Component() {
           sectionId="paragraphs-carousel"
           layerIndex={1}
           layer={{ type: 'image', src: '', speed: 0 }}
-          position={{ top: '65vh', left: '0', width: '100%', height: '331px', zIndex: 2 }}
+          position={{ top: '65vh', left: '0', width: '100%', height: CH, zIndex: 2 }}
         >
-          <div className="flex w-max" style={{ height: '331px' }}>
-            <div className="flex animate-carousel">
+          <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
+            <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'dwm-carousel-scroll 10s linear infinite' }}>
               {[ASSETS.img5, ASSETS.img6, ASSETS.img7, ASSETS.img5, ASSETS.img6, ASSETS.img7].map((src, i) => (
-                <div key={i} className="w-[588px] h-[331px] flex-shrink-0">
-                  <img src={src} className="w-full h-full object-cover" style={{ height: '331px' }} alt="" />
-                </div>
+                <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
               ))}
             </div>
           </div>
         </ParallaxLayer>
         <style dangerouslySetInnerHTML={{
           __html: `
-          @keyframes carousel-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-${3 * 588}px); }
-          }
-          .animate-carousel {
-            animation: carousel-scroll 10s linear infinite;
+          @keyframes dwm-carousel-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
           }
         `}} />
       </ParallaxSection>
@@ -248,7 +293,7 @@ export function Component() {
           sectionId="final-paragraph"
           layerIndex={0}
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '15vh', left: '15%', width: '70%', height: 'auto', zIndex: 1 }}
+          position={{ top: '15vh', left: '12.71%', width: '70%', height: 'auto', zIndex: 1 }}
         >
           <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '800px' }} className="dw-p">
             El espejo nos permite a veces intuir que el cuerpo está presente. En este caso, la
@@ -274,19 +319,19 @@ export function Component() {
         <ParallaxLayer
           sectionId="collage-3"
           layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img6, speed: 0.2 }}
+          layer={{ type: 'image', src: ASSETS.img6, speed: 0.3 }}
           position={{ top: '10vh', left: '10%', width: '80%', height: '110vh', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="collage-3"
           layerIndex={2}
-          layer={{ type: 'image', src: ASSETS.img5, speed: 0.45 }}
+          layer={{ type: 'image', src: ASSETS.img5, speed: 0.3 }}
           position={{ top: '5vh', left: '8%', width: '30%', height: '35vh', zIndex: 2 }}
         />
         <ParallaxLayer
           sectionId="collage-3"
           layerIndex={3}
-          layer={{ type: 'image', src: ASSETS.img7, speed: 0.7 }}
+          layer={{ type: 'image', src: ASSETS.img7, speed: 0.3 }}
           position={{ top: '80vh', left: '55%', width: '35%', height: '40vh', zIndex: 3 }}
         />
       </ParallaxSection>
@@ -301,7 +346,7 @@ export function Component() {
           sectionId="finish"
           layerIndex={0}
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '10vh', left: '12%', width: '32%', height: 'auto', zIndex: 1 }}
+          position={{ top: '10vh', left: '12.71%', width: TW, height: 'auto', zIndex: 1 }}
         >
           <div style={TEXT_BLOCK_STYLE} className="dw-p">
             Con la utilización de espejos, se posibilita el juego de distorsión de la realidad
@@ -319,20 +364,20 @@ export function Component() {
         <ParallaxLayer
           sectionId="finish"
           layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img8, speed: 0.25 }}
-          position={{ top: '65vh', left: '8%', width: '24%', height: '70vh', zIndex: 1 }}
+          layer={{ type: 'image', src: ASSETS.img8, speed: 0.3 }}
+          position={{ top: 'var(--f-img1-t)', left: 'var(--f-img1-x)', width: 'var(--f-img-w)', height: 'var(--f-img-h)', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="finish"
           layerIndex={2}
-          layer={{ type: 'image', src: ASSETS.img9, speed: 0.5 }}
-          position={{ top: '80vh', left: '38%', width: '24%', height: '65vh', zIndex: 2 }}
+          layer={{ type: 'image', src: ASSETS.img9, speed: 0.3 }}
+          position={{ top: 'var(--f-img2-t)', left: 'var(--f-img2-x)', width: 'var(--f-img-w)', height: 'var(--f-img-h)', zIndex: 2 }}
         />
         <ParallaxLayer
           sectionId="finish"
           layerIndex={3}
-          layer={{ type: 'image', src: ASSETS.img10, speed: 0.8 }}
-          position={{ top: '95vh', left: '68%', width: '24%', height: '70vh', zIndex: 3 }}
+          layer={{ type: 'image', src: ASSETS.img10, speed: 0.3 }}
+          position={{ top: 'var(--f-img3-t)', left: 'var(--f-img3-x)', width: 'var(--f-img-w)', height: 'var(--f-img-h)', zIndex: 3 }}
         />
 
         {/* Final Marquee - Overlapping the images */}
@@ -348,7 +393,7 @@ export function Component() {
           sectionId="finish"
           layerIndex={5}
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '190vh', left: '12%', width: '38%', height: 'auto', zIndex: 6 }}
+          position={{ top: '190vh', left: '12.71%', width: TW, height: 'auto', zIndex: 6 }}
         >
           <div style={TEXT_BLOCK_STYLE} className="dw-p">
             Ensayo de Espejismo busca apelar a varios sentidos en simultáneo. Asimismo, intenta

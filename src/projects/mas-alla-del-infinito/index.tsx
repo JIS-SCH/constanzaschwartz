@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { TW, CH, HERO_TOP } from '../shared'
 
 // ---------------------------------------------------------------------------
 // Figma asset URLs — expire 7 days. Replace with /public or Cloudinary paths.
@@ -71,28 +72,25 @@ const CAROUSEL_2 = [
 // ---------------------------------------------------------------------------
 // Carousel — CSS keyframe infinite scroll (same pattern across all projects)
 // ---------------------------------------------------------------------------
-function Carousel({ images, id, itemW }: { images: string[]; id: string; itemW: number }) {
+function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
-  const totalWidth = images.length * itemW
   const duration = images.length * 3.5
   return (
-    <div style={{ width: '100%', height: '331px', overflow: 'hidden' }}>
+    <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes mal-c-${id} {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-${totalWidth}px); }
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
         }
       `}} />
       <div style={{
         display: 'flex',
-        height: '331px',
+        height: CH,
         width: 'max-content',
         animation: `mal-c-${id} ${duration}s linear infinite`,
       }}>
         {doubled.map((src, i) => (
-          <div key={i} style={{ width: `${itemW}px`, height: '331px', flexShrink: 0 }}>
-            <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-          </div>
+          <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
         ))}
       </div>
     </div>
@@ -156,7 +154,7 @@ export function Component() {
       <ParallaxSection id="mal-hero" style={{ minHeight: '90vh' }}>
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_HERO, speed: 0.3, isHero: true }}
-          position={{ top: '0', left: '0', width: '100%', height: '90vh', zIndex: 1 }}
+          position={{ top: HERO_TOP, left: '0', width: '100%', height: '90vh', zIndex: 1 }}
         />
       </ParallaxSection>
 
@@ -164,13 +162,13 @@ export function Component() {
       <ParallaxSection id="mal-intro" style={{ minHeight: '150vh' }}>
         {/* Left: tall portrait */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB028, speed: 0.2 }}
-          position={{ top: '5vh', left: '8.33%', width: '32.43%', height: '70vh', zIndex: 1 }}
+          layer={{ type: 'image', src: IMG_WEB028, speed: 0.3 }}
+          position={{ top: '5vh', left: '8.33%', width: TW, height: '70vh', zIndex: 1 }}
         />
         {/* Right: intro text */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '8vh', left: '58.33%', width: '32.43%', height: 'auto', zIndex: 2 }}
+          position={{ top: '8vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
@@ -188,7 +186,7 @@ export function Component() {
         />
         {/* web009 center — visible below text */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB009, speed: 0.35 }}
+          layer={{ type: 'image', src: IMG_WEB009, speed: 0.3 }}
           position={{ top: '85vh', left: '25%', width: '49.31%', height: '48vh', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -196,7 +194,7 @@ export function Component() {
       {/* 3. FULLWIDTH 1 ──────────────────────────────────────────────── */}
       <ParallaxSection id="mal-fw1" style={{ minHeight: '100vh' }}>
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_FULL_1, speed: 0.2 }}
+          layer={{ type: 'image', src: IMG_FULL_1, speed: 0.3 }}
           position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -211,7 +209,7 @@ export function Component() {
         {/* Text 2 left */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '25vh', left: '20.83%', width: '32.43%', height: 'auto', zIndex: 2 }}
+          position={{ top: '25vh', left: '20.83%', width: TW, height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
@@ -224,13 +222,13 @@ export function Component() {
         </ParallaxLayer>
         {/* web025 center wide */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB025, speed: 0.4 }}
+          layer={{ type: 'image', src: IMG_WEB025, speed: 0.3 }}
           position={{ top: '85vh', left: '16.67%', width: '66.25%', height: '55vh', zIndex: 1 }}
         />
         {/* GIF 1 left */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_GIF1, speed: 0 }}
-          position={{ top: '145vh', left: '4.17%', width: '32.43%', height: '28vh', zIndex: 2 }}
+          position={{ top: '145vh', left: '4.17%', width: TW, height: '28vh', zIndex: 2 }}
         />
       </ParallaxSection>
 
@@ -239,7 +237,7 @@ export function Component() {
         {/* Text 3 right */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '5vh', left: '58.33%', width: '32.43%', height: 'auto', zIndex: 2 }}
+          position={{ top: '5vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
@@ -253,7 +251,7 @@ export function Component() {
         </ParallaxLayer>
         {/* web012 left small */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB012, speed: 0.25 }}
+          layer={{ type: 'image', src: IMG_WEB012, speed: 0.3 }}
           position={{ top: '5vh', left: '4.17%', width: '24%', height: '52vh', zIndex: 1 }}
         />
         {/* Sticky marquee 2 */}
@@ -263,7 +261,7 @@ export function Component() {
         />
         {/* web011 center small */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB011, speed: 0.4 }}
+          layer={{ type: 'image', src: IMG_WEB011, speed: 0.3 }}
           position={{ top: '55vh', left: '38%', width: '24%', height: '52vh', zIndex: 1 }}
         />
         {/* web007 right */}
@@ -273,8 +271,8 @@ export function Component() {
         />
         {/* web005 left tall */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB005, speed: 0.2 }}
-          position={{ top: '95vh', left: '8.33%', width: '32.43%', height: '55vh', zIndex: 1 }}
+          layer={{ type: 'image', src: IMG_WEB005, speed: 0.3 }}
+          position={{ top: '95vh', left: '8.33%', width: TW, height: '55vh', zIndex: 1 }}
         />
       </ParallaxSection>
 
@@ -283,7 +281,7 @@ export function Component() {
         {/* web022 center — masked in Figma, regular image here */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB022, speed: 0.3 }}
-          position={{ top: '5vh', left: '33.33%', width: '32.43%', height: '62vh', zIndex: 1 }}
+          position={{ top: '5vh', left: '33.33%', width: TW, height: '62vh', zIndex: 1 }}
         />
         {/* Video 1 */}
         <ParallaxLayer
@@ -298,7 +296,7 @@ export function Component() {
       <ParallaxSection id="mal-gif2" style={{ minHeight: '110vh' }}>
         {/* GIF 2 center wide */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_GIF2, speed: 0.25 }}
+          layer={{ type: 'image', src: IMG_GIF2, speed: 0.3 }}
           position={{ top: '10vh', left: '16.67%', width: '66.25%', height: '55vh', zIndex: 1 }}
         />
         {/* Sticky marquee 3 */}
@@ -313,7 +311,7 @@ export function Component() {
         {/* Text 4 right */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '5vh', left: '58.33%', width: '32.43%', height: 'auto', zIndex: 2 }}
+          position={{ top: '5vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -328,11 +326,11 @@ export function Component() {
         />
         {/* web017 + web018 pair */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB017, speed: 0.4 }}
+          layer={{ type: 'image', src: IMG_WEB017, speed: 0.3 }}
           position={{ top: '70vh', left: '50%', width: '20.42%', height: '48vh', zIndex: 1 }}
         />
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB018, speed: 0.5 }}
+          layer={{ type: 'image', src: IMG_WEB018, speed: 0.3 }}
           position={{ top: '70vh', left: '71%', width: '20.42%', height: '48vh', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -340,7 +338,7 @@ export function Component() {
       {/* 9. FULLWIDTH 2 ──────────────────────────────────────────────── */}
       <ParallaxSection id="mal-fw2" style={{ minHeight: '100vh' }}>
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_FULL_2, speed: 0.2 }}
+          layer={{ type: 'image', src: IMG_FULL_2, speed: 0.3 }}
           position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -354,12 +352,12 @@ export function Component() {
         />
         {/* web013 center */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB013, speed: 0.4 }}
-          position={{ top: '40vh', left: '29.17%', width: '32.43%', height: '32vh', zIndex: 2 }}
+          layer={{ type: 'image', src: IMG_WEB013, speed: 0.3 }}
+          position={{ top: '40vh', left: '29.17%', width: TW, height: '32vh', zIndex: 2 }}
         />
         {/* web015 right */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB015, speed: 0.2 }}
+          layer={{ type: 'image', src: IMG_WEB015, speed: 0.3 }}
           position={{ top: '20vh', left: '50%', width: '40.83%', height: '42vh', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -367,15 +365,15 @@ export function Component() {
       {/* 11. THREE COLUMNS ───────────────────────────────────────────── */}
       <ParallaxSection id="mal-threecol" style={{ minHeight: '80vh' }}>
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB040, speed: 0.15 }}
+          layer={{ type: 'image', src: IMG_WEB040, speed: 0.3 }}
           position={{ top: '0', left: '0', width: '33.33%', height: '75vh', zIndex: 1 }}
         />
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB037, speed: 0.25 }}
+          layer={{ type: 'image', src: IMG_WEB037, speed: 0.3 }}
           position={{ top: '0', left: '33.33%', width: '33.33%', height: '75vh', zIndex: 1 }}
         />
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB039, speed: 0.15 }}
+          layer={{ type: 'image', src: IMG_WEB039, speed: 0.3 }}
           position={{ top: '0', left: '66.67%', width: '33.33%', height: '75vh', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -384,13 +382,13 @@ export function Component() {
       <ParallaxSection id="mal-text5" style={{ minHeight: '170vh' }}>
         {/* web050 right tall */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB050, speed: 0.2 }}
-          position={{ top: '5vh', left: '58.33%', width: '32.43%', height: '65vh', zIndex: 1 }}
+          layer={{ type: 'image', src: IMG_WEB050, speed: 0.3 }}
+          position={{ top: '5vh', left: '58.33%', width: TW, height: '65vh', zIndex: 1 }}
         />
         {/* Text 5 left */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '25vh', left: '10.71%', width: '32.43%', height: 'auto', zIndex: 2 }}
+          position={{ top: '25vh', left: '10.71%', width: TW, height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -400,8 +398,8 @@ export function Component() {
         </ParallaxLayer>
         {/* web054 center */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB054, speed: 0.35 }}
-          position={{ top: '75vh', left: '37.5%', width: '32.43%', height: '32vh', zIndex: 2 }}
+          layer={{ type: 'image', src: IMG_WEB054, speed: 0.3 }}
+          position={{ top: '75vh', left: '37.5%', width: TW, height: '32vh', zIndex: 2 }}
         />
         {/* Sticky marquee 4 */}
         <ParallaxLayer
@@ -421,15 +419,15 @@ export function Component() {
       <ParallaxSection id="mal-carousel1" style={{ minHeight: '100vh' }}>
         {/* web047 wide left */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB047, speed: 0.25 }}
+          layer={{ type: 'image', src: IMG_WEB047, speed: 0.3 }}
           position={{ top: '5vh', left: '7.64%', width: '57.71%', height: '55vh', zIndex: 1 }}
         />
         {/* Carousel 1 */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '68vh', left: '0', width: '100%', height: '331px', zIndex: 2 }}
+          position={{ top: '68vh', left: '0', width: '100%', height: CH, zIndex: 2 }}
         >
-          <Carousel images={CAROUSEL_1} id="c1" itemW={221} />
+          <Carousel images={CAROUSEL_1} id="c1" />
         </ParallaxLayer>
       </ParallaxSection>
 
@@ -438,7 +436,7 @@ export function Component() {
         {/* Text 6 right */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '5vh', left: '58.33%', width: '32.43%', height: 'auto', zIndex: 2 }}
+          position={{ top: '5vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -448,18 +446,18 @@ export function Component() {
         </ParallaxLayer>
         {/* web048 wide */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB048, speed: 0.25 }}
+          layer={{ type: 'image', src: IMG_WEB048, speed: 0.3 }}
           position={{ top: '30vh', left: '25%', width: '44.77%', height: '45vh', zIndex: 1 }}
         />
         {/* web055 right small */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB055, speed: 0.35 }}
+          layer={{ type: 'image', src: IMG_WEB055, speed: 0.3 }}
           position={{ top: '30vh', left: '70.83%', width: '19.93%', height: '45vh', zIndex: 1 }}
         />
         {/* Text 7 left */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '80vh', left: '20.83%', width: '32.43%', height: 'auto', zIndex: 2 }}
+          position={{ top: '80vh', left: '20.83%', width: TW, height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -472,7 +470,7 @@ export function Component() {
       {/* 15. FULLWIDTH 3 ─────────────────────────────────────────────── */}
       <ParallaxSection id="mal-fw3" style={{ minHeight: '100vh' }}>
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_FULL_3, speed: 0.15 }}
+          layer={{ type: 'image', src: IMG_FULL_3, speed: 0.3 }}
           position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -481,9 +479,9 @@ export function Component() {
       <ParallaxSection id="mal-carousel2" style={{ minHeight: '80vh' }} overflowHidden={false}>
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '0', left: '0', width: '100%', height: '331px', zIndex: 1 }}
+          position={{ top: '0', left: '0', width: '100%', height: CH, zIndex: 1 }}
         >
-          <Carousel images={CAROUSEL_2} id="c2" itemW={588} />
+          <Carousel images={CAROUSEL_2} id="c2" />
         </ParallaxLayer>
         {/* Closing quote */}
         <ParallaxLayer
