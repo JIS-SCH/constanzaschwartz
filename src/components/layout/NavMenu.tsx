@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import gsap from 'gsap'
+import { cldImg } from '@/src/utils/cloudinary'
 
 // Sub-items split into rows matching Figma layout
 const SUB_ROWS = [
@@ -95,7 +96,7 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
       }}
     >
       <Image
-        src="/CONSTANZA-SCHWARTZ_comingsoon_bkf.webp"
+        src={cldImg('CONSTANZA-SCHWARTZ_WEBSITE_BACKGROUND_xrkjoh')}
         alt=""
         fill
         style={{ objectFit: 'cover', objectPosition: 'center' }}

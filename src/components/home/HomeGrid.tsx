@@ -14,27 +14,26 @@ interface HomeGridProps {
 }
 
 // ─── Layout constants ────────────────────────────────────────────────────────
-const BASE_Z = -40
-const ARC_DISTANCE = 65
+const BASE_Z = -20                    // Pushed back for flatter perspective
 const GROUP_ROTATION = 0              // arc is symmetric in front of camera
-const ARC_FOV = Math.PI / 3            // 60° total spread — 5u gap between cards, outer cards 66% visible
-const ARC_CENTER_ANGLE = Math.PI / 2  // arc symmetry axis (in front of camera)
 const MOUSE_ROTATION_RANGE = Math.PI / 10    // ±18° max camera yaw on desktop hover
 const DRAG_ROTATION_RANGE = Math.PI / 3      // full-window drag = ±60° on mobile
 const DRAG_TAP_THRESHOLD = 10                // px movement to count as drag (not tap)
 
-// Desktop card geometry
+
 const CARD_W = 12
-const CARD_H = 9
-const REFLECTION_H = 2.4
+const CARD_H = 6.75
+const REFLECTION_H = 6
+const CARD_SPACING = CARD_W + 2              // Tight gap for continuous screen look
+const CARD_BASE_Z = -65                      // Original arc distance
 
 // Mobile card geometry — smaller cards + tighter arc so 3 fit the narrow portrait viewport
 const MOBILE_CARD_W = 7
-const MOBILE_CARD_H = 5.25
-const MOBILE_REFLECTION_H = 1.4
-const MOBILE_ARC_FOV = Math.PI / 4   // 45° — slight spread for portrait
-const MOBILE_ARC_DISTANCE = 28
-const MOBILE_BASE_Z = -16
+const MOBILE_CARD_H = 3.94 // 16:9 aspect ratio
+const MOBILE_REFLECTION_H = 2.0
+const MOBILE_CARD_SPACING = MOBILE_CARD_W + 1.5
+const MOBILE_CARD_BASE_Z = -28
+const MOBILE_BASE_Z = -24
 
 function getTitle(index: number): string {
   return `Project ${String(index + 1).padStart(2, '0')}`
@@ -152,12 +151,16 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     scene.background = new THREE.Color(0x000000)
 
     const camera = new THREE.PerspectiveCamera(
-      85,
+      38, // Telephoto-like FOV to flatten perspective to match Figma
       window.innerWidth / window.innerHeight,
       0.1,
       100
     )
-    camera.position.set(0, 0, -35)
+    // Elevate camera Y to look from slightly above, establishing a "floor"
+    const camY = mobile ? 1.0 : 2.5
+    camera.position.set(0, camY, -50) // Initial far position
+    // Tilt slightly down to frame the cards
+    camera.rotation.x = mobile ? -0.02 : -0.04
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false })
     renderer.setSize(window.innerWidth, window.innerHeight)
@@ -172,7 +175,6 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     const count = projects.length
 
-    // Per-card refs
     const cardMeshes: THREE.Mesh[] = []
     const cardGroups: THREE.Group[] = []
     const overlayMeshes: THREE.Mesh[] = []
@@ -180,29 +182,41 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     const cardMats: THREE.MeshBasicMaterial[] = []
     const refMats: THREE.MeshBasicMaterial[] = []
 
-    // Arc positions (stored for hover restore)
+
     const arcPositions: { x: number; z: number }[] = []
 
-    const arcFov = mobile ? MOBILE_ARC_FOV : ARC_FOV
-    const arcDist = mobile ? MOBILE_ARC_DISTANCE : ARC_DISTANCE
+    const cardSpacing = mobile ? MOBILE_CARD_SPACING : CARD_SPACING
+    const baseCardZ = mobile ? MOBILE_CARD_BASE_Z : CARD_BASE_Z
+
+    const cameraZ = mobile ? MOBILE_BASE_Z : BASE_Z
+    const radius = Math.abs(baseCardZ - cameraZ)
+
     const cardW = mobile ? MOBILE_CARD_W : CARD_W
     const cardH = mobile ? MOBILE_CARD_H : CARD_H
     const refH = mobile ? MOBILE_REFLECTION_H : REFLECTION_H
 
     projects.forEach((project, i) => {
-      const angle = count > 1
-        ? ARC_CENTER_ANGLE - arcFov / 2 + (arcFov / (count - 1)) * i
-        : ARC_CENTER_ANGLE
-      const x = -arcDist * Math.cos(angle)
-      const z = -arcDist * Math.sin(angle)
-      const rotationY = Math.PI / 2 - angle
+      // 1. Arc length along the cylinder
+      const totalArc = (count - 1) * cardSpacing
+      const startArc = -totalArc / 2
+      const arcLength = startArc + i * cardSpacing
+
+      // 2. Cylinder angle (theta)
+      const theta = arcLength / radius
+
+      // 3. Exact positioning on the cylinder perimeter
+      const x = radius * Math.sin(theta)
+      const z = cameraZ - (radius * Math.cos(theta))
+
+      // 4. Perfect inward rotation to face the camera dead-on (Negative Y rotates left card right, right card left)
+      const rotationY = -theta
 
       arcPositions.push({ x, z })
 
       const group = new THREE.Group()
       group.position.set(x, 0, z)
       group.rotation.y = rotationY
-      group.userData = { index: i }
+      group.userData = { index: i, hoverY: 0, hoverZ: 0 }
 
       // ── Image card ──────────────────────────────────────────────────────
       const geo = new THREE.PlaneGeometry(cardW, cardH)
@@ -356,16 +370,13 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     }
 
     function applyHover(group: THREE.Group) {
-      const idx = group.userData.index as number
-      // Card pops forward + lifts + scales
-      gsap.to(group.position, { z: group.position.z + 1, y: 0.5, duration: 0.4, ease: 'power2.out' })
-      gsap.to(group.scale, { x: 1.3, y: 1.3, z: 1.3, duration: 0.4, ease: 'power2.out' })
+      // Subtle premium hover: slight pop forward + slight lift + subtle scale
+      gsap.to(group.userData, { hoverZ: 0.5, hoverY: 0.3, duration: 0.4, ease: 'power2.out' })
+      gsap.to(group.scale, { x: 1.12, y: 1.12, z: 1.12, duration: 0.4, ease: 'power2.out' })
     }
 
     function removeHover(group: THREE.Group) {
-      const idx = group.userData.index as number
-      const origZ = arcPositions[idx].z
-      gsap.to(group.position, { z: origZ, y: 0, duration: 0.4, ease: 'power2.out' })
+      gsap.to(group.userData, { hoverZ: 0, hoverY: 0, duration: 0.4, ease: 'power2.out' })
       gsap.to(group.scale, { x: 1, y: 1, z: 1, duration: 0.4, ease: 'power2.out' })
     }
 
@@ -443,6 +454,15 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
         7,
         delta
       )
+
+      cardGroups.forEach((group, i) => {
+        const baseZ = arcPositions[i].z
+        const hoverZ = group.userData.hoverZ || 0
+        const hoverY = group.userData.hoverY || 0
+
+        group.position.y = hoverY
+        group.position.z = baseZ + hoverZ
+      })
 
       renderer.render(scene, camera)
     }

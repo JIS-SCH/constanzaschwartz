@@ -6,13 +6,12 @@ import * as eco from './eco-al-infinito'
 import * as masAlla from './mas-alla-del-infinito'
 import * as mutek from './mutek'
 
-// Display order (matches the old `projects[]` array)
 const ORDERED: ProjectModule[] = [
-  masAlla,
-  mutek,
-  designWeek,
-  eco,
   alterego,
+  mutek,
+  eco,
+  masAlla,
+  designWeek,
 ]
 
 export const projectRegistry: Record<string, ProjectModule> = Object.fromEntries(
