@@ -263,7 +263,7 @@ export function ProfilePage() {
 
         {/* CONSTANZA / SCHWARTZ — overlays portrait */}
         <div className="pr-title">
-          <h1 className="pr-h2">CONSTANZA</h1>
+          <h1 className="pr-h2 pr-h2--diff">CONSTANZA</h1>
           <h1 className="pr-h2 pr-h2--diff">SCHWARTZ</h1>
         </div>
 
@@ -392,8 +392,11 @@ const CSS = `
   letter-spacing: 0;
   margin: 0;
   font-size: 57px;
+  overflow: visible;
 }
-.pr-h2--diff { mix-blend-mode: difference; }
+.pr-h2--diff {
+  /* blend mode moved to parent container */
+}
 
 .pr-bio-word {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -418,7 +421,7 @@ const CSS = `
 
 .pr-p {
   font-family: "Space Grotesk", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 15px;
   line-height: 1.45;
   color: #fff;
@@ -428,7 +431,7 @@ const CSS = `
 
 .pr-list {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 15px;
   line-height: 1.15;
   color: #fff;
@@ -450,9 +453,10 @@ const CSS = `
 /* Title overlays portrait */
 .pr-title {
   position: absolute;
-  top: calc(96px + 48px);   /* align with portrait top */
+  top: calc(96px + 48px);
   left: 21px;
-  z-index: 2;
+  z-index: 10;
+  mix-blend-mode: difference;
 }
 
 .pr-statement  { padding: 32px 20px; }
@@ -484,22 +488,26 @@ const CSS = `
 .pr-year-img {
   width: 100%;
   height: 146px;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
   z-index: 0;
-  margin-bottom: -35px; /* carousel slides over bottom of year image */
+  margin-bottom: 150px;
+  padding-top: 20px;
+}
+.pr-year-img img {
+  object-position: top;
 }
 
 .pr-year-carousel {
   position: relative;
   z-index: 1;
-  margin-bottom: -35px; /* events slide over bottom of carousel strip */
+  margin-bottom: 150px;
 }
 
 .pr-year-events {
   position: relative;
   z-index: 2;
-  padding: 40px 20px 32px;
+  padding: 0 20px 150px;
   background: #000; /* opaque so it covers carousel bleed */
 }
 
@@ -554,7 +562,9 @@ const CSS = `
     position: absolute;
     left: 163px;
     top: 63px;
-    z-index: 2;
+    z-index: 100;
+    pointer-events: none;
+    mix-blend-mode: difference;
   }
 
   .pr-statement {
@@ -604,7 +614,7 @@ const CSS = `
   .pr-bio-label {
     position: absolute;
     left: 143px;
-    top: 2025px;
+    top: 1984px; /* aligned with bio text top */
     width: 200px;
     height: 432px;
     display: flex;
@@ -624,14 +634,14 @@ const CSS = `
   }
 
   /* ── Year sections desktop ── */
-  /*
-   * Desktop overlap (from Figma):
-   *   year img h=528px; gallery starts 413px into it → gallery overlaps last 115px
-   *   events follow gallery in normal flow
-   */
   .pr-year-img {
     height: 528px;
-    margin-bottom: -115px; /* gallery overlaps bottom 115px of year image */
+    margin-bottom: -115px;
+    padding-top: 40px;
+    overflow: visible;
+  }
+  .pr-year-img img {
+    object-position: top;
   }
 
   .pr-year-carousel {
@@ -639,8 +649,8 @@ const CSS = `
   }
 
   .pr-year-events {
-    padding: 40px calc(8.33% + 2px);
+    padding: 40px calc(8.33% + 2px) 120px;
   }
 
-  .pr-list { font-size: 26px; }
+  .pr-list { font-size: 26px; font-weight: 100; }
 }`

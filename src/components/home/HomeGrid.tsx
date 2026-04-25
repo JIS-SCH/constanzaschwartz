@@ -360,8 +360,6 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       // Card pops forward + lifts + scales
       gsap.to(group.position, { z: group.position.z + 1, y: 0.5, duration: 0.4, ease: 'power2.out' })
       gsap.to(group.scale, { x: 1.3, y: 1.3, z: 1.3, duration: 0.4, ease: 'power2.out' })
-      // Overlay fades in
-      gsap.to(overlayMats[idx], { opacity: 1, duration: 0.3, ease: 'power2.out' })
     }
 
     function removeHover(group: THREE.Group) {
@@ -369,8 +367,6 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       const origZ = arcPositions[idx].z
       gsap.to(group.position, { z: origZ, y: 0, duration: 0.4, ease: 'power2.out' })
       gsap.to(group.scale, { x: 1, y: 1, z: 1, duration: 0.4, ease: 'power2.out' })
-      // Overlay fades out
-      gsap.to(overlayMats[idx], { opacity: 0, duration: 0.3, ease: 'power2.out' })
     }
 
     // Desktop: mousemove hover check

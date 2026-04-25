@@ -43,16 +43,19 @@ export const ASSETS = {
   makingOffTemplate: '/eco-al-infinito/making-off-template.png',
   videoMakingOff: '/eco-al-infinito/making-off.mp4',
   videoTimelapse: '/eco-al-infinito/timelapse.mp4',
-  // carousel1-11: pendiente subir a Cloudinary (solo existe carrousel1-2)
-  carousel1: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
+  // carousel1
+  carousel1: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-1_yn37zy'),
   carousel2: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel3: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel4: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel5: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel6: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel7: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel8: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel9: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel10: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
-  carousel11: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),
+  carousel3: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-3_uzxmab'),
+  carousel4: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-4_lx92u7'),
+  carousel5: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-5_lefik9'),
+  // carousel2
+  carousel6: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-1_de0s2v'),
+  carousel7: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-2_voemax'),
+  carousel8: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-3_us0wue'),
+  carousel9: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-4_vp6wzx'),
+  carousel10: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-5_dwfrrc'),
+  carousel11: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-6_vapr03'),
+  // mobile
+  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-portada-mobile_a0mier'),
 } as const

@@ -74,6 +74,8 @@ export function Component() {
         @media (max-width: 1023px) {
           .mutek-desktop { display: none; }
           .mutek-mobile  { display: block; }
+          /* Mobile marquee gap = 40px per Figma annotation */
+          .mutek-container .marquee-item { padding-right: 40px !important; padding-left: 0 !important; }
         }
 
         @media (min-width: 1024px) {
@@ -150,7 +152,7 @@ export function Component() {
           />
         </ParallaxSection>
 
-        <ParallaxSection id="text-block-1" style={{ minHeight: '140vh' }}>
+        <ParallaxSection id="text-block-1" style={{ minHeight: 'calc(56.25vw + 80vh)' }}>
           <ParallaxLayer
             sectionId="text-block-1"
             layerIndex={0}
@@ -166,8 +168,8 @@ export function Component() {
           <ParallaxLayer
             sectionId="text-block-1"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img3, speed: 0.3 }}
-            position={{ top: '32vh', left: '0', width: '100%', height: '70vh', zIndex: 1 }}
+            layer={{ type: 'video', src: ASSETS.vid1, speed: 0.3 }}
+            position={{ top: '32vh', left: '0', width: '100%', height: '56.25vw', zIndex: 1 }}
           />
 
           {/* Text left — 466 wide, 183 from left */}
@@ -175,7 +177,7 @@ export function Component() {
             sectionId="text-block-1"
             layerIndex={2}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '110vh', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: 'calc(32vh + 56.25vw + 15vh)', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               {P_VACIO}
@@ -189,7 +191,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-1"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img4, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img3, speed: 0.3 }}
             position={{ top: '8vh', left: '12.7%', width: '57.7%', height: '70vh', zIndex: 1 }}
           />
 
@@ -205,7 +207,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-1"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img5, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img4, speed: 0.3 }}
             position={{ top: '52vh', left: '64%', width: '24%', height: '32vh', zIndex: 2 }}
           />
         </ParallaxSection>
@@ -216,7 +218,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-2"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img6, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img5, speed: 0.3 }}
             position={{ top: '8vh', left: '0', width: '49.3%', height: '60vh', zIndex: 1 }}
           />
 
@@ -236,7 +238,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-2"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img7, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img6, speed: 0.3 }}
             position={{ top: '78vh', left: '34%', width: '57.7%', height: '60vh', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -247,7 +249,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="text-block-2"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img8, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img7, speed: 0.3 }}
             position={{ top: '5vh', left: '20%', width: '24%', height: '40vh', zIndex: 1 }}
           />
 
@@ -282,7 +284,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-2"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img9, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img8, speed: 0.3 }}
             position={{ top: '0', left: '54.9%', width: TW, height: '70vh', zIndex: 1 }}
           />
 
@@ -298,7 +300,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-2"
             layerIndex={3}
-            layer={{ type: 'image', src: ASSETS.img10, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img9, speed: 0.3 }}
             position={{ top: '76vh', left: '33.8%', width: TW, height: '40vh', zIndex: 2 }}
           />
         </ParallaxSection>
@@ -322,7 +324,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="big-image"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img11, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img10, speed: 0.3 }}
             position={{ top: '0', left: '0', width: '100%', height: '85vh', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -346,7 +348,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="image-text"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img12, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img11, speed: 0.3 }}
             position={{ top: '5vh', left: '21.1%', width: '57.7%', height: '60vh', zIndex: 1 }}
           />
 
@@ -365,14 +367,14 @@ export function Component() {
         {/* 12. CAROUSEL — chair-style horizontal scroll */}
         <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
           <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'mutek-carousel-scroll 14s linear infinite' }}>
-            {[ASSETS.img1, ASSETS.img4, ASSETS.img7, ASSETS.img1, ASSETS.img4, ASSETS.img7].map((src, i) => (
+            {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
               <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
             ))}
           </div>
         </div>
 
-        {/* 13. FINAL TITLE — "Y AÚN APAGADA, ESPERA, AL PRÓXIMO RITUAL." */}
-        <div style={{ marginTop: '220px', marginBottom: '110px', paddingLeft: '46.5%', width: '100%' }}>
+        {/* 13. FINAL TITLE — Desktop: Stuck to carousel, 110px bottom margin */}
+        <div style={{ marginTop: '0', paddingLeft: '46.5%', paddingBottom: '110px', textAlign: 'left', width: '100%' }}>
           <h2 style={{ ...TITLE_STYLE, lineHeight: 1.1 }} className="mutek-h3">
             Y AÚN APAGADA,<br />
             ESPERA, AL PRÓXIMO RITUAL.
@@ -383,139 +385,188 @@ export function Component() {
       {/* ── MUTEK MOBILE ─────────────────────────────────────────────── */}
       <div className="mutek-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden' }}>
 
-        {/* Hero */}
-        <img src={ASSETS.hero} alt="" style={{ display: 'block', width: '100%', height: '573px', objectFit: 'cover' }} />
+        {/* 1. Hero */}
+        <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '573px', objectFit: 'cover' }} />
 
-        {/* Intro para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
+        {/* 2. Intro para */}
+        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
           En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
         </div>
 
-        {/* Image pair staggered */}
-        <div style={{ position: 'relative', height: '360px', marginTop: '60px' }}>
-          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '270px', objectFit: 'cover' }} />
-          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '100px', width: '200px', height: '170px', objectFit: 'cover' }} />
+        {/* 3. First image pair + title + sub-text — absolute layout per Figma */}
+        {/* img1 top:0 h:299, title top:252 overlaps tail of img1, img2 right-side top:374 h:300 */}
+        <div style={{ position: 'relative', height: '674px', marginTop: '80px' }}>
+          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
+          <h3 style={{
+            position: 'absolute', top: '252px', left: '20px', margin: 0,
+            fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
+            fontWeight: 100, fontSize: '36px', lineHeight: 1, color: '#fff', textTransform: 'uppercase',
+            zIndex: 1
+          }}>
+            Ritual al Vacío
+          </h3>
+          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', left: 'calc(41.67% + 7.5px)', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
+          <div className="mutek-p" style={{ position: 'absolute', top: '298px', left: '20px', width: '350px', color: '#fff', zIndex: 1 }}>
+            Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
+          </div>
         </div>
 
-        {/* H3 — RITUAL AL VACÍO */}
-        <h3 style={{ fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica', fontWeight: 100, fontSize: '36px', lineHeight: 1.1, color: '#fff', textTransform: 'uppercase', padding: '80px 20px 0' }}>
-          RITUAL AL VACÍO
-        </h3>
-
-        {/* Para — cave */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '40px 20px 0', maxWidth: '350px' }}>
+        {/* 4. P_CAVE — 80px after image container */}
+        <div className="mutek-p" style={{ color: '#fff', padding: '80px 0 0', width: '350px', marginLeft: '20px' }}>
           {P_CAVE}
         </div>
 
-        {/* Para — void */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '40px 20px 0', maxWidth: '350px' }}>
+        {/* 5. Video */}
+        <div style={{ width: '100%', height: '219px', marginTop: '110px', overflow: 'hidden' }}>
+          <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}>
+            <source src={ASSETS.vid1} type="video/mp4" />
+          </video>
+        </div>
+
+        {/* 6. P_VACIO */}
+        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
           {P_VACIO}
         </div>
 
-        {/* Video placeholder */}
-        <div style={{ width: '100%', height: '219px', marginTop: '60px', background: 'rgba(0,0,0,0.85)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="mutek-p" style={{ color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em' }}>VIDEO</span>
-        </div>
+        {/* 7. Stills + marquee + DSC3353 + P_RITUAL + Still 15 + Still 126 — absolute layout */}
+        {/* Still145 top:0, Still18 top:136, Marquee top:147, DSC3353 top:342, P_RITUAL top:496, Still15 top:726, Still126 top:854 */}
+        <div style={{ position: 'relative', height: '950px', marginTop: '110px' }}>
+          <img src={ASSETS.img3} alt="" style={{ position: 'absolute', left: 'calc(8.33% + 17.5px)', top: 0, width: '290px', height: '163px', objectFit: 'cover' }} />
+          <img src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
 
-        {/* Para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '60px 20px 0', maxWidth: '350px' }}>
-          {P_RITUAL}
-        </div>
-
-        {/* img3 left */}
-        <img src={ASSETS.img3} alt="" style={{ display: 'block', width: '290px', height: '163px', objectFit: 'cover', marginTop: '40px', marginLeft: '20px' }} />
-
-        {/* Marquee 1 */}
-        <div style={{ marginTop: '40px', height: '28px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '18s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '20px', padding: '0 40px' }}>COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE ·</span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '20px', padding: '0 40px' }}>COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE ·</span></div>
+          {/* Marquee 1 — overlaps bottom of Still18 */}
+          <div style={{ position: 'absolute', top: '147px', left: 0, width: '100%', height: '40px', overflow: 'hidden' }}>
+            <div className="marquee-track" style={{ animationDuration: '20s' }}>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
+                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
+                }}>
+                  Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
+                </span>
+              </div>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
+                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
+                }}>
+                  Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
+                </span>
+              </div>
+            </div>
           </div>
+
+          {/* DSC3353 — left-aligned per Figma annotation */}
+          <img src={ASSETS.img5} alt="" style={{ position: 'absolute', left: '20px', top: '342px', width: '280px', height: '187px', objectFit: 'cover' }} />
+
+          {/* P_RITUAL — right-indented, nowrap per Figma */}
+          <div className="mutek-p" style={{
+            position: 'absolute', top: '496px', left: 'calc(25% + 12.5px)',
+            color: '#fff', whiteSpace: 'nowrap',
+          }}>
+            <p style={{ margin: 0 }}>La luz se apaga, todo se disuelve.</p>
+            <p style={{ margin: 0 }}>La caverna desaparece,</p>
+            <p style={{ margin: 0 }}>el ritmo se interrumpe.</p>
+            <p style={{ margin: 0 }}>Y en ese vaivén constante,</p>
+            <p style={{ margin: 0 }}>se funda un nuevo ritual:</p>
+            <p style={{ margin: 0 }}>un Ritual al Vacío.</p>
+          </div>
+
+          {/* Still 15 — right-aligned */}
+          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', right: 0, top: '726px', width: '280px', height: '158px', objectFit: 'cover' }} />
+
+          {/* Still 126 — left edge */}
+          <img src={ASSETS.img7} alt="" style={{ position: 'absolute', left: 0, top: '854px', width: '170px', height: '96px', objectFit: 'cover' }} />
         </div>
 
-        {/* img4 right */}
-        <img src={ASSETS.img4} alt="" style={{ display: 'block', width: '170px', height: '96px', objectFit: 'cover', marginTop: '40px', marginLeft: 'auto', marginRight: '20px' }} />
-
-        {/* img5 centered-left */}
-        <img src={ASSETS.img5} alt="" style={{ display: 'block', width: '280px', height: '187px', objectFit: 'cover', marginTop: '40px', marginLeft: '20px' }} />
-
-        {/* Poetic block */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '60px 20px 0', maxWidth: '350px', lineHeight: 1.8 }}>
-          <div>La luz se enciende.</div>
-          <div>El sonido respira.</div>
-          <div>El cuerpo entra.</div>
-          <div>El vacío espera.</div>
-          <div>Algo ocurre.</div>
-          <div>Todo cambia.</div>
-        </div>
-
-        {/* Image pair 280/170 */}
-        <div style={{ position: 'relative', height: '310px', marginTop: '60px' }}>
-          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '280px', height: '187px', objectFit: 'cover' }} />
-          <img src={ASSETS.img7} alt="" style={{ position: 'absolute', right: '20px', top: '100px', width: '170px', height: '96px', objectFit: 'cover' }} />
-        </div>
-
-        {/* Para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '60px 20px 0', maxWidth: '350px' }}>
+        {/* 8. P_QUESTION */}
+        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
           {P_QUESTION}
         </div>
 
-        {/* Para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '40px 20px 0', maxWidth: '350px' }}>
+        {/* 9. P_MENTE */}
+        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
           {P_MENTE}
         </div>
 
-        {/* Image pair 200px */}
-        <div style={{ position: 'relative', height: '300px', marginTop: '60px' }}>
-          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '200px', objectFit: 'cover' }} />
-          <img src={ASSETS.img9} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '200px', height: '200px', objectFit: 'cover' }} />
-        </div>
+        {/* 10. Second image pair + Marquee 2 — absolute layout */}
+        {/* DSC3347(img8) right side top:0 h:300, Marquee2 top:48 overlaps img8, DSC3435(img9) left top:199 h:300 */}
+        <div style={{ position: 'relative', height: '499px', marginTop: '100px' }}>
+          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: 'calc(41.67% + 7.5px)', top: 0, width: '200px', height: '300px', objectFit: 'cover' }} />
 
-        {/* Marquee 2 */}
-        <div style={{ marginTop: '60px', height: '28px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '22s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '20px', padding: '0 40px' }}>EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO ·</span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '20px', padding: '0 40px' }}>EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO ·</span></div>
+          {/* Marquee 2 — overlaps top portion of right image */}
+          <div style={{ position: 'absolute', top: '48px', left: 0, width: '100%', height: '40px', overflow: 'hidden' }}>
+            <div className="marquee-track" style={{ animationDuration: '22s' }}>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
+                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
+                }}>
+                  El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
+                </span>
+              </div>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
+                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
+                }}>
+                  El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
+                </span>
+              </div>
+            </div>
           </div>
+
+          <img src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '20px', top: '199px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
-        {/* Para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '60px 20px 0', maxWidth: '350px' }}>
+        {/* 11. P_APELA */}
+        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
           {P_APELA}
         </div>
 
-        {/* Big full-width image (390×572) */}
-        <img src={ASSETS.img11} alt="" style={{ display: 'block', width: '100%', height: '572px', objectFit: 'cover', marginTop: '60px' }} />
+        {/* 12. Full-width image (Still 122) 390×572 */}
+        <img src={ASSETS.img10} alt="" style={{ display: 'block', width: '100%', height: '572px', objectFit: 'cover', marginTop: '80px' }} />
 
-        {/* Para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '60px 20px 0', maxWidth: '350px' }}>
+        {/* 13. P_UMBRAL */}
+        <div className="mutek-p" style={{ color: '#fff', paddingTop: '110px', width: '350px', marginLeft: '20px' }}>
           {P_UMBRAL}
         </div>
 
-        {/* img12 350×197 */}
-        <img src={ASSETS.img12} alt="" style={{ display: 'block', width: '350px', height: '197px', objectFit: 'cover', marginTop: '40px', marginLeft: '20px' }} />
+        {/* 14. Still 111 — centered, 350×197 */}
+        <img src={ASSETS.img11} alt="" style={{ display: 'block', width: '350px', height: '197px', objectFit: 'cover', marginTop: '110px', marginLeft: 'auto', marginRight: 'auto' }} />
 
-        {/* Para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '60px 20px 0', maxWidth: '350px' }}>
+        {/* 15. P_CAVERNA */}
+        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
           {P_CAVERNA}
         </div>
 
-        {/* Carousel */}
-        <div style={{ marginTop: '60px', width: '100%', height: CH, overflow: 'hidden' }}>
-          <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'mutek-m-c 14s linear infinite' }}>
-            {[ASSETS.img1, ASSETS.img4, ASSETS.img7, ASSETS.img1, ASSETS.img4, ASSETS.img7].map((src, i) => (
-              <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
+        {/* 16. Carousel — 588px wide frames, 331px tall, seamless loop */}
+        <div style={{ marginTop: '80px', width: '100%', height: '331px', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', height: '331px', width: 'max-content', animation: 'mutek-m-c 14s linear infinite' }}>
+            {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7,
+            ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
+              <img key={i} src={src} alt="" style={{ height: '331px', width: '588px', objectFit: 'cover', display: 'block', flexShrink: 0 }} />
             ))}
+          </div>
+        </div>
+
+        {/* 17. Closing title — Mobile: Stuck to carousel, 110px bottom margin */}
+        <div style={{ marginTop: '0', paddingLeft: '80px', paddingBottom: '110px' }}>
+          <div style={{
+            fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
+            fontWeight: 100, fontSize: '28px', lineHeight: 'normal', color: '#fff',
+            textTransform: 'uppercase', letterSpacing: '0.56px',
+          }}>
+            <div>Y aún apagada,</div>
+            <div>espera,</div>
+            <div>al próximo ritual.</div>
           </div>
         </div>
         <style dangerouslySetInnerHTML={{ __html: `@keyframes mutek-m-c { from { transform: translateX(0) } to { transform: translateX(-50%) } }` }} />
 
-        {/* Closing H4 */}
-        <h4 style={{ fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica', fontWeight: 100, fontSize: '28px', lineHeight: 1.2, color: '#fff', textTransform: 'uppercase', padding: '80px 20px 100px', letterSpacing: '0.02em' }}>
-          Y AÚN APAGADA,<br/>ESPERA, AL PRÓXIMO RITUAL.
-        </h4>
 
-      </div>{/* /mutek-mobile */}
+
+      </div>
 
     </div>
   )
