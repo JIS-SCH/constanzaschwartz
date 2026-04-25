@@ -14,4 +14,6 @@ export const ASSETS = {
   img9: cldImg('CONSTANZASCHWARTZ-projects-Mutek-1_tbng2q'),
   img10: cldImg('CONSTANZASCHWARTZ-projects-Mutek-10_lpuzsp'),
   img11: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
+  // Mutek-12 no existe en Cloudinary — usamos Mutek-11 como fallback
+  img12: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
 } as const

@@ -102,7 +102,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   const elementRef = useRef<HTMLElement>(null)
   const isMarquee = layer.type === 'marquee'
 
-  const { speed = 1, direction = 'y', multiplier = 1200 } = layer
+  const { speed = 1, direction = 'y', multiplier = 600 } = layer
   const marqueeHeight = position.height || '72px'
   const isStickyMarquee = isMarquee && !position.top
 
