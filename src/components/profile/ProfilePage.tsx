@@ -421,7 +421,7 @@ const CSS = `
 
 .pr-p {
   font-family: "Space Grotesk", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 15px;
   line-height: 1.45;
   color: #fff;
@@ -431,9 +431,9 @@ const CSS = `
 
 .pr-list {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 15px;
-  line-height: 1.15;
+  line-height: 1.21;
   color: #fff;
 }
 
@@ -478,6 +478,7 @@ const CSS = `
 /* ═══ YEAR SECTIONS — both viewports ════════════════════════════════════ */
 .pr-year-section {
   position: relative;
+  margin-bottom: 150px;
 }
 
 /*
@@ -634,6 +635,9 @@ const CSS = `
   }
 
   /* ── Year sections desktop ── */
+  .pr-year-section {
+    margin-bottom: 330px;
+  }
   .pr-year-img {
     height: 528px;
     margin-bottom: -115px;
@@ -652,5 +656,5 @@ const CSS = `
     padding: 40px calc(8.33% + 2px) 120px;
   }
 
-  .pr-list { font-size: 26px; font-weight: 100; }
+  .pr-list { font-size: 26px; font-weight: 100; line-height: 1.21; }
 }`
