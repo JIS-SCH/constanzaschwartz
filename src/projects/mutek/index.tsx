@@ -41,24 +41,16 @@ export function Component() {
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mutek-container">
       <style dangerouslySetInnerHTML={{
         __html: `
-        /* TYPOGRAPHY SYSTEM - MUTEK */
-        .mutek-container {
-          --h1-d: 280px; --h1-m: 170px;
-          --h2-d: 128px; --h2-m: 57px;
-          --h3-d: 56px;  --h3-m: 36px;
-          --h4-d: 36px;  --h4-m: 28px;
-          --list-d: 26px; --list-m: 15px;
-          --p-d: 16px;   --p-m: 15px;
-          --credits-d: 24px; --credits-m: 16px;
-        }
+        /* MUTEK overrides - use global tokens from globals.css */
 
-        .mutek-h1 { font-size: var(--h1-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .mutek-h2 { font-size: var(--h2-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .mutek-h3 { font-size: var(--h3-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .mutek-h4 { font-size: var(--h4-m); line-height: 1.2; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 300; letter-spacing: 0.02em; }
-        .mutek-list { font-size: var(--list-m); line-height: 1.15; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 300; letter-spacing: 0; }
-        .mutek-p { font-size: var(--p-m); line-height: 1.45; font-family: "Space Grotesk", sans-serif; font-weight: 300; letter-spacing: 0; }
-        .mutek-credits { font-size: var(--credits-m); font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 700; color: #fff; letter-spacing: 0.02em; }
+        .mutek-h1, .mutek-h2, .mutek-h3 { font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; }
+        .mutek-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
+        .mutek-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
+        .mutek-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
+        .mutek-h4 { font-size: var(--h4-size); line-height: 1.2; font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: 0.02; }
+        .mutek-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
+        .mutek-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 300; letter-spacing: var(--p-ls); }
+        .mutek-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0.02; }
 
         /* Marquee gap fix: designer requested 80px between phrases on desktop */
         .mutek-container .marquee-item { padding-right: 80px !important; }
@@ -79,13 +71,13 @@ export function Component() {
         }
 
         @media (min-width: 1024px) {
-          .mutek-h1 { font-size: var(--h1-d); }
-          .mutek-h2 { font-size: var(--h2-d); }
-          .mutek-h3 { font-size: var(--h3-d); }
-          .mutek-h4 { font-size: var(--h4-d); }
-          .mutek-list { font-size: var(--list-d); line-height: 1.21; }
-          .mutek-p { font-size: var(--p-d); line-height: 1.5; }
-          .mutek-credits { font-size: var(--credits-d); }
+          .mutek-h1 { font-size: 280px; }
+          .mutek-h2 { font-size: 128px; }
+          .mutek-h3 { font-size: 56px; }
+          .mutek-h4 { font-size: 36px; }
+          .mutek-list { font-size: 26px; line-height: 1.21; }
+          .mutek-p { font-size: 16px; line-height: 1.5; }
+          .mutek-credits { font-size: 24px; }
         }
 
         /* Carousel — chair-style horizontal scroll, refs Cloudinary asset later */

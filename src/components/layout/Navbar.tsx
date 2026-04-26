@@ -57,17 +57,19 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
   return (
     <nav
       ref={navRef}
+      className="h-[40px] md:h-[52px]"
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 50,
-        height: '40px',
         padding: '0 21px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        background: 'transparent',
+        pointerEvents: 'none',
       }}
     >
       {/* Left — MENU / close toggle */}
@@ -89,6 +91,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           justifyContent: 'center',
           width: '48px',
           height: '24px',
+          pointerEvents: 'auto',
+          mixBlendMode: 'difference',
         }}
       >
         <span
@@ -135,6 +139,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          pointerEvents: 'auto',
+          mixBlendMode: 'difference',
         }}
       >
         <Image
@@ -165,6 +171,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           alignItems: 'center',
           gap: '6px',
           color: '#fff',
+          pointerEvents: 'auto',
+          mixBlendMode: 'difference',
         }}
       >
         <WaveformIcon width={18} color="#fff" />

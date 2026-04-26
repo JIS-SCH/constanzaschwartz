@@ -17,30 +17,22 @@ export { meta } from './meta'
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="eco-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="eco-container">
       <style dangerouslySetInnerHTML={{
         __html: `
-        /* TYPOGRAPHY SYSTEM - ECO AL INFINITO */
-        .eco-container {
-          --h1-d: 280px; --h1-m: 170px;
-          --h2-d: 128px; --h2-m: 57px;
-          --h3-d: 56px;  --h3-m: 36px;
-          --h4-d: 36px;  --h4-m: 28px;
-          --list-d: 26px; --list-m: 15px;
-          --p-d: 16px;   --p-m: 15px;
-          --credits-d: 32px; --credits-m: 20px;
-        }
+        /* ECO AL INFINITO - use global tokens from globals.css */
 
-        .eco-h1 { font-size: var(--h1-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .eco-h2 { font-size: var(--h2-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .eco-h3 { font-size: var(--h3-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .eco-h4 { font-size: var(--h4-m); line-height: 1.2; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0.02em; }
-        .eco-list { font-size: var(--list-m); line-height: 1.15; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 300; letter-spacing: 0; }
-        .eco-p { font-size: var(--p-m); line-height: 1.5; font-family: "Space Grotesk", sans-serif; font-weight: 300; letter-spacing: 0; color: #fff; }
-        .eco-credits { font-size: var(--credits-m); line-height: 1.4; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; text-transform: uppercase; }
+        .eco-h1, .eco-h2, .eco-h3 { font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; }
+        .eco-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
+        .eco-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
+        .eco-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
+        .eco-h4 { font-size: var(--h4-size); line-height: 1.2; font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0.02; }
+        .eco-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
+        .eco-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 300; letter-spacing: var(--p-ls); color: #fff; }
+        .eco-credits { font-size: var(--h4-size); line-height: 1.4; font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0; text-transform: uppercase; }
 
         .marquee-item {
-          font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+          font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
           font-weight: 100 !important;
           text-transform: uppercase;
         }
@@ -53,7 +45,7 @@ export function Component() {
           align-items: center;
           justify-content: center;
           color: rgba(255,255,255,0.3);
-          font-family: "Helvetica Neue", sans-serif;
+          font-family: 'Helvetica Neue', sans-serif;
           font-size: 14px;
           letter-spacing: 0.1em;
           text-transform: uppercase;
@@ -67,24 +59,25 @@ export function Component() {
         }
 
         @media (min-width: 1024px) {
-          .eco-h1 { font-size: var(--h1-d); }
-          .eco-h2 { font-size: var(--h2-d); }
-          .eco-h3 { font-size: var(--h3-d); }
-          .eco-h4 { font-size: var(--h4-d); }
-          .eco-list { font-size: var(--list-d); line-height: 1.21; }
-          .eco-p { font-size: var(--p-d); line-height: 1.5; }
-          .eco-credits { font-size: var(--credits-d); }
+          .eco-h1 { font-size: 280px; }
+          .eco-h2 { font-size: 128px; }
+          .eco-h3 { font-size: 56px; }
+          .eco-h4 { font-size: 36px; }
+          .eco-list { font-size: 26px; line-height: 1.21; }
+          .eco-p { font-size: 16px; line-height: 1.5; }
+          .eco-credits { font-size: 32px; }
         }
       `}} />
 
       <div className="eco-desktop">
         {/* 1. HERO — Full width sculpture */}
-        <ParallaxSection id="hero" style={{ minHeight: '100vh' }}>
+        <ParallaxSection id="hero" style={{ minHeight: '115vh' }}>
           <ParallaxLayer
+            className="eco-hero-layer"
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'cover' }}
-            position={{ top: HERO_TOP, left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'contain' }}
+            position={{ top: '80px', left: '4.17%', width: '91.66%', height: '80vh', zIndex: 1 }}
           />
         </ParallaxSection>
 
@@ -752,7 +745,7 @@ export function Component() {
       <div className="eco-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden' }}>
 
         {/* Hero */}
-        <img src={ASSETS.hero} alt="" style={{ display: 'block', width: '100%', height: '561px', objectFit: 'cover' }} />
+        <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '561px', objectFit: 'cover' }} />
 
         {/* Para 1 */}
         <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>

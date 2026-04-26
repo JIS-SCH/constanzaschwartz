@@ -64,12 +64,12 @@ interface ParallaxLayerProps {
 }
 
 const TEXT_STYLE: React.CSSProperties = {
-  fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+  fontFamily: "'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif",
   fontWeight: 300,
-  letterSpacing: '0.12em',
+  letterSpacing: '0.02em',
   textTransform: 'uppercase',
   color: '#fff',
-  fontSize: 'clamp(1rem, 2.2vw, 1.75rem)',
+  fontSize: 'var(--h4-size)',
   whiteSpace: 'nowrap',
   paddingRight: '5em',
 }

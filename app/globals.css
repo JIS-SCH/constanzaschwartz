@@ -1,5 +1,84 @@
 @import "tailwindcss";
 
+/* ─── TYPOGRAPHY TOKENS: Figma-exact values ─── */
+/* Mobile (≤768px) */
+:root {
+  --h1-size: 170px;
+  --h2-size: 57px;
+  --h3-size: 36px;
+  --h4-size: 28px;
+  --h5-size: 24px;
+  --list-size: 15px;
+  --p-size: 15px;
+
+  --h1-lh: 1;
+  --h2-lh: 1;
+  --h3-lh: 1;
+  --h4-lh: auto;
+  --h5-lh: 1;
+  --list-lh: 1.15;
+  --p-lh: 1.45;
+
+  --h1-ls: 0;
+  --h2-ls: 0;
+  --h3-ls: 0;
+  --h4-ls: 0.02;
+  --h5-ls: 0;
+  --list-ls: 0;
+  --p-ls: 0;
+}
+
+/* Desktop (>768px) */
+@media (min-width: 769px) {
+  :root {
+    --h1-size: 280px;
+    --h2-size: 128px;
+    --h3-size: 56px;
+    --h4-size: 36px;
+    --list-size: 26px;
+    --p-size: 16px;
+
+    --list-lh: 1.21;
+    --p-lh: 1.5;
+    background-color: #0f0f0f;
+  }
+}
+
+/* ─── TYPOGRAPHY CLASSES ─── */
+/* Headings - Helvetica Neue LT Std Thin (100) */
+.h1, .h2, .h3 {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 100;
+}
+
+.h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
+.h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
+.h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
+.h4 {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--h4-size); line-height: var(--h4-lh); letter-spacing: var(--h4-ls);
+  font-weight: 300;
+}
+.h5 {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--h5-size); line-height: var(--h5-lh); letter-spacing: var(--h5-ls);
+  font-weight: 100;
+}
+
+/* List - Helvetica Neue LT Std Light (300) */
+.list {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: var(--list-size); line-height: var(--list-lh); letter-spacing: var(--list-ls);
+}
+
+/* Paragraph - Space Grotesk Light (300) */
+.p, p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: var(--p-size); line-height: var(--p-lh); letter-spacing: var(--p-ls);
+}
+
 /* Helvetica Neue LT Std */
 @font-face {
   font-family: 'Helvetica Neue LT Std';

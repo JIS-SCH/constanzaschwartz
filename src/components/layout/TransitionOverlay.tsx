@@ -76,7 +76,7 @@ export function TransitionOverlay() {
     const target = document.querySelector<HTMLElement>('[data-project-image]')
 
     const cleanup = () => {
-      gsap.set(overlay, { visibility: 'hidden', background: '#000', opacity: 1 })
+      gsap.set(overlay, { visibility: 'hidden', background: '#0F0F0F', opacity: 1 })
       gsap.set(el, { visibility: 'hidden', left: '', top: '', width: '', height: '', opacity: 1, backgroundImage: '' })
       setDone()
     }
@@ -127,7 +127,7 @@ export function TransitionOverlay() {
     if (el) gsap.set(el, { visibility: 'hidden' })
 
     // Fade in black overlay
-    gsap.set(overlay, { visibility: 'visible', opacity: 0, background: '#000' })
+    gsap.set(overlay, { visibility: 'visible', opacity: 0, background: '#0F0F0F' })
 
     const ctx = gsap.context(() => {
       gsap.to(overlay, {
@@ -187,7 +187,7 @@ export function TransitionOverlay() {
         zIndex: 100,
         pointerEvents: isActive ? 'auto' : 'none',
         visibility: 'hidden',
-        background: '#000',
+        background: '#0F0F0F',
       }}
     >
       <div

@@ -169,7 +169,6 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     const cleanupResize = setupResize(camera, renderer)
 
-    // ── Cards group ────────────────────────────────────────────────────────
     const cardsGroup = new THREE.Group()
     cardsGroup.rotation.y = GROUP_ROTATION
     scene.add(cardsGroup)

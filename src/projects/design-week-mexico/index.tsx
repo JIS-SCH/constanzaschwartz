@@ -20,65 +20,58 @@ export function Component() {
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="dw-container">
       <style dangerouslySetInnerHTML={{
         __html: `
-        /* TYPOGRAPHY */
-        .dw-container {
-          --h1-d: 280px; --h1-m: 170px;
-          --h2-d: 128px; --h2-m: 57px;
-          --h3-d: 56px;  --h3-m: 36px;
-          --h4-d: 36px;  --h4-m: 28px;
-          --list-d: 26px; --list-m: 15px;
-          --p-d: 16px;   --p-m: 15px;
+        /* DESIGN WEEK MEXICO - use global tokens from globals.css */
 
-          /* ─── LAYOUT TOKENS — edit these, not the JSX ─── */
-          /* section heights */
-          --h-hero: 110vh; --h-intro: 60vh; --h-c1: 100vh;
-          --h-stmt: 100vh; --h-c2: 140vh;
-          /* intro — left text */
-          --it-l-t: 15vh;  --it-l-x: 12.71%; --it-l-w: 32.4305%;
-          /* intro — right text (ficha: 345px) */
-          --it-r-t: 15vh;  --it-r-x: 63.33%; --it-r-w: 23.96%;
-          /* collage-1 img2 (behind, left): left=425px, w=467px, h=451px */
-          --c1-a-t: 25vh;  --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 50vh;
-          /* collage-1 img1 (front, right): left=791px, w=588px — arranca en el top */
-          --c1-b-t: 0vh;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 48vh;
-          /* statement */
-          --stmt-x: 12.71%; --stmt-w: 76%;
-          /* collage-2 img3 */
-          --c2-a-t: 5vh;   --c2-a-x: 63.33%; --c2-a-w: 32.4305%;
-          /* collage-2 img4 */
-          --c2-b-t: 40vh;  --c2-b-x: 33.33%; --c2-b-w: 32.4305%;
-          /* finish staircase */
-          --f-img-w: 23.96%;
-          --f-img-h: auto; /* Pendiente: alto exacto de Figma */
-          --f-img1-x: 4.24%;
-          --f-img1-t: 65vh;
-          --f-img2-x: 38.12%;
-          --f-img2-t: calc(var(--f-img1-t) + 130px);
-          --f-img3-x: 71.81%;
-          --f-img3-t: calc(var(--f-img2-t) + 130px);
-        }
-
-        .dw-h1 { font-size: var(--h1-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .dw-h2 { font-size: var(--h2-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .dw-h3 { font-size: var(--h3-m); line-height: 1; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 100; letter-spacing: 0; }
-        .dw-h4 { font-size: var(--h4-m); line-height: 1.2; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 300; letter-spacing: 0.02em; }
-        .dw-list { font-size: var(--list-m); line-height: 1.15; font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica; font-weight: 300; letter-spacing: 0; }
-        .dw-p { font-size: var(--p-m); line-height: 1.45; font-family: "Space Grotesk", sans-serif; font-weight: 300; letter-spacing: 0; }
+        .dw-h1, .dw-h2, .dw-h3 { font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; }
+        .dw-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
+        .dw-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
+        .dw-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
+        .dw-h4 { font-size: var(--h4-size); line-height: 1.2; font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: 0.02; }
+        .dw-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
+        .dw-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 300; letter-spacing: var(--p-ls); }
 
         .marquee-item {
-          font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+          font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
           font-weight: 300 !important;
           text-transform: uppercase;
         }
 
         @media (min-width: 1024px) {
-          .dw-h1 { font-size: var(--h1-d); }
-          .dw-h2 { font-size: var(--h2-d); }
-          .dw-h3 { font-size: var(--h3-d); }
-          .dw-h4 { font-size: var(--h4-d); }
-          .dw-list { font-size: var(--list-d); line-height: 1.21; }
-          .dw-p { font-size: var(--p-d); line-height: 1.5; }
+          .dw-h1 { font-size: 280px; }
+          .dw-h2 { font-size: 128px; }
+          .dw-h3 { font-size: 56px; }
+          .dw-h4 { font-size: 36px; }
+          .dw-list { font-size: 26px; line-height: 1.21; }
+          .dw-p { font-size: 16px; line-height: 1.5; }
         }
+
+        /* ─── LAYOUT TOKENS — edit these, not the JSX ─── */
+        /* section heights */
+        --h-hero: 110vh; --h-intro: 60vh; --h-c1: 100vh;
+        --h-stmt: 100vh; --h-c2: 140vh;
+        /* intro — left text */
+        --it-l-t: 15vh;  --it-l-x: 12.71%; --it-l-w: 32.4305%;
+        /* intro — right text (ficha: 345px) */
+        --it-r-t: 15vh;  --it-r-x: 63.33%; --it-r-w: 23.96%;
+        /* collage-1 img2 (behind, left): left=425px, w=467px, h=451px */
+        --c1-a-t: 25vh;  --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 50vh;
+        /* collage-1 img1 (front, right): left=791px, w=588px — arranca en el top */
+        --c1-b-t: 0vh;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 48vh;
+        /* statement */
+        --stmt-x: 12.71%; --stmt-w: 76%;
+        /* collage-2 img3 */
+        --c2-a-t: 5vh;   --c2-a-x: 63.33%; --c2-a-w: 32.4305%;
+        /* collage-2 img4 */
+        --c2-b-t: 40vh;  --c2-b-x: 33.33%; --c2-b-w: 32.4305%;
+        /* finish staircase */
+        --f-img-w: 23.96%;
+        --f-img-h: auto; /* Pendiente: alto exacto de Figma */
+        --f-img1-x: 4.24%;
+        --f-img1-t: 65vh;
+        --f-img2-x: 38.12%;
+        --f-img2-t: calc(var(--f-img1-t) + 130px);
+        --f-img3-x: 71.81%;
+        --f-img3-t: calc(var(--f-img2-t) + 130px);
 
         /* ─── MOBILE (≤ 768px) — edit numbers here to iterate fast ─── */
         @media (max-width: 768px) {
@@ -128,8 +121,8 @@ export function Component() {
         <ParallaxLayer
           sectionId="hero"
           layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'contain' }}
-          position={{ top: HERO_TOP, left: '35%', width: '30%', height: '80vh', zIndex: 1 }}
+          layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'cover' }}
+          position={{ top: HERO_TOP, left: '0', width: '100%', height: '80vh', zIndex: 1 }}
         />
       </ParallaxSection>
 
