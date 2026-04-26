@@ -26,16 +26,11 @@ export function Component() {
         .eco-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
         .eco-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
         .eco-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
-        .eco-h4 { font-size: var(--h4-size); line-height: 1.2; font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0.02; }
+        .eco-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--h4-ls); }
         .eco-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
         .eco-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 300; letter-spacing: var(--p-ls); color: #fff; }
-        .eco-credits { font-size: var(--h4-size); line-height: 1.4; font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0; text-transform: uppercase; }
+        .eco-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: var(--h5-ls); text-transform: uppercase; }
 
-        .marquee-item {
-          font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-          font-weight: 100 !important;
-          text-transform: uppercase;
-        }
 
         .eco-placeholder {
           width: 100%;
@@ -57,16 +52,6 @@ export function Component() {
           .eco-desktop { display: none; }
           .eco-mobile  { display: block; }
         }
-
-        @media (min-width: 1024px) {
-          .eco-h1 { font-size: 280px; }
-          .eco-h2 { font-size: 128px; }
-          .eco-h3 { font-size: 56px; }
-          .eco-h4 { font-size: 36px; }
-          .eco-list { font-size: 26px; line-height: 1.21; }
-          .eco-p { font-size: 16px; line-height: 1.5; }
-          .eco-credits { font-size: 32px; }
-        }
       `}} />
 
       <div className="eco-desktop">
@@ -86,7 +71,7 @@ export function Component() {
             {[0, 1].map((setIdx) => (
               <div key={setIdx} className="marquee-set">
                 {Array.from({ length: 4 }, (_, i) => (
-                  <span key={i} style={{ fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, sans-serif', fontSize: '36px', fontWeight: 250, letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', whiteSpace: 'nowrap', paddingRight: '5em', lineHeight: 'normal' }}>
+                  <span key={i} className="marquee-item">
                     ESCULTURA COLGANTE SITE-SPECIFIC.
                   </span>
                 ))}
@@ -108,7 +93,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: '15vh', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 3 }}
           >
-            <div className="eco-p" style={{ fontSize: '16px', lineHeight: '1.5' }}>
+            <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               <p style={{ marginBottom: '1.5rem' }}>
                 Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
               </p>
@@ -165,7 +150,7 @@ export function Component() {
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
                     {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} style={{ fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, sans-serif', fontSize: '36px', fontWeight: 250, letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', whiteSpace: 'nowrap', paddingRight: '5em', lineHeight: 'normal' }}>
+                      <span key={i} className="marquee-item">
                         Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
                       </span>
                     ))}
@@ -185,7 +170,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: '15vh', left: 'calc(8.33% + 3px)', width: TW, height: 'auto', zIndex: 2 }}
           >
-            <div className="eco-p" style={{ fontSize: '16px', lineHeight: '1.5' }}>
+            <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
             </div>
           </ParallaxLayer>
@@ -240,7 +225,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: 'calc(100vh + 1054px)', left: 'calc(8.33% + 2px)', width: TW, height: 'auto', zIndex: 2 }}
           >
-            <div className="eco-p" style={{ fontSize: '16px', lineHeight: '1.5' }}>
+            <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos de su obra.
             </div>
           </ParallaxLayer>
@@ -322,7 +307,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: '1400px', left: 'calc(8.33% + 3px)', width: TW, height: 'auto', zIndex: 2 }}
           >
-            <div className="eco-p" style={{ fontSize: '16px', lineHeight: '1.5' }}>
+            <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
             </div>
           </ParallaxLayer>
@@ -355,7 +340,7 @@ export function Component() {
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
                     {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} style={{ fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, sans-serif', fontSize: '36px', fontWeight: 250, letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', whiteSpace: 'nowrap', paddingRight: '5em', lineHeight: 'normal' }}>
+                      <span key={i} className="marquee-item">
                         SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS
                       </span>
                     ))}
@@ -412,7 +397,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: '1660px', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 2 }}
           >
-            <div className="eco-p" style={{ fontSize: '16px', lineHeight: '1.5' }}>
+            <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo.
               Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son
               las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por
@@ -453,7 +438,7 @@ export function Component() {
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
                     {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} style={{ fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, sans-serif', fontSize: '36px', fontWeight: 250, letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', whiteSpace: 'nowrap', paddingRight: '5em', lineHeight: 'normal' }}>
+                      <span key={i} className="marquee-item">
                         SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ.
                       </span>
                     ))}
@@ -680,7 +665,7 @@ export function Component() {
               color: '#fff',
               textTransform: 'uppercase',
               fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-              fontSize: '36px',
+              fontSize: 'var(--h4-size)',
               fontWeight: 100,
               letterSpacing: '0.72px',
               lineHeight: 1,
@@ -701,7 +686,7 @@ export function Component() {
               color: '#fff',
               fontFamily: '"Space Grotesk", sans-serif',
               fontWeight: 300,
-              fontSize: '16px',
+              fontSize: 'var(--p-size)',
               lineHeight: 1.5,
             }}>
               Simon &amp; Garfunkel · 1964
@@ -714,7 +699,7 @@ export function Component() {
               color: '#fff',
               fontFamily: '"Space Grotesk", sans-serif',
               fontWeight: 300,
-              fontSize: '16px',
+              fontSize: 'var(--p-size)',
               lineHeight: 1.5,
             }}>
               <span style={{ fontWeight: 700 }}>Realización: </span>
@@ -764,8 +749,8 @@ export function Component() {
           <img src={ASSETS.img4} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '30px', overflow: 'hidden' }}>
             <div className="marquee-track" style={{ animationDuration: '22s' }}>
-              <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
-              <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
+              <div className="marquee-set"><span className="marquee-item">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
+              <div className="marquee-set"><span className="marquee-item">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
             </div>
           </div>
         </div>
@@ -833,8 +818,8 @@ export function Component() {
         {/* Marquee */}
         <div style={{ marginTop: '60px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '24s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
+            <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
+            <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
           </div>
         </div>
 
@@ -864,8 +849,8 @@ export function Component() {
         {/* Marquee */}
         <div style={{ marginTop: '60px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '28s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
+            <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
+            <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
           </div>
         </div>
 
@@ -904,8 +889,8 @@ export function Component() {
         {/* Marquee */}
         <div style={{ marginTop: '60px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '26s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontSize: '22px', padding: '0 30px' }}>SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
+            <div className="marquee-set"><span className="marquee-item">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
+            <div className="marquee-set"><span className="marquee-item">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
           </div>
         </div>
 
@@ -968,7 +953,7 @@ export function Component() {
             color: '#fff',
             fontFamily: '"Space Grotesk", sans-serif',
             fontWeight: 300,
-            fontSize: '15px',
+            fontSize: 'var(--p-size)',
             lineHeight: 1.45,
           }}>
             Simon &amp; Garfunkel · 1964

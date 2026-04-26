@@ -70,6 +70,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         justifyContent: 'center',
         background: 'transparent',
         pointerEvents: 'none',
+        mixBlendMode: 'difference',
       }}
     >
       {/* Left — MENU / close toggle */}
@@ -92,7 +93,6 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           width: '48px',
           height: '24px',
           pointerEvents: 'auto',
-          mixBlendMode: 'difference',
         }}
       >
         <span
@@ -140,7 +140,6 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           alignItems: 'center',
           justifyContent: 'center',
           pointerEvents: 'auto',
-          mixBlendMode: 'difference',
         }}
       >
         <Image
@@ -148,7 +147,9 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           alt="Constanza Schwartz"
           width={13}
           height={28}
-          style={{ objectFit: 'contain' }}
+          style={{
+            objectFit: 'contain',
+          }}
           priority
         />
       </button>
@@ -172,7 +173,6 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           gap: '6px',
           color: '#fff',
           pointerEvents: 'auto',
-          mixBlendMode: 'difference',
         }}
       >
         <WaveformIcon width={18} color="#fff" />

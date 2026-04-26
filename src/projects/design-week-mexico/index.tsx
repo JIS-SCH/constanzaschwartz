@@ -24,18 +24,13 @@ export function Component() {
         .dw-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
         .dw-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
         .dw-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
-        .dw-h4 { font-size: var(--h4-size); line-height: 1.2; font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: 0.02; }
+        .dw-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--h4-ls); }
         .dw-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 300; letter-spacing: var(--p-ls); }
 
         .marquee-item {
           font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
           font-weight: 300 !important;
           text-transform: uppercase;
-        }
-
-        @media (min-width: 1024px) {
-          .dw-h3 { font-size: 56px; }
-          .dw-p { font-size: 16px; line-height: 1.5; }
         }
 
         /* ─── LAYOUT TOKENS ─── */

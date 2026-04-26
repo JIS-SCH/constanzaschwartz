@@ -131,17 +131,12 @@ export function Component() {
   return (
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0f0f0f', marginTop: '-80px' }} className="mal-container">
       <style dangerouslySetInnerHTML={{ __html: `
-        .mal-container {
-          --p-d: 16px; --p-m: 15px;
-        }
         .mal-p {
           font-family: "Space Grotesk", sans-serif;
           font-weight: 300;
-          font-size: var(--p-m);
-          line-height: 1.5;
-        }
-        @media (min-width: 1024px) {
-          .mal-p { font-size: var(--p-d); }
+          font-size: var(--p-size);
+          line-height: var(--p-lh);
+          letter-spacing: var(--p-ls);
         }
         .mal-container .marquee-item {
           font-family: ${HFONT} !important;
@@ -493,14 +488,9 @@ export function Component() {
             maxWidth: '1440px',
             margin: '0 auto',
           }}>
-            <p style={{
-              fontFamily: HFONT,
-              fontWeight: 100,
-              fontSize: 'clamp(28px, 3.89vw, 56px)',
-              lineHeight: 1,
+            <p className="h3" style={{
               color: '#fff',
               textTransform: 'uppercase',
-              letterSpacing: 0,
             }}>
               Si tienes apego a tu cordura, no entres.
             </p>

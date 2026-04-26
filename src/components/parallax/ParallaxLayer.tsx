@@ -63,17 +63,6 @@ interface ParallaxLayerProps {
   children?: React.ReactNode
 }
 
-const TEXT_STYLE: React.CSSProperties = {
-  fontFamily: "'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif",
-  fontWeight: 300,
-  letterSpacing: '0.02em',
-  textTransform: 'uppercase',
-  color: '#fff',
-  fontSize: 'var(--h4-size)',
-  whiteSpace: 'nowrap',
-  paddingRight: '5em',
-}
-
 // Number of text repetitions per set.
 // -50% moves exactly one set → seamless loop.
 // Each set must be wider than the viewport for the loop to be gap-free.
@@ -89,7 +78,7 @@ function MarqueeContent({ content, duration }: { content: string; duration: numb
         {[0, 1].map((setIdx) => (
           <div key={setIdx} className="marquee-set">
             {Array.from({ length: MARQUEE_SET_REPEAT }, (_, i) => (
-              <span key={i} className="marquee-item" style={TEXT_STYLE}>{content}</span>
+              <span key={i} className="marquee-item">{content}</span>
             ))}
           </div>
         ))}
@@ -137,6 +126,10 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       willChange: 'transform',
     }
 
+  if (layer.type === 'text' || layer.type === 'marquee' || layer.type === 'credits') {
+    baseStyle.mixBlendMode = 'difference'
+  }
+
   const renderedContent = useMemo(() => {
     switch (layer.type) {
       case 'image':
@@ -179,6 +172,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               fontSize: 'clamp(1rem, 2.5vw, 3rem)',
               display: 'flex',
               alignItems: 'center',
+              mixBlendMode: 'difference',
             }}
           >
             {layer.content}
@@ -196,6 +190,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               fontSize: 'clamp(14px, 1.4vw, 20px)',
               lineHeight: 1.8,
               boxSizing: 'border-box',
+              mixBlendMode: 'difference',
             }}
           >
             {layer.credits.map((entry, i) => (

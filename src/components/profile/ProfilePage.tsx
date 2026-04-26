@@ -388,10 +388,10 @@ const CSS = `
   font-weight: 100;
   text-transform: uppercase;
   color: #fff;
-  line-height: 1;
-  letter-spacing: 0;
+  line-height: var(--h2-lh);
+  letter-spacing: var(--h2-ls);
   margin: 0;
-  font-size: 57px;
+  font-size: var(--h2-size);
   overflow: visible;
 }
 .pr-h2--diff {
@@ -403,8 +403,9 @@ const CSS = `
   font-weight: 100;
   text-transform: uppercase;
   color: #fff;
-  line-height: 1;
-  font-size: 170px;
+  line-height: var(--h1-lh);
+  letter-spacing: var(--h1-ls);
+  font-size: var(--h1-size);
   display: block;
   white-space: nowrap;
 }
@@ -412,9 +413,9 @@ const CSS = `
 .pr-marquee-text {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
-  font-size: 28px;
+  font-size: var(--h4-size);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--h4-ls);
   color: #fff;
   display: inline-block;
 }
@@ -422,8 +423,9 @@ const CSS = `
 .pr-p {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 300;
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: var(--p-size);
+  line-height: var(--p-lh);
+  letter-spacing: var(--p-ls);
   color: #fff;
   margin: 0 0 1em;
 }
@@ -431,9 +433,10 @@ const CSS = `
 
 .pr-list {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 200;
-  font-size: 15px;
-  line-height: 1.21;
+  font-weight: 300;
+  font-size: var(--list-size);
+  line-height: var(--list-lh);
+  letter-spacing: var(--list-ls);
   color: #fff;
 }
 
@@ -517,13 +520,6 @@ const CSS = `
 
 /* ═══ DESKTOP ════════════════════════════════════════════════════════════ */
 @media (min-width: 1024px) {
-
-  /* ── Typography ── */
-  .pr-h2        { font-size: 128px; }
-  .pr-bio-word  { font-size: 280px; }
-  .pr-p         { font-size: 16px; line-height: 1.5; }
-  .pr-list      { font-size: 26px; line-height: 1.21; }
-  .pr-marquee-text { font-size: 36px; }
 
   /*
    * ── Intro area — absolute positioning matching Figma 1440px canvas ──
@@ -658,6 +654,4 @@ const CSS = `
   .pr-year-events {
     padding: 40px calc(8.33% + 2px) 120px;
   }
-
-  .pr-list { font-size: 26px; font-weight: 200; line-height: 1.21; }
 }`
