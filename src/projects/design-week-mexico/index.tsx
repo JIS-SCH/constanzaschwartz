@@ -3,21 +3,22 @@
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { ASSETS } from './assets'
-import { TW, TEXT_BLOCK_STYLE, CH, HERO_TOP } from '../shared'
+import { TW, TEXT_BLOCK_STYLE, CH } from '../shared'
 
 export { meta } from './meta'
 
 const TITLE_STYLE: React.CSSProperties = {
   fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontWeight: 100, // 35 Thin
+  fontWeight: 100,
   color: '#fff',
   textTransform: 'uppercase',
   lineHeight: 1,
 }
 
+
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="dw-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="dw-container">
       <style dangerouslySetInnerHTML={{
         __html: `
         /* DESIGN WEEK MEXICO - use global tokens from globals.css */
@@ -46,32 +47,34 @@ export function Component() {
         }
 
         /* ─── LAYOUT TOKENS — edit these, not the JSX ─── */
-        /* section heights */
-        --h-hero: 110vh; --h-intro: 60vh; --h-c1: 100vh;
-        --h-stmt: 100vh; --h-c2: 140vh;
-        /* intro — left text */
-        --it-l-t: 15vh;  --it-l-x: 12.71%; --it-l-w: 32.4305%;
-        /* intro — right text (ficha: 345px) */
-        --it-r-t: 15vh;  --it-r-x: 63.33%; --it-r-w: 23.96%;
-        /* collage-1 img2 (behind, left): left=425px, w=467px, h=451px */
-        --c1-a-t: 25vh;  --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 50vh;
-        /* collage-1 img1 (front, right): left=791px, w=588px — arranca en el top */
-        --c1-b-t: 0vh;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 48vh;
-        /* statement */
-        --stmt-x: 12.71%; --stmt-w: 76%;
-        /* collage-2 img3 */
-        --c2-a-t: 5vh;   --c2-a-x: 63.33%; --c2-a-w: 32.4305%;
-        /* collage-2 img4 */
-        --c2-b-t: 40vh;  --c2-b-x: 33.33%; --c2-b-w: 32.4305%;
-        /* finish staircase */
-        --f-img-w: 23.96%;
-        --f-img-h: auto; /* Pendiente: alto exacto de Figma */
-        --f-img1-x: 4.24%;
-        --f-img1-t: 65vh;
-        --f-img2-x: 38.12%;
-        --f-img2-t: calc(var(--f-img1-t) + 130px);
-        --f-img3-x: 71.81%;
-        --f-img3-t: calc(var(--f-img2-t) + 130px);
+        .dw-container {
+          /* section heights */
+          --h-hero: 110vh; --h-intro: 60vh; --h-c1: 100vh;
+          --h-stmt: 100vh; --h-c2: 140vh;
+          /* intro — left text */
+          --it-l-t: 15vh;  --it-l-x: 12.71%; --it-l-w: 32.4305%;
+          /* intro — right text (ficha: 345px) */
+          --it-r-t: 15vh;  --it-r-x: 63.33%; --it-r-w: 23.96%;
+          /* collage-1 img2 (behind, left): left=425px, w=467px, h=451px */
+          --c1-a-t: 25vh;  --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 50vh;
+          /* collage-1 img1 (front, right): left=791px, w=588px */
+          --c1-b-t: 0vh;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 48vh;
+          /* statement */
+          --stmt-x: 12.71%; --stmt-w: 76%;
+          /* collage-2 img3 */
+          --c2-a-t: 5vh;   --c2-a-x: 63.33%; --c2-a-w: 32.4305%;
+          /* collage-2 img4 */
+          --c2-b-t: 40vh;  --c2-b-x: 33.33%; --c2-b-w: 32.4305%;
+          /* finish staircase */
+          --f-img-w: 23.96%;
+          --f-img-h: auto;
+          --f-img1-x: 4.24%;
+          --f-img1-t: 65vh;
+          --f-img2-x: 38.12%;
+          --f-img2-t: calc(var(--f-img1-t) + 130px);
+          --f-img3-x: 71.81%;
+          --f-img3-t: calc(var(--f-img2-t) + 130px);
+        }
 
         /* ─── MOBILE (≤ 768px) — edit numbers here to iterate fast ─── */
         @media (max-width: 768px) {
@@ -113,17 +116,41 @@ export function Component() {
           sectionId="hero"
           layerIndex={0}
           layer={{ type: 'text', content: '', speed: 0.4 }}
-          position={{ top: HERO_TOP, left: '0', width: '100%', height: '80vh', zIndex: 0 }}
+          position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
         >
-          <div style={{ width: '100%', height: '100%', backgroundColor: '#000' }} />
+          <div style={{ width: '100%', height: '100%', backgroundColor: '#0f0f0f' }} />
         </ParallaxLayer>
 
-        <ParallaxLayer
-          sectionId="hero"
-          layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'cover' }}
-          position={{ top: HERO_TOP, left: '0', width: '100%', height: '80vh', zIndex: 1 }}
-        />
+        {/* Desktop Hero Image */}
+        <div className="dw-desktop" style={{ display: 'block' }}>
+          <ParallaxLayer
+            sectionId="hero"
+            layerIndex={1}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'contain' }}
+            position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 1 }}
+          />
+        </div>
+
+        {/* Mobile Hero Image */}
+        <div className="dw-mobile" style={{ display: 'none' }}>
+          <ParallaxLayer
+            sectionId="hero"
+            layerIndex={2}
+            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.8, isHero: true, objectFit: 'contain' }}
+            position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 1 }}
+          />
+        </div>
+
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          @media (max-width: 768px) {
+            .dw-desktop { display: none !important; }
+            .dw-mobile { display: block !important; }
+          }
+          `
+        }} />
+
+
       </ParallaxSection>
 
       {/* 2. INTRO — Two columns of text */}
@@ -137,7 +164,7 @@ export function Component() {
           layer={{ type: 'text', content: '', speed: 0 }}
           position={{ top: 'var(--it-l-t)', left: 'var(--it-l-x)', width: 'var(--it-l-w)', height: 'auto', zIndex: 1 }}
         >
-          <div style={TEXT_BLOCK_STYLE} className="dw-list">
+          <div style={TEXT_BLOCK_STYLE} className="dw-p">
             En el marco de Design Week Mexico 2025, Argentina fue el país invitado.
             Constanza Schwartz bajo la representación de Comité357, fue una de las artistas
             seleccionadas para representar al país con Ensayo de Espejismo, híbrido entre
@@ -151,11 +178,11 @@ export function Component() {
           layer={{ type: 'text', content: '', speed: 0 }}
           position={{ top: 'var(--it-r-t)', left: 'var(--it-r-x)', width: 'var(--it-r-w)', height: 'auto', zIndex: 1 }}
         >
-          <div style={TEXT_BLOCK_STYLE} className="dw-list">
-            <p><strong>Título:</strong> Ensayo de Espejismo</p>
-            <p><strong>Año:</strong> 2025</p>
-            <p><strong>Materiales:</strong> Acero Pulido y Cromado, Madera.</p>
-            <p><strong>Medidas:</strong> 2.10 x 0.72 x 0.30 x 0.16 mts.</p>
+          <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <p>Título: Ensayo de Espejismo</p>
+            <p>Año: 2025</p>
+            <p>Materiales: Acero Pulido y Cromado, Madera.</p>
+            <p>Medidas: 2.10 x 0.72 x 0.30 x 0.16 mts.</p>
           </div>
         </ParallaxLayer>
       </ParallaxSection>
@@ -189,7 +216,7 @@ export function Component() {
           layer={{ type: 'text', content: '', speed: 0 }}
           position={{ top: '10vh', left: 'var(--stmt-x)', width: 'var(--stmt-w)', height: 'auto', zIndex: 1 }}
         >
-          <h2 style={TITLE_STYLE} className="dw-h2">STATEMENT</h2>
+          <h3 style={TITLE_STYLE} className="dw-h3">STATEMENT</h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '800px', marginTop: '40px' }}>
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
@@ -262,7 +289,12 @@ export function Component() {
         >
           <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
             <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'dwm-carousel-scroll 10s linear infinite' }}>
-              {[ASSETS.img5, ASSETS.img6, ASSETS.img7, ASSETS.img5, ASSETS.img6, ASSETS.img7].map((src, i) => (
+              {[
+                ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3,
+                ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6,
+                ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3,
+                ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6,
+              ].map((src, i) => (
                 <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
               ))}
             </div>
@@ -286,9 +318,9 @@ export function Component() {
           sectionId="final-paragraph"
           layerIndex={0}
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '15vh', left: '12.71%', width: '70%', height: 'auto', zIndex: 1 }}
+          position={{ top: '15vh', left: 'calc(54.17% + 11px)', width: TW, height: 'auto', zIndex: 1 }}
         >
-          <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '800px' }} className="dw-p">
+          <div style={TEXT_BLOCK_STYLE} className="dw-p">
             El espejo nos permite a veces intuir que el cuerpo está presente. En este caso, la
             conformación de la estructura permite fragmentar las imágenes que se presentan ante él,
             imágenes que suelen estar unidas pero que en este juego de repetición, de llenos y

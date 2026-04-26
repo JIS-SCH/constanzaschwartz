@@ -55,15 +55,15 @@ function VideoSection({ id, src }: { id: string; src: string }) {
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative' }}>
+    <div style={{ width: '100%', position: 'relative', marginTop: '-80px' }}>
 
       {/* 1. HERO — portada + marquee */}
       <ParallaxSection id="hero" overflowHidden={false} style={{ minHeight: '115vh' }}>
         <ParallaxLayer
           sectionId="hero"
           layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: 0.8, isHero: true }}
-          position={{ top: HERO_TOP, left: '4.25%', width: '91.5%', height: '490px', zIndex: 1 }}
+          layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: 0.8, isHero: true, objectFit: 'contain' }}
+          position={{ top: '80px', left: '4.17%', width: '91.66%', height: '80vh', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="hero"

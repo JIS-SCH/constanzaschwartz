@@ -129,7 +129,7 @@ export { meta } from './meta'
 // ---------------------------------------------------------------------------
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0f0f0f' }} className="mal-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0f0f0f', marginTop: '-80px' }} className="mal-container">
       <style dangerouslySetInnerHTML={{ __html: `
         .mal-container {
           --p-d: 16px; --p-m: 15px;
@@ -151,10 +151,10 @@ export function Component() {
       `}} />
 
       {/* 1. HERO ─────────────────────────────────────────────────────── */}
-      <ParallaxSection id="mal-hero" style={{ minHeight: '90vh' }}>
+      <ParallaxSection id="mal-hero" style={{ minHeight: '115vh' }}>
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_HERO, speed: 0.3, isHero: true }}
-          position={{ top: HERO_TOP, left: '0', width: '100%', height: '90vh', zIndex: 1 }}
+          layer={{ type: 'image', src: IMG_HERO, speed: 0.8, isHero: true, objectFit: 'cover' }}
+          position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
         />
       </ParallaxSection>
 
