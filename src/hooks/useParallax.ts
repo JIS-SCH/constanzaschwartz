@@ -17,7 +17,7 @@ export function useParallax(
   options: UseParallaxOptions = {}
 ) {
   const {
-    speed = 1,
+    speed = 0,
     direction = 'y',
     multiplier = 300,
   } = options

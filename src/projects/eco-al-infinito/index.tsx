@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { ASSETS } from './assets'
 import { TW, CH, HERO_TOP, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE } from '../shared'
 
@@ -27,6 +28,7 @@ export function Component() {
         .eco-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
         .eco-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
         .eco-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--h4-ls); }
+        .eco-marquee { font-size: var(--h4-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0.1em; text-transform: uppercase; }
         .eco-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
         .eco-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 300; letter-spacing: var(--p-ls); color: #fff; }
         .eco-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: var(--h5-ls); text-transform: uppercase; }
@@ -250,37 +252,34 @@ export function Component() {
         </ParallaxSection>
 
         {/* 6. COLLAGE 4 — The 4 Images Strip (10, 11, 12, 13) */}
-        <ParallaxSection id="collage-4" style={{ minHeight: '2200px', position: 'relative' }}>
-          {/* BIG Top Right Image (Img 10) - 710px width */}
+        <ParallaxSection id="collage-4" style={{ minHeight: '1800px', position: 'relative' }}>
+          {/* BIG Top Right Image (Img 10) - 710px width x 473px height */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img10, speed: 0.1 }}
-            position={{ top: '220px', left: '46.46%', width: '49.31%', height: '550px', zIndex: 1 }}
+            layer={{ type: 'image', src: ASSETS.img10, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '220px', left: '46.46%', width: '49.31%', height: '473px', zIndex: 1 }}
           />
-
-          {/* BIG Bottom Left Image (Img 11) - 710px width */}
+          {/* BIG Bottom Left Image (Img 11) - 710px width x 473px height */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img11, speed: 0.2 }}
-            position={{ top: '550px', left: '4.24%', width: '49.31%', height: '550px', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img11, speed: 0.2, objectFit: 'cover' }}
+            position={{ top: '473px', left: '4.24%', width: '49.31%', height: '473px', zIndex: 2 }}
           />
-
-          {/* SMALL Top Right Image (Img 12) - 467px width. Starts 220px after Img 11 */}
+          {/* SMALL Top Right Image (Img 12) - 467px width x 312px height */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img12, speed: 0.1 }}
-            position={{ top: '1320px', left: '59.10%', width: '32.43%', height: '450px', zIndex: 3 }}
+            layer={{ type: 'image', src: ASSETS.img12, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '1166px', left: '59.10%', width: '32.43%', height: '312px', zIndex: 3 }}
           />
-
-          {/* SMALL Bottom Left Image (Img 13) - 467px width */}
+          {/* SMALL Bottom Left Image (Img 13) - 467px width x 312px height */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={3}
-            layer={{ type: 'image', src: ASSETS.img13, speed: 0.2 }}
-            position={{ top: '1550px', left: '33.82%', width: '32.43%', height: '450px', zIndex: 4 }}
+            layer={{ type: 'image', src: ASSETS.img13, speed: 0.2, objectFit: 'cover' }}
+            position={{ top: '1358px', left: '33.82%', width: '32.43%', height: '312px', zIndex: 4 }}
           />
         </ParallaxSection>
 
@@ -292,39 +291,37 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: '5vh', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
           >
-            <div className="vimeo-container">
-              <iframe
-                src={ASSETS.videoMakingOff}
-                frameBorder="0"
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                title="ECO AL INFINITO . Making Off"
-              ></iframe>
+            <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
+              <CustomVimeoPlayer 
+                videoUrl={ASSETS.videoMakingOff} 
+                title="ECO AL INFINITO . Making Off" 
+              />
             </div>
           </ParallaxLayer>
         </ParallaxSection>
 
         {/* 8. COLLAGE STAIRCASE + PARAGRAPH + IMG 17 & 18 */}
         <ParallaxSection id="collage-14-15-16" style={{ minHeight: '2900px', position: 'relative' }}>
-          {/* Staircase Image 14 */}
+          {/* Staircase Image 14 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img14, speed: 0.1 }}
-            position={{ top: '220px', left: '4.24%', width: '23.96%', height: 'auto', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img14, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '220px', left: '4.24%', width: '32.43%', height: '312px', zIndex: 2 }}
           />
-          {/* Staircase Image 15 */}
+          {/* Staircase Image 15 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img15, speed: 0.1 }}
-            position={{ top: '440px', left: '38.02%', width: '23.96%', height: 'auto', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img15, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '440px', left: '38.02%', width: '32.43%', height: '312px', zIndex: 2 }}
           />
-          {/* Staircase Image 16 */}
+          {/* Staircase Image 16 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img16, speed: 0.1 }}
-            position={{ top: '660px', left: '71.74%', width: '23.96%', height: 'auto', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img16, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '660px', left: '67.57%', width: '32.43%', height: '312px', zIndex: 2 }}
           />
 
           {/* Paragraph below staircase */}
@@ -339,20 +336,20 @@ export function Component() {
             </div>
           </ParallaxLayer>
 
-          {/* Img 17 (Shadows) */}
+          {/* Img 17 (Shadows) - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={4}
-            layer={{ type: 'image', src: ASSETS.img17, speed: 0.1 }}
-            position={{ top: '1770px', left: '21.11%', width: '32.43%', height: 'auto', zIndex: 3 }}
+            layer={{ type: 'image', src: ASSETS.img17, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '1770px', left: '21.11%', width: '32.43%', height: '312px', zIndex: 3 }}
           />
 
-          {/* Img 18 (Red Triangles) */}
+          {/* Img 18 (Red Triangles) - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={5}
-            layer={{ type: 'image', src: ASSETS.img18, speed: 0.1 }}
-            position={{ top: '2070px', left: '46.46%', width: '32.43%', height: 'auto', zIndex: 4 }}
+            layer={{ type: 'image', src: ASSETS.img18, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '1970px', left: '46.46%', width: '32.43%', height: '312px', zIndex: 4 }}
           />
 
           {/* Marquee Text ON TOP of Img 17 and 18 */}
@@ -360,15 +357,15 @@ export function Component() {
             sectionId="collage-14-15-16"
             layerIndex={6}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '2650px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
+            position={{ top: '2500px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
           >
             <div style={{ padding: '0', overflow: 'hidden' }}>
               <div className="marquee-track" style={{ animationDuration: '32s' }}>
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
                     {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} className="marquee-item">
-                        SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS
+                      <span key={i} className="marquee-item eco-marquee">
+                        SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·
                       </span>
                     ))}
                   </div>
@@ -393,20 +390,20 @@ export function Component() {
         {/* 11. FINAL SEQUENCE: COLLAGE 20-21-22 + TEXT + COLLAGE 23-24 */}
         <ParallaxSection id="final-sequence" style={{ minHeight: '3400px', position: 'relative' }}>
 
-          {/* Img 21 (Tall one, back) */}
+          {/* Img 21 (467x312) */}
           <ParallaxLayer
             sectionId="final-sequence"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img21, speed: 0.1 }}
-            position={{ top: '220px', left: '42.22%', width: '32.43%', height: 'auto', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img21, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '220px', left: '42.22%', width: '32.43%', height: '312px', zIndex: 2 }}
           />
 
-          {/* Img 20 (Short one, front) */}
+          {/* Img 20 (467x312) */}
           <ParallaxLayer
             sectionId="final-sequence"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img20, speed: 0.2 }}
-            position={{ top: '400px', left: '63.33%', width: '32.43%', height: 'auto', zIndex: 3 }}
+            layer={{ type: 'image', src: ASSETS.img20, speed: 0.2, objectFit: 'cover' }}
+            position={{ top: '400px', left: '63.33%', width: '32.43%', height: '312px', zIndex: 3 }}
           />
 
           {/* Img 22 (Wide one below 20-21) - 608px width */}
@@ -458,15 +455,15 @@ export function Component() {
             sectionId="final-sequence"
             layerIndex={6}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '2400px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
+            position={{ top: '2800px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
           >
             <div style={{ padding: '0', overflow: 'hidden' }}>
               <div className="marquee-track" style={{ animationDuration: '32s' }}>
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
                     {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} className="marquee-item">
-                        SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ.
+                      <span key={i} className="marquee-item eco-marquee">
+                        SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ ·
                       </span>
                     ))}
                   </div>
@@ -474,6 +471,20 @@ export function Component() {
               </div>
             </div>
           </ParallaxLayer>
+
+          {/* Missing Photos after Marquee (img28 & img29) */}
+          <ParallaxLayer
+            sectionId="final-sequence"
+            layerIndex={7}
+            layer={{ type: 'image', src: ASSETS.img28, speed: 0.1, objectFit: 'cover' }}
+            position={{ top: '3100px', left: '8.47%', width: '32.43%', height: '312px', zIndex: 2 }}
+          />
+          <ParallaxLayer
+            sectionId="final-sequence"
+            layerIndex={8}
+            layer={{ type: 'image', src: ASSETS.img29, speed: 0.2, objectFit: 'cover' }}
+            position={{ top: '3300px', left: '33.82%', width: '32.43%', height: '312px', zIndex: 3 }}
+          />
         </ParallaxSection>
         {/* 13. IMAGE 25 (Full Width) + COLLAGE 26-27 */}
         <ParallaxSection id="final-sequence-25-27" style={{ minHeight: '230vh' }}>
@@ -484,18 +495,18 @@ export function Component() {
             position={{ top: '10vh', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
           />
 
-          {/* Staggered Duo 26-27 below 25 */}
+          {/* Staggered Duo 26-27 below 25 - Horizontal Proportions */}
           <ParallaxLayer
             sectionId="final-sequence-25-27"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img26, speed: 0.3 }}
-            position={{ top: '125vh', left: '34.0277%', width: TW, height: '50vh', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img26, speed: 0.3, objectFit: 'cover' }}
+            position={{ top: '125vh', left: '34.0277%', width: '32.43%', height: '312px', zIndex: 2 }}
           />
           <ParallaxLayer
             sectionId="final-sequence-25-27"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img27, speed: 0.3 }}
-            position={{ top: '150vh', left: '60%', width: '30%', height: '70vh', zIndex: 3 }}
+            layer={{ type: 'image', src: ASSETS.img27, speed: 0.3, objectFit: 'cover' }}
+            position={{ top: '150vh', left: '60%', width: '32.43%', height: '312px', zIndex: 3 }}
           />
         </ParallaxSection>
 
@@ -545,28 +556,28 @@ export function Component() {
             </div>
           </ParallaxLayer>
 
-          {/* Image 30 (Far Right - Aligned with text) */}
+          {/* Image 30 (Horizontal) */}
           <ParallaxLayer
             sectionId="final-sequence-30-33"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img30, speed: 0.3 }}
-            position={{ top: '60vh', left: '59.0972%', width: TW, height: '70vh', zIndex: 1 }}
+            layer={{ type: 'image', src: ASSETS.img30, speed: 0.3, objectFit: 'cover' }}
+            position={{ top: '60vh', left: '59.0972%', width: '32.43%', height: '312px', zIndex: 1 }}
           />
 
-          {/* Image 31 (Center) */}
+          {/* Image 31 (Horizontal) */}
           <ParallaxLayer
             sectionId="final-sequence-30-33"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img31, speed: 0.3 }}
-            position={{ top: '110vh', left: '33.75%', width: TW, height: '65vh', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img31, speed: 0.3, objectFit: 'cover' }}
+            position={{ top: '110vh', left: '33.75%', width: '32.43%', height: '312px', zIndex: 2 }}
           />
 
-          {/* Image 32 (Left, custom width 345px) - Above 33 */}
+          {/* Image 32 (Horizontal - 345x230) */}
           <ParallaxLayer
             sectionId="final-sequence-30-33"
             layerIndex={3}
-            layer={{ type: 'image', src: ASSETS.img32, speed: 0.3 }}
-            position={{ top: '185vh', left: '8.5416%', width: '23.9583%', height: '90vh', zIndex: 3 }}
+            layer={{ type: 'image', src: ASSETS.img32, speed: 0.3, objectFit: 'cover' }}
+            position={{ top: '185vh', left: '8.5416%', width: '23.9583%', height: '230px', zIndex: 3 }}
           />
 
           {/* Marquee crossing the TOP part of 32 */}
@@ -575,14 +586,28 @@ export function Component() {
             layerIndex={4}
             layer={{ type: 'marquee', content: 'SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER', speed: 0 }}
             position={{ top: '190vh', left: '0', width: '100%', height: '8vh', zIndex: 4 }}
-          />
+          >
+             <div style={{ padding: '0', overflow: 'hidden' }}>
+              <div className="marquee-track" style={{ animationDuration: '32s' }}>
+                {[0, 1].map((setIdx) => (
+                  <div key={setIdx} className="marquee-set">
+                    {Array.from({ length: 4 }, (_, i) => (
+                      <span key={i} className="marquee-item eco-marquee">
+                        SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ParallaxLayer>
 
-          {/* Image 33 (Bottom Center) - Square format, below 32 */}
+          {/* Image 33 (Horizontal) */}
           <ParallaxLayer
             sectionId="final-sequence-30-33"
             layerIndex={5}
-            layer={{ type: 'image', src: ASSETS.img33, speed: 0.3 }}
-            position={{ top: '235vh', left: '29.6527%', width: TW, height: '40vh', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img33, speed: 0.3, objectFit: 'cover' }}
+            position={{ top: '235vh', left: '29.6527%', width: '32.43%', height: '312px', zIndex: 2 }}
           />
         </ParallaxSection>
 

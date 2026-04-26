@@ -215,10 +215,16 @@ canvas {
   mix-blend-mode: difference;
   -webkit-mix-blend-mode: difference;
   
-  /* Mobile (H5) */
   font-size: var(--h5-size);
   line-height: var(--h5-lh);
   letter-spacing: var(--h5-ls);
+  padding-right: 40px;
+}
+
+.marquee-thin .marquee-item {
+  font-size: 12px;
+  font-weight: 100;
+  letter-spacing: 0.1em;
   padding-right: 40px;
 }
 

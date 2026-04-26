@@ -29,27 +29,28 @@ export function Component() {
 
         .marquee-item {
           font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-          font-weight: 300 !important;
+          font-weight: 100 !important;
           text-transform: uppercase;
         }
 
         /* ─── LAYOUT TOKENS ─── */
         .dw-container {
-          /* section heights */
-          --h-hero: 110vh; --h-intro: 60vh; --h-c1: 100vh;
-          --h-stmt: 100vh; --h-c2: 140vh;
-          --h-pc: 100vh; --h-fp: 60vh; --h-c3: 160vh; --h-finish: 230vh;
+          /* section heights — fixed-px approach ensures exact 220px gaps */
+          /* h-hero = 80vh (image) + 300px (220px gap + 80px for neg-margin) */
+          --h-hero: calc(80vh + 300px); --h-intro: 340px; --h-c1: 1063px;
+          --h-stmt: 480px; --h-c2: 140vh;
+          --h-pc: 100vh; --h-fp: 40vh; --h-c3: 185vh; --h-finish: 215vh;
 
-          /* intro */
-          --it-l-t: 15vh; --it-l-x: 12.71%; --it-l-w: 32.4305%;
-          --it-r-t: 15vh; --it-r-x: 63.33%; --it-r-w: 23.96%;
+          /* intro — starts at section top which is exactly 220px after hero */
+          --it-l-t: 0px; --it-l-x: 12.71%; --it-l-w: 32.4305%;
+          --it-r-t: 0px; --it-r-x: 63.33%; --it-r-w: 23.96%;
 
-          /* collage-1 */
-          --c1-a-t: 25vh; --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 50vh;
-          --c1-b-t: 0vh;  --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 48vh;
+          /* collage-1 — c1-a offset matches Figma (143px below c1-b) */
+          --c1-a-t: 143px; --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 700px;
+          --c1-b-t: 0px;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 392px;
 
-          /* statement */
-          --stmt-x: 12.71%; --stmt-w: 76%; --stmt-t: 10vh;
+          /* statement — fixed px: 20px top + ~240px content + 220px gap = 480px */
+          --stmt-x: 12.71%; --stmt-w: 76%; --stmt-t: 20px;
 
           /* collage-2 */
           --c2-a-t: 5vh;  --c2-a-x: 63.33%; --c2-a-w: 32.4305%; --c2-a-h: 80vh;
@@ -58,24 +59,25 @@ export function Component() {
 
           /* paragraphs-carousel */
           --pc-text-t: 10vh; --pc-text-l: 55%; --pc-text-w: 32.4305%;
-          --pc-carousel-t: 65vh;
+          --pc-carousel-t: 45vh;
 
           /* final-paragraph */
           --fp-text-t: 15vh; --fp-text-l: calc(54.17% + 11px); --fp-text-w: 32.4305%;
 
           /* collage-3 */
-          --c3-a-t: 5vh;  --c3-a-x: 8%;  --c3-a-w: 30%; --c3-a-h: 35vh;
-          --c3-b-t: 10vh; --c3-b-x: 10%; --c3-b-w: 80%; --c3-b-h: 110vh;
-          --c3-c-t: 80vh; --c3-c-x: 55%; --c3-c-w: 35%; --c3-c-h: 40vh;
+          --c3-a-t: 0vh;   --c3-a-x: 24.69%; --c3-a-w: 32.4305%; --c3-a-h: 312px;
+          --c3-b-t: 26vh;  --c3-b-x: 0%;     --c3-b-w: 100%;     --c3-b-h: 960px;
+          --c3-c-t: 123vh; --c3-c-x: 75.38%; --c3-c-w: 32.4305%; --c3-c-h: 311px;
+          --c3-marquee-t: 6vh;
 
           /* finish */
           --finish-text-t: 10vh; --finish-text-l: 12.71%; --finish-text-w: 32.4305%;
-          --finish-marquee-t: 140vh;
-          --finish-close-t: 190vh; --finish-close-l: 12.71%; --finish-close-w: 32.4305%;
+          --finish-marquee-t: 130vh;
+          --finish-close-t: 155vh; --finish-close-l: 12.71%; --finish-close-w: 32.4305%;
 
           /* finish staircase */
           --f-img-w: 23.96%; --f-img-h: auto;
-          --f-img1-x: 4.24%;  --f-img1-t: 65vh;
+          --f-img1-x: 4.24%;  --f-img1-t: 56vh;
           --f-img2-x: 38.12%; --f-img2-t: calc(var(--f-img1-t) + 130px);
           --f-img3-x: 71.81%; --f-img3-t: calc(var(--f-img2-t) + 130px);
         }
@@ -216,7 +218,7 @@ export function Component() {
           position={{ top: 'var(--stmt-t)', left: 'var(--stmt-x)', width: 'var(--stmt-w)', height: 'auto', zIndex: 1 }}
         >
           <h3 style={TITLE_STYLE} className="dw-h3">STATEMENT</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '800px', marginTop: '40px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '466px', marginTop: '40px' }}>
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
               Pocas personas desconocen totalmente los órganos de los sentidos, pero no todas
               comprenden la magnitud que tienen en nuestra conexión con el mundo/ la realidad.
