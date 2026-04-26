@@ -1,7 +1,8 @@
 import { cldImg } from '@/src/utils/cloudinary'
 
 export const ASSETS = {
-  hero: cldImg('CONSTANZASCHWARTZ-projects-designweekmexico-portada_DRAFT_fyu9tg'),
+  hero: cldImg('CONSTANZASCHWARTZ-projects-designweekmexico-portada-desktop_qknikc'),
+  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-designweekmexico-portada-mobile_nihlin'),
   img1:  cldImg('CONSTANZASCHWARTZ-projects-designweekmexico-1_oz4q7c'),
   img2:  cldImg('CONSTANZASCHWARTZ-projects-designweekmexico-2_hz1uqh'),
   img3:  cldImg('CONSTANZASCHWARTZ-projects-designweekmexico-3_ibejr9'),
