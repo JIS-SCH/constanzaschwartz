@@ -73,7 +73,6 @@ export function Component() {
         {/* 1. HERO — Full width sculpture */}
         <ParallaxSection id="hero" style={{ minHeight: '115vh' }}>
           <ParallaxLayer
-            className="eco-hero-layer"
             sectionId="hero"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'contain' }}
