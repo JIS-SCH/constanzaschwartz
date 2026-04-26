@@ -13,12 +13,13 @@ interface HomeGridProps {
   onProjectClick: (index: number, rect: OriginRect) => void
 }
 
-// ─── Layout constants ────────────────────────────────────────────────────────
-const BASE_Z = -20                    // Pushed back for flatter perspective
+const BASE_Z = -20
 const GROUP_ROTATION = 0              // arc is symmetric in front of camera
 const MOUSE_ROTATION_RANGE = Math.PI / 10    // ±18° max camera yaw on desktop hover
 const DRAG_ROTATION_RANGE = Math.PI / 3      // full-window drag = ±60° on mobile
 const DRAG_TAP_THRESHOLD = 10                // px movement to count as drag (not tap)
+const CAMERA_Y = 1.5    // Height of the camera (higher = more floor visible)
+const CAMERA_TILT = -0.08             // Tilt camera down (-) to move the grid UP on screen
 
 
 const CARD_W = 12
@@ -157,10 +158,10 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       100
     )
     // Elevate camera Y to look from slightly above, establishing a "floor"
-    const camY = mobile ? 1.0 : 2.5
+    const camY = mobile ? 1.0 : CAMERA_Y
     camera.position.set(0, camY, -50) // Initial far position
-    // Tilt slightly down to frame the cards
-    camera.rotation.x = mobile ? -0.02 : -0.04
+    // Tilt slightly down to frame the cards (more negative = shifts the cards UP on screen)
+    camera.rotation.x = mobile ? -0.02 : CAMERA_TILT
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false })
     renderer.setSize(window.innerWidth, window.innerHeight)
