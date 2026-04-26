@@ -18,6 +18,7 @@ export const ALT = {
   14: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_14_tewhqd',  // 4096x2160 — blue purple neon
   15: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_15_fpuxzt',  // 1080x1920 — B&W film strip (portrait)
   16: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_16_nv8ht4',  // 1080x1920 — dark shadow shots (portrait)
+  17: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_17_w7aspo',
   // videos
   v1: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_1_nksue5',
   v2: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_2_xn8am8',

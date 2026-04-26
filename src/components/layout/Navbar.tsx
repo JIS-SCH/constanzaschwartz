@@ -57,7 +57,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
   return (
     <nav
       ref={navRef}
-      className="h-[40px] md:h-[52px]"
+      className="h-[60px] md:h-[80px]"
       style={{
         position: 'fixed',
         top: 0,
@@ -101,9 +101,10 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           style={{
             position: 'absolute',
             color: '#fff',
-            fontSize: '10px',
-            fontWeight: 200,
-            letterSpacing: '0.2em',
+            fontSize: '12px',
+            fontWeight: 400,
+            lineHeight: '24px',
+            letterSpacing: '0',
             fontFamily: 'HelveticaLTStd, Helvetica Neue, sans-serif',
             transition: 'opacity 0.25s ease, transform 0.25s ease',
             opacity: menuOpen ? 0 : 1,
@@ -147,8 +148,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         <Image
           src="/CONSTANZA SCHWARTZ_ISOTIPO_white.svg"
           alt="Constanza Schwartz"
-          width={13}
-          height={28}
+          width={26}
+          height={56}
           style={{
             objectFit: 'contain',
           }}
@@ -180,9 +181,10 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         <WaveformIcon width={18} color="#fff" />
         <span
           style={{
-            fontSize: '10px',
-            fontWeight: 200,
-            letterSpacing: '0.2em',
+            fontSize: '12px',
+            fontWeight: 400,
+            lineHeight: '24px',
+            letterSpacing: '0',
             fontFamily: 'HelveticaLTStd, Helvetica Neue, sans-serif',
           }}
         >

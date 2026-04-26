@@ -57,5 +57,5 @@ export const ASSETS = {
   carousel10: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-5_dwfrrc'),
   carousel11: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel2-6_vapr03'),
   // mobile
-  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-portada-mobile_a0mier'),
+  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-portada-mobile_hlm0yq'),
 } as const
