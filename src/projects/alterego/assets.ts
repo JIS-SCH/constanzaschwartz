@@ -26,4 +26,6 @@ export const ALT = {
   v5: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_5_rhs2kx',
   v6: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_6_uqdkef',
   v7: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_7_rdclow',
+  // portada mobile
+  portadaMobile: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_portada_mobile_g3vg3j',
 } as const

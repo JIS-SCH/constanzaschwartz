@@ -8,7 +8,6 @@ import { ALT } from './assets'
 import { HERO_TOP } from '../shared'
 
 export { meta } from './meta'
-export { gallery } from './gallery'
 
 const CREDITS = [
   { role: 'Dirección', name: 'Jero Pokle @jeropokle' },
@@ -139,7 +138,23 @@ export function Component() {
         <VideoSection id="fw-video-2" src={cldVideo(ALT.v2)} />
       </ParallaxSection>
 
-      {/* 8. FULL-WIDTH VIDEO 3 — pdsclip1 (St1-06 pair skipped: no Cloudinary assets) */}
+      {/* 8. PHOTO PAIR 2 — St1-06 2 and St1-06 1 */}
+      <ParallaxSection id="photo-pair-2" style={{ minHeight: '80vh' }}>
+        <ParallaxLayer
+          sectionId="photo-pair-2"
+          layerIndex={0}
+          layer={{ type: 'image', src: cldImg(ALT[8], 'w_1200'), speed: 0.3 }}
+          position={{ top: '5vh', left: '16.67%', width: '32.3%', height: '291px', zIndex: 1 }}
+        />
+        <ParallaxLayer
+          sectionId="photo-pair-2"
+          layerIndex={1}
+          layer={{ type: 'image', src: cldImg(ALT[9], 'w_1200'), speed: 0.45 }}
+          position={{ top: '25vh', left: '45.83%', width: '32.3%', height: '291px', zIndex: 2 }}
+        />
+      </ParallaxSection>
+
+      {/* 9. FULL-WIDTH VIDEO 3 — pdsclip1 */}
       <ParallaxSection id="fw-video-3" style={{ minHeight: '80vh', background: '#000' }}>
         <VideoSection id="fw-video-3" src={cldVideo(ALT.v3)} />
       </ParallaxSection>
@@ -168,7 +183,7 @@ export function Component() {
       <ParallaxSection id="pre-inv" style={{ minHeight: '50vh' }}>
         <ParallaxLayer
           sectionId="pre-inv"
-          layer={{ type: 'image', src: cldImg(ALT[11], 'w_1200'), speed: 0.3 }}
+          layer={{ type: 'image', src: cldImg(ALT[10], 'w_1200'), speed: 0.3 }}
           position={{ top: '5vh', left: '8.33%', width: '32.3%', height: '246px', zIndex: 1 }}
         />
       </ParallaxSection>
@@ -184,64 +199,70 @@ export function Component() {
         <ParallaxLayer
           sectionId="inv-scatter"
           layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT[13], 'w_1200'), speed: 0.4 }}
+          layer={{ type: 'image', src: cldImg(ALT[11], 'w_1200'), speed: 0.4 }}
           position={{ top: '5vh', left: '62.5%', width: '32.3%', height: '245px', zIndex: 2 }}
         />
         {/* invstill4 — centered */}
         <ParallaxLayer
           sectionId="inv-scatter"
           layerIndex={1}
-          layer={{ type: 'image', src: cldImg(ALT[14], 'w_1200'), speed: 0.3 }}
+          layer={{ type: 'image', src: cldImg(ALT[12], 'w_1200'), speed: 0.3 }}
           position={{ top: '35vh', left: 'calc(50% - 233px)', width: '32.3%', height: '245px', zIndex: 1 }}
         />
         {/* invstill12 — right 58.33% */}
         <ParallaxLayer
           sectionId="inv-scatter"
           layerIndex={2}
-          layer={{ type: 'image', src: cldImg(ALT[12], 'w_1200'), speed: 0.5 }}
+          layer={{ type: 'image', src: cldImg(ALT[13], 'w_1200'), speed: 0.5 }}
           position={{ top: '65vh', left: '58.33%', width: '32.3%', height: '246px', zIndex: 2 }}
         />
       </ParallaxSection>
 
-      {/* 13. PORTRAIT — St1-02 at 33.33%, 466px × 828px */}
+      {/* 14. PORTRAIT — St1-02 at 33.33%, 466px × 828px */}
       <ParallaxSection id="portrait-st102" style={{ minHeight: '120vh' }}>
         <ParallaxLayer
           sectionId="portrait-st102"
+          layer={{ type: 'image', src: cldImg(ALT[14], 'w_900'), speed: 0.25 }}
+          position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
+        />
+      </ParallaxSection>
+
+      {/* 15. PORTRAIT VIDEO — St1-04 (v6) at 33.33%, 466px × 828px */}
+      <ParallaxSection id="portrait-st104" style={{ minHeight: '120vh' }}>
+        <ParallaxLayer
+          sectionId="portrait-st104"
+          layer={{ type: 'video', src: cldVideo(ALT.v6), speed: 0.25 }}
+          position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
+        />
+      </ParallaxSection>
+
+      {/* 16. FULL-WIDTH VIDEO 5 — azclip2 */}
+      <ParallaxSection id="fw-video-5" style={{ minHeight: '80vh', background: '#000' }}>
+        <VideoSection id="fw-video-5" src={cldVideo(ALT.v7)} />
+      </ParallaxSection>
+
+      {/* 17. PORTRAIT — St1-03 at 33.33%, 466px × 828px */}
+      <ParallaxSection id="portrait-st103" style={{ minHeight: '120vh' }}>
+        <ParallaxLayer
+          sectionId="portrait-st103"
           layer={{ type: 'image', src: cldImg(ALT[15], 'w_900'), speed: 0.25 }}
           position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
         />
       </ParallaxSection>
 
-      {/* 14. FULL-WIDTH VIDEO 5 — azclip2 (St1-04 skipped: no Cloudinary asset) */}
-      <ParallaxSection id="fw-video-5" style={{ minHeight: '80vh', background: '#000' }}>
-        <VideoSection id="fw-video-5" src={cldVideo(ALT.v6)} />
-      </ParallaxSection>
-
-      {/* 15. PORTRAIT — St1-03 at 33.33%, 466px × 828px */}
-      <ParallaxSection id="portrait-st103" style={{ minHeight: '120vh' }}>
+      {/* 18. WIDE LANDSCAPE (azstill12) AND CREDITS */}
+      <ParallaxSection id="final-section" style={{ minHeight: '90vh' }}>
         <ParallaxLayer
-          sectionId="portrait-st103"
-          layer={{ type: 'image', src: cldImg(ALT[16], 'w_900'), speed: 0.25 }}
-          position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 16. WIDE LANDSCAPE — azstill12 · left 16.67%, width 66.25%, height 503px */}
-      <ParallaxSection id="wide-az12" style={{ minHeight: '80vh' }}>
-        <ParallaxLayer
-          sectionId="wide-az12"
-          layer={{ type: 'image', src: cldImg(ALT[10], 'w_2000'), speed: 0.25 }}
-          position={{ top: '5vh', left: '16.67%', width: '66.25%', height: '503px', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 17. CREDITS */}
-      <ParallaxSection id="credits" style={{ minHeight: '60vh' }}>
-        <ParallaxLayer
-          sectionId="credits"
+          sectionId="final-section"
           layerIndex={0}
+          layer={{ type: 'image', src: cldImg(ALT[16], 'w_2000'), speed: 0.25 }}
+          position={{ top: '0', left: '16.67%', width: '66.25%', height: '503px', zIndex: 1 }}
+        />
+        <ParallaxLayer
+          sectionId="final-section"
+          layerIndex={1}
           layer={{ type: 'credits', speed: 0, credits: CREDITS }}
-          position={{ top: '10vh', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
+          position={{ top: '438px', left: '0', width: '100%', height: 'auto', zIndex: 2 }}
         />
       </ParallaxSection>
 
