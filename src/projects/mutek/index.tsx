@@ -38,7 +38,7 @@ const P_APELA =
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mutek-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="mutek-container">
       <style dangerouslySetInnerHTML={{
         __html: `
         /* MUTEK overrides - use global tokens from globals.css */
@@ -92,12 +92,12 @@ export function Component() {
 
       <div className="mutek-desktop">
         {/* 1. HERO — Full-width image, fit so the baked-in title + credits stay visible. */}
-        <ParallaxSection id="hero" style={{ minHeight: '100vh' }}>
+        <ParallaxSection id="hero" style={{ minHeight: '115vh' }}>
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'cover' }}
-            position={{ top: HERO_TOP, left: '0', width: '100%', height: '100vh', zIndex: 0 }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'contain' }}
+            position={{ top: '80px', left: '4.17%', width: '91.66%', height: '80vh', zIndex: 0 }}
           />
         </ParallaxSection>
 
@@ -115,12 +115,12 @@ export function Component() {
             </div>
           </ParallaxLayer>
 
-          {/* Image 1 — left, 467 wide, tall */}
+          {/* Image 1 — left, tall */}
           <ParallaxLayer
             sectionId="intro"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img1, speed: 0.3 }}
-            position={{ top: '55vh', left: '8.47%', width: TW, height: '70vh', zIndex: 1 }}
+            position={{ top: '55vh', left: '8.47%', width: '24%', height: '65vh', zIndex: 1 }}
           />
 
           {/* RITUAL AL VACÍO title — right column */}
@@ -140,7 +140,7 @@ export function Component() {
             sectionId="intro"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img2, speed: 0.3 }}
-            position={{ top: '85vh', left: '32.4%', width: TW, height: '70vh', zIndex: 2 }}
+            position={{ top: '85vh', left: '33.8%', width: '24%', height: '65vh', zIndex: 2 }}
           />
         </ParallaxSection>
 
