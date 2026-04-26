@@ -71,6 +71,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         background: 'transparent',
         pointerEvents: 'none',
         mixBlendMode: 'difference',
+        ...({ WebkitMixBlendMode: 'difference' } as any),
+        transform: 'translateZ(0)',
       }}
     >
       {/* Left — MENU / close toggle */}

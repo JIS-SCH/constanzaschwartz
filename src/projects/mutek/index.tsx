@@ -58,6 +58,8 @@ export function Component() {
         /* Marquees over imagery use difference blend like the navbar */
         .mutek-marquee-blend {
           mix-blend-mode: difference;
+          -webkit-mix-blend-mode: difference;
+          transform: translateZ(0);
           isolation: isolate;
         }
 

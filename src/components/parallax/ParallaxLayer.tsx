@@ -128,6 +128,8 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
 
   if (layer.type === 'text' || layer.type === 'marquee' || layer.type === 'credits') {
     baseStyle.mixBlendMode = 'difference'
+    ;(baseStyle as any).WebkitMixBlendMode = 'difference'
+    baseStyle.transform = baseStyle.transform ? `${baseStyle.transform} translateZ(0)` : 'translateZ(0)'
   }
 
   const renderedContent = useMemo(() => {
@@ -173,6 +175,8 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               display: 'flex',
               alignItems: 'center',
               mixBlendMode: 'difference',
+              ...({ WebkitMixBlendMode: 'difference' } as any),
+              transform: 'translateZ(0)',
             }}
           >
             {layer.content}
@@ -191,6 +195,8 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               lineHeight: 1.8,
               boxSizing: 'border-box',
               mixBlendMode: 'difference',
+              ...({ WebkitMixBlendMode: 'difference' } as any),
+              transform: 'translateZ(0)',
             }}
           >
             {layer.credits.map((entry, i) => (

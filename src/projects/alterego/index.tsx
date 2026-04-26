@@ -374,8 +374,10 @@ export function Component() {
             letterSpacing: '0.48px',
             lineHeight: 1.5,
             padding: '20px',
-            mixBlendMode: 'difference'
-          }}>
+            mixBlendMode: 'difference',
+            WebkitMixBlendMode: 'difference',
+            transform: 'translateZ(0)'
+          } as any}>
             {CREDITS.map((c, i) => (
               <div key={i} style={{ marginBottom: '10px' }}>
                 <span style={{ fontWeight: 700 }}>{c.role}:</span> {c.name}

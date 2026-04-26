@@ -28,12 +28,15 @@ const REFLECTION_H = 6
 const CARD_SPACING = CARD_W + 2              // Tight gap for continuous screen look
 const CARD_BASE_Z = -65                      // Original arc distance
 
-// Mobile card geometry — smaller cards + tighter arc so 3 fit the narrow portrait viewport
-const MOBILE_CARD_W = 7
-const MOBILE_CARD_H = 3.94 // 16:9 aspect ratio
-const MOBILE_REFLECTION_H = 2.0
-const MOBILE_CARD_SPACING = MOBILE_CARD_W + 1.5
-const MOBILE_CARD_BASE_Z = -28
+// Mobile card geometry — portrait-friendly:
+// • Radius = 10 (camera -24, base -34) so adjacent cards stay in front
+// • Near-square cards (4:5 aspect) to fill portrait viewport
+// • FOV=80° vertical gives ~42° horizontal at portrait aspect
+const MOBILE_CARD_W = 4.5
+const MOBILE_CARD_H = 5.5  // portrait-ish aspect, fills ~35% of viewport height
+const MOBILE_REFLECTION_H = 1.5
+const MOBILE_CARD_SPACING = 5.5   // adjacent shows ~25% of card
+const MOBILE_CARD_BASE_Z = -34    // radius = 10 from camera
 const MOBILE_BASE_Z = -24
 
 function getTitle(index: number): string {
@@ -152,16 +155,16 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     scene.background = new THREE.Color(0x000000)
 
     const camera = new THREE.PerspectiveCamera(
-      38, // Telephoto-like FOV to flatten perspective to match Figma
+      mobile ? 80 : 38, // Wide vertical FOV on portrait so horizontal view is usable
       window.innerWidth / window.innerHeight,
       0.1,
-      100
+      200
     )
-    // Elevate camera Y to look from slightly above, establishing a "floor"
-    const camY = mobile ? 1.0 : CAMERA_Y
+    // Elevate camera Y slightly; tilt compensates so cards appear vertically centered
+    const camY = mobile ? 0.5 : CAMERA_Y
     camera.position.set(0, camY, -50) // Initial far position
-    // Tilt slightly down to frame the cards (more negative = shifts the cards UP on screen)
-    camera.rotation.x = mobile ? -0.02 : CAMERA_TILT
+    // Tilt to center cards: -atan(camY / radius). radius=10 → -atan(0.05) ≈ -0.05
+    camera.rotation.x = mobile ? -0.05 : CAMERA_TILT
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false })
     renderer.setSize(window.innerWidth, window.innerHeight)

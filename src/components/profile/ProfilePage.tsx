@@ -462,6 +462,7 @@ const CSS = `
   pointer-events: none;
   mix-blend-mode: difference;
   -webkit-mix-blend-mode: difference;
+  transform: translateZ(0);
 }
 
 
