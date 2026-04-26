@@ -54,6 +54,24 @@ export function Component() {
         }
       `}} />
 
+      {/* Helper for Vimeo Videos */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        .vimeo-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background: #000;
+        }
+        .vimeo-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      `}} />
+
       <div className="eco-desktop">
         {/* 1. HERO — Full width sculpture */}
         <ParallaxSection id="hero" style={{ minHeight: '115vh' }}>
@@ -266,14 +284,23 @@ export function Component() {
           />
         </ParallaxSection>
 
-        {/* 7. MAKING-OFF-TEMPLATE */}
-        <ParallaxSection id="making-of-intro" style={{ minHeight: '100vh' }}>
+        {/* 7. VIDEO MAKING OFF (Full Width) */}
+        <ParallaxSection id="video-making-off" style={{ minHeight: '110vh' }}>
           <ParallaxLayer
-            sectionId="making-of-intro"
+            sectionId="video-making-off"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.makingOffTemplate, speed: 0.3, objectFit: 'cover' }}
-            position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
-          />
+            layer={{ type: 'text', content: '', speed: 0.1 }}
+            position={{ top: '5vh', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+          >
+            <div className="vimeo-container">
+              <iframe
+                src={ASSETS.videoMakingOff}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                title="ECO AL INFINITO . Making Off"
+              ></iframe>
+            </div>
+          </ParallaxLayer>
         </ParallaxSection>
 
         {/* 8. COLLAGE STAIRCASE + PARAGRAPH + IMG 17 & 18 */}
@@ -568,12 +595,6 @@ export function Component() {
             position={{ top: '10vh', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
           >
             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-              {/* The template frame goes on top */}
-              <img
-                src={ASSETS.makingOffTemplate}
-                alt=""
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 2, pointerEvents: 'none', objectFit: 'contain' }}
-              />
               <video
                 autoPlay
                 muted
@@ -792,9 +813,15 @@ export function Component() {
           <img src={ASSETS.img12} alt="" style={{ position: 'absolute', left: '0px', top: '80px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
-        {/* Video placeholder - making off */}
-        <div style={{ width: '100%', height: '219px', marginTop: '40px', background: 'rgba(249,148,64,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="eco-p" style={{ color: '#fff', letterSpacing: '0.05em' }}>VIDEO MAKING OFF</span>
+        {/* Video Making Off - Mobile */}
+        <div style={{ width: '100%', height: '219px', marginTop: '40px', position: 'relative', background: '#000' }}>
+          <iframe
+            src={ASSETS.videoMakingOff}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            title="ECO AL INFINITO . Making Off"
+          ></iframe>
         </div>
 
         {/* Three diagonal images */}

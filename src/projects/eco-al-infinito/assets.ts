@@ -40,8 +40,8 @@ export const ASSETS = {
   img36: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-36_clmc01'),
   img37: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-37_tgc3kr'),
   img38: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-38_ntkx4q'),
-  makingOffTemplate: '/eco-al-infinito/making-off-template.png',
-  videoMakingOff: '/eco-al-infinito/making-off.mp4',
+  makingOffTemplate: '',
+  videoMakingOff: 'https://player.vimeo.com/video/1186746593?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0',
   videoTimelapse: '/eco-al-infinito/timelapse.mp4',
   // carousel1
   carousel1: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-1_yn37zy'),
