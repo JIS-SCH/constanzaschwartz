@@ -34,9 +34,13 @@ export default function ProjectPage() {
   }
 
   const { Component, gallery } = mod
+  const isWideCreditsProject = ['eco-al-infinito', 'mas-alla-del-infinito', 'alterego'].includes(params.slug)
 
   return (
-    <div style={{ minHeight: '100vh', background: '#000', color: '#fff', paddingTop: '80px' }}>
+    <div 
+      className={!isWideCreditsProject ? 'project-page-padding' : ''}
+      style={{ minHeight: '100vh', background: '#000', color: '#fff', paddingTop: '80px' }}
+    >
       <Component />
       {gallery && <ParallaxGallery images={gallery} />}
     </div>

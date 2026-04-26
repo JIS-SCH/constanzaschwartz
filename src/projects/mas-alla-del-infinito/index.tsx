@@ -3,11 +3,10 @@
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { TW, CH, HERO_TOP } from '../shared'
+import { ASSETS } from './assets'
+import { isMobile } from '@/src/utils/detect'
 
-// ---------------------------------------------------------------------------
-// Figma asset URLs — expire 7 days. Replace with /public or Cloudinary paths.
-// ---------------------------------------------------------------------------
-const IMG_HERO   = 'https://www.figma.com/api/mcp/asset/d26b3f9e-af13-46ad-af13-f6983f521da1'
+const IMG_HERO = ASSETS.hero
 const IMG_FULL_1 = 'https://www.figma.com/api/mcp/asset/6c291b28-87c4-41a6-affe-47ab95bbd620'
 const IMG_FULL_2 = 'https://www.figma.com/api/mcp/asset/61e5452d-e39e-4b11-ae6c-f719f6774ddc'
 const IMG_FULL_3 = 'https://www.figma.com/api/mcp/asset/9d3b273f-3d48-4c1d-a532-0ca0ea3f13cb'
@@ -15,13 +14,13 @@ const IMG_WEB028 = 'https://www.figma.com/api/mcp/asset/b8f6378a-1222-403a-80fc-
 const IMG_WEB009 = 'https://www.figma.com/api/mcp/asset/3763a9b0-d3a7-444e-9d95-7b191992c53b'
 const IMG_WEB008 = 'https://www.figma.com/api/mcp/asset/80b6e87b-6939-4440-871e-d334e6c7b34d'
 const IMG_WEB025 = 'https://www.figma.com/api/mcp/asset/a733d542-3ede-4429-8821-633bddc65ff2'
-const IMG_GIF1   = 'https://www.figma.com/api/mcp/asset/128b55b2-da1a-4406-b8b5-945b6dbe95d4'
+const IMG_GIF1 = 'https://www.figma.com/api/mcp/asset/128b55b2-da1a-4406-b8b5-945b6dbe95d4'
 const IMG_WEB005 = 'https://www.figma.com/api/mcp/asset/cd4d9d9d-a1d0-4fd7-9918-d8a263b0db48'
 const IMG_WEB007 = 'https://www.figma.com/api/mcp/asset/1fc805f6-64bd-444c-b4af-6b618cfcb30e'
 const IMG_WEB012 = 'https://www.figma.com/api/mcp/asset/e370a77b-e74e-4d99-a424-0e486b364dcf'
 const IMG_WEB011 = 'https://www.figma.com/api/mcp/asset/432c479c-ec6f-49de-ad2c-60a6f90dfc09'
 const IMG_WEB022 = 'https://www.figma.com/api/mcp/asset/46e71884-3d90-493e-b82f-4ba49603a056'
-const IMG_GIF2   = 'https://www.figma.com/api/mcp/asset/cb540c54-d08f-4291-8ef0-1464e5116844'
+const IMG_GIF2 = 'https://www.figma.com/api/mcp/asset/cb540c54-d08f-4291-8ef0-1464e5116844'
 const IMG_WEB016 = 'https://www.figma.com/api/mcp/asset/6115b668-e9e3-4969-817c-cbbe527d65e3'
 const IMG_WEB017 = 'https://www.figma.com/api/mcp/asset/78e0910c-dffe-41da-bea4-72a6a790e061'
 const IMG_WEB018 = 'https://www.figma.com/api/mcp/asset/253eea5c-4481-470b-a710-bcb823b4f2ab'
@@ -77,7 +76,8 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
   const duration = images.length * 3.5
   return (
     <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes mal-c-${id} {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
@@ -124,13 +124,12 @@ function VideoPlaceholder({ label }: { label: string }) {
 
 export { meta } from './meta'
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
+
 export function Component() {
   return (
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0f0f0f', marginTop: '-80px' }} className="mal-container">
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .mal-p {
           font-family: "Space Grotesk", sans-serif;
           font-weight: 300;
@@ -148,9 +147,21 @@ export function Component() {
       {/* 1. HERO ─────────────────────────────────────────────────────── */}
       <ParallaxSection id="mal-hero" style={{ minHeight: '115vh' }}>
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_HERO, speed: 0.8, isHero: true, objectFit: 'cover' }}
+          layer={{ type: 'image', src: IMG_HERO, speed: 0.8, isHero: true, objectFit: 'cover', className: 'mal-hero-desktop' }}
           position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
         />
+        <ParallaxLayer
+          layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.8, isHero: true, objectFit: 'cover', className: 'mal-hero-mobile' }}
+          position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+        />
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          .mal-hero-mobile { display: none !important; }
+          @media (max-width: 1023px) {
+            .mal-hero-desktop { display: none !important; }
+            .mal-hero-mobile { display: block !important; }
+          }
+        ` }} />
       </ParallaxSection>
 
       {/* 2. INTRO: text right + web028 left + marquee-1 ─────────────── */}

@@ -244,7 +244,7 @@ function YearSection({ data }: { data: YearData }) {
 // ---------------------------------------------------------------------------
 export function ProfilePage() {
   return (
-    <div className="pr-root">
+    <div className="pr-root project-page-padding">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
       {/*
@@ -363,8 +363,6 @@ export function ProfilePage() {
 
       {/* YEARS */}
       {YEARS.map((y) => <YearSection key={y.year} data={y} />)}
-
-      <div style={{ height: '80px' }} />
     </div>
   )
 }

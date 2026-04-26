@@ -95,6 +95,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           width: '48px',
           height: '24px',
           pointerEvents: 'auto',
+          mixBlendMode: 'difference',
+          ...({ WebkitMixBlendMode: 'difference' } as any),
         }}
       >
         <span
@@ -143,6 +145,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           alignItems: 'center',
           justifyContent: 'center',
           pointerEvents: 'auto',
+          mixBlendMode: 'difference',
+          ...({ WebkitMixBlendMode: 'difference' } as any),
         }}
       >
         <Image
@@ -176,6 +180,8 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
           gap: '6px',
           color: '#fff',
           pointerEvents: 'auto',
+          mixBlendMode: 'difference',
+          ...({ WebkitMixBlendMode: 'difference' } as any),
         }}
       >
         <WaveformIcon width={18} color="#fff" />
