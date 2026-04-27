@@ -9,8 +9,8 @@ export type LayerType = 'image' | 'video' | 'text' | 'marquee' | 'credits'
 export interface BaseLayerProps {
   type: LayerType
   speed?: number
-  direction?: 'y' | 'x' | 'both'
-  multiplier?: number
+  axis?: 'y' | 'x'
+  intensity?: number
   className?: string
   isHero?: boolean
 }
@@ -56,6 +56,7 @@ interface ParallaxLayerProps {
     bottom?: string
     width?: string
     height?: string
+    aspectRatio?: string
     zIndex: number
   }
   sectionId?: string
@@ -92,7 +93,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   const parallaxInnerRef = useRef<HTMLDivElement>(null)
   const isMarquee = layer.type === 'marquee'
 
-  const { speed = 1, direction = 'y', multiplier = 80 } = layer
+  const { speed = 0, axis = 'y', intensity = 60 } = layer
   const marqueeHeight = position.height || '72px'
   const isStickyMarquee = isMarquee && !position.top
 
@@ -101,11 +102,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     ? ({ current: null } as unknown as React.RefObject<HTMLElement>)
     : (parallaxInnerRef as React.RefObject<HTMLElement>)
 
-  useParallax(parallaxRef, {
-    speed,
-    direction,
-    multiplier,
-  })
+  useParallax(parallaxRef, { speed, axis, intensity })
 
   // ─── OUTER: position container (NEVER transformed by parallax) ───
   const positionStyle: React.CSSProperties = isStickyMarquee
@@ -124,6 +121,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       bottom: position.bottom,
       width: position.width,
       height: position.height,
+      aspectRatio: position.aspectRatio,
       zIndex: position.zIndex,
     }
 
@@ -134,7 +132,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   }
 
   // Only hint willChange when parallax is active
-  if (speed > 0) {
+  if (speed !== 0) {
     innerStyle.willChange = 'transform'
   }
 
@@ -196,7 +194,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
           </div>
         )
       case 'marquee':
-        return <MarqueeContent content={layer.content} duration={layer.multiplier ?? 22} />
+        return <MarqueeContent content={layer.content} duration={layer.intensity ?? 22} />
       case 'credits':
         return (
           <div

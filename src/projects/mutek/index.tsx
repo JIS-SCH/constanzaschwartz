@@ -3,7 +3,7 @@
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { ASSETS } from './assets'
-import { TW, TEXT_BLOCK_STYLE, CH, HERO_TOP } from '../shared'
+import { TW, TEXT_BLOCK_STYLE, CH, GAP } from '../shared'
 
 export { meta } from './meta'
 
@@ -84,23 +84,23 @@ export function Component() {
 
       <div className="mutek-desktop">
         {/* 1. HERO — Full-width image, fit so the baked-in title + credits stay visible. */}
-        <ParallaxSection id="hero" style={{ minHeight: '115vh' }}>
+        <ParallaxSection id="hero" style={{ minHeight: `calc(80px + 80vh + 251px)` }}>
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'contain' }}
-            position={{ top: '80px', left: '4.17%', width: '91.66%', height: '80vh', zIndex: 0 }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'cover' }}
+            position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
           />
         </ParallaxSection>
 
         {/* 2. INTRO PARAGRAPH + COLLAGE 1 (img1 left tall, img2 portrait below, RITUAL AL VACÍO right) */}
-        <ParallaxSection id="intro" style={{ minHeight: '160vh' }}>
+        <ParallaxSection id="intro" style={{ minHeight: '1830px' }}>
           {/* Intro paragraph — left, 466 wide */}
           <ParallaxLayer
             sectionId="intro"
             layerIndex={0}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '15vh', left: '8.47%', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '0', left: '8.47%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
@@ -112,7 +112,7 @@ export function Component() {
             sectionId="intro"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img1, speed: 0.3 }}
-            position={{ top: '55vh', left: '8.47%', width: '24%', height: '65vh', zIndex: 1 }}
+            position={{ top: '396px', left: '8.47%', width: '467px', height: '790px', zIndex: 1 }}
           />
 
           {/* RITUAL AL VACÍO title — right column */}
@@ -120,7 +120,7 @@ export function Component() {
             sectionId="intro"
             layerIndex={2}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '65vh', left: '54.9%', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '499px', left: '54.9%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <h2 style={TITLE_STYLE} className="mutek-h3">RITUAL AL VACÍO</h2>
             <div style={{ ...TEXT_BLOCK_STYLE, marginTop: '2.5rem' }} className="mutek-p">
@@ -132,160 +132,160 @@ export function Component() {
             sectionId="intro"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img2, speed: 0.3 }}
-            position={{ top: '85vh', left: '33.8%', width: '24%', height: '65vh', zIndex: 2 }}
+            position={{ top: '905px', left: '33.8%', width: '467px', height: '700px', zIndex: 2 }}
           />
         </ParallaxSection>
 
-        <ParallaxSection id="text-block-1" style={{ minHeight: 'calc(56.25vw + 80vh)' }}>
+        <ParallaxSection id="text-block-1" style={{ minHeight: 'calc(320px + 56.25vw + 220px)' }}>
           <ParallaxLayer
             sectionId="text-block-1"
             layerIndex={0}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '6vh', left: '54.9%', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '0', left: '54.9%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               {P_CAVE}
             </div>
           </ParallaxLayer>
 
-          {/* Full-width image */}
+          {/* Full-width video */}
           <ParallaxLayer
             sectionId="text-block-1"
             layerIndex={1}
-            layer={{ type: 'video', src: ASSETS.vid1, speed: 0.3 }}
-            position={{ top: '32vh', left: '0', width: '100%', height: '56.25vw', zIndex: 1 }}
+            layer={{ type: 'video', src: ASSETS.vid1, speed: 0 }}
+            position={{ top: '320px', left: '0', width: '100%', height: '56.25vw', aspectRatio: '16/9', zIndex: 1 }}
           />
-
-          {/* Text left — 466 wide, 183 from left */}
-          <ParallaxLayer
-            sectionId="text-block-1"
-            layerIndex={2}
-            layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: 'calc(32vh + 56.25vw + 15vh)', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
-          >
-            <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_VACIO}
-            </div>
-          </ParallaxLayer>
         </ParallaxSection>
 
         {/* 4. IMAGE 831 + MARQUEE (difference blend) + IMAGE 345 PORTRAIT RIGHT */}
-        <ParallaxSection id="marquee-1" style={{ minHeight: '110vh' }}>
-          {/* Image 831 wide */}
+        <ParallaxSection id="marquee-1" style={{ minHeight: '1116px' }}>
+          {/* P_VACIO — left, 466 wide, 183 from left */}
           <ParallaxLayer
             sectionId="marquee-1"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img3, speed: 0.3 }}
-            position={{ top: '8vh', left: '12.7%', width: '57.7%', height: '70vh', zIndex: 1 }}
-          />
+            layer={{ type: 'text', content: '', speed: 0 }}
+            position={{ top: '0', left: '12.7%', width: '466px', height: 'auto', zIndex: 2 }}
+          >
+            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
+              {P_VACIO}
+            </div>
+          </ParallaxLayer>
 
-          {/* Marquee — difference blend, overlapping image */}
+          {/* Image 831 wide — 220px below P_VACIO (corrected from ruler measurement) */}
           <ParallaxLayer
             sectionId="marquee-1"
             layerIndex={1}
-            layer={{ type: 'marquee', content: 'COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE, ENVUELTA EN PROYECCIONES TRASLÚCIDAS DE LUZ.', speed: 0, className: 'mutek-marquee-blend' }}
-            position={{ top: '60vh', left: '0', width: '100%', height: '8vh', zIndex: 3 }}
-          />
-
-          {/* Image 345 portrait right */}
-          <ParallaxLayer
-            sectionId="marquee-1"
-            layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img4, speed: 0.3 }}
-            position={{ top: '52vh', left: '64%', width: '24%', height: '32vh', zIndex: 2 }}
-          />
-        </ParallaxSection>
-
-        {/* 5. COLLAGE — IMAGE 710 LEFT + TEXT RIGHT */}
-        <ParallaxSection id="collage-2" style={{ minHeight: '110vh' }}>
-          {/* Image 710 wide left */}
-          <ParallaxLayer
-            sectionId="collage-2"
-            layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img5, speed: 0.3 }}
-            position={{ top: '8vh', left: '0', width: '49.3%', height: '60vh', zIndex: 1 }}
-          />
-
-          {/* Right text block ("La luz se apaga...") */}
-          <ParallaxLayer
-            sectionId="collage-2"
-            layerIndex={1}
-            layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '32vh', left: '54.9%', width: TW, height: 'auto', zIndex: 2 }}
-          >
-            <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_RITUAL}
-            </div>
-          </ParallaxLayer>
-
-          {/* Image 831 centered, right-aligned per designer note */}
-          <ParallaxLayer
-            sectionId="collage-2"
-            layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img6, speed: 0.3 }}
-            position={{ top: '78vh', left: '34%', width: '57.7%', height: '60vh', zIndex: 1 }}
-          />
-        </ParallaxSection>
-
-        {/* 6. PORTRAIT 345 + TEXT — "¿Y qué es un ritual..." */}
-        <ParallaxSection id="text-block-2" style={{ minHeight: '90vh' }}>
-          {/* Image 345 portrait */}
-          <ParallaxLayer
-            sectionId="text-block-2"
-            layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img7, speed: 0.3 }}
-            position={{ top: '5vh', left: '20%', width: '24%', height: '40vh', zIndex: 1 }}
-          />
-
-          {/* Text "¿Y qué es un ritual cuando ya no convoca..." */}
-          <ParallaxLayer
-            sectionId="text-block-2"
-            layerIndex={1}
-            layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '52vh', left: '46.5%', width: TW, height: 'auto', zIndex: 2 }}
-          >
-            <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_QUESTION}
-            </div>
-          </ParallaxLayer>
-        </ParallaxSection>
-
-        {/* 7. TEXT LEFT + IMAGE 467 RIGHT + MARQUEE (difference blend) */}
-        <ParallaxSection id="marquee-2" style={{ minHeight: '120vh' }}>
-          {/* Left text "La mente creativa..." */}
-          <ParallaxLayer
-            sectionId="marquee-2"
-            layerIndex={0}
-            layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '6vh', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
-          >
-            <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_MENTE}
-            </div>
-          </ParallaxLayer>
-
-          {/* Image 467 right */}
-          <ParallaxLayer
-            sectionId="marquee-2"
-            layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img8, speed: 0.3 }}
-            position={{ top: '0', left: '54.9%', width: TW, height: '70vh', zIndex: 1 }}
+            layer={{ type: 'image', src: ASSETS.img3, speed: 0 }}
+            position={{ top: '332px', left: '12.7%', width: '831px', height: '466px', zIndex: 1 }}
           />
 
           {/* Marquee — difference blend */}
           <ParallaxLayer
-            sectionId="marquee-2"
+            sectionId="marquee-1"
             layerIndex={2}
-            layer={{ type: 'marquee', content: 'EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO.', speed: 0, className: 'mutek-marquee-blend' }}
-            position={{ top: '60vh', left: '0', width: '100%', height: '8vh', zIndex: 3 }}
+            layer={{ type: 'marquee', content: 'COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE, ENVUELTA EN PROYECCIONES TRASLÚCIDAS DE LUZ.', speed: 0, className: 'mutek-marquee-blend' }}
+            position={{ top: '742px', left: '0', width: '100%', height: '80px', zIndex: 2 }}
           />
 
-          {/* Image 467 portrait — under marquee */}
+          {/* Image 345 — Front layer overlapping marquee and img3 */}
+          <ParallaxLayer
+            sectionId="marquee-1"
+            layerIndex={3}
+            layer={{ type: 'image', src: ASSETS.img4, speed: 0 }}
+            position={{ top: '702px', left: '63.3%', width: '345px', height: '194px', zIndex: 3 }}
+          />
+        </ParallaxSection>
+
+        {/* 5. COLLAGE — IMAGE 710 LEFT + TEXT OVERLAPPING */}
+        <ParallaxSection id="collage-2" style={{ minHeight: '693px' }}>
+          {/* Image 710 left — speed 0 */}
+          <ParallaxLayer
+            sectionId="collage-2"
+            layerIndex={0}
+            layer={{ type: 'image', src: ASSETS.img5, speed: 0 }}
+            position={{ top: '0', left: '0', width: '710px', height: '473px', zIndex: 1 }}
+          />
+
+          {/* Ritual text — left: 609px (42.3%) | Overlaps img5 by 101px */}
+          <ParallaxLayer
+            sectionId="collage-2"
+            layerIndex={1}
+            layer={{ type: 'text', content: '', speed: 0 }}
+            position={{ top: '258px', left: '42.3%', width: '466px', height: 'auto', zIndex: 2 }}
+          >
+            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
+              {P_RITUAL}
+            </div>
+          </ParallaxLayer>
+        </ParallaxSection>
+
+        {/* 5b. COLLAGE — IMAGE 831 + IMAGE 345 + TEXT */}
+        <ParallaxSection id="collage-3" style={{ minHeight: '1145px' }}>
+          {/* Image 831 right — speed 0 */}
+          <ParallaxLayer
+            sectionId="collage-3"
+            layerIndex={0}
+            layer={{ type: 'image', src: ASSETS.img6, speed: 0 }}
+            position={{ top: '0', left: '710px', width: '831px', height: '467px', zIndex: 1 }}
+          />
+
+          {/* Image 345 left — speed 0 (Overlapping img6) */}
+          <ParallaxLayer
+            sectionId="collage-3"
+            layerIndex={1}
+            layer={{ type: 'image', src: ASSETS.img7, speed: 0 }}
+            position={{ top: '411px', left: '480px', width: '345px', height: '194px', zIndex: 3 }}
+          />
+
+          {/* Text "¿Y qué es un ritual..." — left: 669px (46.4%) */}
+          <ParallaxLayer
+            sectionId="collage-3"
+            layerIndex={2}
+            layer={{ type: 'text', content: '', speed: 0 }}
+            position={{ top: '825px', left: '46.4%', width: TW, height: 'auto', zIndex: 4 }}
+          >
+            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
+              ¿Y qué es un ritual cuando ya no convoca, cuando no transforma, cuando sólo queda la forma vacía como una piel transparente, invisible colgando del tiempo?
+            </div>
+          </ParallaxLayer>
+        </ParallaxSection>
+
+        {/* 6. COLLAGE — IMAGE 467 x2 + MARQUEE */}
+        <ParallaxSection id="marquee-2" style={{ minHeight: '1350px' }}>
+          {/* Image 8 (Back) — 467 wide, right aligned to margin */}
+          <ParallaxLayer
+            sectionId="marquee-2"
+            layerIndex={0}
+            layer={{ type: 'image', src: ASSETS.img8, speed: 0 }}
+            position={{ top: '0', left: '790px', width: '467px', height: '700px', zIndex: 4 }}
+          />
+
+          {/* Text "La mente creativa..." — top: 103px from section start, left aligned to margin */}
+          <ParallaxLayer
+            sectionId="marquee-2"
+            layerIndex={1}
+            layer={{ type: 'text', content: '', speed: 0 }}
+            position={{ top: '103px', left: '183px', width: '466px', height: 'auto', zIndex: 2 }}
+          >
+            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
+              {P_MENTE}
+            </div>
+          </ParallaxLayer>
+
+          {/* Marquee (Middle) — difference blend via ParallaxLayer */}
+          <ParallaxLayer
+            sectionId="marquee-2"
+            layerIndex={2}
+            layer={{ type: 'marquee', content: 'EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO. ', intensity: 22, speed: 0, className: 'mutek-h4 mutek-marquee-blend' }}
+            position={{ top: '529px', left: '0', width: '100%', height: '80px', zIndex: 3 }}
+          />
+
+          {/* Image 9 (Back) — 467 wide, left: 487px */}
           <ParallaxLayer
             sectionId="marquee-2"
             layerIndex={3}
-            layer={{ type: 'image', src: ASSETS.img9, speed: 0.3 }}
-            position={{ top: '76vh', left: '33.8%', width: TW, height: '40vh', zIndex: 2 }}
+            layer={{ type: 'image', src: ASSETS.img9, speed: 0 }}
+            position={{ top: '430px', left: '487px', width: '467px', height: '700px', zIndex: 1 }}
           />
         </ParallaxSection>
 
@@ -295,7 +295,7 @@ export function Component() {
             sectionId="text-block-3"
             layerIndex={0}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '8vh', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '0px', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               {P_APELA}
@@ -304,7 +304,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 9. BIG FULL-WIDTH IMAGE */}
-        <ParallaxSection id="big-image" style={{ minHeight: '90vh' }}>
+        <ParallaxSection id="big-image" style={{ minHeight: '85vh' }}>
           <ParallaxLayer
             sectionId="big-image"
             layerIndex={0}
@@ -314,12 +314,12 @@ export function Component() {
         </ParallaxSection>
 
         {/* 10. TEXT RIGHT — "Una posibilidad. Como umbral..." */}
-        <ParallaxSection id="text-block-4" style={{ minHeight: '50vh' }}>
+        <ParallaxSection id="text-block-4" style={{ minHeight: '500px' }}>
           <ParallaxLayer
             sectionId="text-block-4"
             layerIndex={0}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '12vh', left: '59.2%', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '220px', left: '59.2%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               {P_UMBRAL}
@@ -328,19 +328,19 @@ export function Component() {
         </ParallaxSection>
 
         {/* 11. IMAGE 831 CENTERED + TEXT LEFT "La caverna de luz..." */}
-        <ParallaxSection id="image-text" style={{ minHeight: '90vh' }}>
+        <ParallaxSection id="image-text" style={{ minHeight: 'calc(60vh + 470px)' }}>
           <ParallaxLayer
             sectionId="image-text"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img11, speed: 0.3 }}
-            position={{ top: '5vh', left: '21.1%', width: '57.7%', height: '60vh', zIndex: 1 }}
+            position={{ top: '0', left: '21.1%', width: '57.7%', height: '60vh', zIndex: 1 }}
           />
 
           <ParallaxLayer
             sectionId="image-text"
             layerIndex={1}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '72vh', left: '8.47%', width: '40%', height: 'auto', zIndex: 2 }}
+            position={{ top: 'calc(60vh + 220px)', left: '8.47%', width: '40%', height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               {P_CAVERNA}

@@ -31,11 +31,12 @@ export function Component() {
           font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
           font-weight: 100 !important;
           text-transform: uppercase;
+          mix-blend-mode: difference;
         }
         @media (min-width: 769px) {
           .marquee-item {
             font-size: 36px !important;
-            font-weight: 300 !important;
+            font-weight: 100 !important;
             letter-spacing: 0.02em !important;
             line-height: normal !important;
             padding-right: 80px !important;
@@ -46,49 +47,40 @@ export function Component() {
         .dw-container {
           /* section heights — fixed-px approach ensures exact 220px gaps */
           /* h-hero = 80vh (image) + 300px (220px gap + 80px for neg-margin) */
-          --h-hero: calc(80vh + 300px); --h-intro: 340px; --h-c1: 1063px;
-          --h-stmt: 480px; --h-c2: 140vh;
-          --h-pc: 100vh; --h-fp: 40vh; --h-c3: 185vh; --h-finish: 215vh;
+          --h-hero: calc(80vh + 300px); --h-intro: 340px; --h-c1: calc(343px + 48.61vw);
+          --h-stmt: 480px; --h-c2: calc(72.915vw + 220px);
+          --h-pc: 994px; --h-fp: 440px; --h-c3: calc(9vw + 66.67vw + 220px); --h-finish: calc(220px + 260px + 35vw + 20px + 220px + 250px);
 
           /* intro — starts at section top which is exactly 220px after hero */
           --it-l-t: 0px; --it-l-x: 12.71%; --it-l-w: 32.4305%;
           --it-r-t: 0px; --it-r-x: 63.33%; --it-r-w: 23.96%;
 
           /* collage-1 — c1-a offset matches Figma (143px below c1-b) */
-          --c1-a-t: 143px; --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 700px;
-          --c1-b-t: 0px;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 392px;
+          --c1-a-t: 143px; --c1-a-x: 29.51%; --c1-a-w: 32.4305%; --c1-a-h: 48.61vw;
+          --c1-b-t: 0px;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 27.22vw;
 
           /* statement — fixed px: 20px top + ~240px content + 220px gap = 480px */
           --stmt-x: 12.71%; --stmt-w: 32.4305%; --stmt-t: 20px;
 
-          /* collage-2 */
-          --c2-a-t: 5vh;  --c2-a-x: 63.33%; --c2-a-w: 32.4305%; --c2-a-h: 80vh;
-          --c2-b-t: 40vh; --c2-b-x: 33.33%; --c2-b-w: 32.4305%; --c2-b-h: 80vh;
-          --c2-marquee-t: 110vh;
+          /* collage-2 — c2-a top=0 so 220px gap comes from stmt section tail */
+          --c2-a-t: 0px;           --c2-a-x: 63.33%; --c2-a-w: 32.4305%; --c2-a-h: 48.61vw;
+          --c2-b-t: calc(24.305vw); --c2-b-x: 33.75%; --c2-b-w: 32.4305%; --c2-b-h: 48.61vw;
+          --c2-marquee-t: 42vw;
 
           /* paragraphs-carousel */
-          --pc-text-t: 10vh; --pc-text-l: 55%; --pc-text-w: 32.4305%;
-          --pc-carousel-t: 45vh;
+          --pc-text-t: 0px; --pc-text-l: 55%; --pc-text-w: 32.4305%;
+          --pc-carousel-t: 444px;
 
           /* final-paragraph */
-          --fp-text-t: 15vh; --fp-text-l: calc(54.17% + 11px); --fp-text-w: 32.4305%;
+          --fp-text-t: 0px; --fp-text-l: 55%; --fp-text-w: 32.4305%;
 
-          /* collage-3 */
-          --c3-a-t: 0vh;   --c3-a-x: 24.69%; --c3-a-w: 32.4305%; --c3-a-h: 312px;
-          --c3-b-t: 26vh;  --c3-b-x: 0%;     --c3-b-w: 100%;     --c3-b-h: 960px;
-          --c3-c-t: 123vh; --c3-c-x: 75.38%; --c3-c-w: 32.4305%; --c3-c-h: 311px;
-          --c3-marquee-t: 6vh;
+          /* collage-3: img5 top-left, img6 full-width center, img7 bottom-right */
+          --c3-a-t: 0px;      --c3-a-x: 8.47%;  --c3-a-w: 32.4305%; --c3-a-h: 21.67vw;
+          --c3-b-t: 9vw;      --c3-b-x: 0%;     --c3-b-w: 100%;     --c3-b-h: 66.67vw;
+          --c3-c-t: calc(9vw + 66.67vw - 21.60vw); --c3-c-x: 59.17%; --c3-c-w: 32.4305%; --c3-c-h: 21.60vw;
+          --c3-marquee-t: 0px;
 
-          /* finish */
-          --finish-text-t: 10vh; --finish-text-l: 12.71%; --finish-text-w: 32.4305%;
-          --finish-marquee-t: 130vh;
-          --finish-close-t: 155vh; --finish-close-l: 12.71%; --finish-close-w: 32.4305%;
-
-          /* finish staircase */
-          --f-img-w: 23.96%; --f-img-h: auto;
-          --f-img1-x: 4.24%;  --f-img1-t: 56vh;
-          --f-img2-x: 38.12%; --f-img2-t: calc(var(--f-img1-t) + 130px);
-          --f-img3-x: 71.81%; --f-img3-t: calc(var(--f-img2-t) + 130px);
+          /* finish: now uses flow layout — no positioning vars needed */
         }
 
         /* ─── MOBILE (≤ 768px) ─── */
@@ -153,7 +145,7 @@ export function Component() {
       <ParallaxSection id="hero" style={{ minHeight: 'var(--h-hero)' }}>
         <ParallaxLayer
           sectionId="hero" layerIndex={0}
-          layer={{ type: 'text', content: '', speed: 0.4 }}
+          layer={{ type: 'text', content: '', speed: 0 }}
           position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
         >
           <div style={{ width: '100%', height: '100%', backgroundColor: '#0f0f0f' }} />
@@ -162,7 +154,7 @@ export function Component() {
         <div className="dw-desktop" style={{ display: 'block' }}>
           <ParallaxLayer
             sectionId="hero" layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'cover' }}
             position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 1 }}
           />
         </div>
@@ -170,7 +162,7 @@ export function Component() {
         <div className="dw-mobile" style={{ display: 'none' }}>
           <ParallaxLayer
             sectionId="hero" layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.8, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0, isHero: true, objectFit: 'cover' }}
             position={{ top: '0', left: '0', width: '100%', height: '100%', zIndex: 1 }}
           />
         </div>
@@ -209,12 +201,12 @@ export function Component() {
       <ParallaxSection id="collage-1" style={{ minHeight: 'var(--h-c1)' }}>
         <ParallaxLayer
           sectionId="collage-1" layerIndex={0}
-          layer={{ type: 'image', src: ASSETS.img2, speed: 0.3 }}
+          layer={{ type: 'image', src: ASSETS.img2, speed: 0 }}
           position={{ top: 'var(--c1-a-t)', left: 'var(--c1-a-x)', width: 'var(--c1-a-w)', height: 'var(--c1-a-h)', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="collage-1" layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img1, speed: 0.3 }}
+          layer={{ type: 'image', src: ASSETS.img1, speed: 0 }}
           position={{ top: 'var(--c1-b-t)', left: 'var(--c1-b-x)', width: 'var(--c1-b-w)', height: 'var(--c1-b-h)', zIndex: 2 }}
         />
       </ParallaxSection>
@@ -245,12 +237,12 @@ export function Component() {
       <ParallaxSection id="collage-2" style={{ minHeight: 'var(--h-c2)' }}>
         <ParallaxLayer
           sectionId="collage-2" layerIndex={0}
-          layer={{ type: 'image', src: ASSETS.img3, speed: 0.3 }}
+          layer={{ type: 'image', src: ASSETS.img3, speed: 0 }}
           position={{ top: 'var(--c2-a-t)', left: 'var(--c2-a-x)', width: 'var(--c2-a-w)', height: 'var(--c2-a-h)', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="collage-2" layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img4, speed: 0.3 }}
+          layer={{ type: 'image', src: ASSETS.img4, speed: 0 }}
           position={{ top: 'var(--c2-b-t)', left: 'var(--c2-b-x)', width: 'var(--c2-b-w)', height: 'var(--c2-b-h)', zIndex: 2 }}
         />
         <ParallaxLayer
@@ -326,28 +318,25 @@ export function Component() {
         />
         <ParallaxLayer
           sectionId="collage-3" layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img6, speed: 0.3 }}
+          layer={{ type: 'image', src: ASSETS.img6, speed: 0 }}
           position={{ top: 'var(--c3-b-t)', left: 'var(--c3-b-x)', width: 'var(--c3-b-w)', height: 'var(--c3-b-h)', zIndex: 1 }}
         />
         <ParallaxLayer
           sectionId="collage-3" layerIndex={2}
-          layer={{ type: 'image', src: ASSETS.img5, speed: 0.3 }}
+          layer={{ type: 'image', src: ASSETS.img5, speed: 0 }}
           position={{ top: 'var(--c3-a-t)', left: 'var(--c3-a-x)', width: 'var(--c3-a-w)', height: 'var(--c3-a-h)', zIndex: 2 }}
         />
         <ParallaxLayer
           sectionId="collage-3" layerIndex={3}
-          layer={{ type: 'image', src: ASSETS.img7, speed: 0.3 }}
+          layer={{ type: 'image', src: ASSETS.img7, speed: 0 }}
           position={{ top: 'var(--c3-c-t)', left: 'var(--c3-c-x)', width: 'var(--c3-c-w)', height: 'var(--c3-c-h)', zIndex: 3 }}
         />
       </ParallaxSection>
 
-      {/* 9. FINISH */}
-      <ParallaxSection id="finish" style={{ minHeight: 'var(--h-finish)' }}>
-        <ParallaxLayer
-          sectionId="finish" layerIndex={0}
-          layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: 'var(--finish-text-t)', left: 'var(--finish-text-l)', width: 'var(--finish-text-w)', height: 'auto', zIndex: 1 }}
-        >
+      {/* 9. FINISH — flow layout for natural 220px gaps */}
+      <section id="finish" style={{ position: 'relative', width: '100%' }}>
+        {/* Text paragraph */}
+        <div style={{ paddingLeft: '32.4305%', paddingRight: '35%' }}>
           <div style={TEXT_BLOCK_STYLE} className="dw-p">
             Con la utilización de espejos, se posibilita el juego de distorsión de la realidad
             en un claro paralelismo e intento de mirada introspectiva sobre nuestra nueva
@@ -358,43 +347,53 @@ export function Component() {
             comportamientos como sociedad. Traspasar todo limite, libertad sin límites,
             profundidad, amplitud, variabilidad de posibilidades.
           </div>
-        </ParallaxLayer>
+        </div>
 
-        <ParallaxLayer
-          sectionId="finish" layerIndex={1}
-          layer={{ type: 'image', src: ASSETS.img8, speed: 0.3 }}
-          position={{ top: 'var(--f-img1-t)', left: 'var(--f-img1-x)', width: 'var(--f-img-w)', height: 'var(--f-img-h)', zIndex: 2 }}
-        />
-        <ParallaxLayer
-          sectionId="finish" layerIndex={2}
-          layer={{ type: 'image', src: ASSETS.img9, speed: 0.3 }}
-          position={{ top: 'var(--f-img2-t)', left: 'var(--f-img2-x)', width: 'var(--f-img-w)', height: 'var(--f-img-h)', zIndex: 3 }}
-        />
-        <ParallaxLayer
-          sectionId="finish" layerIndex={3}
-          layer={{ type: 'image', src: ASSETS.img10, speed: 0.3 }}
-          position={{ top: 'var(--f-img3-t)', left: 'var(--f-img3-x)', width: 'var(--f-img-w)', height: 'var(--f-img-h)', zIndex: 4 }}
-        />
+        {/* 220px gap */}
+        <div style={{ height: '220px' }} />
 
-        <ParallaxLayer
-          sectionId="finish" layerIndex={4}
-          layer={{ type: 'marquee', content: 'INTENTA FRACTURAR LA COMPLACENCIA CON LA INDUSTRIALIZACIÓN Y LA TECNIFICACIÓN QUE TOMAMOS POR NATURALEZA DEL SIGLO XXI', speed: 0.8 }}
-          position={{ top: 'var(--finish-marquee-t)', left: '0', width: '100%', height: '8vh', zIndex: 5 }}
-        />
+        {/* Staircase images: 3 images in a row, staggered vertically */}
+        <div className="dw-staircase" style={{ position: 'relative', width: '100%', height: 'calc(260px + 36vw)' }}>
+          <img src={ASSETS.img8} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', left: '4.24%', top: 0, width: '23.96%', height: 'auto', display: 'block' }} />
+          <img src={ASSETS.img9} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', left: '38.12%', top: '130px', width: '23.96%', height: 'auto', display: 'block' }} />
+          <img src={ASSETS.img10} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', left: '71.81%', top: '260px', width: '23.96%', height: 'auto', display: 'block' }} />
+        </div>
 
-        <ParallaxLayer
-          sectionId="finish" layerIndex={5}
-          layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: 'var(--finish-close-t)', left: 'var(--finish-close-l)', width: 'var(--finish-close-w)', height: 'auto', zIndex: 6 }}
-        >
+        {/* Marquee — touching img10 bottom */}
+        <div style={{
+          width: '100%', overflow: 'hidden',
+          mixBlendMode: 'difference',
+          ...(({ WebkitMixBlendMode: 'difference', transform: 'translateZ(0)' }) as any),
+        }}>
+          <div className="marquee-track" style={{ animationDuration: '88s' }}>
+            {[0, 1].map((setIdx) => (
+              <div key={setIdx} className="marquee-set">
+                {Array.from({ length: 4 }, (_, i) => (
+                  <span key={i} className="marquee-item">
+                    INTENTA FRACTURAR LA COMPLACENCIA CON LA INDUSTRIALIZACIÓN Y LA TECNIFICACIÓN QUE TOMAMOS POR NATURALEZA DEL SIGLO XXI
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 220px gap */}
+        <div style={{ height: '220px' }} />
+
+        {/* Closing text */}
+        <div style={{ paddingLeft: '7.64%', paddingRight: '60%' }}>
           <div style={TEXT_BLOCK_STYLE} className="dw-p">
             Ensayo de Espejismo busca apelar a varios sentidos en simultáneo. Asimismo, intenta
             fracturar la complacencia con la industrialización y la tecnificación que tomamos
             por naturaleza del siglo XXI. Esta es una obra que resalta la confusión de un acabado
-            "de máquina", "perfecto" cuando su proceso es único y enteramente artesanal.
+            &quot;de máquina&quot;, &quot;perfecto&quot; cuando su proceso es único y enteramente artesanal.
           </div>
-        </ParallaxLayer>
-      </ParallaxSection>
+        </div>
+      </section>
 
     </div>
   )

@@ -7,46 +7,38 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 interface UseParallaxOptions {
-  speed?: number
-  direction?: 'y' | 'x' | 'both'
-  multiplier?: number
+  speed?: number      // signed ratio, recommended range -1 to 1
+  axis?: 'y' | 'x'
+  intensity?: number  // max displacement in px at speed=1 (default 60)
 }
 
 export function useParallax(
-  elementRef: React.RefObject<HTMLElement | null>,
+  innerRef: React.RefObject<HTMLElement | null>,
   options: UseParallaxOptions = {}
 ) {
-  const {
-    speed = 0,
-    direction = 'y',
-    multiplier = 300,
-  } = options
+  const { speed = 0, axis = 'y', intensity = 60 } = options
 
   useEffect(() => {
-    const element = elementRef.current
-    if (!element || speed === 0) return
+    const inner = innerRef.current
+    if (!inner || speed === 0) return
 
-    const range = speed * multiplier
+    // Trigger on the layout container (parent) so transforms on inner never shift the trigger zone
+    const trigger = inner.parentElement ?? inner
+    const range = speed * intensity
 
     const st = ScrollTrigger.create({
-      trigger: element,
+      trigger,
       start: 'top bottom',
       end: 'bottom top',
       onUpdate: (self) => {
-        // self.progress goes from 0 to 1
-        // (self.progress * 2 - 1) goes from -1 to 1
-        // This makes the element move from -range to +range relative to its container
-        // As the page scrolls down (container moves up), the element moves down relative to the container
-        // This creates the illusion that the element is "behind" the page (moving slower)
         const offset = (self.progress * 2 - 1) * range
-        const xVal = direction === 'x' || direction === 'both' ? offset : 0
-        const yVal = direction === 'y' || direction === 'both' ? offset : 0
-        gsap.set(element, { x: xVal, y: yVal })
+        gsap.set(inner, {
+          x: axis === 'x' ? offset : 0,
+          y: axis === 'y' ? offset : 0,
+        })
       },
     })
 
-    return () => {
-      st.kill()
-    }
-  }, [speed, direction, multiplier, elementRef])
+    return () => st.kill()
+  }, [speed, axis, intensity, innerRef])
 }
