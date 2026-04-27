@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { TW, CH, HERO_TOP } from '../shared'
 import { ASSETS } from './assets'
 import { isMobile } from '@/src/utils/detect'
@@ -141,6 +142,19 @@ export function Component() {
           font-family: ${HFONT} !important;
           font-weight: 100 !important;
           text-transform: uppercase;
+        }
+        .vimeo-container {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background: #000;
+        }
+        .vimeo-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
         }
       `}} />
 
@@ -294,7 +308,12 @@ export function Component() {
           layer={{ type: 'text', content: '', speed: 0 }}
           position={{ top: '75vh', left: '0', width: '100%', height: '70vh', zIndex: 2 }}
         >
-          <VideoPlaceholder label="VIDEOARTE" />
+          <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
+            <CustomVimeoPlayer
+              videoUrl="https://player.vimeo.com/video/1186767280?h=ef4894270a"
+              title="Más allá del Infinito - Video Arte"
+            />
+          </div>
         </ParallaxLayer>
       </ParallaxSection>
 
@@ -417,7 +436,9 @@ export function Component() {
           layer={{ type: 'text', content: '', speed: 0 }}
           position={{ top: '115vh', left: '0', width: '100%', height: '50vh', zIndex: 2 }}
         >
-          <VideoPlaceholder label="VIDEO MAKING OFF" />
+          <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
+            <VideoPlaceholder label="VIDEO MAKING OFF" />
+          </div>
         </ParallaxLayer>
       </ParallaxSection>
 

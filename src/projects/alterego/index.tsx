@@ -5,7 +5,6 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { VideoPlayer } from '@/src/components/media/VideoPlayer'
 import { cldImg, cldVideo } from '@/src/utils/cloudinary'
 import { ALT } from './assets'
-import { HERO_TOP } from '../shared'
 
 export { meta } from './meta'
 
@@ -28,7 +27,7 @@ const CREDITS = [
   { role: 'Mapping', name: 'Mauro Parissenti @mauroparissenti & EMEPE Audiovisuales @emepeaudiovisuales' },
   { role: 'Diseño Gráfico', name: 'Manuel Blanco @__manublanco & RGII @rg.2nd' },
   { role: 'Comercial', name: 'Franco Panaro @fgpanaro' },
-  { role: 'Artistas', name: 'Justo Fernández Madero @justo.fm / Lucas Grasso @lucobyluco / Fernando Laprida @byferla / Francisco Nicholson @franjnicholson' },
+  { role: 'Artistas', name: 'Justo Fernández Madero @justo.fm Lucas Grasso @lucobyluco Fernando Laprida @byferla Francisco Nicholson @franjnicholson' },
 ]
 
 function VideoSection({ id, src }: { id: string; src: string }) {
@@ -39,14 +38,15 @@ function VideoSection({ id, src }: { id: string; src: string }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: '#000',
+      background: '#0F0F0F',
     }}>
       <VideoPlayer
         id={id}
         src={src}
         autoPlay
         loop={false}
-        style={{ width: '100%', aspectRatio: '21/9', maxHeight: '100%' }}
+        objectFit="contain"
+        style={{ width: '100%', height: '100%' }}
       />
     </div>
   )
@@ -54,7 +54,7 @@ function VideoSection({ id, src }: { id: string; src: string }) {
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', marginTop: '-80px' }} className="alterego-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="alterego-container">
       <style dangerouslySetInnerHTML={{
         __html: `
         .alterego-desktop { display: block; }
@@ -63,233 +63,279 @@ export function Component() {
           .alterego-desktop { display: none; }
           .alterego-mobile  { display: block; }
         }
+        .alterego-desktop > section + section { margin-top: 220px; }
       `}} />
 
       <div className="alterego-desktop">
-        {/* 1. HERO — portada + marquee */}
-        <ParallaxSection id="hero" overflowHidden={false} style={{ minHeight: '115vh' }}>
-        <ParallaxLayer
-          sectionId="hero"
-          layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: 0.8, isHero: true, objectFit: 'contain' }}
-          position={{ top: '80px', left: '4.17%', width: '91.66%', height: '80vh', zIndex: 1 }}
-        />
-        <ParallaxLayer
-          sectionId="hero"
-          layerIndex={1}
-          layer={{ type: 'marquee', content: 'DIRECCIÓN DE ARTE Y EFECTOS LUMÍNICOS.', speed: 0, multiplier: 22 }}
-          position={{ top: '86vh', left: '0', width: '100%', height: '72px', zIndex: 2 }}
-        />
-      </ParallaxSection>
-
-      {/* 2. WIDE LANDSCAPE — azstill18 · left 16.67%, width 66.25%, height 503px */}
-      <ParallaxSection id="wide-1" style={{ minHeight: '80vh' }}>
-        <ParallaxLayer
-          sectionId="wide-1"
-          layer={{ type: 'image', src: cldImg(ALT[1], 'w_2000'), speed: 0.25 }}
-          position={{ top: '5vh', left: '16.67%', width: '66.25%', height: '503px', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 3. FULL-WIDTH VIDEO 1 — 04-azclip1 */}
-      <ParallaxSection id="fw-video-1" style={{ minHeight: '80vh', background: '#000' }}>
-        <VideoSection id="fw-video-1" src={cldVideo(ALT.v1)} />
-      </ParallaxSection>
-
-      {/* 4. THREE STACKED STILLS — azstill4 / 09-azstill2 / azstill19 at 33.33% */}
-      <ParallaxSection id="stacked-stills" style={{ minHeight: '150vh' }}>
-        <ParallaxLayer
-          sectionId="stacked-stills"
-          layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT[2], 'w_1200'), speed: 0.2 }}
-          position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
-        />
-        <ParallaxLayer
-          sectionId="stacked-stills"
-          layerIndex={1}
-          layer={{ type: 'image', src: cldImg(ALT[3], 'w_1200'), speed: 0.35 }}
-          position={{ top: '38vh', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
-        />
-        <ParallaxLayer
-          sectionId="stacked-stills"
-          layerIndex={2}
-          layer={{ type: 'image', src: cldImg(ALT[4], 'w_1200'), speed: 0.5 }}
-          position={{ top: '71vh', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 5. PHOTO PAIR — PHOTO-50-34 at 45.83%, PHOTO-53-45 at 16.67% */}
-      <ParallaxSection id="photo-pair" style={{ minHeight: '80vh' }}>
-        <ParallaxLayer
-          sectionId="photo-pair"
-          layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT[5], 'w_1200'), speed: 0.3 }}
-          position={{ top: '5vh', left: '45.83%', width: '32.3%', height: '246px', zIndex: 2 }}
-        />
-        <ParallaxLayer
-          sectionId="photo-pair"
-          layerIndex={1}
-          layer={{ type: 'image', src: cldImg(ALT[6], 'w_1200'), speed: 0.45 }}
-          position={{ top: '28vh', left: '16.67%', width: '32.3%', height: '246px', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 6. PORTRAIT — St1-07 centered, 466px × 828px */}
-      <ParallaxSection id="portrait-st107" style={{ minHeight: '130vh' }}>
-        <ParallaxLayer
-          sectionId="portrait-st107"
-          layer={{ type: 'image', src: cldImg(ALT[7], 'w_900'), speed: 0.25 }}
-          position={{ top: '5vh', left: 'calc(50% - 233px)', width: '466px', height: '828px', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 7. FULL-WIDTH VIDEO 2 — ytclip4 */}
-      <ParallaxSection id="fw-video-2" style={{ minHeight: '80vh', background: '#000' }}>
-        <VideoSection id="fw-video-2" src={cldVideo(ALT.v2)} />
-      </ParallaxSection>
-
-      {/* 8. PHOTO PAIR 2 — St1-06 2 and St1-06 1 */}
-      <ParallaxSection id="photo-pair-2" style={{ minHeight: '80vh' }}>
-        <ParallaxLayer
-          sectionId="photo-pair-2"
-          layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT[8], 'w_1200'), speed: 0.3 }}
-          position={{ top: '5vh', left: '16.67%', width: '32.3%', height: '291px', zIndex: 1 }}
-        />
-        <ParallaxLayer
-          sectionId="photo-pair-2"
-          layerIndex={1}
-          layer={{ type: 'image', src: cldImg(ALT[9], 'w_1200'), speed: 0.45 }}
-          position={{ top: '25vh', left: '45.83%', width: '32.3%', height: '291px', zIndex: 2 }}
-        />
-      </ParallaxSection>
-
-      {/* 9. FULL-WIDTH VIDEO 3 — pdsclip1 */}
-      <ParallaxSection id="fw-video-3" style={{ minHeight: '80vh', background: '#000' }}>
-        <VideoSection id="fw-video-3" src={cldVideo(ALT.v3)} />
-      </ParallaxSection>
-
-      {/* 9. WIDE CENTERED VIDEO — ytclip1, 66.25% wide */}
-      <ParallaxSection id="wide-ytclip1" style={{ minHeight: '70vh', background: '#000' }}>
-        <div style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#000',
-        }}>
-          <VideoPlayer
-            id="ytclip1"
-            src={cldVideo(ALT.v4)}
-            autoPlay
-            loop={false}
-            style={{ width: '66.25%', aspectRatio: '19/10' }}
+        <ParallaxSection id="hero" overflowHidden={false} style={{ height: '100vh' }}>
+          <ParallaxLayer
+            sectionId="hero"
+            layerIndex={0}
+            layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: 0, isHero: true, objectFit: 'cover' }}
+            position={{ top: '80px', left: '0', width: '100%', height: 'calc(100vh - 80px)', zIndex: 1 }}
           />
+        </ParallaxSection>
+
+        {/* Marquee below hero — 97px top, 97px bottom to first content section */}
+        <div style={{ paddingTop: '97px', paddingBottom: '97px' }}>
+          <div style={{ overflow: 'hidden', width: '100%' }}>
+            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item">DIRECCIÓN DE ARTE Y EFECTOS LUMÍNICOS/</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </ParallaxSection>
 
-      {/* 10. INV STILL — invstill11 at 8.33%, precedes clipinv3 video */}
-      <ParallaxSection id="pre-inv" style={{ minHeight: '50vh' }}>
-        <ParallaxLayer
-          sectionId="pre-inv"
-          layer={{ type: 'image', src: cldImg(ALT[10], 'w_1200'), speed: 0.3 }}
-          position={{ top: '5vh', left: '8.33%', width: '32.3%', height: '246px', zIndex: 1 }}
-        />
-      </ParallaxSection>
+        {/* 2. WIDE LANDSCAPE — azstill18 · left 16.67%, width 66.25%, height 503px */}
+        <ParallaxSection id="wide-1" style={{ minHeight: '503px' }}>
+          <ParallaxLayer
+            sectionId="wide-1"
+            layer={{ type: 'image', src: cldImg(ALT[1], 'w_2000'), speed: 0.25 }}
+            position={{ top: '0', left: '16.67%', width: '66.25%', height: '503px', zIndex: 1 }}
+          />
+        </ParallaxSection>
 
-      {/* 11. FULL-WIDTH VIDEO 4 — clipinv3 */}
-      <ParallaxSection id="fw-video-4" style={{ minHeight: '80vh', background: '#000' }}>
-        <VideoSection id="fw-video-4" src={cldVideo(ALT.v5)} />
-      </ParallaxSection>
+        {/* 3. FULL-WIDTH VIDEO 1 — 04-azclip1 */}
+        <ParallaxSection id="fw-video-1" style={{ minHeight: '100vh', background: '#0F0F0F' }}>
+          <VideoSection id="fw-video-1" src={cldVideo(ALT.v1)} />
+        </ParallaxSection>
 
-      {/* 12. INV SCATTER — 10inv1 right, invstill4 center, invstill12 right */}
-      <ParallaxSection id="inv-scatter" style={{ minHeight: '180vh' }}>
-        {/* 10 inv 1 — right 62.5% */}
-        <ParallaxLayer
-          sectionId="inv-scatter"
-          layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT[11], 'w_1200'), speed: 0.4 }}
-          position={{ top: '5vh', left: '62.5%', width: '32.3%', height: '245px', zIndex: 2 }}
-        />
-        {/* invstill4 — centered */}
-        <ParallaxLayer
-          sectionId="inv-scatter"
-          layerIndex={1}
-          layer={{ type: 'image', src: cldImg(ALT[12], 'w_1200'), speed: 0.3 }}
-          position={{ top: '35vh', left: 'calc(50% - 233px)', width: '32.3%', height: '245px', zIndex: 1 }}
-        />
-        {/* invstill12 — right 58.33% */}
-        <ParallaxLayer
-          sectionId="inv-scatter"
-          layerIndex={2}
-          layer={{ type: 'image', src: cldImg(ALT[13], 'w_1200'), speed: 0.5 }}
-          position={{ top: '65vh', left: '58.33%', width: '32.3%', height: '246px', zIndex: 2 }}
-        />
-      </ParallaxSection>
+        <ParallaxSection id="stacked-stills" style={{ minHeight: '735px' }}>
+          <ParallaxLayer
+            sectionId="stacked-stills"
+            layerIndex={0}
+            layer={{ type: 'image', src: cldImg(ALT[2], 'w_1200'), speed: 0 }}
+            position={{ top: '0', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
+          />
+          <ParallaxLayer
+            sectionId="stacked-stills"
+            layerIndex={1}
+            layer={{ type: 'image', src: cldImg(ALT[3], 'w_1200'), speed: 0 }}
+            position={{ top: '245px', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
+          />
+          <ParallaxLayer
+            sectionId="stacked-stills"
+            layerIndex={2}
+            layer={{ type: 'image', src: cldImg(ALT[4], 'w_1200'), speed: 0 }}
+            position={{ top: '490px', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
+          />
+        </ParallaxSection>
 
-      {/* 14. PORTRAIT — St1-02 at 33.33%, 466px × 828px */}
-      <ParallaxSection id="portrait-st102" style={{ minHeight: '120vh' }}>
-        <ParallaxLayer
-          sectionId="portrait-st102"
-          layer={{ type: 'image', src: cldImg(ALT[14], 'w_900'), speed: 0.25 }}
-          position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
-        />
-      </ParallaxSection>
+        {/* 5. PHOTO PAIR — PHOTO-50-34 at 45.83%, PHOTO-53-45 at 16.67% */}
+        <ParallaxSection id="photo-pair" style={{ minHeight: 'calc(23vh + 246px)' }}>
+          <ParallaxLayer
+            sectionId="photo-pair"
+            layerIndex={0}
+            layer={{ type: 'image', src: cldImg(ALT[5], 'w_1200'), speed: 0.3 }}
+            position={{ top: '0', left: '45.83%', width: '32.3%', height: '246px', zIndex: 2 }}
+          />
+          <ParallaxLayer
+            sectionId="photo-pair"
+            layerIndex={1}
+            layer={{ type: 'image', src: cldImg(ALT[6], 'w_1200'), speed: 0.45 }}
+            position={{ top: '23vh', left: '16.67%', width: '32.3%', height: '246px', zIndex: 1 }}
+          />
+        </ParallaxSection>
 
-      {/* 15. PORTRAIT VIDEO — St1-04 (v6) at 33.33%, 466px × 828px */}
-      <ParallaxSection id="portrait-st104" style={{ minHeight: '120vh' }}>
-        <ParallaxLayer
-          sectionId="portrait-st104"
-          layer={{ type: 'video', src: cldVideo(ALT.v6), speed: 0.25 }}
-          position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
-        />
-      </ParallaxSection>
+        {/* 6. PORTRAIT — St1-07 centered, 466px × 828px */}
+        <ParallaxSection id="portrait-st107" style={{ minHeight: '828px' }}>
+          <ParallaxLayer
+            sectionId="portrait-st107"
+            layer={{ type: 'image', src: cldImg(ALT[7], 'w_900'), speed: 0.25 }}
+            position={{ top: '0', left: 'calc(50% - 233px)', width: '466px', height: '828px', zIndex: 1 }}
+          />
+        </ParallaxSection>
 
-      {/* 16. FULL-WIDTH VIDEO 5 — azclip2 */}
-      <ParallaxSection id="fw-video-5" style={{ minHeight: '80vh', background: '#000' }}>
-        <VideoSection id="fw-video-5" src={cldVideo(ALT.v7)} />
-      </ParallaxSection>
+        {/* 7. FULL-WIDTH VIDEO 2 — ytclip4 */}
+        <ParallaxSection id="fw-video-2" style={{ minHeight: '80vh', background: '#0F0F0F' }}>
+          <VideoSection id="fw-video-2" src={cldVideo(ALT.v2)} />
+        </ParallaxSection>
 
-      {/* 17. PORTRAIT — St1-03 at 33.33%, 466px × 828px */}
-      <ParallaxSection id="portrait-st103" style={{ minHeight: '120vh' }}>
-        <ParallaxLayer
-          sectionId="portrait-st103"
-          layer={{ type: 'image', src: cldImg(ALT[15], 'w_900'), speed: 0.25 }}
-          position={{ top: '5vh', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
-        />
-      </ParallaxSection>
+        {/* 8. PHOTO PAIR 2 — St1-06 2 and St1-06 1 */}
+        <ParallaxSection id="photo-pair-2" style={{ minHeight: 'calc(20vh + 291px)' }}>
+          <ParallaxLayer
+            sectionId="photo-pair-2"
+            layerIndex={0}
+            layer={{ type: 'image', src: cldImg(ALT[8], 'w_1200'), speed: 0.3 }}
+            position={{ top: '0', left: '16.67%', width: '32.3%', height: '291px', zIndex: 1 }}
+          />
+          <ParallaxLayer
+            sectionId="photo-pair-2"
+            layerIndex={1}
+            layer={{ type: 'image', src: cldImg(ALT[9], 'w_1200'), speed: 0.45 }}
+            position={{ top: '20vh', left: '45.83%', width: '32.3%', height: '291px', zIndex: 2 }}
+          />
+        </ParallaxSection>
 
-      {/* 18. WIDE LANDSCAPE (azstill12) AND CREDITS */}
-      <ParallaxSection id="final-section" style={{ minHeight: '90vh' }}>
-        <ParallaxLayer
-          sectionId="final-section"
-          layerIndex={0}
-          layer={{ type: 'image', src: cldImg(ALT[16], 'w_2000'), speed: 0.25 }}
-          position={{ top: '0', left: '16.67%', width: '66.25%', height: '503px', zIndex: 1 }}
-        />
-        <ParallaxLayer
-          sectionId="final-section"
-          layerIndex={1}
-          layer={{ type: 'credits', speed: 0, credits: CREDITS }}
-          position={{ top: '438px', left: '0', width: '100%', height: 'auto', zIndex: 2 }}
-        />
-      </ParallaxSection>
+        <ParallaxSection id="fw-video-3" style={{ minHeight: '80vh', background: '#0F0F0F' }}>
+          <VideoSection id="fw-video-3" src={cldVideo(ALT.v3)} />
+        </ParallaxSection>
+
+        <ParallaxSection id="wide-ytclip1" style={{ background: '#0F0F0F' }}>
+          <div style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            background: '#0F0F0F',
+          }}>
+            <VideoPlayer
+              id="ytclip1"
+              src={cldVideo(ALT.v4)}
+              autoPlay
+              loop={false}
+              style={{ width: '66.25%', aspectRatio: '19/10' }}
+            />
+          </div>
+        </ParallaxSection>
+
+        {/* 10. INV STILL + VIDEO + IMG11 + IMG12 + IMG13 — unified block */}
+        <ParallaxSection id="inv-block" overflowHidden={false} style={{ minHeight: 'calc(246px + 678px + 245px + 110px + 245px + 110px + 246px + 110px + 246px)' }}>
+          <ParallaxLayer
+            sectionId="inv-block"
+            layerIndex={0}
+            layer={{ type: 'image', src: cldImg(ALT[10], 'w_1200'), speed: 0.3 }}
+            position={{ top: '0', left: '8.33%', width: '32.3%', height: '246px', zIndex: 2 }}
+          />
+          <div style={{
+            position: 'absolute',
+            top: '246px',
+            left: '0',
+            width: '100%',
+            height: '678px',
+            background: '#0F0F0F',
+            zIndex: 1,
+          }}>
+            <VideoPlayer
+              id="fw-video-5"
+              src={cldVideo(ALT.v5)}
+              autoPlay
+              loop={false}
+              objectFit="cover"
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
+          {/* img 11 — right, after video */}
+          <ParallaxLayer
+            sectionId="inv-block"
+            layerIndex={2}
+            layer={{ type: 'image', src: cldImg(ALT[11], 'w_1200'), speed: 0 }}
+            position={{ top: 'calc(246px + 678px)', left: '62.5%', width: '32.3%', height: '245px', zIndex: 2 }}
+          />
+          {/* img 12 — centered, 110px below img 11 */}
+          <ParallaxLayer
+            sectionId="inv-block"
+            layerIndex={3}
+            layer={{ type: 'image', src: cldImg(ALT[12], 'w_1200'), speed: 0 }}
+            position={{ top: 'calc(246px + 678px + 245px + 110px)', left: 'calc(50% - 233px)', width: '32.3%', height: '245px', zIndex: 2 }}
+          />
+          {/* img 13 — LEFT, 110px below img 12 */}
+          <ParallaxLayer
+            sectionId="inv-block"
+            layerIndex={4}
+            layer={{ type: 'image', src: cldImg(ALT[13], 'w_1200'), speed: 0 }}
+            position={{ top: 'calc(246px + 678px + 245px + 110px + 245px + 110px)', left: '122px', width: '32.3%', height: '246px', zIndex: 2 }}
+          />
+          {/* img 14 — right, 110px below img 13 */}
+          <ParallaxLayer
+            sectionId="inv-block"
+            layerIndex={5}
+            layer={{ type: 'image', src: cldImg(ALT[14], 'w_900'), speed: 0 }}
+            position={{ top: 'calc(246px + 678px + 245px + 110px + 245px + 110px + 246px + 110px)', left: '45.83%', width: '32.3%', height: '246px', zIndex: 2 }}
+          />
+        </ParallaxSection>
+
+        {/* 15+16. STACKED PORTRAITS — centered, touching (0px gap) */}
+        <ParallaxSection id="stacked-portraits" style={{ minHeight: 'calc(828px + 828px)' }}>
+          <ParallaxLayer
+            sectionId="stacked-portraits"
+            layerIndex={0}
+            layer={{ type: 'image', src: cldImg(ALT[15], 'w_900'), speed: 0.25 }}
+            position={{ top: '0', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
+          />
+          <ParallaxLayer
+            sectionId="stacked-portraits"
+            layerIndex={1}
+            layer={{ type: 'video', src: cldVideo(ALT.v6), speed: 0.25 }}
+            position={{ top: '828px', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
+          />
+        </ParallaxSection>
+
+        {/* 16. FULL-WIDTH VIDEO 5 — azclip2 */}
+        <ParallaxSection id="fw-video-5" style={{ minHeight: '80vh', background: '#0F0F0F' }}>
+          <VideoSection id="fw-video-5" src={cldVideo(ALT.v7)} />
+        </ParallaxSection>
+
+        {/* 17. PORTRAIT — img 16, centered */}
+        <ParallaxSection id="portrait-img16" style={{ minHeight: '828px' }}>
+          <ParallaxLayer
+            sectionId="portrait-img16"
+            layer={{ type: 'image', src: cldImg(ALT[16], 'w_900'), speed: 0 }}
+            position={{ top: '0', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
+          />
+        </ParallaxSection>
+
+        {/* 18. IMG 17 AND CREDITS — credits overlay bottom of image */}
+        <section style={{ position: 'relative', width: '100%', paddingBottom: '168px' }}>
+          <div style={{ width: '66.25%', margin: '0 auto' }}>
+            <img
+              src={cldImg(ALT[17], 'w_2000')}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </div>
+          <div style={{
+            position: 'relative',
+            marginTop: '-66px',
+            width: '100%',
+            color: '#FFF',
+            fontFamily: '"Space Grotesk", sans-serif',
+            fontSize: '16px',
+            fontStyle: 'normal',
+            lineHeight: '150%',
+            boxSizing: 'border-box',
+            mixBlendMode: 'difference',
+            ...({ WebkitMixBlendMode: 'difference' } as any),
+            transform: 'translateZ(0)',
+            zIndex: 2,
+          } as any}>
+            {CREDITS.map((entry, i) => (
+              <span key={i}>
+                {i > 0 && <span>{' / '}</span>}
+                <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
+                  {entry.role}:
+                </span>
+                <span style={{ fontWeight: 300 }}>
+                  {' '}{entry.name}
+                </span>
+              </span>
+            ))}
+          </div>
+        </section>
 
       </div>{/* /alterego-desktop */}
 
       {/* ── ALTEREGO MOBILE ─────────────────────────────────────────────── */}
-      <div className="alterego-mobile" style={{ backgroundColor: '#000', overflow: 'hidden', paddingBottom: '100px' }}>
-        
-        {/* 1. HERO */}
-        <img src={cldImg(ALT.portadaMobile, 'w_800')} alt="" style={{ display: 'block', width: '100%', height: '100vh', objectFit: 'cover' }} />
-        <div style={{ padding: '20px 0', overflow: 'hidden', background: '#000' }}>
-          <div className="marquee-track" style={{ animationDuration: '22s' }}>
-            <div className="marquee-set">
-              <span className="marquee-item" style={{
-                fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-                fontWeight: 100, fontSize: '24px', letterSpacing: '0.48px', color: '#fff'
-              }}>DIRECCIÓN DE ARTE Y EFECTOS LUMÍNICOS.</span>
+      <div className="alterego-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '100px' }}>
+
+        {/* 1. HERO — img + marquee contenido dentro del hero, marquee absolute bottom */}
+        <div style={{ position: 'relative', height: '100vh' }}>
+          <img src={cldImg(ALT.portadaMobile, 'w_800')} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', overflow: 'hidden', zIndex: 2 }}>
+            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item">DIRECCIÓN DE ARTE Y EFECTOS LUMÍNICOS/</span>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -365,14 +411,14 @@ export function Component() {
         {/* 14. FINAL IMAGE + CREDITS */}
         <div style={{ width: '100%', position: 'relative', marginTop: '40px' }}>
           <img src={cldImg(ALT[16], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto' }} />
-          
+
           <div style={{
-            color: '#fff',
-            fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-            fontSize: '12px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.48px',
-            lineHeight: 1.5,
+            color: '#FFF',
+            fontFamily: '"Space Grotesk", sans-serif',
+            fontSize: '16px',
+            fontStyle: 'normal',
+            fontWeight: 700,
+            lineHeight: '150%',
             padding: '20px',
             mixBlendMode: 'difference',
             WebkitMixBlendMode: 'difference',
@@ -380,7 +426,8 @@ export function Component() {
           } as any}>
             {CREDITS.map((c, i) => (
               <div key={i} style={{ marginBottom: '10px' }}>
-                <span style={{ fontWeight: 700 }}>{c.role}:</span> {c.name}
+                <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>{c.role}:</span>
+                <span style={{ fontWeight: 400 }}> {' '}{c.name}</span>
               </div>
             ))}
           </div>

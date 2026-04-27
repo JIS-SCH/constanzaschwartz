@@ -88,16 +88,18 @@ function MarqueeContent({ content, duration }: { content: string; duration: numb
 }
 
 export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, children }: ParallaxLayerProps) {
-  const elementRef = useRef<HTMLElement>(null)
+  // Inner ref — parallax transforms apply HERE, not on the position container
+  const parallaxInnerRef = useRef<HTMLDivElement>(null)
   const isMarquee = layer.type === 'marquee'
 
-  const { speed = 1, direction = 'y', multiplier = 150 } = layer
+  const { speed = 1, direction = 'y', multiplier = 80 } = layer
   const marqueeHeight = position.height || '72px'
   const isStickyMarquee = isMarquee && !position.top
 
+  // Only apply parallax to the inner wrapper
   const parallaxRef = isStickyMarquee
     ? ({ current: null } as unknown as React.RefObject<HTMLElement>)
-    : (elementRef as React.RefObject<HTMLElement>)
+    : (parallaxInnerRef as React.RefObject<HTMLElement>)
 
   useParallax(parallaxRef, {
     speed,
@@ -105,14 +107,14 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     multiplier,
   })
 
-  const baseStyle: React.CSSProperties = isStickyMarquee
+  // ─── OUTER: position container (NEVER transformed by parallax) ───
+  const positionStyle: React.CSSProperties = isStickyMarquee
     ? {
       position: 'sticky',
       top: `calc(100vh - ${marqueeHeight})`,
       width: '100%',
       height: marqueeHeight,
       zIndex: position.zIndex ?? 1,
-      transform: 'translate3d(0,0,0)',
     }
     : {
       position: 'absolute',
@@ -123,13 +125,24 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       width: position.width,
       height: position.height,
       zIndex: position.zIndex,
-      willChange: 'transform',
     }
 
+  // ─── INNER: parallax wrapper (receives gsap transforms) ───
+  const innerStyle: React.CSSProperties = {
+    width: '100%',
+    height: '100%',
+  }
+
+  // Only hint willChange when parallax is active
+  if (speed > 0) {
+    innerStyle.willChange = 'transform'
+  }
+
+  // Blend mode for text/marquee/credits layers
   if (layer.type === 'text' || layer.type === 'marquee' || layer.type === 'credits') {
-    baseStyle.mixBlendMode = 'difference'
-    ;(baseStyle as any).WebkitMixBlendMode = 'difference'
-    baseStyle.transform = baseStyle.transform ? `${baseStyle.transform} translateZ(0)` : 'translateZ(0)'
+    innerStyle.mixBlendMode = 'difference'
+    ;(innerStyle as any).WebkitMixBlendMode = 'difference'
+    innerStyle.transform = 'translateZ(0)'
   }
 
   const renderedContent = useMemo(() => {
@@ -219,12 +232,16 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
 
   return (
     <div
-      ref={isStickyMarquee ? undefined : elementRef as React.RefObject<HTMLDivElement>}
-      style={baseStyle}
+      style={positionStyle}
       className={layer.className}
       data-project-image={layer.isHero ? true : undefined}
     >
-      {children || renderedContent}
+      <div
+        ref={isStickyMarquee ? undefined : parallaxInnerRef}
+        style={innerStyle}
+      >
+        {children || renderedContent}
+      </div>
     </div>
   )
 }

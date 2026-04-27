@@ -32,6 +32,15 @@ export function Component() {
           font-weight: 100 !important;
           text-transform: uppercase;
         }
+        @media (min-width: 769px) {
+          .marquee-item {
+            font-size: 36px !important;
+            font-weight: 300 !important;
+            letter-spacing: 0.02em !important;
+            line-height: normal !important;
+            padding-right: 80px !important;
+          }
+        }
 
         /* ─── LAYOUT TOKENS ─── */
         .dw-container {
@@ -50,7 +59,7 @@ export function Component() {
           --c1-b-t: 0px;   --c1-b-x: 54.93%; --c1-b-w: 40.83%;   --c1-b-h: 392px;
 
           /* statement — fixed px: 20px top + ~240px content + 220px gap = 480px */
-          --stmt-x: 12.71%; --stmt-w: 76%; --stmt-t: 20px;
+          --stmt-x: 12.71%; --stmt-w: 32.4305%; --stmt-t: 20px;
 
           /* collage-2 */
           --c2-a-t: 5vh;  --c2-a-x: 63.33%; --c2-a-w: 32.4305%; --c2-a-h: 80vh;
@@ -153,7 +162,7 @@ export function Component() {
         <div className="dw-desktop" style={{ display: 'block' }}>
           <ParallaxLayer
             sectionId="hero" layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'contain' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'cover' }}
             position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 1 }}
           />
         </div>
