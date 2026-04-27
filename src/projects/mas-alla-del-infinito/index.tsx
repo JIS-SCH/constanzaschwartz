@@ -76,7 +76,7 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
   const duration = images.length * 3.5
   return (
-    <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
+    <div className="w-full h-[var(--carousel-h)] overflow-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes mal-c-${id} {
@@ -84,14 +84,9 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
           to   { transform: translateX(-50%); }
         }
       `}} />
-      <div style={{
-        display: 'flex',
-        height: CH,
-        width: 'max-content',
-        animation: `mal-c-${id} ${duration}s linear infinite`,
-      }}>
+      <div className="flex h-[var(--carousel-h)] w-max animate-[mal-c-${id}_${duration}s_linear-infinite]">
         {doubled.map((src, i) => (
-          <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
+          <img key={i} src={src} alt="" className="h-[var(--carousel-h)] w-auto block shrink-0" />
         ))}
       </div>
     </div>
@@ -128,7 +123,7 @@ export { meta } from './meta'
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0f0f0f', marginTop: '-80px' }} className="mal-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mal-container -mt-20">
       <style dangerouslySetInnerHTML={{
         __html: `
         .mal-p {
@@ -159,7 +154,7 @@ export function Component() {
       `}} />
 
       {/* 1. HERO ─────────────────────────────────────────────────────── */}
-      <ParallaxSection id="mal-hero" style={{ minHeight: '115vh' }}>
+      <ParallaxSection id="mal-hero" className="min-h-[115vh]">
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_HERO, speed: 0.8, isHero: true, objectFit: 'cover', className: 'mal-hero-desktop' }}
           position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
@@ -179,7 +174,7 @@ export function Component() {
       </ParallaxSection>
 
       {/* 2. INTRO: text right + web028 left + marquee-1 ─────────────── */}
-      <ParallaxSection id="mal-intro" style={{ minHeight: '150vh' }}>
+      <ParallaxSection id="mal-intro" className="min-h-[150vh]">
         {/* Left: tall portrait */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB028, speed: 0.3 }}
@@ -201,7 +196,7 @@ export function Component() {
         </ParallaxLayer>
         {/* Sticky marquee */}
         <ParallaxLayer
-          layer={{ type: 'marquee', content: 'Somos responsables de los mundos que creamos', speed: 0, multiplier: 24 }}
+          layer={{ type: 'marquee', content: 'Somos responsables de los mundos que creamos', speed: 0, intensity: 24 }}
           position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
         />
         {/* web009 center — visible below text */}
@@ -212,7 +207,7 @@ export function Component() {
       </ParallaxSection>
 
       {/* 3. FULLWIDTH 1 ──────────────────────────────────────────────── */}
-      <ParallaxSection id="mal-fw1" style={{ minHeight: '100vh' }}>
+      <ParallaxSection id="mal-fw1" className="min-h-screen">
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_FULL_1, speed: 0.3 }}
           position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
@@ -220,7 +215,7 @@ export function Component() {
       </ParallaxSection>
 
       {/* 4. COLLAGE 1: web008 right + text2 left + web025 center ────── */}
-      <ParallaxSection id="mal-collage1" style={{ minHeight: '180vh' }}>
+      <ParallaxSection id="mal-collage1" className="min-h-[180vh]">
         {/* web008 right small */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB008, speed: 0.3 }}
@@ -253,7 +248,7 @@ export function Component() {
       </ParallaxSection>
 
       {/* 5. TEXT 3 + PHOTOS CLUSTER ──────────────────────────────────── */}
-      <ParallaxSection id="mal-cluster1" style={{ minHeight: '160vh' }}>
+      <ParallaxSection id="mal-cluster1" className="min-h-[160vh]">
         {/* Text 3 right */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
@@ -276,7 +271,7 @@ export function Component() {
         />
         {/* Sticky marquee 2 */}
         <ParallaxLayer
-          layer={{ type: 'marquee', content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.', speed: 0, multiplier: 24 }}
+          layer={{ type: 'marquee', content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.', speed: 0, intensity: 24 }}
           position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
         />
         {/* web011 center small */}
@@ -326,7 +321,7 @@ export function Component() {
         />
         {/* Sticky marquee 3 */}
         <ParallaxLayer
-          layer={{ type: 'marquee', content: '¿cómo seguir habitando el planeta?', speed: 0, multiplier: 20 }}
+          layer={{ type: 'marquee', content: '¿cómo seguir habitando el planeta?', speed: 0, intensity: 20 }}
           position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
         />
       </ParallaxSection>
@@ -428,7 +423,7 @@ export function Component() {
         />
         {/* Sticky marquee 4 */}
         <ParallaxLayer
-          layer={{ type: 'marquee', content: 'nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde', speed: 0, multiplier: 24 }}
+          layer={{ type: 'marquee', content: 'nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde', speed: 0, intensity: 24 }}
           position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
         />
         {/* Video 2 */}

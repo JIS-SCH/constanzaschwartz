@@ -18,7 +18,7 @@ export { meta } from './meta'
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="eco-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="eco-container -mt-20">
       <style dangerouslySetInnerHTML={{
         __html: `
         /* ECO AL INFINITO - use global tokens from globals.css */
@@ -76,7 +76,7 @@ export function Component() {
 
       <div className="eco-desktop">
         {/* 1. HERO — Full width sculpture */}
-        <ParallaxSection id="hero" style={{ minHeight: '115vh' }}>
+        <ParallaxSection id="hero" className="min-h-[115vh]">
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
@@ -101,11 +101,7 @@ export function Component() {
         </div>
 
         {/* 2. INTRO — First paragraph + first collage images */}
-        <ParallaxSection id="intro" style={{
-          minHeight: '1400px',
-          position: 'relative',
-          backgroundColor: '#0F0F0F'
-        }}>
+        <ParallaxSection id="intro" className="relative min-h-[1400px] bg-obsidian">
           {/* Text Block */}
           <ParallaxLayer
             sectionId="intro"
@@ -149,7 +145,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 3. COLLAGE 1 + MARQUEE */}
-        <ParallaxSection id="collage-1" style={{ minHeight: '130vh' }}>
+        <ParallaxSection id="collage-1" className="min-h-[130vh]">
           {/* Tall portrait center */}
           <ParallaxLayer
             sectionId="collage-1"
@@ -165,7 +161,7 @@ export function Component() {
             layer={{ type: 'marquee', content: 'Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.', speed: 0 }}
             position={{ top: '20vh', left: '0', width: '100%', height: '50px', zIndex: 3 }}
           >
-            <div style={{ overflow: 'hidden', width: '100%' }}>
+            <div className="overflow-hidden w-full">
               <div className="marquee-track" style={{ animationDuration: '32s' }}>
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
@@ -182,7 +178,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 4. TEXT + COLLAGE 2 — "Constanza Schwartz tampoco cede..." */}
-        <ParallaxSection id="text-collage-2" style={{ minHeight: '140vh', position: 'relative' }}>
+        <ParallaxSection id="text-collage-2" className="relative min-h-[140vh]">
           {/* Left text */}
           <ParallaxLayer
             sectionId="text-collage-2"
@@ -213,7 +209,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 5. COLLAGE 3 + TEXT — "Al desplazarnos..." */}
-        <ParallaxSection id="collage-3" style={{ minHeight: 'calc(100vh + 1200px)', position: 'relative' }}>
+        <ParallaxSection id="collage-3" className="relative min-h-[calc(100vh+1200px)]">
           {/* Full-width Image 7 */}
           <ParallaxLayer
             sectionId="collage-3"
@@ -252,7 +248,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 6. COLLAGE 4 — The 4 Images Strip (10, 11, 12, 13) */}
-        <ParallaxSection id="collage-4" style={{ minHeight: '1800px', position: 'relative' }}>
+        <ParallaxSection id="collage-4" className="relative min-h-[1800px]">
           {/* BIG Top Right Image (Img 10) - 710px width x 473px height */}
           <ParallaxLayer
             sectionId="collage-4"
@@ -284,7 +280,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 7. VIDEO MAKING OFF (Full Width) */}
-        <ParallaxSection id="video-making-off" style={{ minHeight: '110vh' }}>
+        <ParallaxSection id="video-making-off" className="min-h-[110vh]">
           <ParallaxLayer
             sectionId="video-making-off"
             layerIndex={0}
@@ -301,7 +297,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 8. COLLAGE STAIRCASE + PARAGRAPH + IMG 17 & 18 */}
-        <ParallaxSection id="collage-14-15-16" style={{ minHeight: '2900px', position: 'relative' }}>
+        <ParallaxSection id="collage-14-15-16" className="relative min-h-[2900px]">
           {/* Staircase Image 14 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
@@ -378,7 +374,7 @@ export function Component() {
 
 
         {/* 10. FINAL FULL IMAGE (19) */}
-        <ParallaxSection id="final-image-19" style={{ minHeight: '120vh' }}>
+        <ParallaxSection id="final-image-19" className="min-h-[120vh]">
           <ParallaxLayer
             sectionId="final-image-19"
             layerIndex={0}
@@ -388,7 +384,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 11. FINAL SEQUENCE: COLLAGE 20-21-22 + TEXT + COLLAGE 23-24 */}
-        <ParallaxSection id="final-sequence" style={{ minHeight: '3400px', position: 'relative' }}>
+        <ParallaxSection id="final-sequence" className="relative min-h-[34h]">
 
           {/* Img 21 (467x312) */}
           <ParallaxLayer
@@ -487,7 +483,7 @@ export function Component() {
           />
         </ParallaxSection>
         {/* 13. IMAGE 25 (Full Width) + COLLAGE 26-27 */}
-        <ParallaxSection id="final-sequence-25-27" style={{ minHeight: '230vh' }}>
+        <ParallaxSection id="final-sequence-25-27" className="min-h-[230vh]">
           <ParallaxLayer
             sectionId="final-sequence-25-27"
             layerIndex={0}
@@ -511,7 +507,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 14. CAROUSEL 28-29 */}
-        <ParallaxSection id="carousel-section" style={{ minHeight: '60vh' }}>
+        <ParallaxSection id="carousel-section" className="min-h-[60vh]">
           {/* Infinite Carousel */}
           <ParallaxLayer
             sectionId="carousel-section"
@@ -539,7 +535,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 15. FINAL SEQUENCE 30-33 + MARQUEE */}
-        <ParallaxSection id="final-sequence-30-33" style={{ minHeight: '350vh' }}>
+        <ParallaxSection id="final-sequence-30-33" className="min-h-[350vh]">
           {/* Final Reflective Text (Right aligned per figma) */}
           <ParallaxLayer
             sectionId="final-sequence-30-33"
@@ -612,7 +608,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 16. VIDEO TIMELAPSE (Full Width) */}
-        <ParallaxSection id="video-timelapse" style={{ minHeight: '120vh' }}>
+        <ParallaxSection id="video-timelapse" className="min-h-[120vh]">
           <ParallaxLayer
             sectionId="video-timelapse"
             layerIndex={0}
@@ -635,7 +631,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 17. FINAL COLLAGE 34-35 */}
-        <ParallaxSection id="collage-34-35" style={{ minHeight: '180vh' }}>
+        <ParallaxSection id="collage-34-35" className="min-h-[180vh]">
           <ParallaxLayer
             sectionId="collage-34-35"
             layerIndex={0}
@@ -651,7 +647,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 18. CAROUSEL 2 (carousel6-10) */}
-        <ParallaxSection id="carousel-section-2" style={{ minHeight: '60vh' }}>
+        <ParallaxSection id="carousel-section-2" className="min-h-[60vh]">
           <ParallaxLayer
             sectionId="carousel-section-2"
             layerIndex={0}
@@ -678,7 +674,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 19. FINAL COLLAGE 36-37 */}
-        <ParallaxSection id="collage-36-37" style={{ minHeight: '180vh' }}>
+        <ParallaxSection id="collage-36-37" className="min-h-[180vh]">
           <ParallaxLayer
             sectionId="collage-36-37"
             layerIndex={0}
@@ -694,7 +690,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 20. FINAL FULL IMAGE (38) */}
-        <ParallaxSection id="final-image-38" style={{ minHeight: '120vh' }}>
+        <ParallaxSection id="final-image-38" className="min-h-[120vh]">
           <ParallaxLayer
             sectionId="final-image-38"
             layerIndex={0}
@@ -704,18 +700,10 @@ export function Component() {
         </ParallaxSection>
 
         {/* 21. LYRICS SECTION (Sound of Silence) — Figma 1571:1033..1038 + 1867:1262 */}
-        <ParallaxSection id="lyrics-section" style={{ minHeight: 'auto', backgroundColor: '#0F0F0F' }}>
-          <div style={{ position: 'relative', width: '100%', paddingTop: '110px', paddingBottom: '0' }}>
+        <ParallaxSection id="lyrics-section" className="bg-obsidian">
+          <div className="relative w-full pt-[110px]">
             {/* Lyrics — H4 Helvetica Neue LT Std Thin 36px / line-height normal / tracking 0.72px */}
-            <div style={{
-              color: '#fff',
-              textTransform: 'uppercase',
-              fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-              fontSize: 'var(--h4-size)',
-              fontWeight: 100,
-              letterSpacing: '0.72px',
-              lineHeight: 1,
-            }}>
+            <div className="eco-h4 text-white uppercase tracking-[0.72px] leading-none">
               {/* Figma top deltas = 106px. With lineHeight 1 (36px text), marginBottom 70 → top-to-top = 106 ✓ */}
               <div style={{ marginLeft: 'calc(37.5% + 22px)', marginBottom: '70px' }}>BECAUSE A VISION SOFTLY CREEPING</div>
               <div style={{ marginLeft: 'calc(4.17% + 1px)', marginBottom: '70px' }}>LEFT ITS SEEDS WHILE I WAS SLEEPING</div>
@@ -725,29 +713,12 @@ export function Component() {
             </div>
 
             {/* Simon & Garfunkel · 1964 — Space Grotesk Light 16px, 110px below WITHIN, right-anchored at 97px from right edge */}
-            <div style={{
-              marginTop: '110px',
-              marginRight: '6.74%' /* 97/1440 */,
-              textAlign: 'right',
-              color: '#fff',
-              fontFamily: '"Space Grotesk", sans-serif',
-              fontWeight: 300,
-              fontSize: 'var(--p-size)',
-              lineHeight: 1.5,
-            }}>
+            <div className="mt-[110px] mr-[6.74%] text-right text-white font-light text-[var(--p-size)] leading-relaxed">
               Simon &amp; Garfunkel · 1964
             </div>
 
             {/* Credits — Space Grotesk 16px, 292px below Simon & Garfunkel, full-width with 3px left offset */}
-            <div style={{
-              marginTop: '292px',
-              marginLeft: '3px',
-              color: '#fff',
-              fontFamily: '"Space Grotesk", sans-serif',
-              fontWeight: 300,
-              fontSize: 'var(--p-size)',
-              lineHeight: 1.5,
-            }}>
+            <div className="mt-[292px] ml-[3px] text-white font-light text-[var(--p-size)] leading-relaxed">
               <span style={{ fontWeight: 700 }}>Realización: </span>
               <span>Gastón Aliaga (INDIGO Lumieres) y Mónica Mostajo + Franco Lavra (GOTA Arquigrafía)   /   </span>
               <span style={{ fontWeight: 700 }}>Instalación: </span>
@@ -772,28 +743,28 @@ export function Component() {
       </div>{/* /eco-desktop */}
 
       {/* ── ECO MOBILE ───────────────────────────────────────────────── */}
-      <div className="eco-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden' }}>
+      <div className="eco-mobile bg-obsidian overflow-hidden">
 
         {/* Hero */}
-        <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '561px', objectFit: 'cover' }} />
+        <img src={ASSETS.heroMobile} alt="" className="block w-full h-[561px] object-cover" />
 
         {/* Para 1 */}
-        <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
+        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
           <p style={{ marginBottom: '1rem' }}>Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.</p>
           <p>No es más ese conjunto de neuronas que no cede en su lucha por mantenernos vivos. Ha pasado años sumergido en las incontables marejadas de tecnología que nos abruma sin piedad desde que pusimos un caballo delante de un arado.</p>
         </div>
 
         {/* 3-image cluster (staggered) */}
-        <div style={{ position: 'relative', height: '380px', marginTop: '60px' }}>
-          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', left: '110px', top: '80px', width: '170px', height: '114px', objectFit: 'cover' }} />
-          <img src={ASSETS.img3} alt="" style={{ position: 'absolute', right: '0px', top: '240px', width: '200px', height: '133px', objectFit: 'cover' }} />
+        <div className="relative h-[380px] mt-[60px]">
+          <img src={ASSETS.img1} alt="" className="absolute left-0 top-0 w-[140px] h-[210px] object-cover" />
+          <img src={ASSETS.img2} alt="" className="absolute left-[110px] top-[80px] w-[170px] h-[114px] object-cover" />
+          <img src={ASSETS.img3} alt="" className="absolute right-0 top-[240px] w-[200px] h-[133px] object-cover" />
         </div>
 
         {/* Large portrait + marquee overlay */}
-        <div style={{ position: 'relative', width: '100%', height: '525px', marginTop: '20px' }}>
-          <img src={ASSETS.img4} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '30px', overflow: 'hidden' }}>
+        <div className="relative w-full h-[525px] mt-5">
+          <img src={ASSETS.img4} alt="" className="w-full h-full object-cover" />
+          <div className="absolute top-10 left-0 w-full h-[30px] overflow-hidden">
             <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set"><span className="marquee-item">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
               <div className="marquee-set"><span className="marquee-item">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
@@ -802,47 +773,47 @@ export function Component() {
         </div>
 
         {/* Para 2 */}
-        <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
+        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
           Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
         </div>
 
         {/* Image pair */}
-        <div style={{ position: 'relative', height: '320px', marginTop: '60px' }}>
-          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', left: '0px', top: '100px', width: '200px', height: '134px', objectFit: 'cover' }} />
-          <img src={ASSETS.img5} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+        <div className="relative h-[320px] mt-[60px]">
+          <img src={ASSETS.img6} alt="" className="absolute left-0 top-[100px] w-[200px] h-[134px] object-cover" />
+          <img src={ASSETS.img5} alt="" className="absolute right-0 top-0 w-[200px] h-[300px] object-cover" />
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img7} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '40px' }} />
+        <img src={ASSETS.img7} alt="" className="block w-full h-[260px] object-cover mt-10" />
 
         {/* Image pair */}
-        <div style={{ position: 'relative', height: '240px', marginTop: '40px' }}>
-          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '134px', objectFit: 'cover' }} />
-          <img src={ASSETS.img9} alt="" style={{ position: 'absolute', right: '0px', top: '80px', width: '200px', height: '133px', objectFit: 'cover' }} />
+        <div className="relative h-[240px] mt-10">
+          <img src={ASSETS.img8} alt="" className="absolute left-0 top-0 w-[200px] h-[134px] object-cover" />
+          <img src={ASSETS.img9} alt="" className="absolute right-0 top-[80px] w-[200px] h-[133px] object-cover" />
         </div>
 
         {/* Para 3 */}
-        <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
+        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
           Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos de su obra.
         </div>
 
         {/* Image pair staggered */}
-        <div style={{ position: 'relative', height: '230px', marginTop: '60px' }}>
-          <img src={ASSETS.img10} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} />
-          <img src={ASSETS.img11} alt="" style={{ position: 'absolute', left: '0px', top: '80px', width: '200px', height: '133px', objectFit: 'cover' }} />
+        <div className="relative h-[230px] mt-[60px]">
+          <img src={ASSETS.img10} alt="" className="absolute right-0 top-0 w-[200px] h-[133px] object-cover" />
+          <img src={ASSETS.img11} alt="" className="absolute left-0 top-[80px] w-[200px] h-[133px] object-cover" />
         </div>
 
         {/* Image pair staggered */}
-        <div style={{ position: 'relative', height: '230px', marginTop: '20px' }}>
-          <img src={ASSETS.img13} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} />
-          <img src={ASSETS.img12} alt="" style={{ position: 'absolute', left: '0px', top: '80px', width: '200px', height: '133px', objectFit: 'cover' }} />
+        <div className="relative h-[230px] mt-5">
+          <img src={ASSETS.img13} alt="" className="absolute right-0 top-0 w-[200px] h-[133px] object-cover" />
+          <img src={ASSETS.img12} alt="" className="absolute left-0 top-[80px] w-[200px] h-[133px] object-cover" />
         </div>
 
         {/* Video Making Off - Mobile */}
-        <div style={{ width: '100%', height: '219px', marginTop: '40px', position: 'relative', background: '#000' }}>
+        <div className="relative w-full h-[219px] mt-10 bg-black">
           <iframe
             src={ASSETS.videoMakingOff}
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            className="absolute top-0 left-0 w-full h-full"
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             title="ECO AL INFINITO . Making Off"
@@ -850,73 +821,73 @@ export function Component() {
         </div>
 
         {/* Three diagonal images */}
-        <div style={{ position: 'relative', height: '420px', marginTop: '40px' }}>
-          <img src={ASSETS.img14} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <img src={ASSETS.img15} alt="" style={{ position: 'absolute', left: '125px', top: '100px', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <img src={ASSETS.img16} alt="" style={{ position: 'absolute', right: '20px', top: '200px', width: '140px', height: '210px', objectFit: 'cover' }} />
+        <div className="relative h-[420px] mt-10">
+          <img src={ASSETS.img14} alt="" className="absolute left-5 top-0 w-[140px] h-[210px] object-cover" />
+          <img src={ASSETS.img15} alt="" className="absolute left-[125px] top-[100px] w-[140px] h-[210px] object-cover" />
+          <img src={ASSETS.img16} alt="" className="absolute right-5 top-[200px] w-[140px] h-[210px] object-cover" />
         </div>
 
         {/* Para 4 */}
-        <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
+        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
           La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
         </div>
 
         {/* Image pair */}
-        <div style={{ position: 'relative', height: '470px', marginTop: '60px' }}>
-          <img src={ASSETS.img17} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={ASSETS.img18} alt="" style={{ position: 'absolute', right: '20px', top: '150px', width: '200px', height: '300px', objectFit: 'cover' }} />
+        <div className="relative h-[470px] mt-[60px]">
+          <img src={ASSETS.img17} alt="" className="absolute left-5 top-0 w-[200px] h-[300px] object-cover" />
+          <img src={ASSETS.img18} alt="" className="absolute right-5 top-[150px] w-[200px] h-[300px] object-cover" />
         </div>
 
         {/* Marquee */}
-        <div style={{ marginTop: '60px', height: '30px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '24s' }}>
+          <div className="mt-[60px] h-[30px] overflow-hidden">
+            <div className="marquee-track" style={{ animationDuration: '24s' }}>
             <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
             <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
           </div>
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img19} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '40px' }} />
+        <img src={ASSETS.img19} alt="" className="block w-full h-[260px] object-cover mt-10" />
 
         {/* Image pair staggered */}
-        <div style={{ position: 'relative', height: '300px', marginTop: '40px' }}>
-          <img src={ASSETS.img20} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '200px', objectFit: 'cover' }} />
-          <img src={ASSETS.img21} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '200px', height: '200px', objectFit: 'cover' }} />
+        <div className="relative h-[300px] mt-10">
+          <img src={ASSETS.img20} alt="" className="absolute left-5 top-0 w-[200px] h-[200px] object-cover" />
+          <img src={ASSETS.img21} alt="" className="absolute right-5 top-[80px] w-[200px] h-[200px] object-cover" />
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img22} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '40px' }} />
+        <img src={ASSETS.img22} alt="" className="block w-full h-[260px] object-cover mt-10" />
 
         {/* Para 5 */}
-        <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
+        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
           Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo. Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por la Tierra. Nos traslada a los inicios, mientras nos apoyamos confiados en las formas abiertas y fundamentales de nuestro alfabeto de formas. No importa el siglo de nuestra ubicación defensiva. Seguiremos dudando hasta que realmente nos reconozcamos allí. Somos habitantes de un extenso universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos. Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos. Es nuestro universo…
         </div>
 
         {/* Image pair offset */}
-        <div style={{ position: 'relative', height: '360px', marginTop: '60px' }}>
-          <img src={ASSETS.img23} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '270px', objectFit: 'cover' }} />
-          <img src={ASSETS.img24} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '200px', height: '170px', objectFit: 'cover' }} />
+        <div className="relative h-[360px] mt-[60px]">
+          <img src={ASSETS.img23} alt="" className="absolute right-5 top-0 w-[200px] h-[270px] object-cover" />
+          <img src={ASSETS.img24} alt="" className="absolute left-5 top-[100px] w-[200px] h-[170px] object-cover" />
         </div>
 
         {/* Marquee */}
-        <div style={{ marginTop: '60px', height: '30px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '28s' }}>
+          <div className="mt-[60px] h-[30px] overflow-hidden">
+            <div className="marquee-track" style={{ animationDuration: '28s' }}>
             <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
             <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
           </div>
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img25} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '40px' }} />
+        <img src={ASSETS.img25} alt="" className="block w-full h-[260px] object-cover mt-10" />
 
         {/* Image pair 170px */}
-        <div style={{ position: 'relative', height: '310px', marginTop: '40px' }}>
+        <div className="relative h-[310px] mt-10">
           <img src={ASSETS.img26} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '170px', height: '210px', objectFit: 'cover' }} />
           <img src={ASSETS.img27} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '170px', height: '210px', objectFit: 'cover' }} />
         </div>
 
         {/* Image pair 200px */}
-        <div style={{ position: 'relative', height: '300px', marginTop: '20px' }}>
+        <div className="relative h-[300px] mt-5">
           <img src={ASSETS.img30} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '200px', objectFit: 'cover' }} />
           <img src={ASSETS.img31} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '200px', height: '200px', objectFit: 'cover' }} />
         </div>
@@ -933,7 +904,7 @@ export function Component() {
         <style dangerouslySetInnerHTML={{ __html: `@keyframes eco-m-c1 { from { transform: translateX(0) } to { transform: translateX(-50%) } }` }} />
 
         {/* Image pair (img32/img33) */}
-        <div style={{ position: 'relative', height: '320px', marginTop: '60px' }}>
+        <div className="relative h-[320px] mt-[60px]">
           <img src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '170px', height: '230px', objectFit: 'cover' }} />
           <img src={ASSETS.img33} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '170px', height: '200px', objectFit: 'cover' }} />
         </div>
@@ -952,7 +923,7 @@ export function Component() {
         </div>
 
         {/* Image pair (img34/img35) */}
-        <div style={{ position: 'relative', height: '340px', marginTop: '40px' }}>
+        <div className="relative h-[340px] mt-10">
           <img src={ASSETS.img34} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '230px', objectFit: 'cover' }} />
           <img src={ASSETS.img35} alt="" style={{ position: 'absolute', right: '20px', top: '90px', width: '200px', height: '200px', objectFit: 'cover' }} />
         </div>

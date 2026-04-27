@@ -38,7 +38,7 @@ const P_APELA =
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="mutek-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mutek-container -mt-20">
       <style dangerouslySetInnerHTML={{
         __html: `
         /* MUTEK overrides - use global tokens from globals.css */
@@ -349,8 +349,8 @@ export function Component() {
         </ParallaxSection>
 
         {/* 12. CAROUSEL — chair-style horizontal scroll */}
-        <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-          <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'mutek-carousel-scroll 14s linear infinite' }}>
+        <div className="w-full h-[var(--carousel-h)] overflow-hidden">
+          <div className="flex h-[var(--carousel-h)] w-max animate-mutek-carousel">
             {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
               <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
             ))}
@@ -358,7 +358,7 @@ export function Component() {
         </div>
 
         {/* 13. FINAL TITLE — Desktop: Stuck to carousel, 110px bottom margin */}
-        <div style={{ marginTop: '0', paddingLeft: '46.5%', paddingBottom: '110px', textAlign: 'left', width: '100%' }}>
+        <div className="pl-[46.5%] pb-[110px] w-full text-left">
           <h2 style={{ ...TITLE_STYLE, lineHeight: 1.1 }} className="mutek-h3">
             Y AÚN APAGADA,<br />
             ESPERA, AL PRÓXIMO RITUAL.
@@ -367,48 +367,43 @@ export function Component() {
       </div>{/* /mutek-desktop */}
 
       {/* ── MUTEK MOBILE ─────────────────────────────────────────────── */}
-      <div className="mutek-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden' }}>
+      <div className="mutek-mobile bg-obsidian overflow-hidden">
 
         {/* 1. Hero */}
-        <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '573px', objectFit: 'cover' }} />
+        <img src={ASSETS.heroMobile} alt="" className="block w-full h-[573px] object-cover" />
 
         {/* 2. Intro para */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
+        <div className="mutek-p text-white pt-[110px] w-[350px] ml-5">
           En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
         </div>
 
         {/* 3. First image pair + title + sub-text — absolute layout per Figma */}
         {/* img1 top:0 h:299, title top:252 overlaps tail of img1, img2 right-side top:374 h:300 */}
-        <div style={{ position: 'relative', height: '674px', marginTop: '80px' }}>
-          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
-          <h3 style={{
-            position: 'absolute', top: '252px', left: '20px', margin: 0,
-            fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-            fontWeight: 100, fontSize: '36px', lineHeight: 1, color: '#fff', textTransform: 'uppercase',
-            zIndex: 1
-          }}>
+        <div className="relative h-[674px] mt-20">
+          <img src={ASSETS.img1} alt="" className="absolute left-5 top-0 w-[200px] h-[299px] object-cover z-0" />
+          <h3 className="absolute top-[252px] left-5 m-0 font-light text-[36px] leading-none text-white uppercase z-10">
             Ritual al Vacío
           </h3>
-          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', left: 'calc(41.67% + 7.5px)', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
-          <div className="mutek-p" style={{ position: 'absolute', top: '298px', left: '20px', width: '350px', color: '#fff', zIndex: 1 }}>
+          <img src={ASSETS.img2} alt="" className="absolute left-[calc(41.67%+7.5px)] top-[374px] w-[200px] h-[300px] object-cover z-0" />
+          <div className="mutek-p absolute top-[298px] left-5 w-[350px] text-white z-10">
             Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
           </div>
         </div>
 
         {/* 4. P_CAVE — 80px after image container */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '80px 0 0', width: '350px', marginLeft: '20px' }}>
+        <div className="mutek-p text-white pt-[80px] w-[350px] ml-5">
           {P_CAVE}
         </div>
 
         {/* 5. Video */}
-        <div style={{ width: '100%', height: '219px', marginTop: '110px', overflow: 'hidden' }}>
-          <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}>
+        <div className="w-full h-[219px] mt-[110px] overflow-hidden">
+          <video autoPlay muted loop playsInline className="w-full h-full object-cover block">
             <source src={ASSETS.vid1} type="video/mp4" />
           </video>
         </div>
 
         {/* 6. P_VACIO */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
+        <div className="mutek-p text-white pt-[110px] w-[350px] ml-5">
           {P_VACIO}
         </div>
 
@@ -464,7 +459,7 @@ export function Component() {
         </div>
 
         {/* 8. P_QUESTION */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '110px 0 0', width: '350px', marginLeft: '20px' }}>
+        <div className="mutek-p text-white pt-[110px] w-[350px] ml-5">
           {P_QUESTION}
         </div>
 

@@ -17,7 +17,7 @@ const TITLE_STYLE: React.CSSProperties = {
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="dw-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="dw-container -mt-20">
       <style dangerouslySetInnerHTML={{
         __html: `
         .dw-h1, .dw-h2, .dw-h3 { font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; }
@@ -29,14 +29,14 @@ export function Component() {
 
         .marquee-item {
           font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-          font-weight: 100 !important;
+          font-weight: 300 !important;
           text-transform: uppercase;
           mix-blend-mode: difference;
+          -webkit-mix-blend-mode: difference;
         }
         @media (min-width: 769px) {
           .marquee-item {
             font-size: 36px !important;
-            font-weight: 100 !important;
             letter-spacing: 0.02em !important;
             line-height: normal !important;
             padding-right: 80px !important;
@@ -49,7 +49,7 @@ export function Component() {
           /* h-hero = 80vh (image) + 300px (220px gap + 80px for neg-margin) */
           --h-hero: calc(80vh + 300px); --h-intro: 340px; --h-c1: calc(343px + 48.61vw);
           --h-stmt: 480px; --h-c2: calc(72.915vw + 220px);
-          --h-pc: 994px; --h-fp: 440px; --h-c3: calc(9vw + 66.67vw + 220px); --h-finish: calc(220px + 260px + 35vw + 20px + 220px + 250px);
+          --h-pc: 994px; --h-fp: 440px; --h-c3: calc(9vw + 66.67vw + 220px);
 
           /* intro — starts at section top which is exactly 220px after hero */
           --it-l-t: 0px; --it-l-x: 12.71%; --it-l-w: 32.4305%;
@@ -89,7 +89,7 @@ export function Component() {
             /* section heights */
             --h-hero: 750px; --h-intro: 320px; --h-c1: 580px;
             --h-stmt: 380px; --h-c2: 810px;
-            --h-pc: 720px;   --h-fp: 310px;   --h-c3: 540px; --h-finish: 1500px;
+            --h-pc: 720px;   --h-fp: 310px;   --h-c3: 540px;
 
             /* intro */
             --it-l-t: 30px;  --it-l-x: 20px; --it-l-w: calc(100% - 40px);
@@ -120,20 +120,28 @@ export function Component() {
             --c3-c-t: 320px; --c3-c-x: 229px; --c3-c-w: 141px; --c3-c-h: 94px;
             --c3-marquee-t: 40px;
 
-            /* finish */
-            --finish-text-t: 30px; --finish-text-l: 20px; --finish-text-w: calc(100% - 40px);
-            --finish-marquee-t: 890px;
-            --finish-close-t: 1080px; --finish-close-l: 20px; --finish-close-w: calc(100% - 40px);
-
-            /* finish staircase */
-            --f-img-w: 140px; --f-img-h: 209px;
-            --f-img1-x: 20px;  --f-img1-t: 500px;
-            --f-img2-x: 125px; --f-img2-t: 640px;
-            --f-img3-x: 230px; --f-img3-t: 780px;
+          /* finish: flow layout — mobile overrides via CSS classes */
           }
+          
+          #finish > div:first-child { padding-left: 20px !important; padding-right: 20px !important; }
+          #finish > div:last-child { padding-left: 20px !important; padding-right: 20px !important; }
+          #finish .dw-staircase {
+            height: calc(120px + 56vw) !important;
+          }
+          #finish .dw-staircase img:nth-child(1) { left: 20px !important; width: 140px !important; top: 0 !important; }
+          #finish .dw-staircase img:nth-child(2) { left: 125px !important; width: 140px !important; top: 80px !important; }
+          #finish .dw-staircase img:nth-child(3) { left: 230px !important; width: 140px !important; top: 160px !important; }
+          
           .dw-desktop { display: none !important; }
           .dw-mobile  { display: block !important; }
         }
+
+        /* Global fixes */
+        .dw-container section { isolation: auto !important; }
+        .marquee-track { mix-blend-mode: difference !important; }
+
+        .dw-desktop { display: block; }
+        .dw-mobile  { display: none; }
 
         @keyframes dwm-carousel-scroll {
           from { transform: translateX(0); }
@@ -148,7 +156,7 @@ export function Component() {
           layer={{ type: 'text', content: '', speed: 0 }}
           position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
         >
-          <div style={{ width: '100%', height: '100%', backgroundColor: '#0f0f0f' }} />
+          <div className="w-full h-full bg-obsidian" />
         </ParallaxLayer>
 
         <div className="dw-desktop" style={{ display: 'block' }}>
@@ -247,7 +255,7 @@ export function Component() {
         />
         <ParallaxLayer
           sectionId="collage-2" layerIndex={2}
-          layer={{ type: 'marquee', content: 'UN GRUPO DE FANTASMAS (LOS SENTIDOS) DIRIGEN TODA NUESTRA VIDA Y DESDE YA NUESTRA CONEXIÓN CON EL ARTE, EL DISEÑO.', speed: 0 }}
+          layer={{ type: 'marquee', content: 'UN GRUPO DE FANTASMAS (LOS SENTIDOS) DIRIGEN TODA NUESTRA VIDA Y DESDE YA NUESTRA CONEXIÓN CON EL ARTE, EL DISEÑO.', speed: 0, intensity: 22 }}
           position={{ top: 'var(--c2-marquee-t)', left: '0', width: '100%', height: '8vh', zIndex: 3 }}
         />
       </ParallaxSection>
@@ -313,7 +321,7 @@ export function Component() {
       <ParallaxSection id="collage-3" style={{ minHeight: 'var(--h-c3)' }}>
         <ParallaxLayer
           sectionId="collage-3" layerIndex={0}
-          layer={{ type: 'marquee', content: 'ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.', speed: 0 }}
+          layer={{ type: 'marquee', content: 'ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.', speed: 0, intensity: 22 }}
           position={{ top: 'var(--c3-marquee-t, 2vh)', left: '0', width: '100%', height: '8vh', zIndex: 4 }}
         />
         <ParallaxLayer
@@ -353,7 +361,7 @@ export function Component() {
         <div style={{ height: '220px' }} />
 
         {/* Staircase images: 3 images in a row, staggered vertically */}
-        <div className="dw-staircase" style={{ position: 'relative', width: '100%', height: 'calc(260px + 36vw)' }}>
+        <div className="dw-staircase" style={{ position: 'relative', width: '100%', height: 'calc(260px + 33vw)' }}>
           <img src={ASSETS.img8} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', left: '4.24%', top: 0, width: '23.96%', height: 'auto', display: 'block' }} />
           <img src={ASSETS.img9} alt="" loading="lazy" decoding="async"
@@ -362,11 +370,14 @@ export function Component() {
             style={{ position: 'absolute', left: '71.81%', top: '260px', width: '23.96%', height: 'auto', display: 'block' }} />
         </div>
 
-        {/* Marquee — touching img10 bottom */}
+        {/* Marquee — overlapping img10 bottom */}
         <div style={{
           width: '100%', overflow: 'hidden',
+          marginTop: '-60px', // Superposición para que se vea el efecto difference
+          position: 'relative',
+          zIndex: 10,
           mixBlendMode: 'difference',
-          ...(({ WebkitMixBlendMode: 'difference', transform: 'translateZ(0)' }) as any),
+          ...(({ WebkitMixBlendMode: 'difference' }) as any),
         }}>
           <div className="marquee-track" style={{ animationDuration: '88s' }}>
             {[0, 1].map((setIdx) => (
@@ -381,8 +392,8 @@ export function Component() {
           </div>
         </div>
 
-        {/* 220px gap */}
-        <div style={{ height: '220px' }} />
+        {/* Gap ajustado para que Foto -> Párrafo sea 220px (Gap = 220 - altura marquee) */}
+        <div style={{ height: '160px' }} />
 
         {/* Closing text */}
         <div style={{ paddingLeft: '7.64%', paddingRight: '60%' }}>

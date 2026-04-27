@@ -152,10 +152,10 @@ function Marquee() {
   const text = 'Es posible que la objetividad sea un proyecto inalcanzable de la modernidad.'
 
   return (
-    <div style={{ overflow: 'hidden', width: '100%' }}>
-      <div ref={trackRef} style={{ display: 'flex', whiteSpace: 'nowrap', width: 'max-content' }}>
+    <div className="overflow-hidden w-full">
+      <div ref={trackRef} className="flex whitespace-nowrap w-max">
         {[0, 1].map((i) => (
-          <span key={i} className="pr-marquee-text" style={{ marginRight: '5em' }}>
+          <span key={i} className="pr-marquee-text mr-[5em]">
             {text}
           </span>
         ))}
@@ -173,22 +173,18 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
   const duration = images.length * 3.5
 
   return (
-    <div style={{ width: '100%', height: '331px', overflow: 'hidden' }}>
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes pr-carousel-${id} {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-${totalWidth}px); }
-        }
-      `}} />
-      <div style={{
-        display: 'flex',
-        height: '331px',
-        width: 'max-content',
-        animation: `pr-carousel-${id} ${duration}s linear infinite`,
-      }}>
+    <div className="w-full h-[331px] overflow-hidden">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes pr-carousel-${id} {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-${totalWidth}px); }
+          }
+        `}} />
+      <div className="flex h-[331px] w-max animate-[pr-carousel-${id}_${duration}s_linear_infinite]">
         {doubled.map((src, i) => (
-          <div key={i} style={{ width: '588px', height: '331px', flexShrink: 0 }}>
-            <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <div key={i} className="w-[588px] h-[331px] flex-shrink-0">
+            <img src={src} alt="" className="w-full h-full object-cover block" />
           </div>
         ))}
       </div>
@@ -204,9 +200,9 @@ function EventList({ events }: { events: string[] }) {
     <div>
       {events.map((event, i) => (
         <div key={i}>
-          <p className="pr-list" style={{ margin: 0, padding: '10px 0' }}>{event}</p>
+          <p className="pr-list m-0 py-[10px]">{event}</p>
           {i < events.length - 1 && (
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.3)' }} />
+            <div className="border-t border-white/30" />
           )}
         </div>
       ))}
@@ -223,7 +219,7 @@ function YearSection({ data }: { data: YearData }) {
       {/* Year typographic image */}
       <div className="pr-year-img">
         <img src={data.yearImg} alt={data.year}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          className="w-full h-full object-cover block" />
       </div>
 
       {/* Carousel overlaps bottom of year image */}
@@ -258,7 +254,7 @@ export function ProfilePage() {
         {/* Portrait */}
         <div className="pr-portrait">
           <img src={IMG_PORTRAIT} alt="Constanza Schwartz"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            className="w-full h-full object-cover" />
         </div>
 
         {/* CONSTANZA / SCHWARTZ — overlays portrait */}
@@ -306,7 +302,7 @@ export function ProfilePage() {
         {/* Second portrait */}
         <div className="pr-photo2">
           <img src={IMG_PORTRAIT_2} alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            className="w-full h-full object-cover" />
         </div>
 
         {/* Text 2 */}
@@ -334,7 +330,7 @@ export function ProfilePage() {
         {/* BIO text */}
         <div className="pr-bio-text">
           <p className="pr-p">
-            <span style={{ textTransform: 'uppercase' }}>Constanza Schwartz</span>
+            <span className="uppercase">Constanza Schwartz</span>
             {' '}(Buenos Aires, 1999).
           </p>
           <p className="pr-p">

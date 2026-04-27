@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --color-obsidian: #0F0F0F;
+  --color-off-white: #ededed;
+  
+  --font-helvetica: "Helvetica Neue LT Std", Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  
+  --spacing-GAP: 220px;
+  --spacing-CH: 330px;
+  --spacing-TW: 32.4305%;
+}
+
 /* ─── TYPOGRAPHY TOKENS: Figma-exact values ─── */
 /* Mobile (≤768px) */
 :root {
@@ -230,6 +242,38 @@ canvas {
 
 .project-page-padding {
   padding-bottom: 40px;
+}
+
+/* ─── COMPONENT CLASSES FOR INLINE STYLE MIGRATION ─── */
+/* Text block base */
+.text-block {
+  font-family: var(--font-space);
+  font-weight: 300;
+  font-size: var(--p-size);
+  line-height: var(--p-lh);
+  color: #fff;
+}
+
+/* Title base */
+.title-3 {
+  font-family: var(--font-helvetica);
+  font-weight: 100;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Project container base */
+.project-container {
+  width: 100%;
+  position: relative;
+  background-color: #0F0F0F;
+  margin-top: -80px;
+}
+
+/* Vimeo container */
+.vimeo-container {
+  width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 769px) {

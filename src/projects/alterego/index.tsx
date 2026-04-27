@@ -32,21 +32,14 @@ const CREDITS = [
 
 function VideoSection({ id, src }: { id: string; src: string }) {
   return (
-    <div style={{
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: '#0F0F0F',
-    }}>
+    <div className="w-full h-full flex items-center justify-center bg-obsidian">
       <VideoPlayer
         id={id}
         src={src}
         autoPlay
         loop={false}
         objectFit="contain"
-        style={{ width: '100%', height: '100%' }}
+        className="w-full h-full"
       />
     </div>
   )
@@ -54,7 +47,7 @@ function VideoSection({ id, src }: { id: string; src: string }) {
 
 export function Component() {
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F', marginTop: '-80px' }} className="alterego-container">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="alterego-container -mt-20">
       <style dangerouslySetInnerHTML={{
         __html: `
         .alterego-desktop { display: block; }
@@ -67,7 +60,7 @@ export function Component() {
       `}} />
 
       <div className="alterego-desktop">
-        <ParallaxSection id="hero" overflowHidden={false} style={{ height: '100vh' }}>
+        <ParallaxSection id="hero" overflowHidden={false} className="h-screen">
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
@@ -77,8 +70,8 @@ export function Component() {
         </ParallaxSection>
 
         {/* Marquee below hero — 97px top, 97px bottom to first content section */}
-        <div style={{ paddingTop: '97px', paddingBottom: '97px' }}>
-          <div style={{ overflow: 'hidden', width: '100%' }}>
+        <div className="pt-[97px] pb-[97px]">
+          <div className="overflow-hidden w-full">
             <div className="marquee-track" style={{ animationDuration: '88s' }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
@@ -101,7 +94,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 3. FULL-WIDTH VIDEO 1 — 04-azclip1 */}
-        <ParallaxSection id="fw-video-1" style={{ minHeight: '100vh', background: '#0F0F0F' }}>
+        <ParallaxSection id="fw-video-1" className="min-h-screen bg-obsidian">
           <VideoSection id="fw-video-1" src={cldVideo(ALT.v1)} />
         </ParallaxSection>
 
@@ -152,7 +145,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 7. FULL-WIDTH VIDEO 2 — ytclip4 */}
-        <ParallaxSection id="fw-video-2" style={{ minHeight: '80vh', background: '#0F0F0F' }}>
+        <ParallaxSection id="fw-video-2" className="min-h-[80vh] bg-obsidian">
           <VideoSection id="fw-video-2" src={cldVideo(ALT.v2)} />
         </ParallaxSection>
 
@@ -172,17 +165,12 @@ export function Component() {
           />
         </ParallaxSection>
 
-        <ParallaxSection id="fw-video-3" style={{ minHeight: '80vh', background: '#0F0F0F' }}>
+        <ParallaxSection id="fw-video-3" className="min-h-[80vh] bg-obsidian">
           <VideoSection id="fw-video-3" src={cldVideo(ALT.v3)} />
         </ParallaxSection>
 
-        <ParallaxSection id="wide-ytclip1" style={{ background: '#0F0F0F' }}>
-          <div style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            background: '#0F0F0F',
-          }}>
+        <ParallaxSection id="wide-ytclip1" className="bg-obsidian">
+          <div className="w-full flex justify-center bg-obsidian">
             <VideoPlayer
               id="ytclip1"
               src={cldVideo(ALT.v4)}
@@ -266,7 +254,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 16. FULL-WIDTH VIDEO 5 — azclip2 */}
-        <ParallaxSection id="fw-video-5" style={{ minHeight: '80vh', background: '#0F0F0F' }}>
+        <ParallaxSection id="fw-video-5" className="min-h-[80vh] bg-obsidian">
           <VideoSection id="fw-video-5" src={cldVideo(ALT.v7)} />
         </ParallaxSection>
 
