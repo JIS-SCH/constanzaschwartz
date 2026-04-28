@@ -51,7 +51,12 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
   }, [])
 
   const handleLogoClick = () => {
-    if (pathname !== '/') close()
+    if (pathname !== '/') {
+      close()
+    } else {
+      sessionStorage.removeItem('introComplete')
+      window.location.href = '/'
+    }
   }
 
   return (
