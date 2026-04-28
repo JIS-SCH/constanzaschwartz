@@ -373,37 +373,36 @@ export function Component() {
         <img src={ASSETS.heroMobile} alt="" className="block w-full h-[573px] object-cover" />
 
         {/* 2. Intro para */}
-        <div className="mutek-p text-white pt-[80px] w-[350px] ml-5">
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
         </div>
 
         {/* 3. First image pair + title + sub-text — absolute layout per Figma */}
-        {/* img1 top:0 h:299, title top:252 overlaps tail of img1, img2 right-side top:374 h:300 */}
-        <div className="relative h-[674px] mt-20">
-          <img src={ASSETS.img1} alt="" className="absolute left-5 top-0 w-[200px] h-[299px] object-cover z-0" />
-          <h3 className="absolute top-[252px] left-5 m-0 font-light text-[36px] leading-none text-white uppercase z-10">
+        <div style={{ position: 'relative', height: '674px', marginTop: '80px' }}>
+          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
+          <h3 style={{ position: 'absolute', top: '252px', left: '20px', margin: 0, fontWeight: 300, fontSize: '36px', lineHeight: 1, color: '#fff', textTransform: 'uppercase', zIndex: 10 }}>
             Ritual al Vacío
           </h3>
-          <img src={ASSETS.img2} alt="" className="absolute left-[calc(41.67%+7.5px)] top-[374px] w-[200px] h-[300px] object-cover z-0" />
-          <div className="mutek-p absolute top-[298px] left-5 w-[350px] text-white z-10">
+          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
+          <div style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10, fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
             Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
           </div>
         </div>
 
         {/* 4. P_CAVE — 80px after image container */}
-        <div className="mutek-p text-white pt-[80px] w-[350px] ml-5">
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           {P_CAVE}
         </div>
 
         {/* 5. Video */}
-        <div className="w-full h-[219px] mt-[80px] overflow-hidden">
-          <video autoPlay muted loop playsInline className="w-full h-full object-cover block">
+        <div style={{ width: '100%', height: '219px', marginTop: '80px', overflow: 'hidden' }}>
+          <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}>
             <source src={ASSETS.vid1} type="video/mp4" />
           </video>
         </div>
 
         {/* 6. P_VACIO */}
-        <div className="mutek-p text-white pt-[80px] w-[350px] ml-5">
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           {P_VACIO}
         </div>
 
@@ -459,19 +458,18 @@ export function Component() {
         </div>
 
         {/* 8. P_QUESTION */}
-        <div className="mutek-p text-white pt-[80px] w-[350px] ml-5">
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           {P_QUESTION}
         </div>
 
         {/* 9. P_MENTE */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '80px 0 0', width: '350px', marginLeft: '20px' }}>
+        <div className="mutek-p text-white mt-[80px] w-[350px] ml-[20px]">
           {P_MENTE}
         </div>
 
         {/* 10. Second image pair + Marquee 2 — absolute layout */}
-        {/* DSC3347(img8) right side top:0 h:300, Marquee2 top:48 overlaps img8, DSC3435(img9) left top:199 h:300 */}
         <div style={{ position: 'relative', height: '499px', marginTop: '80px' }}>
-          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: 'calc(41.67% + 7.5px)', top: 0, width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', right: '20px', top: 0, width: '200px', height: '300px', objectFit: 'cover' }} />
 
           {/* Marquee 2 — overlaps top portion of right image */}
           <div style={{ position: 'absolute', top: '48px', left: 0, width: '100%', height: '40px', overflow: 'hidden' }}>
@@ -499,7 +497,7 @@ export function Component() {
         </div>
 
         {/* 11. P_APELA */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '80px 0 0', width: '350px', marginLeft: '20px' }}>
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           {P_APELA}
         </div>
 
@@ -507,7 +505,7 @@ export function Component() {
         <img src={ASSETS.img10} alt="" style={{ display: 'block', width: '100%', height: '572px', objectFit: 'cover', marginTop: '80px' }} />
 
         {/* 13. P_UMBRAL */}
-        <div className="mutek-p" style={{ color: '#fff', paddingTop: '80px', width: '350px', marginLeft: '20px' }}>
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           {P_UMBRAL}
         </div>
 
@@ -515,7 +513,7 @@ export function Component() {
         <img src={ASSETS.img11} alt="" style={{ display: 'block', width: '350px', height: '197px', objectFit: 'cover', marginTop: '80px', marginLeft: 'auto', marginRight: 'auto' }} />
 
         {/* 15. P_CAVERNA */}
-        <div className="mutek-p" style={{ color: '#fff', padding: '80px 0 0', width: '350px', marginLeft: '20px' }}>
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           {P_CAVERNA}
         </div>
 

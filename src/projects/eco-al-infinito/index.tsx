@@ -28,7 +28,7 @@ export function Component() {
         .eco-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
         .eco-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
         .eco-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--h4-ls); }
-        .eco-marquee { font-size: var(--h4-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0.1em; text-transform: uppercase; }
+        .eco-marquee { font-size: var(--h4-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: 0.1em; text-transform: uppercase; mix-blend-mode: difference; -webkit-mix-blend-mode: difference; transform: translateZ(0); }
         .eco-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
         .eco-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 200; letter-spacing: var(--p-ls); color: #fff; }
         .eco-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: var(--h5-ls); text-transform: uppercase; }
@@ -91,7 +91,7 @@ export function Component() {
             {[0, 1].map((setIdx) => (
               <div key={setIdx} className="marquee-set">
                 {Array.from({ length: 4 }, (_, i) => (
-                  <span key={i} className="marquee-item">
+                  <span key={i} className="marquee-item eco-marquee">
                     ESCULTURA COLGANTE SITE-SPECIFIC.
                   </span>
                 ))}
@@ -166,7 +166,7 @@ export function Component() {
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
                     {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} className="marquee-item">
+                      <span key={i} className="marquee-item eco-marquee">
                         Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
                       </span>
                     ))}
@@ -700,45 +700,74 @@ export function Component() {
         </ParallaxSection>
 
         {/* 21. LYRICS SECTION (Sound of Silence) — Figma 1571:1033..1038 + 1867:1262 */}
-        <ParallaxSection id="lyrics-section" className="bg-obsidian">
-          <div className="relative w-full pt-[110px]">
-            {/* Lyrics — H4 Helvetica Neue LT Std Thin 36px / line-height normal / tracking 0.72px */}
+        <ParallaxSection id="lyrics-section" className="bg-obsidian min-h-[1100px]">
+          {/* Lyrics */}
+          <ParallaxLayer
+            sectionId="lyrics-section"
+            layerIndex={0}
+            layer={{ type: 'text', content: '', speed: 0 }}
+            position={{ top: '110px', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
+          >
             <div className="eco-h4 text-white uppercase tracking-[0.72px] leading-none">
-              {/* Figma top deltas = 106px. With lineHeight 1 (36px text), marginBottom 70 → top-to-top = 106 ✓ */}
               <div style={{ marginLeft: 'calc(37.5% + 22px)', marginBottom: '70px' }}>BECAUSE A VISION SOFTLY CREEPING</div>
               <div style={{ marginLeft: 'calc(4.17% + 1px)', marginBottom: '70px' }}>LEFT ITS SEEDS WHILE I WAS SLEEPING</div>
               <div style={{ marginLeft: 'calc(41.67% + 8px)', marginBottom: '70px' }}>AND THE VISION THAT WAS PLANTED IN MY BRAIN</div>
               <div style={{ marginLeft: 'calc(29.17% - 14px)', marginBottom: '70px' }}>STILL REMAINS</div>
               <div style={{ marginLeft: '50%' }}>WITHIN THE SOUND OF SILENCE</div>
             </div>
+          </ParallaxLayer>
 
-            {/* Simon & Garfunkel · 1964 — Space Grotesk Light 16px, 110px below WITHIN, right-anchored at 97px from right edge */}
-            <div className="mt-[110px] mr-[6.74%] text-right text-white font-light text-[var(--p-size)] leading-relaxed">
+          {/* Simon & Garfunkel */}
+          <ParallaxLayer
+            sectionId="lyrics-section"
+            layerIndex={1}
+            layer={{ type: 'text', content: '', speed: 0 }}
+            position={{ top: '650px', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
+          >
+            <div className="mr-[6.74%] text-right text-white font-light text-[var(--p-size)] leading-relaxed">
               Simon &amp; Garfunkel · 1964
             </div>
+          </ParallaxLayer>
 
-            {/* Credits — Space Grotesk 16px, 292px below Simon & Garfunkel, full-width with 3px left offset */}
-            <div className="mt-[292px] ml-[3px] text-white font-light text-[var(--p-size)] leading-relaxed">
-              <span style={{ fontWeight: 700 }}>Realización: </span>
-              <span>Gastón Aliaga (INDIGO Lumieres) y Mónica Mostajo + Franco Lavra (GOTA Arquigrafía)   /   </span>
-              <span style={{ fontWeight: 700 }}>Instalación: </span>
-              <span>Mónica Mostajo + Franco Lavra (GOTA Arquigrafía)   /   </span>
-              <span style={{ fontWeight: 700 }}>Acompañamiento Curatorial: </span>
-              <span>Facundo López   /   </span>
-              <span style={{ fontWeight: 700 }}>Dirección Audiovisual: </span>
-              <span>Martín Rois   /   </span>
-              <span style={{ fontWeight: 700 }}>Composición Musical: </span>
-              <span>Francisco Rousset Osio   /   </span>
-              <span style={{ fontWeight: 700 }}>Registro Fotográfico: </span>
-              <span>Bianca Siffredi   /   </span>
-              <span style={{ fontWeight: 700 }}>2do en Cámara: </span>
-              <span>Felipe Malatesta   /   </span>
-              <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado: </span>
-              <span>Francisca Gil Sosa   /   </span>
-              <span style={{ fontWeight: 700 }}>Colaboración Integral Post-Montaje: </span>
-              <span>Juan Ignacio Scheller</span>
+          {/* Credits — Using the fixed 3px padding pattern from MAL/Alterego */}
+          <ParallaxLayer
+            sectionId="lyrics-section"
+            layerIndex={2}
+            layer={{ type: 'text', content: '', speed: 0 }}
+            position={{ top: '942px', left: '0', width: '100%', height: 'auto', zIndex: 2 }}
+          >
+            <div style={{
+              color: '#fff',
+              width: '100%',
+              padding: '0 3px',
+              mixBlendMode: 'difference',
+              WebkitMixBlendMode: 'difference',
+              transform: 'translateZ(0)',
+              textAlign: 'left'
+            } as any}>
+              <p style={{ fontSize: '14px', lineHeight: '1.6', width: '100%', maxWidth: 'none', display: 'block', textTransform: 'uppercase', fontFamily: '"Helvetica Neue LT Std", sans-serif', fontWeight: 100 }}>
+                <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
+                <span style={{ fontWeight: 700 }}>Realización: </span>
+                <span>Gastón Aliaga (INDIGO Lumieres) y Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>Instalación: </span>
+                <span>Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>Acompañamiento Curatorial: </span>
+                <span>Facundo López &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>Dirección Audiovisual: </span>
+                <span>Martín Rois &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>Composición Musical: </span>
+                <span>Francisco Rousset Osio &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>Registro Fotográfico: </span>
+                <span>Bianca Siffredi &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>2do en Cámara: </span>
+                <span>Felipe Malatesta &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado: </span>
+                <span>Francisca Gil Sosa &nbsp;/&nbsp;</span>
+                <span style={{ fontWeight: 700 }}>Colaboración Integral Post-Montaje: </span>
+                <span>Juan Ignacio Scheller</span>
+              </p>
             </div>
-          </div>
+          </ParallaxLayer>
         </ParallaxSection>
       </div>{/* /eco-desktop */}
 
@@ -746,71 +775,78 @@ export function Component() {
       <div className="eco-mobile bg-obsidian overflow-hidden">
 
         {/* Hero */}
-        <img src={ASSETS.heroMobile} alt="" className="block w-full h-[561px] object-cover" />
+        <div style={{ position: 'relative', width: '100%', height: '561px', marginTop: '80px' }}>
+          <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+
+        {/* Location Text */}
+        <div style={{ color: '#fff', width: '350px', marginLeft: '20px', marginTop: '40px', fontSize: '14px', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, textTransform: 'none', opacity: 0.8 }}>
+          / Lumina Office / Estudio Mario Roberto Alvarez
+        </div>
 
         {/* Para 1 */}
-        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p style={{ marginBottom: '1rem' }}>Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.</p>
           <p>No es más ese conjunto de neuronas que no cede en su lucha por mantenernos vivos. Ha pasado años sumergido en las incontables marejadas de tecnología que nos abruma sin piedad desde que pusimos un caballo delante de un arado.</p>
         </div>
 
         {/* 3-image cluster (staggered) */}
-        <div className="relative h-[380px] mt-[80px]">
-          <img src={ASSETS.img1} alt="" className="absolute left-0 top-0 w-[140px] h-[210px] object-cover" />
-          <img src={ASSETS.img2} alt="" className="absolute left-[110px] top-[80px] w-[170px] h-[114px] object-cover" />
-          <img src={ASSETS.img3} alt="" className="absolute right-0 top-[240px] w-[200px] h-[133px] object-cover" />
+        <div style={{ position: 'relative', height: '380px', marginTop: '80px' }}>
+          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '140px', height: '210px', objectFit: 'cover' }} />
+          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', left: '110px', top: '80px', width: '170px', height: '114px', objectFit: 'cover' }} />
+          <img src={ASSETS.img3} alt="" style={{ position: 'absolute', left: '190px', top: '240px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Large portrait + marquee overlay */}
-        <div className="relative w-full h-[525px] mt-5">
-          <img src={ASSETS.img4} alt="" className="w-full h-full object-cover" />
+        <div style={{ position: 'relative', width: '100%', height: '525px', marginTop: '80px' }}>
+          <img src={ASSETS.img4} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           <div className="absolute top-10 left-0 w-full h-[30px] overflow-hidden">
             <div className="marquee-track" style={{ animationDuration: '22s' }}>
-              <div className="marquee-set"><span className="marquee-item">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
-              <div className="marquee-set"><span className="marquee-item">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
+              <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
+              <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
             </div>
           </div>
         </div>
 
         {/* Para 2 */}
-        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
         </div>
 
         {/* Image pair */}
-        <div className="relative h-[320px] mt-[80px]">
-          <img src={ASSETS.img6} alt="" className="absolute left-0 top-[100px] w-[200px] h-[134px] object-cover" />
-          <img src={ASSETS.img5} alt="" className="absolute right-0 top-0 w-[200px] h-[300px] object-cover" />
+        <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
+          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '200px', height: '134px', objectFit: 'cover' }} />
+          <img src={ASSETS.img5} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img7} alt="" className="block w-full h-[260px] object-cover mt-10" />
+        <img src={ASSETS.img7} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '80px' }} />
 
         {/* Image pair */}
-        <div className="relative h-[240px] mt-10">
-          <img src={ASSETS.img8} alt="" className="absolute left-0 top-0 w-[200px] h-[134px] object-cover" />
-          <img src={ASSETS.img9} alt="" className="absolute right-0 top-[80px] w-[200px] h-[133px] object-cover" />
+        <div style={{ position: 'relative', height: '240px', marginTop: '80px' }}>
+          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '134px', objectFit: 'cover' }} />
+          <img src={ASSETS.img9} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Para 3 */}
-        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos de su obra.
         </div>
 
         {/* Image pair staggered */}
-        <div className="relative h-[230px] mt-[80px]">
-          <img src={ASSETS.img10} alt="" className="absolute right-0 top-0 w-[200px] h-[133px] object-cover" />
-          <img src={ASSETS.img11} alt="" className="absolute left-0 top-[80px] w-[200px] h-[133px] object-cover" />
+        <div style={{ position: 'relative', height: '230px', marginTop: '80px' }}>
+          <img src={ASSETS.img10} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <img src={ASSETS.img11} alt="" style={{ position: 'absolute', left: '20px', top: '80px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Image pair staggered */}
-        <div className="relative h-[230px] mt-5">
-          <img src={ASSETS.img13} alt="" className="absolute right-0 top-0 w-[200px] h-[133px] object-cover" />
-          <img src={ASSETS.img12} alt="" className="absolute left-0 top-[80px] w-[200px] h-[133px] object-cover" />
+        <div style={{ position: 'relative', height: '230px', marginTop: '80px' }}>
+          <img src={ASSETS.img13} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <img src={ASSETS.img12} alt="" style={{ position: 'absolute', left: '20px', top: '80px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Video Making Off - Mobile */}
-        <div className="relative w-full h-[219px] mt-10 bg-black">
+        <div className="relative w-full h-[219px] mt-[80px] bg-black">
           <iframe
             src={ASSETS.videoMakingOff}
             className="absolute top-0 left-0 w-full h-full"
@@ -821,73 +857,79 @@ export function Component() {
         </div>
 
         {/* Three diagonal images */}
-        <div className="relative h-[420px] mt-10">
-          <img src={ASSETS.img14} alt="" className="absolute left-5 top-0 w-[140px] h-[210px] object-cover" />
-          <img src={ASSETS.img15} alt="" className="absolute left-[125px] top-[100px] w-[140px] h-[210px] object-cover" />
-          <img src={ASSETS.img16} alt="" className="absolute right-5 top-[200px] w-[140px] h-[210px] object-cover" />
+        <div style={{ position: 'relative', height: '420px', marginTop: '80px' }}>
+          <img src={ASSETS.img14} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <img src={ASSETS.img15} alt="" style={{ position: 'absolute', left: '125px', top: '100px', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <img src={ASSETS.img16} alt="" style={{ position: 'absolute', right: '20px', top: '200px', width: '140px', height: '210px', objectFit: 'cover' }} />
         </div>
 
         {/* Para 4 */}
-        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
         </div>
 
         {/* Image pair */}
-        <div className="relative h-[470px] mt-[80px]">
-          <img src={ASSETS.img17} alt="" className="absolute left-5 top-0 w-[200px] h-[300px] object-cover" />
-          <img src={ASSETS.img18} alt="" className="absolute right-5 top-[150px] w-[200px] h-[300px] object-cover" />
+        <div style={{ position: 'relative', height: '470px', marginTop: '80px' }}>
+          <img src={ASSETS.img17} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={ASSETS.img18} alt="" style={{ position: 'absolute', right: '20px', top: '150px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
-          <div className="mt-[80px] h-[30px] overflow-hidden">
+          <div style={{ marginTop: '80px', height: '30px', overflow: 'hidden' }}>
             <div className="marquee-track" style={{ animationDuration: '24s' }}>
-            <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
-            <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
           </div>
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img19} alt="" className="block w-full h-[260px] object-cover mt-10" />
+        <img src={ASSETS.img19} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '80px' }} />
 
         {/* Image pair staggered */}
-        <div className="relative h-[300px] mt-10">
-          <img src={ASSETS.img20} alt="" className="absolute left-5 top-0 w-[200px] h-[200px] object-cover" />
-          <img src={ASSETS.img21} alt="" className="absolute right-5 top-[80px] w-[200px] h-[200px] object-cover" />
+        <div style={{ position: 'relative', height: '300px', marginTop: '80px' }}>
+          <img src={ASSETS.img20} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '200px', objectFit: 'cover' }} />
+          <img src={ASSETS.img21} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '200px', height: '200px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img22} alt="" className="block w-full h-[260px] object-cover mt-10" />
+        <img src={ASSETS.img22} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '80px' }} />
 
         {/* Para 5 */}
-        <div className="eco-p text-white px-5 pt-[80px] max-w-[350px]">
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo. Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por la Tierra. Nos traslada a los inicios, mientras nos apoyamos confiados en las formas abiertas y fundamentales de nuestro alfabeto de formas. No importa el siglo de nuestra ubicación defensiva. Seguiremos dudando hasta que realmente nos reconozcamos allí. Somos habitantes de un extenso universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos. Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos. Es nuestro universo…
         </div>
 
         {/* Image pair offset */}
-        <div className="relative h-[360px] mt-[80px]">
-          <img src={ASSETS.img23} alt="" className="absolute right-5 top-0 w-[200px] h-[270px] object-cover" />
-          <img src={ASSETS.img24} alt="" className="absolute left-5 top-[100px] w-[200px] h-[170px] object-cover" />
+        <div style={{ position: 'relative', height: '360px', marginTop: '80px' }}>
+          <img src={ASSETS.img23} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '270px', objectFit: 'cover' }} />
+          <img src={ASSETS.img24} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '200px', height: '170px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
-          <div className="mt-[80px] h-[30px] overflow-hidden">
+          <div style={{ marginTop: '80px', height: '30px', overflow: 'hidden' }}>
             <div className="marquee-track" style={{ animationDuration: '28s' }}>
-            <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
-            <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. ·</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. ·</span></div>
           </div>
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img25} alt="" className="block w-full h-[260px] object-cover mt-10" />
+        <img src={ASSETS.img25} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '80px' }} />
+
+        {/* Image pair 28-29 */}
+        <div style={{ position: 'relative', height: '310px', marginTop: '80px' }}>
+          <img src={ASSETS.img28} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '170px', height: '210px', objectFit: 'cover' }} />
+          <img src={ASSETS.img29} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '170px', height: '210px', objectFit: 'cover' }} />
+        </div>
 
         {/* Image pair 170px */}
-        <div className="relative h-[310px] mt-10">
+        <div style={{ position: 'relative', height: '310px', marginTop: '80px' }}>
           <img src={ASSETS.img26} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '170px', height: '210px', objectFit: 'cover' }} />
           <img src={ASSETS.img27} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '170px', height: '210px', objectFit: 'cover' }} />
         </div>
 
         {/* Image pair 200px */}
-        <div className="relative h-[300px] mt-5">
+        <div style={{ position: 'relative', height: '300px', marginTop: '80px' }}>
           <img src={ASSETS.img30} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '200px', objectFit: 'cover' }} />
           <img src={ASSETS.img31} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '200px', height: '200px', objectFit: 'cover' }} />
         </div>
@@ -904,7 +946,7 @@ export function Component() {
         <style dangerouslySetInnerHTML={{ __html: `@keyframes eco-m-c1 { from { transform: translateX(0) } to { transform: translateX(-50%) } }` }} />
 
         {/* Image pair (img32/img33) */}
-        <div className="relative h-[320px] mt-[80px]">
+        <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
           <img src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '170px', height: '230px', objectFit: 'cover' }} />
           <img src={ASSETS.img33} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '170px', height: '200px', objectFit: 'cover' }} />
         </div>
@@ -912,18 +954,27 @@ export function Component() {
         {/* Marquee */}
         <div style={{ marginTop: '80px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '26s' }}>
-            <div className="marquee-set"><span className="marquee-item">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
-            <div className="marquee-set"><span className="marquee-item">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
           </div>
         </div>
 
-        {/* Video timelapse placeholder */}
-        <div style={{ width: '100%', height: '219px', marginTop: '40px', background: 'rgba(249,148,64,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <span className="eco-p" style={{ color: '#fff', letterSpacing: '0.05em' }}>VIDEO TIMELAPSE</span>
+        {/* Video timelapse - Mobile */}
+        <div style={{ position: 'relative', width: '100%', height: '219px', marginTop: '80px', background: '#000' }}>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            crossOrigin="anonymous"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          >
+            <source src={ASSETS.videoTimelapse} type="video/mp4" />
+          </video>
         </div>
 
         {/* Image pair (img34/img35) */}
-        <div className="relative h-[340px] mt-10">
+        <div style={{ position: 'relative', height: '340px', marginTop: '80px' }}>
           <img src={ASSETS.img34} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '230px', objectFit: 'cover' }} />
           <img src={ASSETS.img35} alt="" style={{ position: 'absolute', right: '20px', top: '90px', width: '200px', height: '200px', objectFit: 'cover' }} />
         </div>
@@ -946,7 +997,7 @@ export function Component() {
         </div>
 
         {/* Full-width */}
-        <img src={ASSETS.img38} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '40px' }} />
+        <img src={ASSETS.img38} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '80px' }} />
 
         {/* Para 6 */}
         <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
@@ -954,7 +1005,7 @@ export function Component() {
         </div>
 
         {/* Lyrics — Figma 1571:1135..1141 (mobile) — Helvetica Neue LT Std Thin 16px, centered */}
-        <div style={{ backgroundColor: '#0F0F0F', marginTop: '40px', padding: '60px 20px 0', textAlign: 'center' }}>
+        <div style={{ backgroundColor: '#0F0F0F', marginTop: '80px', padding: '60px 20px 0', textAlign: 'center' }}>
           <div style={{
             color: '#fff',
             textTransform: 'uppercase',
@@ -980,6 +1031,41 @@ export function Component() {
             lineHeight: 1.45,
           }}>
             Simon &amp; Garfunkel · 1964
+          </div>
+
+          {/* Credits Mobile */}
+          <div style={{
+            color: '#fff',
+            marginTop: '40px',
+            padding: '0 20px',
+            fontFamily: '"Helvetica Neue LT Std", sans-serif',
+            fontWeight: 100,
+            fontSize: '12px',
+            lineHeight: '1.6',
+            mixBlendMode: 'difference',
+            WebkitMixBlendMode: 'difference',
+            transform: 'translateZ(0)',
+            textTransform: 'uppercase'
+          } as any}>
+            <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
+            <span style={{ fontWeight: 700 }}>Realización: </span>
+            <span>Gastón Aliaga (INDIGO Lumieres) y Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Instalación: </span>
+            <span>Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Acompañamiento Curatorial: </span>
+            <span>Facundo López &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Dirección Audiovisual: </span>
+            <span>Martín Rois &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Composición Musical: </span>
+            <span>Francisco Rousset Osio &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Registro Fotográfico: </span>
+            <span>Bianca Siffredi &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>2do en Cámara: </span>
+            <span>Felipe Malatesta &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado: </span>
+            <span>Francisca Gil Sosa &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Colaboración Integral Post-Montaje: </span>
+            <span>Juan Ignacio Scheller</span>
           </div>
         </div>
 

@@ -608,14 +608,31 @@ export function Component() {
       <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '100px' }}>
 
         {/* HERO */}
-        <div style={{ position: 'relative', height: '100vh' }}>
+        <div style={{ position: 'relative', height: '85vh', minHeight: '600px' }}>
           <img src={ASSETS.heroMobile} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-          <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', overflow: 'hidden', zIndex: 2 }}>
-            <div className="marquee-track" style={{ animationDuration: '30s' }}>
+          
+          {/* Hero Text */}
+          <div style={{ position: 'absolute', bottom: '60px', left: '20px', color: '#fff', zIndex: 3 }}>
+            <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '14px', fontWeight: 300, marginBottom: '4px' }}>UNGALLERY / 2026</p>
+            <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '14px', fontWeight: 300 }}>MUESTRA INDIVIDUAL MULTISENSORIAL</p>
+          </div>
+
+          {/* Hero Marquee Overlay */}
+          <div style={{ position: 'absolute', bottom: '15px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 4 }}>
+            <div className="marquee-track" style={{ animationDuration: '10s' }}>
               {[0, 1].map(s => (
                 <div key={s} className="marquee-set">
-                  {Array.from({ length: 3 }, (_, i) => (
-                    <span key={i} className="marquee-item">DIRECCIÓN CREATIVA / ESCENOGRAFÍA / DISEÑO LUMÍNICO /</span>
+                  {Array.from({ length: 2 }, (_, i) => (
+                    <span key={i} className="marquee-item" style={{ 
+                      fontFamily: '"Helvetica Neue LT Std", sans-serif',
+                      fontSize: '28px',
+                      fontWeight: 250,
+                      letterSpacing: '0.56px',
+                      textTransform: 'uppercase',
+                      color: '#FFF',
+                      leadingTrim: 'both',
+                      textEdge: 'cap'
+                    } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS · </span>
                   ))}
                 </div>
               ))}
@@ -624,7 +641,7 @@ export function Component() {
         </div>
 
         {/* TEXT 1 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p style={{ marginBottom: '1.5rem' }}>
             Dado que la objetividad es un proyecto inalcanzable, Constanza Schwartz crea con el subjetivismo escénico experiencias intensamente subjetivas por las que el espectador participativo puede ir cambiando su inserción y su influencia en su entorno.
           </p>
@@ -633,14 +650,22 @@ export function Component() {
           </p>
         </div>
 
-        {/* img1 (WEB028) */}
-        <img src={IMG_WEB028} alt="" loading="lazy" style={{ display: 'block', width: '85%', height: 'auto', marginTop: '80px', marginLeft: '5%' }} />
+        {/* FIRST PAIR: img2 (WEB009) + img1 (WEB028) */}
+        <div style={{ position: 'relative', height: '440px', marginTop: '84px' }}>
+          <img src={IMG_WEB009} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '230px', height: '153px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_WEB028} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '100px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 2 }} />
+        </div>
 
-        {/* img2 (WEB009) */}
-        <img src={IMG_WEB009} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        {/* Marquee 2 */}
+        <div style={{ marginTop: '40px', height: '40px', overflow: 'hidden' }}>
+          <div className="marquee-track" style={{ animationDuration: '10s' }}>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS · </span></div>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS · </span></div>
+          </div>
+        </div>
 
         {/* TEXT 2 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px 0 40px' }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p style={{ marginBottom: '1.5rem' }}>
             La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
           </p>
@@ -650,19 +675,27 @@ export function Component() {
         </div>
 
         {/* img3 (FULL_1) */}
-        <img src={IMG_FULL_1} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        <img src={IMG_FULL_1} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
 
         {/* img4 (WEB008) + img5 (WEB025) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
-          <img src={IMG_WEB008} alt="" loading="lazy" style={{ width: '75%', height: 'auto', alignSelf: 'flex-end' }} />
-          <img src={IMG_WEB025} alt="" loading="lazy" style={{ width: '100%', height: 'auto' }} />
+        <div style={{ position: 'relative', height: '440px', marginTop: '80px' }}>
+          <img src={IMG_WEB008} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={IMG_WEB025} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '180px', width: '300px', height: '200px', objectFit: 'cover' }} />
         </div>
 
         {/* img6 (GIF1) */}
-        <img src={IMG_GIF1} alt="" loading="lazy" style={{ display: 'block', width: '90%', height: 'auto', marginTop: '80px', marginLeft: '5%' }} />
+        <img src={IMG_GIF1} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
+
+        {/* Marquee 3 */}
+        <div style={{ marginTop: '80px', height: '40px', overflow: 'hidden' }}>
+          <div className="marquee-track" style={{ animationDuration: '12s' }}>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD · </span></div>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD · </span></div>
+          </div>
+        </div>
 
         {/* TEXT 3 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p style={{ marginBottom: '1.5rem' }}>
             Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
           </p>
@@ -671,16 +704,16 @@ export function Component() {
         </div>
 
         {/* STAIRCASE: img7, img8, img9 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', marginTop: '80px', padding: '0 20px' }}>
-          <img src={IMG_WEB012} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-start' }} />
-          <img src={IMG_WEB011} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'center' }} />
-          <img src={IMG_WEB007} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-end' }} />
+        <div style={{ position: 'relative', height: '620px', marginTop: '80px' }}>
+          <img src={IMG_WEB012} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={IMG_WEB011} alt="" loading="lazy" style={{ position: 'absolute', left: '110px', top: '160px', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={IMG_WEB007} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '320px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* PORTRAIT PAIR: img10, img11 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
-          <img src={IMG_WEB005} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-start' }} />
-          <img src={IMG_WEB022} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-end' }} />
+        <div style={{ position: 'relative', height: '560px', marginTop: '80px' }}>
+          <img src={IMG_WEB005} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={IMG_WEB022} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '200px', width: '240px', height: '360px', objectFit: 'cover' }} />
         </div>
 
         {/* VIDEO 1 */}
@@ -694,44 +727,61 @@ export function Component() {
         </div>
 
         {/* img12 (GIF2) */}
-        <img src={IMG_GIF2} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        <div style={{ position: 'relative', marginTop: '80px' }}>
+          <img src={IMG_GIF2} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: '233px', objectFit: 'cover' }} />
+          {/* Marquee 4 overlay */}
+          <div style={{ position: 'absolute', top: '100px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference', WebkitMixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '10s' }}>
+              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? · </span></div>
+              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? · </span></div>
+            </div>
+          </div>
+        </div>
 
         {/* TEXT 4 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px 0 40px' }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p>
             Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético.
           </p>
         </div>
 
         {/* img13 (WEB016) + img14 (WEB017) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
-          <img src={IMG_WEB016} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-start' }} />
-          <img src={IMG_WEB017} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-end' }} />
+        <div style={{ position: 'relative', height: '440px', marginTop: '80px' }}>
+          <img src={IMG_WEB016} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={IMG_WEB017} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '140px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* FULL WIDTH img15 (WEB018) */}
-        <img src={IMG_WEB018} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        <img src={IMG_WEB018} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
 
         {/* img17 (WEB014) + img18 (WEB013) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
-          <img src={IMG_WEB014} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-end' }} />
-          <img src={IMG_WEB013} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-start' }} />
+        <div style={{ position: 'relative', height: '420px', marginTop: '80px' }}>
+          <img src={IMG_WEB014} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={IMG_WEB013} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '120px', width: '240px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* FULL WIDTH img19 (WEB015) */}
-        <img src={IMG_WEB015} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        <img src={IMG_WEB015} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
 
         {/* TEXT 5 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p>
             De esas raíces y las tensiones de nuestra vida cotidiana, nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde de algunas plantitas traviesas que asoman en un balcón.
           </p>
         </div>
 
+        {/* Marquee 5 */}
+        <div style={{ marginTop: '80px', height: '40px', overflow: 'hidden' }}>
+          <div className="marquee-track" style={{ animationDuration: '12s' }}>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA · </span></div>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA · </span></div>
+          </div>
+        </div>
+
         {/* img20 (WEB040) + img21 (WEB037) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
-          <img src={IMG_WEB040} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-end' }} />
-          <img src={IMG_WEB037} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-start' }} />
+        <div style={{ position: 'relative', height: '480px', marginTop: '80px' }}>
+          <img src={IMG_WEB040} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={IMG_WEB037} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '180px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* VIDEO 2 (Making Off) */}
@@ -740,7 +790,7 @@ export function Component() {
         </div>
 
         {/* img22 (WEB039) */}
-        <img src={IMG_WEB039} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        <img src={IMG_WEB039} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
 
         {/* CAROUSEL 1 */}
         <div style={{ marginTop: '80px' }}>
@@ -748,49 +798,44 @@ export function Component() {
         </div>
 
         {/* TEXT 6 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p>
             La ciencia y la técnica han triunfado hasta participar de la construcción completa de los paisajes de nuestras ciudades. "Más allá del infinito" es una alerta cruda e implacable que subraya los aspectos amenazantes de esta victoria.
           </p>
         </div>
 
         {/* img23 (WEB050) */}
-        <img src={IMG_WEB050} alt="" loading="lazy" style={{ display: 'block', width: '85%', height: 'auto', marginTop: '80px', marginLeft: '5%' }} />
+        <img src={IMG_WEB050} alt="" loading="lazy" style={{ display: 'block', width: '300px', height: '450px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
 
         {/* TEXT 7 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px 0 40px' }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p>
             La vibración de esta obra persiste en nuestros sentidos, nos impulsa a buscar nuevas respuestas que tal vez están asociadas a las notas de nostalgia distribuidas con inclemencia en diversos rincones de la muestra. Nuestros afectos y la ternura que suele acompañar a la nostalgia serán solo una parte de la respuesta emocional a esta apelación al amor y la cordura.
           </p>
         </div>
 
         {/* img24 (WEB054) */}
-        <img src={IMG_WEB054} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        <img src={IMG_WEB054} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
 
         {/* CAROUSEL 2 */}
         <div style={{ marginTop: '80px' }}>
           <Carousel images={CAROUSEL_2} id="c2-m" />
         </div>
 
-        {/* QUOTE */}
-        <div style={{ marginTop: '80px', padding: '0 20px' }}>
-          <p style={{
-            color: '#fff',
-            textTransform: 'uppercase',
-            fontFamily: '"Helvetica Neue LT Std", sans-serif',
-            fontSize: '36px',
-            fontWeight: 200,
-            lineHeight: '1.1',
-          }}>
-            SI TIENES APEGO A TU<br />CORDURA, NO ENTRES.
-          </p>
+        {/* QUOTE MARQUEE */}
+        <div style={{ marginTop: '80px', height: '40px', overflow: 'hidden' }}>
+          <div className="marquee-track" style={{ animationDuration: '12s' }}>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
+            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
+          </div>
         </div>
 
         {/* CREDITS */}
         <div style={{
           color: '#fff',
           marginTop: '40px',
-          padding: '0 20px',
+          marginLeft: '20px',
+          width: '350px',
           fontFamily: "'Space Grotesk', sans-serif",
           fontWeight: 300,
           fontSize: '12px',
