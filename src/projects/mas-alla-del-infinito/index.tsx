@@ -595,7 +595,7 @@ export function Component() {
       </div>{/* /mal-desktop */}
 
       {/* ── MAS ALLA MOBILE ─────────────────────────────────────────────── */}
-      <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '100px' }}>
+      <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '40px' }}>
 
         {/* HERO */}
         <div style={{ position: 'relative', height: '85vh', minHeight: '600px' }}>
@@ -603,8 +603,6 @@ export function Component() {
 
           {/* Hero Text */}
           <div style={{ position: 'absolute', bottom: '60px', left: '20px', color: '#fff', zIndex: 3 }}>
-            <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '14px', fontWeight: 300, marginBottom: '4px' }}>UNGALLERY / 2026</p>
-            <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: '14px', fontWeight: 300 }}>MUESTRA INDIVIDUAL MULTISENSORIAL</p>
           </div>
 
 
@@ -620,52 +618,69 @@ export function Component() {
           </p>
         </div>
 
-        {/* FIRST PAIR: img1 (WEB028) + img2 (WEB009) */}
-        <div style={{ position: 'relative', height: '440px', marginTop: '80px' }}>
-          <img src={IMG_WEB028} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
-          <img src={IMG_WEB009} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '180px', width: '230px', height: '153px', objectFit: 'cover', zIndex: 2 }} />
-        </div>
+        {/* FIRST PAIR: img1 (WEB009) + img2 (WEB028) - Swapped and Marquee Overlapping */}
+        <div style={{ position: 'relative', height: '480px', marginTop: '80px' }}>
+          <img src={IMG_WEB009} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '230px', height: '153px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_WEB028} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '140px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 2 }} />
 
-        {/* Marquee 2 */}
-        <div style={{ marginTop: '80px', height: '40px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '10s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS · </span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS · </span></div>
+          {/* Marquee overlaying the images */}
+          <div style={{ position: 'absolute', top: '370px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3, mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '10s' }}>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std", sans-serif',
+                  fontSize: '28px',
+                  fontWeight: 250,
+                  letterSpacing: '0.56px',
+                  textTransform: 'uppercase',
+                  color: '#FFF'
+                } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS </span>
+              </div>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std", sans-serif',
+                  fontSize: '28px',
+                  fontWeight: 250,
+                  letterSpacing: '0.56px',
+                  textTransform: 'uppercase',
+                  color: '#FFF'
+                } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS · </span>
+              </div>
+            </div>
           </div>
         </div>
 
+
+
+
+        {/* SECOND PAIR: img3 (FULL_1) + img4 (WEB008) - Staggered with Marquee */}
+        <div style={{ position: 'relative', height: '480px', marginTop: '80px' }}>
+          <img src={IMG_FULL_1} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
+          <img src={IMG_WEB008} alt="" loading="lazy" style={{ position: 'absolute', right: '40px', top: '350px', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+
+        </div>
+
         {/* TEXT 2 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '200px', width: '350px', marginLeft: '30px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p style={{ marginBottom: '1.5rem' }}>
             La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
           </p>
           <p>
-            Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy.
+            La obra de Constanza insistirá entonces en la apelación continua a derribar las barreras racionales que impiden fluir nuestra creatividad.
+
+            Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy. Los horrores de su existencia son velozmente atenuados por un bosque de acrílico, altar en homenaje a nuestros orígenes. En el abismo entre estas dos escenas pueden brotar cuestiones acerca de la validez de nuestro modo de vivir. Esta obra nos permite acercarnos a estímulos con los que cohabitamos diariamente desde planos de conciencia más sensibles que lo que permite el diario trajinar por nuestra civilización industrializada.
           </p>
         </div>
-
-        {/* img3 (FULL_1) */}
-        <img src={IMG_FULL_1} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
-
-        {/* img4 (WEB008) + img5 (WEB025) */}
-        <div style={{ position: 'relative', height: '440px', marginTop: '80px' }}>
-          <img src={IMG_WEB008} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={IMG_WEB025} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '180px', width: '300px', height: '200px', objectFit: 'cover' }} />
+        {/* THIRD PAIR: img5 (WEB025) + img6 (GIF1) - Staggered Overlap */}
+        <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
+          <img src={IMG_WEB025} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '290px', height: '193px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_GIF1} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '140px', width: '170px', height: '113px', objectFit: 'cover', zIndex: 2 }} />
         </div>
 
-        {/* img6 (GIF1) */}
-        <img src={IMG_GIF1} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
 
-        {/* Marquee 3 */}
-        <div style={{ marginTop: '80px', height: '40px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '12s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD · </span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD · </span></div>
-          </div>
-        </div>
 
         {/* TEXT 3 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '10px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p style={{ marginBottom: '1.5rem' }}>
             Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
           </p>
@@ -675,63 +690,91 @@ export function Component() {
 
         {/* STAIRCASE: img7, img8, img9 */}
         <div style={{ position: 'relative', height: '540px', marginTop: '80px' }}>
-          <img src={IMG_WEB012} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <img src={IMG_WEB011} alt="" loading="lazy" style={{ position: 'absolute', left: '125px', top: '130px', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <img src={IMG_WEB007} alt="" loading="lazy" style={{ position: 'absolute', left: '230px', top: '260px', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <img src={IMG_WEB012} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_WEB011} alt="" loading="lazy" style={{ position: 'absolute', left: '125px', top: '140px', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_WEB007} alt="" loading="lazy" style={{ position: 'absolute', left: '230px', top: '290px', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+
+          {/* Marquee overlaying img7 */}
+          <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '44px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '12s' }}>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std", sans-serif',
+                  fontSize: '28px',
+                  fontWeight: 250,
+                  letterSpacing: '0.56px',
+                  textTransform: 'uppercase',
+                  color: '#FFF'
+                } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD </span>
+              </div>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std", sans-serif',
+                  fontSize: '28px',
+                  fontWeight: 250,
+                  letterSpacing: '0.56px',
+                  textTransform: 'uppercase',
+                  color: '#FFF'
+                } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* PORTRAIT PAIR: img10, img11 */}
-        <div style={{ position: 'relative', height: '560px', marginTop: '80px', width: '100%' }}>
-          <img src={IMG_WEB005} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '180px', height: '270px', objectFit: 'cover' }} />
-          <img src={IMG_WEB022} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '200px', width: '220px', height: '330px', objectFit: 'cover' }} />
+        <div style={{ position: 'relative', height: '560px', marginTop: '40px', width: '100%' }}>
+          <img src={IMG_WEB005} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '200px', height: '270px', objectFit: 'cover' }} />
+          <img src={IMG_WEB022} alt="" loading="lazy" style={{ position: 'absolute', right: '0', top: '200px', width: '200px', height: '330px', objectFit: 'cover' }} />
         </div>
 
         {/* VIDEO 1 */}
         <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', marginTop: '80px' }}>
-          <div className="vimeo-container">
+          <div className="vimeo-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
             <CustomVimeoPlayer
               videoUrl="https://player.vimeo.com/video/1186767280?h=ef4894270a"
               title="Más allá del Infinito - Video Arte"
+              inline={true}
             />
           </div>
         </div>
 
         {/* img12 (GIF2) */}
         <div style={{ position: 'relative', marginTop: '80px' }}>
-          <img src={IMG_GIF2} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: '233px', objectFit: 'cover' }} />
+          <img src={IMG_GIF2} alt="" loading="lazy" style={{ display: 'block', width: '300px', height: '233px', objectFit: 'cover', marginLeft: '40px', marginRight: '40px' }} />
           {/* Marquee 4 overlay */}
-          <div style={{ position: 'absolute', top: '100px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
+          <div style={{ position: 'absolute', top: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: '10s' }}>
-              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? · </span></div>
-              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? · </span></div>
+              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? </span></div>
+              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? </span></div>
             </div>
           </div>
         </div>
 
         {/* TEXT 4 */}
-        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+        <div className="mal-p" style={{ color: '#fff', marginTop: '72px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
           <p>
             Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético.
           </p>
         </div>
 
         {/* img13 (WEB016) + img14 (WEB017) */}
-        <div style={{ position: 'relative', height: '440px', marginTop: '80px' }}>
-          <img src={IMG_WEB016} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={IMG_WEB017} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '140px', width: '200px', height: '300px', objectFit: 'cover' }} />
+        <div style={{ position: 'relative', height: '550px', marginTop: '72px' }}>
+          <img src={IMG_WEB016} alt="" loading="lazy" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_WEB017} alt="" loading="lazy" style={{ position: 'absolute', right: '25px', top: '180px', width: '230px', height: '345px', objectFit: 'contain', zIndex: 2 }} />
         </div>
 
         {/* FULL WIDTH img15 (WEB018) */}
-        <img src={IMG_WEB018} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
+        <img src={IMG_WEB018} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: '233px', objectFit: 'cover', marginTop: '-30px', }} />
 
-        {/* img17 (WEB014) + img18 (WEB013) */}
-        <div style={{ position: 'relative', height: '420px', marginTop: '80px' }}>
-          <img src={IMG_WEB014} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={IMG_WEB013} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '120px', width: '240px', height: '160px', objectFit: 'cover' }} />
+        {/* img16, img17, img18 Staircase */}
+        <div style={{ position: 'relative', height: '520px', marginTop: '80px' }}>
+          <img src={IMG_WEB014_V} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_WEB014} alt="" loading="lazy" style={{ position: 'absolute', left: '110px', top: '170px', width: '170px', height: '113px', objectFit: 'cover', zIndex: 3 }} />
+          <img src={IMG_WEB013} alt="" loading="lazy" style={{ position: 'absolute', left: '190px', top: '270px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
         </div>
 
         {/* FULL WIDTH img19 (WEB015) */}
-        <img src={IMG_WEB015} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
+        <img src={IMG_WEB015} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: '233px', objectFit: 'cover', marginTop: '-35px', marginLeft: '0' }} />
 
         {/* TEXT 5 */}
         <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
@@ -740,24 +783,24 @@ export function Component() {
           </p>
         </div>
 
-        {/* Marquee 5 */}
-        <div style={{ marginTop: '80px', height: '40px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '12s' }}>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA · </span></div>
-            <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA · </span></div>
-          </div>
-        </div>
+        {/* img20 (WEB040) + img21 (WEB037) with Marquee 5 overlay */}
+        <div style={{ position: 'relative', height: '540px', marginTop: '80px' }}>
+          <img src={IMG_WEB040} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={IMG_WEB037} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '250px', width: '230px', height: '153px', objectFit: 'cover', zIndex: 2 }} />
 
-        {/* img20 (WEB040) + img21 (WEB037) */}
-        <div style={{ position: 'relative', height: '480px', marginTop: '80px' }}>
-          <img src={IMG_WEB040} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={IMG_WEB037} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '180px', width: '200px', height: '300px', objectFit: 'cover' }} />
+          {/* Marquee 5 overlay */}
+          <div style={{ position: 'absolute', top: '360px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference', zIndex: 3 }}>
+            <div className="marquee-track" style={{ animationDuration: '12s' }}>
+              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span></div>
+              <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span></div>
+            </div>
+          </div>
         </div>
 
 
 
         {/* img22 (WEB039) */}
-        <img src={IMG_WEB039} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
+        <img src={IMG_WEB039} alt="" loading="lazy" style={{ display: 'block', width: '230px', height: '153px', objectFit: 'cover', marginTop: '-55px', marginLeft: '20px' }} />
 
         {/* CAROUSEL 1 */}
         <div style={{ marginTop: '80px' }}>
@@ -772,7 +815,7 @@ export function Component() {
         </div>
 
         {/* img23 (WEB050) */}
-        <img src={IMG_WEB050} alt="" loading="lazy" style={{ display: 'block', width: '300px', height: '450px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
+        <img src={IMG_WEB050} alt="" loading="lazy" style={{ display: 'block', width: '230px', height: '103px', objectFit: 'cover', marginTop: '80px', marginLeft: 'auto', marginRight: '20px' }} />
 
         {/* TEXT 7 */}
         <div className="mal-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
@@ -782,7 +825,7 @@ export function Component() {
         </div>
 
         {/* img24 (WEB054) */}
-        <img src={IMG_WEB054} alt="" loading="lazy" style={{ display: 'block', width: '350px', height: '233px', objectFit: 'cover', marginTop: '80px', marginLeft: '20px' }} />
+        <img src={IMG_WEB054} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: '233px', objectFit: 'cover', marginTop: '80px', }} />
 
         {/* CAROUSEL 2 */}
         <div style={{ marginTop: '80px' }}>
@@ -790,39 +833,13 @@ export function Component() {
         </div>
 
         {/* QUOTE MARQUEE */}
-        <div style={{ marginTop: '80px', height: '40px', overflow: 'hidden' }}>
+        <div style={{ marginTop: '40px', height: '40px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '12s' }}>
             <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
             <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
           </div>
         </div>
-
-        {/* CREDITS */}
-        <div style={{
-          color: '#fff',
-          marginTop: '80px',
-          marginLeft: '20px',
-          width: '350px',
-          fontFamily: "'Space Grotesk', sans-serif",
-          fontWeight: 300,
-          fontSize: '12px',
-          lineHeight: '1.6',
-          mixBlendMode: 'difference',
-          transform: 'translateZ(0)',
-        } as any}>
-          <span style={{ fontWeight: 700 }}>"MÁS ALLÁ DEL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Acompañamiento Conceptual:</span> Graciela Peyrú &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Composición Sonora:</span> Francisco Rousset Osio &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Diseño Lumínico:</span> Renzo Salces &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Registro Audiovisual:</span> Martín Rois &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Coproducción lumínica de Árboles de Acrílico:</span> Matías Kroitor &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Coproducción de Escenas y Diseño Lumínico:</span> Manuela Ihan &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Project Management:</span> Marina Kucbart &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado:</span> Francisca Gil Sosa &nbsp;/&nbsp;
-          <span style={{ fontWeight: 700 }}>Ayudante Árboles de Acrílico:</span> Juan Lasala
-        </div>
-
-      </div>{/* /mal-mobile */}
+      </div >
 
     </div >
   )
