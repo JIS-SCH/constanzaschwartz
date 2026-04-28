@@ -11,11 +11,9 @@ export const ASSETS = {
   img6: cldImg('CONSTANZASCHWARTZ-projects-Mutek-6_hgt6ya'),
   img7: cldImg('CONSTANZASCHWARTZ-projects-Mutek-7_ufgrqq'),
   img8: cldImg('CONSTANZASCHWARTZ-projects-Mutek-8_tsrlib'),
-  // Mutek-9 no existe en Cloudinary — usamos Mutek-1 (DSC_3417 portrait) como fallback para DSC_3347
   img9: cldImg('CONSTANZASCHWARTZ-projects-Mutek-1_tbng2q'),
   img10: cldImg('CONSTANZASCHWARTZ-projects-Mutek-10_lpuzsp'),
   img11: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
-  // Mutek-12 no existe en Cloudinary — usamos Mutek-11 como fallback
   img12: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
   // carousel
   carousel1: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-1_shofak'),
@@ -25,5 +23,5 @@ export const ASSETS = {
   carousel5: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-5_lgjktm'),
   carousel6: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-6_jwoms7'),
   carousel7: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-7_hbk9rm'),
-  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-mutek-portada-mobile_bdqweo'),
+  heroMobile: '/CONSTANZASCHWARTZ-projects-mutek-portada-mobile.gif',
 } as const

@@ -49,6 +49,7 @@
     --h2-size: 128px;
     --h3-size: 56px;
     --h4-size: 36px;
+    --h4-ls: 0.72px;
     --list-size: 26px;
     --p-size: 16px;
 
@@ -60,9 +61,13 @@
   /* Marquee Desktop (H4) */
   .marquee-item {
     font-size: var(--h4-size);
-    line-height: var(--h4-lh);
-    letter-spacing: var(--h4-ls);
+    line-height: normal;
+    letter-spacing: 0.72px;
     padding-right: 80px;
+    leading-trim: both;
+    text-edge: cap;
+    white-space: pre !important;
+      
   }
 }
 
@@ -79,7 +84,7 @@
 .h4 {
   font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: var(--h4-size); line-height: var(--h4-lh); letter-spacing: var(--h4-ls);
-  font-weight: 300;
+  font-weight: 250;
 }
 .h5 {
   font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -222,15 +227,17 @@ canvas {
 .marquee-item {
   flex-shrink: 0;
   font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 100;
+  font-weight: 250;
   text-transform: uppercase;
   color: #fff;
-  white-space: nowrap;
+  white-space: pre;
   mix-blend-mode: difference;
   -webkit-mix-blend-mode: difference;
+  leading-trim: both;
+  text-edge: cap;
   
   font-size: var(--h5-size);
-  line-height: var(--h5-lh);
+  line-height: normal;
   letter-spacing: var(--h5-ls);
   padding-right: 40px;
 }

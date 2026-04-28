@@ -47,7 +47,7 @@ export function Component() {
         .mutek-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
         .mutek-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
         .mutek-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
-        .mutek-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--h4-ls); }
+        .mutek-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: var(--h4-ls); }
         .mutek-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
         .mutek-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 200; letter-spacing: var(--p-ls); }
         .mutek-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: var(--h5-ls); }
@@ -418,16 +418,16 @@ export function Component() {
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
-                }}>
+                  fontWeight: 250, fontSize: '36px', letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
+                } as any}>
                   Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
                 </span>
               </div>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
-                }}>
+                  fontWeight: 250, fontSize: '36px', letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
+                } as any}>
                   Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
                 </span>
               </div>
@@ -477,16 +477,16 @@ export function Component() {
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
-                }}>
+                  fontWeight: 250, fontSize: '36px', letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
+                } as any}>
                   El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
                 </span>
               </div>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 100, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff',
-                }}>
+                  fontWeight: 250, fontSize: '36px', letterSpacing: '0.72px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
+                } as any}>
                   El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
                 </span>
               </div>

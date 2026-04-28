@@ -305,10 +305,10 @@ export function Component() {
             fontStyle: 'normal',
             lineHeight: '150%',
             boxSizing: 'border-box',
-            ...({ WebkitMixBlendMode: 'difference' } as any),
+            mixBlendMode: 'difference',
             transform: 'translateZ(0)',
             zIndex: 2,
-          } as any}>
+          }}>
             {CREDITS.map((entry, i) => (
               <span key={i}>
                 {i > 0 && <span>{' / '}</span>}
@@ -457,10 +457,9 @@ export function Component() {
           lineHeight: '1.45',
           boxSizing: 'border-box',
           mixBlendMode: 'difference',
-          ...({ WebkitMixBlendMode: 'difference' } as any),
           transform: 'translateZ(0)',
           zIndex: 2,
-        } as any}>
+        }}>
           {CREDITS.map((entry, i) => (
             <span key={i}>
               {i > 0 && <span>{' / '}</span>}
