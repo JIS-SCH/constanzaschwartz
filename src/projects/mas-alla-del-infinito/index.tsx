@@ -55,7 +55,7 @@ const CAROUSEL_2 = [
 // ---------------------------------------------------------------------------
 function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
-  const duration = images.length * 3.5
+  const duration = images.length * 2.0
   return (
     <div className="w-full h-[var(--carousel-h)] overflow-hidden">
       <style dangerouslySetInnerHTML={{
@@ -138,7 +138,6 @@ export function Component() {
         }
         .mal-desktop {
           display: block;
-          margin-bottom: -60px;
         }
         .mal-mobile { display: none; }
         .mal-mobile { --carousel-h: 280px; }
@@ -171,7 +170,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 2. INTRO: text right + web028 left + marquee-1 ─────────────── */}
-        <ParallaxSection id="mal-intro" style={{ minHeight: '1779px' }}>
+        <ParallaxSection id="mal-intro" style={{ minHeight: '1779px', zIndex: 10 }}>
           {/* Disciplines Marquee — 220px gap from hero */}
           <ParallaxLayer
             layer={{
@@ -181,12 +180,12 @@ export function Component() {
               intensity: 24,
               className: 'mal-marquee-blend mal-h4'
             }}
-            position={{ top: '220px', left: '0', width: '100%', height: '44px', zIndex: 4 }}
+            position={{ top: '220px', left: '0', width: '100%', height: '44px', zIndex: 10 }}
           />
           {/* Left: tall portrait  */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB028, speed: 0.3 }}
-            position={{ top: '569px', left: '8.4%', width: '467px', height: '700px', zIndex: 1 }}
+            position={{ top: '569px', left: '8.4%', width: '467px', height: '700px', zIndex: 10 }}
           />
           {/* Right: intro text  */}
           <ParallaxLayer
@@ -210,21 +209,22 @@ export function Component() {
               speed: 0,
               intensity: 24,
               className: 'mal-marquee-blend mal-h4'
+
             }}
-            position={{ top: '950px', left: '0', width: '100%', height: '56px', zIndex: 3 }}
+            position={{ top: '1100px', left: '0', width: '100%', height: '56px', zIndex: 11 }}
           />
           {/* web009 center — 352px gap from text block (484+~250+352 = 1086) */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB009, speed: 0.3 }}
-            position={{ top: '1075px', left: '33.8%', width: '710px', height: '473px', zIndex: 2 }}
+            position={{ top: '1180px', left: '33.8%', width: '710px', height: '473px', zIndex: 1, }}
           />
         </ParallaxSection>
 
         {/* 3. FULLWIDTH 1 ──────────────────────────────────────────────── */}
-        <ParallaxSection id="mal-fw1" style={{ minHeight: '960px' }}>
+        <ParallaxSection id="mal-fw1" style={{ minHeight: '960px', zIndex: 1, top: '100px' }}>
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_FULL_1, speed: 0.3 }}
-            position={{ top: '0', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
+            position={{ top: '0', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 2 }}
           />
         </ParallaxSection>
 
@@ -277,7 +277,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 5. PHOTOS CLUSTER 1 ─────────────────────────────────────────── */}
-        <ParallaxSection id="mal-cluster1" style={{ minHeight: '2448px' }}>
+        <ParallaxSection id="mal-cluster1" style={{ minHeight: '2448px', top: '-30px' }}>
           {/* Sticky marquee 2 — 220px gap from text block 3 */}
           <ParallaxLayer
             layer={{
@@ -319,11 +319,11 @@ export function Component() {
           />
         </ParallaxSection>
 
-        <ParallaxSection id="mal-video1" style={{ minHeight: '1016px' }}>
+        <ParallaxSection id="mal-video1" style={{ minHeight: '1016px', top: '-20px' }}>
           {/* Video 1 */}
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '0', left: '0', width: '100%', height: '810px', zIndex: 2 }}
+            position={{ left: '0', width: '100%', height: '810px', zIndex: 2, }}
           >
             <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
               <CustomVimeoPlayer
@@ -335,7 +335,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 7. GIF 2 + MARQUEE 3 ────────────────────────────────────────── */}
-        <ParallaxSection id="mal-gif2" style={{ minHeight: '856px' }}>
+        <ParallaxSection id="mal-gif2" style={{ minHeight: '856px', top: '-29px' }}>
           {/* GIF 2 center wide — 220px gap from video is handled by mal-video1 minHeight */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_GIF2, speed: 0.3 }}
@@ -350,7 +350,7 @@ export function Component() {
               intensity: 24,
               className: 'mal-marquee-blend mal-h4'
             }}
-            position={{ top: '100px', left: '0', width: '100%', height: '56px', zIndex: 3 }}
+            position={{ top: '115px', left: '0', width: '100%', height: '56px', zIndex: 3, }}
           />
         </ParallaxSection>
 
@@ -359,7 +359,7 @@ export function Component() {
           {/* Text 4 right — 220px gap from GIF is handled by mal-gif2 minHeight */}
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '32px', left: '59.02%', width: '467px', height: 'auto', zIndex: 2 }}
+            position={{ top: '10px', left: '59.02%', width: '467px', height: 'auto', zIndex: 2 }}
           >
             <TextBlock>
               <p className="mal-p">
@@ -370,7 +370,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 9. PHOTOS CLUSTER 2 ─────────────────────────────────────────── */}
-        <ParallaxSection id="mal-cluster2" style={{ minHeight: '919px', top: '63px' }}>
+        <ParallaxSection id="mal-cluster2" style={{ minHeight: '919px', top: '33px' }}>
           {/* img16 (WEB016) — 220px gap from paragraph */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB016, speed: 0.3 }}
@@ -387,12 +387,12 @@ export function Component() {
           {/* img15 — 220px gap from cluster is handled by mal-cluster2 minHeight */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB018, speed: 0.3 }}
-            position={{ top: '83px', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
+            position={{ top: '59px', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
           />
         </ParallaxSection>
 
         {/* 11. PHOTOS CLUSTER 3 ────────────────────────────────────────── */}
-        <ParallaxSection id="mal-collage2" style={{ minHeight: '1262px', top: '5px' }}>
+        <ParallaxSection id="mal-collage2" style={{ minHeight: '1262px', top: '-18px' }}>
           {/* img16 (Vertical) — Vertical on left */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB014_V, speed: 0.3 }}
@@ -415,16 +415,16 @@ export function Component() {
           {/* img19 — 220px gap from cluster is handled by mal-collage2 minHeight */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB015, speed: 0.3 }}
-            position={{ top: '97px', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
+            position={{ top: '77px', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
           />
         </ParallaxSection>
 
         {/* 13. COMPLEX FINAL CLUSTER (img20, 21) ──────────────────────── */}
-        <ParallaxSection id="mal-final-cluster" style={{ minHeight: '1131px', top: '111px' }}>
+        <ParallaxSection id="mal-final-cluster" style={{ minHeight: '1131px', top: '90px' }}>
           {/* Paragraph left */}
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '150px', left: '10.69%', width: '467px', height: 'auto', zIndex: 1 }}
+            position={{ top: '230px', left: '10.69%', width: '467px', height: 'auto', zIndex: 1 }}
           >
             <TextBlock>
               <p className="mal-p">
@@ -458,7 +458,7 @@ export function Component() {
           />
         </ParallaxSection>
 
-        <ParallaxSection id="mal-img22" style={{ minHeight: '774px', top: '129px' }}>
+        <ParallaxSection id="mal-img22" style={{ minHeight: '774px', top: '107px' }}>
           {/* img22 — 220px gap from video */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB039, speed: 0.3 }}
@@ -467,7 +467,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 16. CAROUSEL 1 ─────────────────────────────────────────────── */}
-        <ParallaxSection id="mal-carousel-1" style={{ minHeight: '333px', top: '140px' }}>
+        <ParallaxSection id="mal-carousel-1" style={{ minHeight: '333px', top: '120px' }}>
           {/* Carousel 1 — 220px gap from img22 is handled by mal-img22 minHeight */}
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: 0 }}
@@ -479,7 +479,7 @@ export function Component() {
 
 
         {/* 17. FINAL SEQUENCE: TEXT - PHOTO 23 - TEXT ────────────────── */}
-        <ParallaxSection id="mal-final-sequence" style={{ minHeight: '1850px', top: '135px' }}>
+        <ParallaxSection id="mal-final-sequence" style={{ minHeight: '1850px', top: '115px' }}>
           {/* Text 6 - Right aligned — 220px gap from Carousel 1 */}
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: 0 }}
@@ -495,7 +495,7 @@ export function Component() {
           {/* img23 */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB050, speed: 0.3 }}
-            position={{ top: '570px', left: '28%', width: '923px', height: '430px', zIndex: 1 }}
+            position={{ top: '562px', left: '28%', width: '923px', height: '430px', zIndex: 1 }}
           />
 
           {/* Text 7 - Left aligned — 220px gap from combo (570 + 430 + 220 = 1220) */}
@@ -512,9 +512,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 18. img24 (Wide) ───────────────────────────────────────────── */}
-        <ParallaxSection id="mal-finish-img-24" style={{ height: '1030px', marginTop: '-110px' }}>
-          {/* img24 — 220px gap from Text 7 handled by Section 17 height */}
-          {/* speed 0 to ensure exact 220px layout gap to carousel */}
+        <ParallaxSection id="mal-finish-img-24" style={{ height: '1030px', top: '-130px' }}>
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB054, speed: 0 }}
             position={{ top: '0', left: '0', width: '100%', height: '810px', zIndex: 1 }}
@@ -522,7 +520,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 19. FINAL SECTION: CAROUSEL 2, QUOTE & CREDITS ───────────────── */}
-        <ParallaxSection id="mal-finish-footer" style={{ height: '550px', marginTop: '-150px' }} overflowHidden={false}>
+        <ParallaxSection id="mal-finish-footer" style={{ height: '475px', top: '-130px' }} overflowHidden={false}>
           {/* Carousel 2 — background — 220px gap from img24 handled by Section 18 height */}
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: 0 }}
@@ -546,7 +544,7 @@ export function Component() {
                 fontWeight: 200,
                 lineHeight: '56px',
                 maxWidth: '850px',
-                marginLeft: 'auto',
+                marginLeft: '45%',
                 textAlign: 'left'
               }}>
                 SI TIENES APEGO A TU<br />CORDURA, NO ENTRES.
@@ -564,7 +562,7 @@ export function Component() {
               maxWidth: 'none',
               paddingLeft: '3px',
               paddingRight: '3px',
-              paddingTop: '0px',
+              paddingTop: '10px',
               paddingBottom: '0px',
               mixBlendMode: 'difference',
               transform: 'translateZ(0)',
@@ -574,20 +572,21 @@ export function Component() {
                 fontFamily: '"Space Grotesk", sans-serif',
                 fontSize: '16px',
                 lineHeight: '1.5',
-                fontWeight: 700,
+                fontWeight: 300,
                 width: '100%',
+                maxWidth: 'none',
                 display: 'block',
               }}>
-                <span style={{ fontWeight: 700 }}>“MÁS ALLÁ DEL INFINITO”</span> por Constanza Schwartz<br />
-                <span style={{ fontWeight: 700 }}>Acompañamiento Conceptual:</span> Graciela Peyrú &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span style={{ fontWeight: 700 }}>Composición Sonora:</span> Francisco Rousset Osio &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span style={{ fontWeight: 700 }}>Diseño Lumínico:</span> Renzo Salces &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span style={{ fontWeight: 700 }}>Registro Audiovisual:</span> Martín Rois &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span style={{ fontWeight: 700 }}>Coproducción lumínica de Árboles de Acrílico:</span> Matías Kroitor &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span style={{ fontWeight: 700 }}>Coproducción de Escenas y Diseño Lumínico:</span> Manuela Ihan &nbsp;/&nbsp;
-                <span style={{ fontWeight: 700 }}>Project Management:</span> Marina Kucbart &nbsp;/&nbsp;
-                <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado:</span> Francisca Gil Sosa &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span style={{ fontWeight: 700 }}>Ayudante Árboles de Acrílico:</span> Juan Lasala
+                <span style={{ fontWeight: 500 }}>“MÁS ALLÁ DEL INFINITO”</span> por Constanza Schwartz<br />
+                <span style={{ fontWeight: 500 }}>Acompañamiento Conceptual:</span> Graciela Peyrú &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span style={{ fontWeight: 500 }}>Composición Sonora:</span> Francisco Rousset Osio &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span style={{ fontWeight: 500 }}>Diseño Lumínico:</span> Renzo Salces &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span style={{ fontWeight: 500 }}>Registro Audiovisual:</span> Martín Rois &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span style={{ fontWeight: 500 }}>Coproducción <br></br>lumínica de Árboles de Acrílico:</span> Matías Kroitor &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span style={{ fontWeight: 500 }}>Coproducción de Escenas y Diseño Lumínico:</span> Manuela Ihan &nbsp;/&nbsp;
+                <span style={{ fontWeight: 500 }}>Project Management:</span> Marina Kucbart &nbsp;/&nbsp;
+                <span style={{ fontWeight: 500 }}>Co-Proyección y Modelado:</span> <br></br>Francisca Gil Sosa &nbsp;&nbsp;/&nbsp;&nbsp;
+                <span style={{ fontWeight: 500 }}>Ayudante Árboles de Acrílico:</span> Juan Lasala
               </p>
             </div>
           </ParallaxLayer>
