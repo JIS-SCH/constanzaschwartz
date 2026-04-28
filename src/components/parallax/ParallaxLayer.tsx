@@ -51,6 +51,7 @@ interface ParallaxLayerProps {
   layer: LayerProps
   position: {
     top?: string
+    textAlignment?: 'center' | 'left' | 'right'
     left?: string
     right?: string
     bottom?: string
@@ -139,7 +140,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   // Blend mode for text/marquee/credits layers
   if (layer.type === 'text' || layer.type === 'marquee' || layer.type === 'credits') {
     innerStyle.mixBlendMode = 'difference'
-    ;(innerStyle as any).WebkitMixBlendMode = 'difference'
+      ; (innerStyle as any).WebkitMixBlendMode = 'difference'
     innerStyle.transform = 'translateZ(0)'
   }
 

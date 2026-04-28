@@ -3,70 +3,51 @@
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
-import { TW, CH, HERO_TOP } from '../shared'
+import { TW, CH } from '../shared'
 import { ASSETS } from './assets'
-import { isMobile } from '@/src/utils/detect'
 
 const IMG_HERO = ASSETS.hero
-const IMG_FULL_1 = 'https://www.figma.com/api/mcp/asset/6c291b28-87c4-41a6-affe-47ab95bbd620'
-const IMG_FULL_2 = 'https://www.figma.com/api/mcp/asset/61e5452d-e39e-4b11-ae6c-f719f6774ddc'
-const IMG_FULL_3 = 'https://www.figma.com/api/mcp/asset/9d3b273f-3d48-4c1d-a532-0ca0ea3f13cb'
-const IMG_WEB028 = 'https://www.figma.com/api/mcp/asset/b8f6378a-1222-403a-80fc-a91f851f4c78'
-const IMG_WEB009 = 'https://www.figma.com/api/mcp/asset/3763a9b0-d3a7-444e-9d95-7b191992c53b'
-const IMG_WEB008 = 'https://www.figma.com/api/mcp/asset/80b6e87b-6939-4440-871e-d334e6c7b34d'
-const IMG_WEB025 = 'https://www.figma.com/api/mcp/asset/a733d542-3ede-4429-8821-633bddc65ff2'
-const IMG_GIF1 = 'https://www.figma.com/api/mcp/asset/128b55b2-da1a-4406-b8b5-945b6dbe95d4'
-const IMG_WEB005 = 'https://www.figma.com/api/mcp/asset/cd4d9d9d-a1d0-4fd7-9918-d8a263b0db48'
-const IMG_WEB007 = 'https://www.figma.com/api/mcp/asset/1fc805f6-64bd-444c-b4af-6b618cfcb30e'
-const IMG_WEB012 = 'https://www.figma.com/api/mcp/asset/e370a77b-e74e-4d99-a424-0e486b364dcf'
-const IMG_WEB011 = 'https://www.figma.com/api/mcp/asset/432c479c-ec6f-49de-ad2c-60a6f90dfc09'
-const IMG_WEB022 = 'https://www.figma.com/api/mcp/asset/46e71884-3d90-493e-b82f-4ba49603a056'
-const IMG_GIF2 = 'https://www.figma.com/api/mcp/asset/cb540c54-d08f-4291-8ef0-1464e5116844'
-const IMG_WEB016 = 'https://www.figma.com/api/mcp/asset/6115b668-e9e3-4969-817c-cbbe527d65e3'
-const IMG_WEB017 = 'https://www.figma.com/api/mcp/asset/78e0910c-dffe-41da-bea4-72a6a790e061'
-const IMG_WEB018 = 'https://www.figma.com/api/mcp/asset/253eea5c-4481-470b-a710-bcb823b4f2ab'
-const IMG_WEB014 = 'https://www.figma.com/api/mcp/asset/9f768831-5d23-405f-9948-f2a48d9f1da2'
-const IMG_WEB013 = 'https://www.figma.com/api/mcp/asset/9db8b950-f388-4620-8a50-8d72e474e6f0'
-const IMG_WEB015 = 'https://www.figma.com/api/mcp/asset/9506da6a-6aef-4c30-a95a-bd0aa42180b6'
-const IMG_WEB039 = 'https://www.figma.com/api/mcp/asset/b179ab40-ae44-41a2-9d81-6604759d28d8'
-const IMG_WEB037 = 'https://www.figma.com/api/mcp/asset/c4ffec83-c4e6-411c-9a1d-e8f5c94be90b'
-const IMG_WEB040 = 'https://www.figma.com/api/mcp/asset/dee231be-2674-45db-b56c-eb25ea80c0a8'
-const IMG_WEB050 = 'https://www.figma.com/api/mcp/asset/e36b2445-7436-4366-bea3-e6097c5570f7'
-const IMG_WEB054 = 'https://www.figma.com/api/mcp/asset/c8509396-56a9-4bae-9418-4470efc8c53c'
-const IMG_WEB047 = 'https://www.figma.com/api/mcp/asset/f2f9186c-5e9c-43ca-a42d-56aa7a18bfcd'
-const IMG_WEB048 = 'https://www.figma.com/api/mcp/asset/3deb62f8-4d97-4e98-8e13-3a4f2191ddb1'
-const IMG_WEB055 = 'https://www.figma.com/api/mcp/asset/56f700d2-1054-457b-9582-8481e76fde59'
+// img1–img24: Cloudinary sequentially ordered by scroll position
+const IMG_WEB028 = ASSETS.img1   // 467×700
+const IMG_WEB009 = ASSETS.img2   // 710×473
+const IMG_FULL_1 = ASSETS.img3   // 1440×960  3:2
+const IMG_WEB008 = ASSETS.img4   // 345×517
+const IMG_WEB025 = ASSETS.img5   // 954×636   3:2
+const IMG_GIF1 = ASSETS.img6   // 467×311
+const IMG_WEB012 = ASSETS.img7   // 345×517
+const IMG_WEB011 = ASSETS.img8   // 345×517
+const IMG_WEB007 = ASSETS.img9   // 345×518
+const IMG_WEB005 = ASSETS.img10  // 467×700
+const IMG_WEB022 = ASSETS.img11  // 467×701
+const IMG_GIF2 = ASSETS.img12  // 954×636
+const IMG_WEB016 = ASSETS.img13  // 345×517
+const IMG_WEB017 = ASSETS.img14  // 294×441
+const IMG_WEB018 = ASSETS.img15  // 294×441
+const IMG_FULL_2 = ASSETS.img16  // 1440×960  3:2
+const IMG_WEB014 = ASSETS.img17  // 345×517
+const IMG_WEB013 = ASSETS.img18  // 467×311
+const IMG_WEB015 = ASSETS.img19  // 588×392
+const IMG_WEB040 = ASSETS.img20  // 480×719   leftmost column
+const IMG_WEB037 = ASSETS.img21  // 480×719   center column
+const IMG_WEB039 = ASSETS.img22  // 480×719   right column
+const IMG_WEB050 = ASSETS.img23  // 467×700
+const IMG_WEB054 = ASSETS.img24  // 467×311
+// pending Cloudinary upload — using fresh Figma URLs (7-day TTL)
+const IMG_WEB047 = 'https://www.figma.com/api/mcp/asset/a582ab2b-d381-4ff9-9a45-56136a00222b'
+const IMG_WEB048 = 'https://www.figma.com/api/mcp/asset/dc0076ab-5d33-40fe-a236-3aff32fb06cc'
+const IMG_WEB055 = 'https://www.figma.com/api/mcp/asset/93dabdaf-ee66-43c5-8817-838bcd1db5e9'
+const IMG_FULL_3 = 'https://www.figma.com/api/mcp/asset/d1ce6b09-dbdb-475d-8a50-42f92427f523'
 
 const CAROUSEL_1 = [
-  'https://www.figma.com/api/mcp/asset/40a27c65-8184-46ac-a09d-22099dfe3f1c',
-  'https://www.figma.com/api/mcp/asset/9e110396-f106-4df7-ae59-57b87f8dc667',
-  'https://www.figma.com/api/mcp/asset/f8ee7084-fd58-44be-b59a-e19aa3eaa144',
-  'https://www.figma.com/api/mcp/asset/09c8c1e6-211e-4175-96c0-58b61b86c5f4',
-  'https://www.figma.com/api/mcp/asset/b7afc93d-9d8d-45fa-9b84-ad51f310b1f8',
-  'https://www.figma.com/api/mcp/asset/d8bcf8a3-edf4-4ba3-822b-2c017a2f3fd6',
-  'https://www.figma.com/api/mcp/asset/f59f1daf-032d-443f-879e-de41e8aac24c',
-  'https://www.figma.com/api/mcp/asset/16c4caf4-4e03-4fdc-b935-8237e3a2a278',
-  'https://www.figma.com/api/mcp/asset/3ca7d9e8-3755-4195-bbf8-3ee2ac5b0083',
-  'https://www.figma.com/api/mcp/asset/baf98d55-8c38-41a6-b3dd-ee90a3587474',
+  ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5,
+  ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10,
 ]
 
 const CAROUSEL_2 = [
-  'https://www.figma.com/api/mcp/asset/b3739a44-e8ef-48fb-82bd-6c8bd586d4f0',
-  'https://www.figma.com/api/mcp/asset/96342fa2-2387-49c0-af16-351faa04e9bb',
-  'https://www.figma.com/api/mcp/asset/0700a4ac-c0c4-41d0-8516-2c5de350aa20',
-  'https://www.figma.com/api/mcp/asset/22604f6b-1ae9-4353-a50f-8897d876a318',
-  'https://www.figma.com/api/mcp/asset/d1aab912-3fc6-4a99-96ff-8fd6966eb52a',
-  'https://www.figma.com/api/mcp/asset/23ebb734-ed57-43ec-a729-830e985b6905',
-  'https://www.figma.com/api/mcp/asset/5cd9c8f0-89b4-481c-b11a-adc0aa119260',
-  'https://www.figma.com/api/mcp/asset/40db325d-5760-4d4e-b4ee-5b9108710a93',
-  'https://www.figma.com/api/mcp/asset/25bafe49-8035-4496-95d2-3dfe04841e3e',
-  'https://www.figma.com/api/mcp/asset/ec82a107-e59b-4f4e-b58e-206f8d57c792',
-  'https://www.figma.com/api/mcp/asset/1e1878a0-999d-4edc-9f91-fe8813de527c',
-  'https://www.figma.com/api/mcp/asset/56f9b0a3-a223-4846-b442-215f23fc726a',
-  'https://www.figma.com/api/mcp/asset/5ab22b9c-f40a-4bdc-802d-6ebc7b98033c',
-  'https://www.figma.com/api/mcp/asset/83b6a000-2ab6-43bf-b4b5-978df8a04888',
-  'https://www.figma.com/api/mcp/asset/71812a1f-1b96-43e2-93c1-49588eb07f51',
-  'https://www.figma.com/api/mcp/asset/d249c063-3fae-4eee-9b1d-0a670d1ece1c',
+  ASSETS.carousel11, ASSETS.carousel12, ASSETS.carousel13, ASSETS.carousel14,
+  ASSETS.carousel15, ASSETS.carousel16, ASSETS.carousel17, ASSETS.carousel18,
+  ASSETS.carousel19, ASSETS.carousel20, ASSETS.carousel21, ASSETS.carousel22,
+  ASSETS.carousel23, ASSETS.carousel24, ASSETS.carousel25, ASSETS.carousel26,
 ]
 
 // ---------------------------------------------------------------------------
@@ -84,7 +65,7 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
           to   { transform: translateX(-50%); }
         }
       `}} />
-      <div className="flex h-[var(--carousel-h)] w-max animate-[mal-c-${id}_${duration}s_linear-infinite]">
+      <div className="flex h-[var(--carousel-h)] w-max" style={{ animation: `mal-c-${id} ${duration}s linear infinite` }}>
         {doubled.map((src, i) => (
           <img key={i} src={src} alt="" className="h-[var(--carousel-h)] w-auto block shrink-0" />
         ))}
@@ -128,7 +109,7 @@ export function Component() {
         __html: `
         .mal-p {
           font-family: "Space Grotesk", sans-serif;
-          font-weight: 300;
+          font-weight: 200;
           font-size: var(--p-size);
           line-height: var(--p-lh);
           letter-spacing: var(--p-ls);
@@ -151,13 +132,29 @@ export function Component() {
           width: 100%;
           height: 100%;
         }
+
+        .mal-marquee-blend {
+          mix-blend-mode: difference;
+          -webkit-mix-blend-mode: difference;
+          transform: translateZ(0);
+        }
+
+        .mal-h4 {
+          font-family: "Helvetica Neue LT Std", ${HFONT};
+          font-weight: 100;
+          font-size: 36px;
+          line-height: normal;
+          letter-spacing: 0.72px;
+          text-transform: uppercase;
+          color: #FFF;
+        }
       `}} />
 
       {/* 1. HERO ─────────────────────────────────────────────────────── */}
-      <ParallaxSection id="mal-hero" className="min-h-[115vh]">
+      <ParallaxSection id="mal-hero" style={{ minHeight: '728px' }}>
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_HERO, speed: 0.8, isHero: true, objectFit: 'cover', className: 'mal-hero-desktop' }}
-          position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+          position={{ top: '80px', left: '0', width: '100%', height: '648px', aspectRatio: '20/9', zIndex: 1 }}
         />
         <ParallaxLayer
           layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.8, isHero: true, objectFit: 'cover', className: 'mal-hero-mobile' }}
@@ -174,16 +171,27 @@ export function Component() {
       </ParallaxSection>
 
       {/* 2. INTRO: text right + web028 left + marquee-1 ─────────────── */}
-      <ParallaxSection id="mal-intro" className="min-h-[150vh]">
-        {/* Left: tall portrait */}
+      <ParallaxSection id="mal-intro" style={{ minHeight: '1779px' }}>
+        {/* Disciplines Marquee — 220px gap from hero */}
+        <ParallaxLayer
+          layer={{
+            type: 'marquee',
+            content: 'DIRECCIÓN CREATIVA Y EJECUTIVA   /   ESCENOGRAFÍA   /   DISEÑO LUMÍNICO DE ESPECTÁCULOS   /   DISEÑO SONORO QUINTAFÓNICO   /   DIRECCIÓN DE OBRA',
+            speed: 0,
+            intensity: 24,
+            className: 'mal-marquee-blend mal-h4'
+          }}
+          position={{ top: '220px', left: '0', width: '100%', height: '44px', zIndex: 4 }}
+        />
+        {/* Left: tall portrait — 220px gap from marquee (220+44+220 = 484) */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB028, speed: 0.3 }}
-          position={{ top: '5vh', left: '8.33%', width: TW, height: '70vh', zIndex: 1 }}
+          position={{ top: '484px', left: '8.4%', width: '467px', height: '700px', zIndex: 1 }}
         />
-        {/* Right: intro text */}
+        {/* Right: intro text — 220px gap from marquee */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '8vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
+          position={{ top: '484px', left: '59.2%', width: '467px', height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
@@ -194,65 +202,67 @@ export function Component() {
             </p>
           </TextBlock>
         </ParallaxLayer>
-        {/* Sticky marquee */}
+        {/* Sticky marquee — 216px gap from paragraph bottom (734 + 216 = 950) */}
         <ParallaxLayer
-          layer={{ type: 'marquee', content: 'Somos responsables de los mundos que creamos', speed: 0, intensity: 24 }}
-          position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
+          layer={{
+            type: 'marquee',
+            content: 'Somos responsables de los mundos que creamos',
+            speed: 0,
+            intensity: 24,
+            className: 'mal-marquee-blend mal-h4'
+          }}
+          position={{ top: '950px', left: '0', width: '100%', height: '56px', zIndex: 3 }}
         />
-        {/* web009 center — visible below text */}
+        {/* web009 center — 352px gap from text block (484+~250+352 = 1086) */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB009, speed: 0.3 }}
-          position={{ top: '85vh', left: '25%', width: '49.31%', height: '48vh', zIndex: 1 }}
+          position={{ top: '1086px', left: '33.8%', width: '710px', height: '473px', zIndex: 2 }}
         />
       </ParallaxSection>
 
       {/* 3. FULLWIDTH 1 ──────────────────────────────────────────────── */}
-      <ParallaxSection id="mal-fw1" className="min-h-screen">
+      <ParallaxSection id="mal-fw1" style={{ minHeight: '960px' }}>
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_FULL_1, speed: 0.3 }}
-          position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+          position={{ top: '0', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
         />
       </ParallaxSection>
 
       {/* 4. COLLAGE 1: web008 right + text2 left + web025 center ────── */}
-      <ParallaxSection id="mal-collage1" className="min-h-[180vh]">
-        {/* web008 right small */}
+      <ParallaxSection id="mal-collage1" style={{ minHeight: '2500px', zIndex: 10 }}>
+        {/* img4 (WEB008) — overlapping img3 */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB008, speed: 0.3 }}
-          position={{ top: '5vh', left: '62.5%', width: '24%', height: '52vh', zIndex: 1 }}
+          position={{ top: '-150px', left: '63.33%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 3 }}
         />
-        {/* Text 2 left */}
+        {/* Text 2 — 222px gap from img3 bottom */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '25vh', left: '20.83%', width: TW, height: 'auto', zIndex: 2 }}
+          position={{ top: '222px', left: '21.1%', width: '32.4%', height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
-              La obra de Constanza insistirá entonces en la apelación continua a derribar las barreras racionales que impiden fluir nuestra creatividad.
+              La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
             </p>
             <p className="mal-p">
-              Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy. Los horrores de su existencia son velozmente atenuados por un bosque de acrílico, altar en homenaje a nuestros orígenes. En el abismo entre estas dos escenas pueden brotar cuestiones acerca de la validez de nuestro modo de vivir.
+              Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy. Los horrores de su existencia son velozmente atenuados por un bosque de acrílico, sitar en homenaje a nuestros orígenes. En el abismo entre estas dos escenas pueden brotar cuestiones acerca de la validez de nuestro modo de vivir. Esta obra nos permite acercarnos a estímulos con los que cohabitamos diariamente desde planos de conciencia más sensibles que lo que permite el diario trajinar por nuestra civilización industrializada.
             </p>
           </TextBlock>
         </ParallaxLayer>
-        {/* web025 center wide */}
+        {/* img5 (WEB025) — 220px gap from text */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB025, speed: 0.3 }}
-          position={{ top: '85vh', left: '16.67%', width: '66.25%', height: '55vh', zIndex: 1 }}
+          position={{ top: '900px', left: '16.87%', width: '66.25%', height: '636px', zIndex: 1 }}
         />
-        {/* GIF 1 left */}
+        {/* img6 (IMG_GIF1) — overlapping img5 */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_GIF1, speed: 0 }}
-          position={{ top: '145vh', left: '4.17%', width: TW, height: '28vh', zIndex: 2 }}
+          layer={{ type: 'image', src: IMG_GIF1, speed: 0.3 }}
+          position={{ top: '1400px', left: '4.16%', width: '32.4%', height: '350px', zIndex: 2 }}
         />
-      </ParallaxSection>
-
-      {/* 5. TEXT 3 + PHOTOS CLUSTER ──────────────────────────────────── */}
-      <ParallaxSection id="mal-cluster1" className="min-h-[160vh]">
-        {/* Text 3 right */}
+        {/* Text 3 — 110px gap from img6 bottom (1400+350+110 = 1860) */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '5vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
+          position={{ top: '1860px', left: '59.2%', width: '32.4%', height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
@@ -264,44 +274,56 @@ export function Component() {
             <p className="mal-p">Tan familiares.</p>
           </TextBlock>
         </ParallaxLayer>
-        {/* web012 left small */}
+      </ParallaxSection>
+
+      {/* 5. PHOTOS CLUSTER 1 ─────────────────────────────────────────── */}
+      <ParallaxSection id="mal-cluster1" style={{ minHeight: '2758px' }}>
+        {/* Sticky marquee 2 — 220px gap from text block 3 */}
+        <ParallaxLayer
+          layer={{
+            type: 'marquee',
+            content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.',
+            speed: 0,
+            intensity: 24,
+            className: 'mal-marquee-blend mal-h4'
+          }}
+          position={{ top: '0', left: '0', width: '100%', height: '56px', zIndex: 3 }}
+        />
+
+        {/* Staircase right to left descending */}
+        {/* img7 (WEB012) - Top Right */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB012, speed: 0.3 }}
-          position={{ top: '5vh', left: '4.17%', width: '24%', height: '52vh', zIndex: 1 }}
+          position={{ top: '150px', left: '4.16%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
         />
-        {/* Sticky marquee 2 */}
-        <ParallaxLayer
-          layer={{ type: 'marquee', content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.', speed: 0, intensity: 24 }}
-          position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
-        />
-        {/* web011 center small */}
+        {/* img8 (WEB011) - Middle */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB011, speed: 0.3 }}
-          position={{ top: '55vh', left: '38%', width: '24%', height: '52vh', zIndex: 1 }}
+          position={{ top: '450px', left: '38%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
         />
-        {/* web007 right */}
+        {/* img9 (WEB007) - Bottom Left */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB007, speed: 0.3 }}
-          position={{ top: '45vh', left: '70.83%', width: '24%', height: '52vh', zIndex: 1 }}
+          position={{ top: '750px', left: '71.8%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
         />
-        {/* web005 left tall */}
+
+        {/* img10 (WEB005) - 220px gap from previous block */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB005, speed: 0.3 }}
-          position={{ top: '95vh', left: '8.33%', width: TW, height: '55vh', zIndex: 1 }}
+          position={{ top: '1487px', left: '8.47%', width: '467px', height: '700px', zIndex: 1 }}
+        />
+        {/* img11 (WEB022) - Staggered */}
+        <ParallaxLayer
+          layer={{ type: 'image', src: IMG_WEB022, speed: 0.3 }}
+          position={{ top: '1837px', left: '33.82%', width: '468px', height: '701px', zIndex: 2 }}
         />
       </ParallaxSection>
 
-      {/* 6. WEB022 + VIDEO 1 ─────────────────────────────────────────── */}
-      <ParallaxSection id="mal-web022" style={{ minHeight: '160vh' }}>
-        {/* web022 center — masked in Figma, regular image here */}
-        <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB022, speed: 0.3 }}
-          position={{ top: '5vh', left: '33.33%', width: TW, height: '62vh', zIndex: 1 }}
-        />
+      <ParallaxSection id="mal-video1" style={{ minHeight: '1016px' }}>
         {/* Video 1 */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '75vh', left: '0', width: '100%', height: '70vh', zIndex: 2 }}
+          position={{ top: '0', left: '0', width: '100%', height: '810px', zIndex: 2 }}
         >
           <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
             <CustomVimeoPlayer
@@ -313,25 +335,31 @@ export function Component() {
       </ParallaxSection>
 
       {/* 7. GIF 2 + MARQUEE 3 ────────────────────────────────────────── */}
-      <ParallaxSection id="mal-gif2" style={{ minHeight: '110vh' }}>
-        {/* GIF 2 center wide */}
+      <ParallaxSection id="mal-gif2" style={{ minHeight: '856px' }}>
+        {/* GIF 2 center wide — 220px gap from video is handled by mal-video1 minHeight */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_GIF2, speed: 0.3 }}
-          position={{ top: '10vh', left: '16.67%', width: '66.25%', height: '55vh', zIndex: 1 }}
+          position={{ top: '0', left: '16.88%', width: '954px', height: '636px', zIndex: 1 }}
         />
-        {/* Sticky marquee 3 */}
+        {/* Sticky marquee 3 — higher on image */}
         <ParallaxLayer
-          layer={{ type: 'marquee', content: '¿cómo seguir habitando el planeta?', speed: 0, intensity: 20 }}
-          position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
+          layer={{
+            type: 'marquee',
+            content: '¿CÓMO SEGUIR HABITANDO EL PLANETA?',
+            speed: 0,
+            intensity: 24,
+            className: 'mal-marquee-blend mal-h4'
+          }}
+          position={{ top: '160px', left: '0', width: '100%', height: '56px', zIndex: 3 }}
         />
       </ParallaxSection>
 
-      {/* 8. TEXT 4 + PHOTOS ──────────────────────────────────────────── */}
-      <ParallaxSection id="mal-text4" style={{ minHeight: '160vh' }}>
-        {/* Text 4 right */}
+      {/* 8. TEXT 4 ──────────────────────────────────────────────────── */}
+      <ParallaxSection id="mal-text4" style={{ minHeight: '400px' }}>
+        {/* Text 4 right — 220px gap from GIF is handled by mal-gif2 minHeight */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '5vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
+          position={{ top: '0', left: '59.02%', width: '467px', height: 'auto', zIndex: 2 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -339,76 +367,60 @@ export function Component() {
             </p>
           </TextBlock>
         </ParallaxLayer>
-        {/* web016 center */}
+      </ParallaxSection>
+
+      {/* 9. PHOTOS CLUSTER 2 ─────────────────────────────────────────── */}
+      <ParallaxSection id="mal-cluster2" style={{ minHeight: '919px' }}>
+        {/* img13 (WEB016) — 220px gap from paragraph */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB016, speed: 0.3 }}
-          position={{ top: '5vh', left: '29.17%', width: '24%', height: '52vh', zIndex: 1 }}
+          position={{ top: '0', left: '29.51%', width: '345px', height: '517px', zIndex: 1 }}
         />
-        {/* web017 + web018 pair */}
+        {/* img14 (WEB017) — Staggered landscape */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB017, speed: 0.3 }}
-          position={{ top: '70vh', left: '50%', width: '20.42%', height: '48vh', zIndex: 1 }}
+          position={{ top: '258px', left: '44.17%', width: '588px', height: '441px', zIndex: 2 }}
         />
+      </ParallaxSection>
+
+      {/* 10. FULLWIDTH 2 (img15) ────────────────────────────────────── */}
+      <ParallaxSection id="mal-fw2" style={{ minHeight: '1180px' }}>
+        {/* img15 — 220px gap from cluster is handled by mal-cluster2 minHeight */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB018, speed: 0.3 }}
-          position={{ top: '70vh', left: '71%', width: '20.42%', height: '48vh', zIndex: 1 }}
+          position={{ top: '0', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
         />
       </ParallaxSection>
 
-      {/* 9. FULLWIDTH 2 ──────────────────────────────────────────────── */}
-      <ParallaxSection id="mal-fw2" style={{ minHeight: '100vh' }}>
-        <ParallaxLayer
-          layer={{ type: 'image', src: IMG_FULL_2, speed: 0.3 }}
-          position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 10. COLLAGE 2: web014 + web013 + web015 ────────────────────── */}
-      <ParallaxSection id="mal-collage2" style={{ minHeight: '130vh' }}>
-        {/* web014 left */}
+      {/* 11. PHOTOS CLUSTER 3 ────────────────────────────────────────── */}
+      <ParallaxSection id="mal-collage2" style={{ minHeight: '789px' }}>
+        {/* img16 (WEB014) — 220px gap from img15 */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB014, speed: 0.3 }}
-          position={{ top: '5vh', left: '8.33%', width: '24%', height: '52vh', zIndex: 1 }}
+          position={{ top: '0', left: '8.47%', width: '345px', height: '517px', zIndex: 1 }}
         />
-        {/* web013 center */}
+        {/* img17 (WEB013) — Middle staggered */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB013, speed: 0.3 }}
-          position={{ top: '40vh', left: '29.17%', width: TW, height: '32vh', zIndex: 2 }}
+          position={{ top: '258px', left: '28.19%', width: '467px', height: '311px', zIndex: 2 }}
         />
-        {/* web015 right */}
+      </ParallaxSection>
+
+      {/* 12. FULLWIDTH 3 (img18/19) ────────────────────────────────── */}
+      <ParallaxSection id="mal-fw3" style={{ minHeight: '1180px' }}>
+        {/* img18/19 — 220px gap from cluster is handled by mal-collage2 minHeight */}
         <ParallaxLayer
           layer={{ type: 'image', src: IMG_WEB015, speed: 0.3 }}
-          position={{ top: '20vh', left: '50%', width: '40.83%', height: '42vh', zIndex: 1 }}
+          position={{ top: '0', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}
         />
       </ParallaxSection>
 
-      {/* 11. THREE COLUMNS ───────────────────────────────────────────── */}
-      <ParallaxSection id="mal-threecol" style={{ minHeight: '80vh' }}>
-        <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB040, speed: 0.3 }}
-          position={{ top: '0', left: '0', width: '33.33%', height: '75vh', zIndex: 1 }}
-        />
-        <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB037, speed: 0.3 }}
-          position={{ top: '0', left: '33.33%', width: '33.33%', height: '75vh', zIndex: 1 }}
-        />
-        <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB039, speed: 0.3 }}
-          position={{ top: '0', left: '66.67%', width: '33.33%', height: '75vh', zIndex: 1 }}
-        />
-      </ParallaxSection>
-
-      {/* 12. WEB050 + TEXT 5 + WEB054 + MARQUEE 4 ───────────────────── */}
-      <ParallaxSection id="mal-text5" style={{ minHeight: '170vh' }}>
-        {/* web050 right tall */}
-        <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB050, speed: 0.3 }}
-          position={{ top: '5vh', left: '58.33%', width: TW, height: '65vh', zIndex: 1 }}
-        />
-        {/* Text 5 left */}
+      {/* 13. COMPLEX FINAL CLUSTER (img20, 21) ──────────────────────── */}
+      <ParallaxSection id="mal-final-cluster" style={{ minHeight: '1131px' }}>
+        {/* Paragraph left */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '25vh', left: '10.71%', width: TW, height: 'auto', zIndex: 2 }}
+          position={{ top: '150px', left: '10.69%', width: '467px', height: 'auto', zIndex: 1 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -416,20 +428,37 @@ export function Component() {
             </p>
           </TextBlock>
         </ParallaxLayer>
-        {/* web054 center */}
+
+        {/* Marquee behind images */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB054, speed: 0.3 }}
-          position={{ top: '75vh', left: '37.5%', width: TW, height: '32vh', zIndex: 2 }}
+          layer={{
+            type: 'marquee',
+            content: 'NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA',
+            speed: 0,
+            intensity: 24,
+            className: 'mal-marquee-blend mal-h4'
+          }}
+          position={{ top: '450px', left: '0', width: '100%', height: '56px', zIndex: 1 }}
         />
-        {/* Sticky marquee 4 */}
+
+        {/* img20 (WEB040) right portrait */}
         <ParallaxLayer
-          layer={{ type: 'marquee', content: 'nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde', speed: 0, intensity: 24 }}
-          position={{ left: '0', width: '100%', height: '56px', zIndex: 3 }}
+          layer={{ type: 'image', src: IMG_WEB040, speed: 0.3 }}
+          position={{ top: '0', left: '59.09%', width: '467px', height: '700px', zIndex: 2 }}
         />
-        {/* Video 2 */}
+
+        {/* img21 (WEB037) center-bottom staggered landscape */}
+        <ParallaxLayer
+          layer={{ type: 'image', src: IMG_WEB037, speed: 0.3 }}
+          position={{ top: '600px', left: '26%', width: '467px', height: '311px', zIndex: 2 }}
+        />
+      </ParallaxSection>
+
+      {/* 14. VIDEO MAKING OFF ───────────────────────────────────────── */}
+      <ParallaxSection id="mal-video2" style={{ minHeight: '1030px' }}>
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '115vh', left: '0', width: '100%', height: '50vh', zIndex: 2 }}
+          position={{ top: '0', left: '0', width: '100%', height: '810px', zIndex: 1 }}
         >
           <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
             <VideoPlaceholder label="VIDEO MAKING OFF" />
@@ -437,28 +466,33 @@ export function Component() {
         </ParallaxLayer>
       </ParallaxSection>
 
-      {/* 13. WEB047 + CAROUSEL 1 ─────────────────────────────────────── */}
-      <ParallaxSection id="mal-carousel1" style={{ minHeight: '100vh' }}>
-        {/* web047 wide left */}
+      {/* 15. PHOTO img22 (WEB039) ───────────────────────────────────── */}
+      <ParallaxSection id="mal-img22" style={{ minHeight: '1030px' }}>
+        {/* img22 — 220px gap from video */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB047, speed: 0.3 }}
-          position={{ top: '5vh', left: '7.64%', width: '57.71%', height: '55vh', zIndex: 1 }}
+          layer={{ type: 'image', src: IMG_WEB039, speed: 0.3 }}
+          position={{ top: '0', left: '7.64%', width: '1220px', height: '810px', zIndex: 1 }}
         />
-        {/* Carousel 1 */}
+      </ParallaxSection>
+
+      {/* 16. CAROUSEL 1 ─────────────────────────────────────────────── */}
+      <ParallaxSection id="mal-carousel-1" style={{ minHeight: '333px' }}>
+        {/* Carousel 1 — 220px gap from img22 is handled by mal-img22 minHeight */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '68vh', left: '0', width: '100%', height: CH, zIndex: 2 }}
+          position={{ top: '0', left: '0', width: '100%', height: '333px', zIndex: 1 }}
         >
           <Carousel images={CAROUSEL_1} id="c1" />
         </ParallaxLayer>
       </ParallaxSection>
 
-      {/* 14. TEXT 6 + PHOTOS PAIR ────────────────────────────────────── */}
-      <ParallaxSection id="mal-text6" style={{ minHeight: '130vh' }}>
-        {/* Text 6 right */}
+
+      {/* 17. FINAL SEQUENCE: TEXT - PHOTO 23 - TEXT ────────────────── */}
+      <ParallaxSection id="mal-final-sequence" style={{ minHeight: '1850px' }}>
+        {/* Text 6 - Right aligned — 220px gap from Carousel 1 */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '5vh', left: '58.33%', width: TW, height: 'auto', zIndex: 2 }}
+          position={{ top: '220px', left: '59.16%', width: '467px', height: 'auto', zIndex: 1 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -466,20 +500,17 @@ export function Component() {
             </p>
           </TextBlock>
         </ParallaxLayer>
-        {/* web048 wide */}
+
+        {/* img23 (Tall) — 220px gap from Text 6 (220 + ~150 + 220 = 590) */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB048, speed: 0.3 }}
-          position={{ top: '30vh', left: '25%', width: '44.77%', height: '45vh', zIndex: 1 }}
+          layer={{ type: 'image', src: IMG_WEB050, speed: 0.3 }}
+          position={{ top: '590px', left: '8.47%', width: '467px', height: '700px', zIndex: 1 }}
         />
-        {/* web055 right small */}
-        <ParallaxLayer
-          layer={{ type: 'image', src: IMG_WEB055, speed: 0.3 }}
-          position={{ top: '30vh', left: '70.83%', width: '19.93%', height: '45vh', zIndex: 1 }}
-        />
-        {/* Text 7 left */}
+
+        {/* Text 7 - Left aligned — 220px gap from img23 (590 + 700 + 220 = 1510) */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '80vh', left: '20.83%', width: TW, height: 'auto', zIndex: 2 }}
+          position={{ top: '1510px', left: '26.67%', width: '467px', height: 'auto', zIndex: 1 }}
         >
           <TextBlock>
             <p className="mal-p">
@@ -489,37 +520,74 @@ export function Component() {
         </ParallaxLayer>
       </ParallaxSection>
 
-      {/* 15. FULLWIDTH 3 ─────────────────────────────────────────────── */}
-      <ParallaxSection id="mal-fw3" style={{ minHeight: '100vh' }}>
+      {/* 18. img24 (Wide) ───────────────────────────────────────────── */}
+      <ParallaxSection id="mal-finish-img-24" style={{ height: '1030px' }}>
+        {/* img24 — 220px gap from Text 7 handled by Section 17 height */}
+        {/* speed 0 to ensure exact 220px layout gap to carousel */}
         <ParallaxLayer
-          layer={{ type: 'image', src: IMG_FULL_3, speed: 0.3 }}
-          position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+          layer={{ type: 'image', src: IMG_WEB054, speed: 0 }}
+          position={{ top: '0', left: '0', width: '100%', height: '810px', zIndex: 1 }}
         />
       </ParallaxSection>
 
-      {/* 16. CAROUSEL 2 + CLOSING QUOTE ─────────────────────────────── */}
-      <ParallaxSection id="mal-carousel2" style={{ minHeight: '80vh' }} overflowHidden={false}>
+      {/* 19. FINAL SECTION: CAROUSEL 2, QUOTE & CREDITS ───────────────── */}
+      <ParallaxSection id="mal-finish-footer" style={{ height: '650px' }}>
+        {/* Carousel 2 — background — 220px gap from img24 handled by Section 18 height */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '0', left: '0', width: '100%', height: CH, zIndex: 1 }}
+          position={{ top: '0', left: '0', width: '100%', height: '333px', zIndex: 1 }}
         >
-          <Carousel images={CAROUSEL_2} id="c2" />
+          <Carousel images={CAROUSEL_2} id="c2-final" />
         </ParallaxLayer>
-        {/* Closing quote */}
+
+        {/* Quote — 2 lines, baseline of 2nd line at 216px from bottom (650 - 216 = 434) */}
+        {/* If line-height is 56px, line 1 is at 434 - 56 = 378. */}
         <ParallaxLayer
           layer={{ type: 'text', content: '', speed: 0 }}
-          position={{ top: '40vh', left: '0', width: '100%', height: 'auto', zIndex: 2 }}
+          position={{ top: '300px', left: '0', width: '100%', height: 'auto', zIndex: 3 }}
         >
-          <div style={{
-            padding: '0 clamp(20px, 4.65%, 67px)',
-            maxWidth: '1440px',
-            margin: '0 auto',
-          }}>
-            <p className="h3" style={{
+          <div style={{ textAlign: 'right', paddingRight: '4.24%' }}>
+            <p style={{
               color: '#fff',
               textTransform: 'uppercase',
+              fontFamily: '"Helvetica Neue LT Std", sans-serif',
+              fontSize: '56px',
+              fontWeight: 200,
+              lineHeight: '56px',
+              maxWidth: '850px',
+              marginLeft: 'auto',
+              textAlign: 'left'
             }}>
-              Si tienes apego a tu cordura, no entres.
+              SI TIENES APEGO A TU<br />CORDURA, NO ENTRES.
+            </p>
+          </div>
+        </ParallaxLayer>
+
+        <ParallaxLayer
+          layer={{ type: 'text', content: '', speed: 0 }}
+          position={{ top: '554px', left: '0', width: '100%', height: 'auto', zIndex: 4 }}
+        >
+          <div style={{
+            color: '#fff',
+            width: '100%',
+            maxWidth: 'none',
+            padding: '0 3px',
+            mixBlendMode: 'difference',
+            WebkitMixBlendMode: 'difference',
+            transform: 'translateZ(0)',
+            textAlign: 'left'
+          } as any}>
+            <p style={{ fontSize: '14px', lineHeight: '1.6', width: '100%', maxWidth: 'none', display: 'block' }}>
+              <span style={{ fontWeight: 700 }}>"MÁS ALLÁ DEL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Acompañamiento Conceptual:</span> Graciela Peyrú &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Composición Sonora:</span> Francisco Rousset Osio &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Diseño Lumínico:</span> Renzo Salces &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Registro Audiovisual:</span> Martín Rois &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Coproducción lumínica de Árboles de Acrílico:</span> Matías Kroitor &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Coproducción de Escenas y Diseño Lumínico:</span> Manuela Ihan &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Project Management:</span> Marina Kucbart &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado:</span> Francisca Gil Sosa &nbsp;/&nbsp;
+              <span style={{ fontWeight: 700 }}>Ayudante Árboles de Acrílico:</span> Juan Lasala
             </p>
           </div>
         </ParallaxLayer>

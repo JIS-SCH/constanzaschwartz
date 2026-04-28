@@ -299,9 +299,7 @@ export function Component() {
                 <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
                   {entry.role}:
                 </span>
-                <span style={{ fontWeight: 300 }}>
-                  {' '}{entry.name}
-                </span>
+                <span style={{ fontWeight: 300 }}> {' '}{entry.name}</span>
               </span>
             ))}
           </div>
