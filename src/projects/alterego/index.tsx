@@ -327,10 +327,10 @@ export function Component() {
         </div>
 
         {/* 2. WIDE LANDSCAPE 1 */}
-        <img src={cldImg(ALT[1], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '40px' }} />
+        <img src={cldImg(ALT[1], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
 
         {/* 3. FW VIDEO 1 */}
-        <div style={{ width: '100%', marginTop: '40px' }}>
+        <div style={{ width: '100%', marginTop: '80px' }}>
           <VideoPlayer id="m-v1" src={cldVideo(ALT.v1)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
         </div>
 
@@ -348,10 +348,10 @@ export function Component() {
         </div>
 
         {/* 6. PORTRAIT 7 */}
-        <img src={cldImg(ALT[7], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '40px' }} />
+        <img src={cldImg(ALT[7], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
 
         {/* 7. FW VIDEO 2 */}
-        <div style={{ width: '100%', marginTop: '40px' }}>
+        <div style={{ width: '100%', marginTop: '80px' }}>
           <VideoPlayer id="m-v2" src={cldVideo(ALT.v2)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
         </div>
 
@@ -362,7 +362,7 @@ export function Component() {
         </div>
 
         {/* 9. FW VIDEO 3 + CENTERED VIDEO 4 */}
-        <div style={{ width: '100%', marginTop: '40px' }}>
+        <div style={{ width: '100%', marginTop: '80px' }}>
           <VideoPlayer id="m-v3" src={cldVideo(ALT.v3)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
         </div>
         <div style={{ width: '100%', padding: '40px 20px' }}>
@@ -371,7 +371,7 @@ export function Component() {
 
         {/* 10. INV STILL 10 + FW VIDEO 5 */}
         <img src={cldImg(ALT[10], 'w_800')} alt="" style={{ display: 'block', width: '90%', height: 'auto', marginLeft: '5%', marginTop: '20px' }} />
-        <div style={{ width: '100%', marginTop: '40px' }}>
+        <div style={{ width: '100%', marginTop: '80px' }}>
           <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
         </div>
 
@@ -383,19 +383,19 @@ export function Component() {
         </div>
 
         {/* 12. PORTRAIT 14 + PORTRAIT VIDEO 6 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '20px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', marginTop: '80px' }}>
           <img src={cldImg(ALT[14], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto' }} />
           <VideoPlayer id="m-v6" src={cldVideo(ALT.v6)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '9/16' }} />
         </div>
 
         {/* 13. FW VIDEO 7 + PORTRAIT 15 */}
-        <div style={{ width: '100%', marginTop: '40px' }}>
+        <div style={{ width: '100%', marginTop: '80px' }}>
           <VideoPlayer id="m-v7" src={cldVideo(ALT.v7)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
         </div>
-        <img src={cldImg(ALT[15], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '40px' }} />
+        <img src={cldImg(ALT[15], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
 
         {/* 14. FINAL IMAGE + CREDITS */}
-        <div style={{ width: '100%', position: 'relative', marginTop: '40px' }}>
+        <div style={{ width: '100%', position: 'relative', marginTop: '80px' }}>
           <img src={cldImg(ALT[16], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto' }} />
 
           <div style={{

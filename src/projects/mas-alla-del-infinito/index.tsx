@@ -148,7 +148,16 @@ export function Component() {
           text-transform: uppercase;
           color: #FFF;
         }
+        .mal-desktop { display: block; }
+        .mal-mobile  { display: none; }
+        .mal-mobile  { --carousel-h: 280px; }
+        @media (max-width: 1023px) {
+          .mal-desktop { display: none; }
+          .mal-mobile  { display: block; }
+        }
       `}} />
+
+      <div className="mal-desktop">
 
       {/* 1. HERO ─────────────────────────────────────────────────────── */}
       <ParallaxSection id="mal-hero" style={{ minHeight: '728px' }}>
@@ -592,6 +601,217 @@ export function Component() {
           </div>
         </ParallaxLayer>
       </ParallaxSection>
+
+      </div>{/* /mal-desktop */}
+
+      {/* ── MAS ALLA MOBILE ─────────────────────────────────────────────── */}
+      <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '100px' }}>
+
+        {/* HERO */}
+        <div style={{ position: 'relative', height: '100vh' }}>
+          <img src={ASSETS.heroMobile} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', overflow: 'hidden', zIndex: 2 }}>
+            <div className="marquee-track" style={{ animationDuration: '30s' }}>
+              {[0, 1].map(s => (
+                <div key={s} className="marquee-set">
+                  {Array.from({ length: 3 }, (_, i) => (
+                    <span key={i} className="marquee-item">DIRECCIÓN CREATIVA / ESCENOGRAFÍA / DISEÑO LUMÍNICO /</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* TEXT 1 */}
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+          <p style={{ marginBottom: '1.5rem' }}>
+            Dado que la objetividad es un proyecto inalcanzable, Constanza Schwartz crea con el subjetivismo escénico experiencias intensamente subjetivas por las que el espectador participativo puede ir cambiando su inserción y su influencia en su entorno.
+          </p>
+          <p>
+            Somos responsables de los mundos que creamos pero solo en la medida en que aceptamos que nuestra contribución y nuestra influencia va a estar guiada por una extrema subjetividad.
+          </p>
+        </div>
+
+        {/* img1 (WEB028) */}
+        <img src={IMG_WEB028} alt="" loading="lazy" style={{ display: 'block', width: '85%', height: 'auto', marginTop: '80px', marginLeft: '5%' }} />
+
+        {/* img2 (WEB009) */}
+        <img src={IMG_WEB009} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+
+        {/* TEXT 2 */}
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px 0 40px' }}>
+          <p style={{ marginBottom: '1.5rem' }}>
+            La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
+          </p>
+          <p>
+            Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy.
+          </p>
+        </div>
+
+        {/* img3 (FULL_1) */}
+        <img src={IMG_FULL_1} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+
+        {/* img4 (WEB008) + img5 (WEB025) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
+          <img src={IMG_WEB008} alt="" loading="lazy" style={{ width: '75%', height: 'auto', alignSelf: 'flex-end' }} />
+          <img src={IMG_WEB025} alt="" loading="lazy" style={{ width: '100%', height: 'auto' }} />
+        </div>
+
+        {/* img6 (GIF1) */}
+        <img src={IMG_GIF1} alt="" loading="lazy" style={{ display: 'block', width: '90%', height: 'auto', marginTop: '80px', marginLeft: '5%' }} />
+
+        {/* TEXT 3 */}
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+          <p style={{ marginBottom: '1.5rem' }}>
+            Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
+          </p>
+          <p style={{ marginBottom: '1.5rem' }}>¿De dónde viene la electricidad que fluye hacia las pantallas de nuestros televisores, notebooks, computadoras, teléfonos?</p>
+          <p>Tan familiares.</p>
+        </div>
+
+        {/* STAIRCASE: img7, img8, img9 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', marginTop: '80px', padding: '0 20px' }}>
+          <img src={IMG_WEB012} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-start' }} />
+          <img src={IMG_WEB011} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'center' }} />
+          <img src={IMG_WEB007} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-end' }} />
+        </div>
+
+        {/* PORTRAIT PAIR: img10, img11 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
+          <img src={IMG_WEB005} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-start' }} />
+          <img src={IMG_WEB022} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-end' }} />
+        </div>
+
+        {/* VIDEO 1 */}
+        <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', marginTop: '80px' }}>
+          <div className="vimeo-container">
+            <CustomVimeoPlayer
+              videoUrl="https://player.vimeo.com/video/1186767280?h=ef4894270a"
+              title="Más allá del Infinito - Video Arte"
+            />
+          </div>
+        </div>
+
+        {/* img12 (GIF2) */}
+        <img src={IMG_GIF2} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+
+        {/* TEXT 4 */}
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px 0 40px' }}>
+          <p>
+            Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético.
+          </p>
+        </div>
+
+        {/* img13 (WEB016) + img14 (WEB017) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
+          <img src={IMG_WEB016} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-start' }} />
+          <img src={IMG_WEB017} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-end' }} />
+        </div>
+
+        {/* FULL WIDTH img15 (WEB018) */}
+        <img src={IMG_WEB018} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+
+        {/* img17 (WEB014) + img18 (WEB013) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
+          <img src={IMG_WEB014} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-end' }} />
+          <img src={IMG_WEB013} alt="" loading="lazy" style={{ width: '80%', height: 'auto', alignSelf: 'flex-start' }} />
+        </div>
+
+        {/* FULL WIDTH img19 (WEB015) */}
+        <img src={IMG_WEB015} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+
+        {/* TEXT 5 */}
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+          <p>
+            De esas raíces y las tensiones de nuestra vida cotidiana, nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde de algunas plantitas traviesas que asoman en un balcón.
+          </p>
+        </div>
+
+        {/* img20 (WEB040) + img21 (WEB037) */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px', marginTop: '80px', padding: '0 20px' }}>
+          <img src={IMG_WEB040} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-end' }} />
+          <img src={IMG_WEB037} alt="" loading="lazy" style={{ width: '85%', height: 'auto', alignSelf: 'flex-start' }} />
+        </div>
+
+        {/* VIDEO 2 (Making Off) */}
+        <div style={{ width: '100%', aspectRatio: '16/9', marginTop: '80px', background: 'rgba(249,148,64,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 300, fontSize: '24px', color: '#fff', textAlign: 'center' }}>VIDEO MAKING OFF</p>
+        </div>
+
+        {/* img22 (WEB039) */}
+        <img src={IMG_WEB039} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+
+        {/* CAROUSEL 1 */}
+        <div style={{ marginTop: '80px' }}>
+          <Carousel images={CAROUSEL_1} id="c1-m" />
+        </div>
+
+        {/* TEXT 6 */}
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px' }}>
+          <p>
+            La ciencia y la técnica han triunfado hasta participar de la construcción completa de los paisajes de nuestras ciudades. "Más allá del infinito" es una alerta cruda e implacable que subraya los aspectos amenazantes de esta victoria.
+          </p>
+        </div>
+
+        {/* img23 (WEB050) */}
+        <img src={IMG_WEB050} alt="" loading="lazy" style={{ display: 'block', width: '85%', height: 'auto', marginTop: '80px', marginLeft: '5%' }} />
+
+        {/* TEXT 7 */}
+        <div className="mal-p" style={{ color: '#fff', marginTop: '80px', padding: '0 20px 0 40px' }}>
+          <p>
+            La vibración de esta obra persiste en nuestros sentidos, nos impulsa a buscar nuevas respuestas que tal vez están asociadas a las notas de nostalgia distribuidas con inclemencia en diversos rincones de la muestra. Nuestros afectos y la ternura que suele acompañar a la nostalgia serán solo una parte de la respuesta emocional a esta apelación al amor y la cordura.
+          </p>
+        </div>
+
+        {/* img24 (WEB054) */}
+        <img src={IMG_WEB054} alt="" loading="lazy" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+
+        {/* CAROUSEL 2 */}
+        <div style={{ marginTop: '80px' }}>
+          <Carousel images={CAROUSEL_2} id="c2-m" />
+        </div>
+
+        {/* QUOTE */}
+        <div style={{ marginTop: '80px', padding: '0 20px' }}>
+          <p style={{
+            color: '#fff',
+            textTransform: 'uppercase',
+            fontFamily: '"Helvetica Neue LT Std", sans-serif',
+            fontSize: '36px',
+            fontWeight: 200,
+            lineHeight: '1.1',
+          }}>
+            SI TIENES APEGO A TU<br />CORDURA, NO ENTRES.
+          </p>
+        </div>
+
+        {/* CREDITS */}
+        <div style={{
+          color: '#fff',
+          marginTop: '40px',
+          padding: '0 20px',
+          fontFamily: "'Space Grotesk', sans-serif",
+          fontWeight: 300,
+          fontSize: '12px',
+          lineHeight: '1.6',
+          mixBlendMode: 'difference',
+          WebkitMixBlendMode: 'difference',
+          transform: 'translateZ(0)',
+        } as any}>
+          <span style={{ fontWeight: 700 }}>"MÁS ALLÁ DEL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Acompañamiento Conceptual:</span> Graciela Peyrú &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Composición Sonora:</span> Francisco Rousset Osio &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Diseño Lumínico:</span> Renzo Salces &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Registro Audiovisual:</span> Martín Rois &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Coproducción lumínica de Árboles de Acrílico:</span> Matías Kroitor &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Coproducción de Escenas y Diseño Lumínico:</span> Manuela Ihan &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Project Management:</span> Marina Kucbart &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado:</span> Francisca Gil Sosa &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Ayudante Árboles de Acrílico:</span> Juan Lasala
+        </div>
+
+      </div>{/* /mal-mobile */}
 
     </div>
   )

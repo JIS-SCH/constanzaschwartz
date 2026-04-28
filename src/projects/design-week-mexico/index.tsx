@@ -87,20 +87,20 @@ export function Component() {
         @media (max-width: 768px) {
           .dw-container {
             /* section heights */
-            --h-hero: 750px; --h-intro: 320px; --h-c1: 580px;
-            --h-stmt: 380px; --h-c2: 810px;
-            --h-pc: 720px;   --h-fp: 310px;   --h-c3: 540px;
+            --h-hero: 750px; --h-intro: 370px; --h-c1: 580px;
+            --h-stmt: 430px; --h-c2: 810px;
+            --h-pc: 770px;   --h-fp: 370px;   --h-c3: 540px;
 
             /* intro */
-            --it-l-t: 30px;  --it-l-x: 20px; --it-l-w: calc(100% - 40px);
-            --it-r-t: 185px; --it-r-x: 20px; --it-r-w: calc(100% - 40px);
+            --it-l-t: 80px;  --it-l-x: 20px; --it-l-w: calc(100% - 40px);
+            --it-r-t: 235px; --it-r-x: 20px; --it-r-w: calc(100% - 40px);
 
             /* collage-1 */
             --c1-a-t: 148px; --c1-a-x: 20px;  --c1-a-w: 230px; --c1-a-h: 345px;
             --c1-b-t: 0px;   --c1-b-x: 110px; --c1-b-w: 280px; --c1-b-h: 187px;
 
             /* statement */
-            --stmt-x: 20px; --stmt-w: calc(100% - 40px); --stmt-t: 30px;
+            --stmt-x: 20px; --stmt-w: calc(100% - 40px); --stmt-t: 80px;
 
             /* collage-2 */
             --c2-a-t: 0px;   --c2-a-x: 187px; --c2-a-w: 183px; --c2-a-h: 274px;
@@ -108,11 +108,11 @@ export function Component() {
             --c2-marquee-t: 500px;
 
             /* paragraphs-carousel */
-            --pc-text-t: 30px; --pc-text-l: 20px; --pc-text-w: calc(100% - 40px);
-            --pc-carousel-t: 400px;
+            --pc-text-t: 80px; --pc-text-l: 20px; --pc-text-w: calc(100% - 40px);
+            --pc-carousel-t: 450px;
 
             /* final-paragraph */
-            --fp-text-t: 20px; --fp-text-l: 20px; --fp-text-w: calc(100% - 40px);
+            --fp-text-t: 80px; --fp-text-l: 20px; --fp-text-w: calc(100% - 40px);
 
             /* collage-3 */
             --c3-a-t: 60px;  --c3-a-x: 20px;  --c3-a-w: 138px; --c3-a-h: 93px;

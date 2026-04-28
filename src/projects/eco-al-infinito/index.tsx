@@ -755,7 +755,7 @@ export function Component() {
         </div>
 
         {/* 3-image cluster (staggered) */}
-        <div className="relative h-[380px] mt-[60px]">
+        <div className="relative h-[380px] mt-[80px]">
           <img src={ASSETS.img1} alt="" className="absolute left-0 top-0 w-[140px] h-[210px] object-cover" />
           <img src={ASSETS.img2} alt="" className="absolute left-[110px] top-[80px] w-[170px] h-[114px] object-cover" />
           <img src={ASSETS.img3} alt="" className="absolute right-0 top-[240px] w-[200px] h-[133px] object-cover" />
@@ -778,7 +778,7 @@ export function Component() {
         </div>
 
         {/* Image pair */}
-        <div className="relative h-[320px] mt-[60px]">
+        <div className="relative h-[320px] mt-[80px]">
           <img src={ASSETS.img6} alt="" className="absolute left-0 top-[100px] w-[200px] h-[134px] object-cover" />
           <img src={ASSETS.img5} alt="" className="absolute right-0 top-0 w-[200px] h-[300px] object-cover" />
         </div>
@@ -798,7 +798,7 @@ export function Component() {
         </div>
 
         {/* Image pair staggered */}
-        <div className="relative h-[230px] mt-[60px]">
+        <div className="relative h-[230px] mt-[80px]">
           <img src={ASSETS.img10} alt="" className="absolute right-0 top-0 w-[200px] h-[133px] object-cover" />
           <img src={ASSETS.img11} alt="" className="absolute left-0 top-[80px] w-[200px] h-[133px] object-cover" />
         </div>
@@ -833,13 +833,13 @@ export function Component() {
         </div>
 
         {/* Image pair */}
-        <div className="relative h-[470px] mt-[60px]">
+        <div className="relative h-[470px] mt-[80px]">
           <img src={ASSETS.img17} alt="" className="absolute left-5 top-0 w-[200px] h-[300px] object-cover" />
           <img src={ASSETS.img18} alt="" className="absolute right-5 top-[150px] w-[200px] h-[300px] object-cover" />
         </div>
 
         {/* Marquee */}
-          <div className="mt-[60px] h-[30px] overflow-hidden">
+          <div className="mt-[80px] h-[30px] overflow-hidden">
             <div className="marquee-track" style={{ animationDuration: '24s' }}>
             <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
             <div className="marquee-set"><span className="marquee-item">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
@@ -864,13 +864,13 @@ export function Component() {
         </div>
 
         {/* Image pair offset */}
-        <div className="relative h-[360px] mt-[60px]">
+        <div className="relative h-[360px] mt-[80px]">
           <img src={ASSETS.img23} alt="" className="absolute right-5 top-0 w-[200px] h-[270px] object-cover" />
           <img src={ASSETS.img24} alt="" className="absolute left-5 top-[100px] w-[200px] h-[170px] object-cover" />
         </div>
 
         {/* Marquee */}
-          <div className="mt-[60px] h-[30px] overflow-hidden">
+          <div className="mt-[80px] h-[30px] overflow-hidden">
             <div className="marquee-track" style={{ animationDuration: '28s' }}>
             <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
             <div className="marquee-set"><span className="marquee-item">Seguiremos dudando hasta que realmente nos reconozcamos allí. ·</span></div>
@@ -893,7 +893,7 @@ export function Component() {
         </div>
 
         {/* Carousel 1 */}
-        <div style={{ marginTop: '60px', width: '100%', height: CH, overflow: 'hidden' }}>
+        <div style={{ marginTop: '80px', width: '100%', height: CH, overflow: 'hidden' }}>
           <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'eco-m-c1 14s linear infinite' }}>
             {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5,
             ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5].map((src, i) => (
@@ -904,13 +904,13 @@ export function Component() {
         <style dangerouslySetInnerHTML={{ __html: `@keyframes eco-m-c1 { from { transform: translateX(0) } to { transform: translateX(-50%) } }` }} />
 
         {/* Image pair (img32/img33) */}
-        <div className="relative h-[320px] mt-[60px]">
+        <div className="relative h-[320px] mt-[80px]">
           <img src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '170px', height: '230px', objectFit: 'cover' }} />
           <img src={ASSETS.img33} alt="" style={{ position: 'absolute', right: '20px', top: '80px', width: '170px', height: '200px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
-        <div style={{ marginTop: '60px', height: '30px', overflow: 'hidden' }}>
+        <div style={{ marginTop: '80px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '26s' }}>
             <div className="marquee-set"><span className="marquee-item">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
             <div className="marquee-set"><span className="marquee-item">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER ·</span></div>
@@ -929,7 +929,7 @@ export function Component() {
         </div>
 
         {/* Carousel 2 */}
-        <div style={{ marginTop: '60px', width: '100%', height: CH, overflow: 'hidden' }}>
+        <div style={{ marginTop: '80px', width: '100%', height: CH, overflow: 'hidden' }}>
           <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'eco-m-c2 18s linear infinite' }}>
             {[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11,
             ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11].map((src, i) => (
@@ -940,7 +940,7 @@ export function Component() {
         <style dangerouslySetInnerHTML={{ __html: `@keyframes eco-m-c2 { from { transform: translateX(0) } to { transform: translateX(-50%) } }` }} />
 
         {/* Image pair (img36/img37) */}
-        <div style={{ position: 'relative', height: '360px', marginTop: '60px' }}>
+        <div style={{ position: 'relative', height: '360px', marginTop: '80px' }}>
           <img src={ASSETS.img36} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '270px', objectFit: 'cover' }} />
           <img src={ASSETS.img37} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '200px', height: '170px', objectFit: 'cover' }} />
         </div>
