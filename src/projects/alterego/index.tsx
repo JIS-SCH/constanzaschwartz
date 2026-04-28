@@ -310,8 +310,8 @@ export function Component() {
       {/* ── ALTEREGO MOBILE ─────────────────────────────────────────────── */}
       <div className="alterego-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '100px' }}>
 
-        {/* 1. HERO — img + marquee contenido dentro del hero, marquee absolute bottom */}
-        <div style={{ position: 'relative', height: '100vh' }}>
+        {/* 1. HERO */}
+        <div style={{ position: 'relative', width: '100%', height: '75vh' }}>
           <img src={cldImg(ALT.portadaMobile, 'w_800')} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
           <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', overflow: 'hidden', zIndex: 2 }}>
             <div className="marquee-track" style={{ animationDuration: '88s' }}>
@@ -326,97 +326,140 @@ export function Component() {
           </div>
         </div>
 
-        {/* 2. WIDE LANDSCAPE 1 */}
-        <img src={cldImg(ALT[1], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        {/* 2. azstill18 — left-aligned, 290px wide */}
+        <img
+          src={cldImg(ALT[1], 'w_800')}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style={{ display: 'block', width: 'calc(100% - 100px)', marginTop: '80px', marginLeft: 'calc(8.33% + 17.5px)' }}
+        />
 
-        {/* 3. FW VIDEO 1 */}
-        <div style={{ width: '100%', marginTop: '80px' }}>
-          <VideoPlayer id="m-v1" src={cldVideo(ALT.v1)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
+        {/* 3. Video 1 — full-width */}
+        <div style={{ marginTop: '80px', width: '100%' }}>
+          <VideoPlayer id="m-v1" src={cldVideo(ALT.v1)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '390/206' }} />
         </div>
 
-        {/* 4. 3 STACKED STILLS */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '40px 20px' }}>
-          <img src={cldImg(ALT[2], 'w_800')} alt="" style={{ width: '80%', alignSelf: 'flex-start' }} />
-          <img src={cldImg(ALT[3], 'w_800')} alt="" style={{ width: '80%', alignSelf: 'center' }} />
-          <img src={cldImg(ALT[4], 'w_800')} alt="" style={{ width: '80%', alignSelf: 'flex-end' }} />
+        {/* 4. 3 stacked stills — left-aligned, no gap between */}
+        <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+          <img src={cldImg(ALT[2], 'w_800')} alt="" loading="lazy" decoding="async"
+            style={{ display: 'block', width: 'calc(100% - 100px)', marginLeft: 'calc(8.33% + 17.5px)' }} />
+          <img src={cldImg(ALT[3], 'w_800')} alt="" loading="lazy" decoding="async"
+            style={{ display: 'block', width: 'calc(100% - 100px)', marginLeft: 'calc(8.33% + 17.5px)' }} />
+          <img src={cldImg(ALT[4], 'w_800')} alt="" loading="lazy" decoding="async"
+            style={{ display: 'block', width: 'calc(100% - 100px)', marginLeft: 'calc(8.33% + 17.5px)' }} />
         </div>
 
-        {/* 5. PHOTO PAIR */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '20px' }}>
-          <img src={cldImg(ALT[5], 'w_800')} alt="" style={{ width: '90%', alignSelf: 'flex-end' }} />
-          <img src={cldImg(ALT[6], 'w_800')} alt="" style={{ width: '90%', alignSelf: 'flex-start' }} />
+        {/* 5. Photo pair 1 — right/left offset, 182×96px */}
+        <div style={{ position: 'relative', marginTop: '80px', height: '144px', width: '100%' }}>
+          <img src={cldImg(ALT[5], 'w_600')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: 0, right: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
+          <img src={cldImg(ALT[6], 'w_600')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: '48px', left: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
         </div>
 
-        {/* 6. PORTRAIT 7 */}
-        <img src={cldImg(ALT[7], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
+        {/* 6. Portrait ALT[7] — centered */}
+        <img
+          src={cldImg(ALT[7], 'w_800')}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style={{ display: 'block', width: 'calc(100% - 100px)', margin: '128px auto 0' }}
+        />
 
-        {/* 7. FW VIDEO 2 */}
-        <div style={{ width: '100%', marginTop: '80px' }}>
-          <VideoPlayer id="m-v2" src={cldVideo(ALT.v2)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
+        {/* 7. Video 2 — full-width */}
+        <div style={{ marginTop: '80px', width: '100%' }}>
+          <VideoPlayer id="m-v2" src={cldVideo(ALT.v2)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '390/206' }} />
         </div>
 
-        {/* 8. PHOTO PAIR 2 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '40px 20px' }}>
-          <img src={cldImg(ALT[8], 'w_800')} alt="" style={{ width: '90%', alignSelf: 'flex-start' }} />
-          <img src={cldImg(ALT[9], 'w_800')} alt="" style={{ width: '90%', alignSelf: 'flex-end' }} />
+        {/* 8. Photo pair 2 — left/right offset, 182×114px */}
+        <div style={{ position: 'relative', marginTop: '80px', height: '171px', width: '100%' }}>
+          <img src={cldImg(ALT[8], 'w_600')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: 0, left: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
+          <img src={cldImg(ALT[9], 'w_600')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: '57px', right: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
         </div>
 
-        {/* 9. FW VIDEO 3 + CENTERED VIDEO 4 */}
-        <div style={{ width: '100%', marginTop: '80px' }}>
-          <VideoPlayer id="m-v3" src={cldVideo(ALT.v3)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
-        </div>
-        <div style={{ width: '100%', padding: '40px 20px' }}>
-          <VideoPlayer id="m-v4" src={cldVideo(ALT.v4)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '19/10' }} />
+        {/* 9. Video 3 — full-width */}
+        <div style={{ marginTop: '81px', width: '100%' }}>
+          <VideoPlayer id="m-v3" src={cldVideo(ALT.v3)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '390/206' }} />
         </div>
 
-        {/* 10. INV STILL 10 + FW VIDEO 5 */}
-        <img src={cldImg(ALT[10], 'w_800')} alt="" style={{ display: 'block', width: '90%', height: 'auto', marginLeft: '5%', marginTop: '20px' }} />
-        <div style={{ width: '100%', marginTop: '80px' }}>
-          <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
+        {/* 10. Video 4 — centered, narrower */}
+        <div style={{ marginTop: '80px', display: 'flex', justifyContent: 'center' }}>
+          <VideoPlayer id="m-v4" src={cldVideo(ALT.v4)} autoPlay loop={false} style={{ width: 'calc(100% - 100px)', height: '153px' }} />
         </div>
 
-        {/* 11. INV SCATTER */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', padding: '40px 20px' }}>
-          <img src={cldImg(ALT[11], 'w_800')} alt="" style={{ width: '85%', alignSelf: 'flex-end' }} />
-          <img src={cldImg(ALT[12], 'w_800')} alt="" style={{ width: '85%', alignSelf: 'center' }} />
-          <img src={cldImg(ALT[13], 'w_800')} alt="" style={{ width: '85%', alignSelf: 'flex-end' }} />
-        </div>
-
-        {/* 12. PORTRAIT 14 + PORTRAIT VIDEO 6 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', marginTop: '80px' }}>
-          <img src={cldImg(ALT[14], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto' }} />
-          <VideoPlayer id="m-v6" src={cldVideo(ALT.v6)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '9/16' }} />
-        </div>
-
-        {/* 13. FW VIDEO 7 + PORTRAIT 15 */}
-        <div style={{ width: '100%', marginTop: '80px' }}>
-          <VideoPlayer id="m-v7" src={cldVideo(ALT.v7)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '21/9' }} />
-        </div>
-        <img src={cldImg(ALT[15], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }} />
-
-        {/* 14. FINAL IMAGE + CREDITS */}
-        <div style={{ width: '100%', position: 'relative', marginTop: '80px' }}>
-          <img src={cldImg(ALT[16], 'w_800')} alt="" style={{ display: 'block', width: '100%', height: 'auto' }} />
-
-          <div style={{
-            color: '#FFF',
-            fontFamily: '"Space Grotesk", sans-serif',
-            fontSize: '16px',
-            fontStyle: 'normal',
-            fontWeight: 700,
-            lineHeight: '150%',
-            padding: '20px',
-            mixBlendMode: 'difference',
-            WebkitMixBlendMode: 'difference',
-            transform: 'translateZ(0)'
-          } as any}>
-            {CREDITS.map((c, i) => (
-              <div key={i} style={{ marginBottom: '10px' }}>
-                <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>{c.role}:</span>
-                <span style={{ fontWeight: 400 }}> {' '}{c.name}</span>
-              </div>
-            ))}
+        {/* 11. Scatter section — 5 thumbnails + video absolutely positioned */}
+        <div style={{ position: 'relative', marginTop: '80px', height: '642px', width: '100%' }}>
+          <img src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: 0, left: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '205px' }}>
+            <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} objectFit="cover" style={{ width: '100%', height: '100%' }} />
           </div>
+          <img src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: '226px', right: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+          <img src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: '340px', left: '180px', width: '140px', height: '74px', objectFit: 'cover' }} />
+          <img src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: '454px', left: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+          <img src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async"
+            style={{ position: 'absolute', top: '568px', right: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+        </div>
+
+        {/* 12. Portrait 15 + Portrait video v6 — centered, touching (no gap) */}
+        <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'center' }}>
+          <img src={cldImg(ALT[15], 'w_800')} alt="" loading="lazy" decoding="async"
+            style={{ display: 'block', width: 'calc(100% - 100px)' }} />
+          <VideoPlayer id="m-v6" src={cldVideo(ALT.v6)} autoPlay loop={false} style={{ width: 'calc(100% - 100px)', aspectRatio: '9/16' }} />
+        </div>
+
+        {/* 13. Video 7 — full-width */}
+        <div style={{ marginTop: '80px', width: '100%' }}>
+          <VideoPlayer id="m-v7" src={cldVideo(ALT.v7)} autoPlay loop={false} style={{ width: '100%', aspectRatio: '390/206' }} />
+        </div>
+
+        {/* 14. Portrait ALT[16] — centered */}
+        <img
+          src={cldImg(ALT[16], 'w_800')}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style={{ display: 'block', width: 'calc(100% - 100px)', margin: '80px auto 0' }}
+        />
+
+        {/* 15. ALT[17] landscape — full-width */}
+        <img
+          src={cldImg(ALT[17], 'w_800')}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style={{ display: 'block', width: '100%', height: 'auto', marginTop: '80px' }}
+        />
+
+        {/* 16. Credits — overlapping bottom of ALT[17] */}
+        <div style={{
+          marginTop: '-32px',
+          width: '100%',
+          padding: '0 20px',
+          color: '#FFF',
+          fontFamily: '"Space Grotesk", sans-serif',
+          fontSize: '15px',
+          fontStyle: 'normal',
+          lineHeight: '1.45',
+          boxSizing: 'border-box',
+          mixBlendMode: 'difference',
+          ...({ WebkitMixBlendMode: 'difference' } as any),
+          transform: 'translateZ(0)',
+          zIndex: 2,
+        } as any}>
+          {CREDITS.map((entry, i) => (
+            <span key={i}>
+              {i > 0 && <span>{' / '}</span>}
+              <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>{entry.role}:</span>
+              <span style={{ fontWeight: 300 }}> {entry.name}</span>
+            </span>
+          ))}
         </div>
 
       </div>
