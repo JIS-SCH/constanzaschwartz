@@ -242,9 +242,6 @@ canvas {
   padding-right: 40px;
 }
 
-.project-page-padding {
-  padding-bottom: 40px;
-}
 
 /* ─── COMPONENT CLASSES FOR INLINE STYLE MIGRATION ─── */
 /* Text block base */
@@ -278,8 +275,10 @@ canvas {
   height: 100%;
 }
 
-@media (min-width: 769px) {
+/* Project Page Padding - Remove on mobile */
+@media (max-width: 768px) {
   .project-page-padding {
-    padding-bottom: 110px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
