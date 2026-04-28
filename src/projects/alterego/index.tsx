@@ -449,6 +449,7 @@ export function Component() {
           marginTop: '-32px',
           width: '100%',
           padding: '0 20px',
+          paddingBottom: '30px',
           color: '#FFF',
           fontFamily: '"Space Grotesk", sans-serif',
           fontSize: '15px',
