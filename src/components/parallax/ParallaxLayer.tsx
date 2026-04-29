@@ -59,6 +59,7 @@ interface ParallaxLayerProps {
     height?: string
     aspectRatio?: string
     zIndex: number
+    paddingBottom?: string
   }
   sectionId?: string
   layerIndex?: number
@@ -140,7 +141,6 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   // Blend mode for text/marquee/credits layers
   if (layer.type === 'text' || layer.type === 'marquee' || layer.type === 'credits') {
     innerStyle.mixBlendMode = 'difference'
-      ; (innerStyle as any).WebkitMixBlendMode = 'difference'
     innerStyle.transform = 'translateZ(0)'
   }
 
@@ -187,7 +187,6 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               display: 'flex',
               alignItems: 'center',
               mixBlendMode: 'difference',
-              ...({ WebkitMixBlendMode: 'difference' } as any),
               transform: 'translateZ(0)',
             }}
           >
@@ -207,7 +206,6 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               lineHeight: 1.8,
               boxSizing: 'border-box',
               mixBlendMode: 'difference',
-              ...({ WebkitMixBlendMode: 'difference' } as any),
               transform: 'translateZ(0)',
             }}
           >

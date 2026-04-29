@@ -5,9 +5,10 @@ import React, { useState, useRef, useEffect } from 'react'
 interface CustomVimeoPlayerProps {
   videoUrl: string
   title?: string
+  inline?: boolean
 }
 
-export const CustomVimeoPlayer = ({ videoUrl, title }: CustomVimeoPlayerProps) => {
+export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVimeoPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
   const [volume, setVolumeState] = useState(1)
@@ -107,9 +108,25 @@ export const CustomVimeoPlayer = ({ videoUrl, title }: CustomVimeoPlayerProps) =
     }
   }
 
+  const iframeStyles: React.CSSProperties = inline ? {
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'none'
+  } : {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: '100vw',
+    height: '56.25vw', /* 16:9 */
+    minHeight: '100vh',
+    minWidth: '177.77vh', /* 16:9 */
+    transform: 'translate(-50%, -50%)',
+    pointerEvents: 'none'
+  }
+
   return (
     <div 
-      className="custom-vimeo-player"
+      className={`custom-vimeo-player ${inline ? 'inline-mode' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -123,17 +140,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title }: CustomVimeoPlayerProps) =
       <iframe
         ref={iframeRef}
         src={`${videoUrl}&controls=0`}
-        style={{ 
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          width: '100vw',
-          height: '56.25vw', /* 16:9 */
-          minHeight: '100vh',
-          minWidth: '177.77vh', /* 16:9 */
-          transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none'
-        }}
+        style={iframeStyles}
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
         title={title}

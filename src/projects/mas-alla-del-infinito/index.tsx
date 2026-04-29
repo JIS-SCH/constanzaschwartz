@@ -644,7 +644,7 @@ export function Component() {
                   letterSpacing: '0.56px',
                   textTransform: 'uppercase',
                   color: '#FFF'
-                } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS · </span>
+                } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS </span>
               </div>
             </div>
           </div>

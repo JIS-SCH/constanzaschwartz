@@ -42,7 +42,7 @@ export const ASSETS = {
   img38: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-38_ntkx4q'),
   makingOffTemplate: '',
   videoMakingOff: 'https://player.vimeo.com/video/1186746593?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0',
-  videoTimelapse: '/eco-al-infinito/timelapse.mp4',
+  videoTimelapse: 'https://player.vimeo.com/video/1186748822?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479',
   // carousel1
   carousel1: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-1_yn37zy'),
   carousel2: cldImg('CONSTANZASCHWARTZ-projects-ecoalinfinito-carrousel1-2_w3boid'),

@@ -24,15 +24,17 @@ export function Component() {
         .dw-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
         .dw-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
         .dw-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
-        .dw-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--h4-ls); }
+        .dw-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: var(--h4-ls); }
         .dw-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 200; letter-spacing: var(--p-ls); }
 
         .marquee-item {
           font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-          font-weight: 300 !important;
+          font-weight: 250 !important;
           text-transform: uppercase;
           mix-blend-mode: difference;
           -webkit-mix-blend-mode: difference;
+          leading-trim: both;
+          text-edge: cap;
         }
         @media (min-width: 769px) {
           .marquee-item {
@@ -86,18 +88,18 @@ export function Component() {
         /* ─── MOBILE (≤ 768px) ─── */
         @media (max-width: 768px) {
           .dw-container {
-            /* section heights */
-            --h-hero: 750px; --h-intro: 370px; --h-c1: 580px;
-            --h-stmt: 430px; --h-c2: 810px;
-            --h-pc: 770px;   --h-fp: 370px;   --h-c3: 540px;
+            /* section heights - calibrated to match content + gaps */
+            --h-hero: 750px; --h-intro: 420px; --h-c1: 580px;
+            --h-stmt: 480px; --h-c2: 810px;
+            --h-pc: 820px;   --h-fp: 420px;   --h-c3: 540px;
 
-            /* intro */
+            /* intro - exactly 80px gap between paragraphs */
             --it-l-t: 80px;  --it-l-x: 20px; --it-l-w: calc(100% - 40px);
-            --it-r-t: 235px; --it-r-x: 20px; --it-r-w: calc(100% - 40px);
+            --it-r-t: 280px; --it-r-x: 20px; --it-r-w: calc(100% - 40px);
 
-            /* collage-1 */
-            --c1-a-t: 148px; --c1-a-x: 20px;  --c1-a-w: 230px; --c1-a-h: 345px;
-            --c1-b-t: 0px;   --c1-b-x: 110px; --c1-b-w: 280px; --c1-b-h: 187px;
+            /* collage-1 - img1 (b) is top, img2 (a) is staggered */
+            --c1-a-t: 160px; --c1-a-x: 20px;  --c1-a-w: 230px; --c1-a-h: 345px;
+            --c1-b-t: 0px;   --c1-b-x: 95px; --c1-b-w: 280px; --c1-b-h: 187px;
 
             /* statement */
             --stmt-x: 20px; --stmt-w: calc(100% - 40px); --stmt-t: 80px;
@@ -105,19 +107,19 @@ export function Component() {
             /* collage-2 */
             --c2-a-t: 0px;   --c2-a-x: 187px; --c2-a-w: 183px; --c2-a-h: 274px;
             --c2-b-t: 184px; --c2-b-x: 20px;  --c2-b-w: 183px; --c2-b-h: 274px;
-            --c2-marquee-t: 500px;
+            --c2-marquee-t: 540px;
 
             /* paragraphs-carousel */
             --pc-text-t: 80px; --pc-text-l: 20px; --pc-text-w: calc(100% - 40px);
-            --pc-carousel-t: 450px;
+            --pc-carousel-t: 480px;
 
             /* final-paragraph */
             --fp-text-t: 80px; --fp-text-l: 20px; --fp-text-w: calc(100% - 40px);
 
             /* collage-3 */
             --c3-a-t: 60px;  --c3-a-x: 20px;  --c3-a-w: 138px; --c3-a-h: 93px;
-            --c3-b-t: 100px; --c3-b-x: 0px;   --c3-b-w: 100%;  --c3-b-h: 261px;
-            --c3-c-t: 320px; --c3-c-x: 229px; --c3-c-w: 141px; --c3-c-h: 94px;
+            --c3-b-t: 120px; --c3-b-x: 0px;   --c3-b-w: 100%;  --c3-b-h: 261px;
+            --c3-c-t: 340px; --c3-c-x: 229px; --c3-c-w: 141px; --c3-c-h: 94px;
             --c3-marquee-t: 40px;
 
           /* finish: flow layout — mobile overrides via CSS classes */
@@ -126,11 +128,11 @@ export function Component() {
           #finish > div:first-child { padding-left: 20px !important; padding-right: 20px !important; }
           #finish > div:last-child { padding-left: 20px !important; padding-right: 20px !important; }
           #finish .dw-staircase {
-            height: calc(120px + 56vw) !important;
+            height: calc(180px + 60vw) !important;
           }
-          #finish .dw-staircase img:nth-child(1) { left: 20px !important; width: 140px !important; top: 0 !important; }
-          #finish .dw-staircase img:nth-child(2) { left: 125px !important; width: 140px !important; top: 80px !important; }
-          #finish .dw-staircase img:nth-child(3) { left: 230px !important; width: 140px !important; top: 160px !important; }
+          #finish .dw-staircase img:nth-child(1) { left: 20px !important; width: 55vw !important; top: 0 !important; }
+          #finish .dw-staircase img:nth-child(2) { left: 32vw !important; width: 55vw !important; top: 120px !important; }
+          #finish .dw-staircase img:nth-child(3) { left: 44vw !important; width: 55vw !important; top: 240px !important; }
           
           .dw-desktop { display: none !important; }
           .dw-mobile  { display: block !important; }
@@ -227,7 +229,7 @@ export function Component() {
           position={{ top: 'var(--stmt-t)', left: 'var(--stmt-x)', width: 'var(--stmt-w)', height: 'auto', zIndex: 1 }}
         >
           <h3 style={TITLE_STYLE} className="dw-h3">STATEMENT</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '466px', marginTop: '40px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '350px', marginTop: '40px' }}>
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
               Pocas personas desconocen totalmente los órganos de los sentidos, pero no todas
               comprenden la magnitud que tienen en nuestra conexión con el mundo/ la realidad.
@@ -344,8 +346,8 @@ export function Component() {
       {/* 9. FINISH — flow layout for natural 220px gaps */}
       <section id="finish" style={{ position: 'relative', width: '100%' }}>
         {/* Text paragraph */}
-        <div style={{ paddingLeft: '32.4305%', paddingRight: '35%' }}>
-          <div style={TEXT_BLOCK_STYLE} className="dw-p">
+        <div style={{ paddingLeft: '32.4305%', paddingRight: '35%' }} className="dw-paragraph-container">
+          <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '466px' }} className="dw-p">
             Con la utilización de espejos, se posibilita el juego de distorsión de la realidad
             en un claro paralelismo e intento de mirada introspectiva sobre nuestra nueva
             generación de diseño argentino; los materiales innovadores que pueden también
@@ -377,7 +379,6 @@ export function Component() {
           position: 'relative',
           zIndex: 10,
           mixBlendMode: 'difference',
-          ...(({ WebkitMixBlendMode: 'difference' }) as any),
         }}>
           <div className="marquee-track" style={{ animationDuration: '88s' }}>
             {[0, 1].map((setIdx) => (
@@ -396,14 +397,26 @@ export function Component() {
         <div style={{ height: '160px' }} />
 
         {/* Closing text */}
-        <div style={{ paddingLeft: '7.64%', paddingRight: '60%' }}>
-          <div style={TEXT_BLOCK_STYLE} className="dw-p">
+        <div style={{ paddingLeft: '7.64%', paddingRight: '60%' }} className="dw-closing-container">
+          <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '466px' }} className="dw-p">
             Ensayo de Espejismo busca apelar a varios sentidos en simultáneo. Asimismo, intenta
             fracturar la complacencia con la industrialización y la tecnificación que tomamos
             por naturaleza del siglo XXI. Esta es una obra que resalta la confusión de un acabado
             &quot;de máquina&quot;, &quot;perfecto&quot; cuando su proceso es único y enteramente artesanal.
           </div>
         </div>
+
+        <style dangerouslySetInnerHTML={{ __html: `
+          @media (max-width: 768px) {
+            .dw-paragraph-container, .dw-closing-container {
+              padding-left: 20px !important;
+              padding-right: 20px !important;
+            }
+            .dw-p {
+              max-width: 350px !important;
+            }
+          }
+        `}} />
       </section>
 
     </div>
