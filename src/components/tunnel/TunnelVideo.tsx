@@ -50,10 +50,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       ? '/Tunel_Interestellar_Vert_A.mp4'
       : '/home/Tunel_Interestellar_A.mp4'
     video.load()
-
-    const canFastSeek =
-      typeof (video as HTMLVideoElement & { fastSeek?: (t: number) => void }).fastSeek === 'function'
-
     const setupAnimation = () => {
       const duration = video.duration
       const videoPx  = Math.round(duration * PX_PER_SEC)
@@ -99,11 +95,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
           duration: videoPx,
           ease: 'none',
           onUpdate() {
-            if (canFastSeek) {
-              (video as HTMLVideoElement & { fastSeek: (t: number) => void }).fastSeek(seekProxy.t)
-            } else {
-              video.currentTime = seekProxy.t
-            }
+            video.currentTime = seekProxy.t
           },
         },
         0

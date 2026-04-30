@@ -52,6 +52,9 @@ function preloadTexture(src: string): Promise<THREE.Texture> {
       const tex = new THREE.Texture(img)
       tex.colorSpace = THREE.SRGBColorSpace
       tex.flipY = true
+      tex.minFilter = THREE.LinearMipmapLinearFilter
+      tex.magFilter = THREE.LinearFilter
+      tex.anisotropy = 16
       tex.needsUpdate = true
       resolve(tex)
     }
@@ -168,7 +171,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 3 : 2))
 
     const cleanupResize = setupResize(camera, renderer)
 
