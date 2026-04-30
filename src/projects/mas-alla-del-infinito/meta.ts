@@ -7,4 +7,5 @@ export const meta: ProjectMeta = {
   date: 'APR 2025',
   category: 'Dirección de Arte y Efectos Lumínicos',
   image: ASSETS.hero,
+  mobileImage: ASSETS.heroMobile,
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { isMobile } from '@/src/utils/detect'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -10,8 +11,9 @@ interface TunnelVideoProps {
   onComplete: () => void
 }
 
-// Pixels of scroll dedicated to logo-shrink phase before video begins
-const LOGO_SCROLL_PX = 500
+const LOGO_FADE_START_S = 1    // video second at which logo starts fading
+const LOGO_FADE_END_S   = 4    // video second at which logo is fully gone
+const PX_PER_SEC        = 180  // scroll pixels per second of video
 
 export function TunnelVideo({ onComplete }: TunnelVideoProps) {
   const containerRef  = useRef<HTMLDivElement>(null)
@@ -44,41 +46,52 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     const logo      = logoRef.current
     if (!video || !container || !overlay || !logo) return
 
+    video.src = isMobile()
+      ? '/Tunel_Interestellar_Vert_A.mp4'
+      : '/home/Tunel_Interestellar_A.mp4'
+    video.load()
+
     const canFastSeek =
       typeof (video as HTMLVideoElement & { fastSeek?: (t: number) => void }).fastSeek === 'function'
 
     const setupAnimation = () => {
-      const duration      = video.duration
-      const videoPx       = Math.round(duration * 180)
-      const totalScrollPx = LOGO_SCROLL_PX + videoPx
+      const duration = video.duration
+      const videoPx  = Math.round(duration * PX_PER_SEC)
+
+      const logoStartPx    = LOGO_FADE_START_S * PX_PER_SEC
+      const logoDurationPx = (LOGO_FADE_END_S - LOGO_FADE_START_S) * PX_PER_SEC
 
       const seekProxy = { t: 0 }
       const tl = gsap.timeline({ paused: true })
 
+      // Video fades in immediately on first scroll
       tl.fromTo(
-        logo,
-        { scale: 1, opacity: 1 },
-        { scale: 0.03, opacity: 0, duration: LOGO_SCROLL_PX, ease: 'power2.in' },
+        video,
+        { opacity: 0 },
+        { opacity: 1, duration: 60, ease: 'power1.out' },
         0
       )
 
+      // Scroll indicator disappears as soon as scroll begins
       const scroll = scrollRef.current
       if (scroll) {
         tl.fromTo(
           scroll,
           { opacity: 1 },
-          { opacity: 0, duration: LOGO_SCROLL_PX * 0.25, ease: 'power1.in' },
+          { opacity: 0, duration: 60, ease: 'power1.in' },
           0
         )
       }
 
+      // Logo fades from video t=1s to t=4s
       tl.fromTo(
-        video,
-        { opacity: 0 },
-        { opacity: 1, duration: LOGO_SCROLL_PX * 0.5, ease: 'power1.out' },
-        LOGO_SCROLL_PX * 0.5
+        logo,
+        { scale: 1, opacity: 1 },
+        { scale: 0.03, opacity: 0, duration: logoDurationPx, ease: 'power2.in' },
+        logoStartPx
       )
 
+      // Scrub video through its entire duration
       tl.to(
         seekProxy,
         {
@@ -93,20 +106,21 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
             }
           },
         },
-        LOGO_SCROLL_PX
+        0
       )
 
+      // Black overlay fades in near the end of the video
       tl.fromTo(
         overlay,
         { opacity: 0 },
         { opacity: 1, duration: videoPx * 0.15, ease: 'power2.in' },
-        LOGO_SCROLL_PX + videoPx * 0.85
+        videoPx * 0.85
       )
 
       stRef.current = ScrollTrigger.create({
         trigger: container,
         start: 'top top',
-        end: `+=${totalScrollPx}`,
+        end: `+=${videoPx}`,
         pin: true,
         anticipatePin: 1,
         scrub: 0.5,
@@ -127,13 +141,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       setIsReady(true)
     }
 
-    // loadedmetadata fires as soon as duration/dimensions are known — much more
-    // reliable than canplaythrough on mobile where browsers limit preloading.
-    if (video.readyState >= 1) {
-      setupAnimation()
-    } else {
-      video.addEventListener('loadedmetadata', setupAnimation, { once: true })
-    }
+    video.addEventListener('loadedmetadata', setupAnimation, { once: true })
 
     return () => {
       video.removeEventListener('loadedmetadata', setupAnimation)
@@ -156,9 +164,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         preload="auto"
         muted
         playsInline
-      >
-        <source src="/home/Tunel_Interestellar_A.mp4" type="video/mp4" />
-      </video>
+      />
 
       {/* Logo wrapper fills the screen — transformOrigin center = screen center.
           Logo sits at top: 37% (Figma: 331px / ~900px, optical offset above center).

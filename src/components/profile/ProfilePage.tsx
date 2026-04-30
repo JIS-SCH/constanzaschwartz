@@ -3,15 +3,16 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { cldImg } from '@/src/utils/cloudinary'
+import { useParallax } from '@/src/hooks/useParallax'
 
-const IMG_PORTRAIT   = cldImg('CONSTANZASCHWARTZ_Profile_1_yx5v5r')
+const IMG_PORTRAIT = cldImg('CONSTANZASCHWARTZ_Profile_1_yx5v5r')
 const IMG_PORTRAIT_2 = cldImg('CONSTANZASCHWARTZ_Profile_2_uipjg1')
-const IMG_YEAR_2021  = cldImg('CONSTANZASCHWARTZ_Profile_2021_iqs673')
-const IMG_YEAR_2022  = cldImg('CONSTANZASCHWARTZ_Profile_2022_tjgl6h')
-const IMG_YEAR_2023  = cldImg('CONSTANZASCHWARTZ_Profile_2023_smey6p')
-const IMG_YEAR_2024  = cldImg('CONSTANZASCHWARTZ_Profile_2024_a0epdc')
-const IMG_YEAR_2025  = cldImg('CONSTANZASCHWARTZ_Profile_2025_hxpxl5')
-const IMG_YEAR_2026  = cldImg('CONSTANZASCHWARTZ_Profile_2026_mqgsln')
+const IMG_YEAR_2021 = cldImg('CONSTANZASCHWARTZ_Profile_2021_iqs673')
+const IMG_YEAR_2022 = cldImg('CONSTANZASCHWARTZ_Profile_2022_tjgl6h')
+const IMG_YEAR_2023 = cldImg('CONSTANZASCHWARTZ_Profile_2023_smey6p')
+const IMG_YEAR_2024 = cldImg('CONSTANZASCHWARTZ_Profile_2024_a0epdc')
+const IMG_YEAR_2025 = cldImg('CONSTANZASCHWARTZ_Profile_2025_hxpxl5')
+const IMG_YEAR_2026 = cldImg('CONSTANZASCHWARTZ_Profile_2026_mqgsln')
 
 const G2021 = [
   cldImg('CONSTANZASCHWARTZ-Profile-Carrousel2021-1_h2l1bp'),
@@ -169,21 +170,29 @@ function Marquee() {
 // ---------------------------------------------------------------------------
 function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
-  const totalWidth = images.length * 588
-  const duration = images.length * 3.5
+
+  // Pattern of widths from Eco al Infinito
+  const widths = ['221px', '221px', '496px', '221px', '221px', '496px']
 
   return (
     <div className="w-full h-[331px] overflow-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
-          @keyframes pr-carousel-${id} {
+          @keyframes pr-anim-${id} {
             0%   { transform: translateX(0); }
-            100% { transform: translateX(-${totalWidth}px); }
+            100% { transform: translateX(-50%); }
           }
         `}} />
-      <div className="flex h-[331px] w-max animate-[pr-carousel-${id}_${duration}s_linear_infinite]">
+      <div
+        className="flex h-[331px] w-max"
+        style={{ animation: `pr-anim-${id} 22s linear infinite` }}
+      >
         {doubled.map((src, i) => (
-          <div key={i} className="w-[588px] h-[331px] flex-shrink-0">
+          <div
+            key={i}
+            className="h-[331px] flex-shrink-0"
+            style={{ width: widths[i % widths.length] }}
+          >
             <img src={src} alt="" className="w-full h-full object-cover block" />
           </div>
         ))}
@@ -234,10 +243,6 @@ function YearSection({ data }: { data: YearData }) {
     </div>
   )
 }
-
-// ---------------------------------------------------------------------------
-// ProfilePage
-// ---------------------------------------------------------------------------
 export function ProfilePage() {
   return (
     <div className="pr-root project-page-padding">
@@ -630,7 +635,7 @@ const CSS = `
 
   /* ── Year sections desktop ── */
   .pr-year-section {
-    margin-bottom: 330px;
+    margin-bottom: 280px;
   }
   .pr-year-img {
     height: 528px;
@@ -647,6 +652,6 @@ const CSS = `
   }
 
   .pr-year-events {
-    padding: 40px calc(8.33% + 2px) 120px;
+    padding: 40px calc(8.33% + 2px) 0;
   }
 }`

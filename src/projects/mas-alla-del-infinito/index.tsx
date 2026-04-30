@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { TW, CH } from '../shared'
 import { ASSETS } from './assets'
@@ -152,11 +153,11 @@ export function Component() {
         {/* 1. HERO ─────────────────────────────────────────────────────── */}
         <ParallaxSection id="mal-hero" style={{ minHeight: '728px' }}>
           <ParallaxLayer
-            layer={{ type: 'image', src: IMG_HERO, speed: 0.8, isHero: true, objectFit: 'cover', className: 'mal-hero-desktop' }}
+            layer={{ type: 'image', src: IMG_HERO, speed: 0.3, isHero: true, objectFit: 'cover', className: 'mal-hero-desktop' }}
             position={{ top: '80px', left: '0', width: '100%', height: '648px', aspectRatio: '20/9', zIndex: 1 }}
           />
           <ParallaxLayer
-            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.8, isHero: true, objectFit: 'cover', className: 'mal-hero-mobile' }}
+            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.3, isHero: true, objectFit: 'cover', className: 'mal-hero-mobile' }}
             position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
           />
           <style dangerouslySetInnerHTML={{
@@ -598,7 +599,7 @@ export function Component() {
       <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '40px' }}>
 
         {/* HERO */}
-        <div style={{ position: 'relative', height: '85vh', minHeight: '600px' }}>
+        <div data-project-image style={{ position: 'relative', height: '85vh', minHeight: '600px' }}>
           <img src={ASSETS.heroMobile} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
 
           {/* Hero Text */}
@@ -621,7 +622,7 @@ export function Component() {
         {/* FIRST PAIR: img1 (WEB009) + img2 (WEB028) - Swapped and Marquee Overlapping */}
         <div style={{ position: 'relative', height: '480px', marginTop: '80px' }}>
           <img src={IMG_WEB009} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '230px', height: '153px', objectFit: 'cover', zIndex: 1 }} />
-          <img src={IMG_WEB028} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '140px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 2 }} />
+          <PI speed={0.2} src={IMG_WEB028} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '140px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 2 }} />
 
           {/* Marquee overlaying the images */}
           <div style={{ position: 'absolute', top: '370px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3, mixBlendMode: 'difference' }}>
@@ -656,7 +657,7 @@ export function Component() {
         {/* SECOND PAIR: img3 (FULL_1) + img4 (WEB008) - Staggered with Marquee */}
         <div style={{ position: 'relative', height: '480px', marginTop: '80px' }}>
           <img src={IMG_FULL_1} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
-          <img src={IMG_WEB008} alt="" loading="lazy" style={{ position: 'absolute', right: '40px', top: '350px', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+          <PI speed={0.15} src={IMG_WEB008} alt="" loading="lazy" style={{ position: 'absolute', right: '40px', top: '350px', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
 
         </div>
 
@@ -673,7 +674,7 @@ export function Component() {
         </div>
         {/* THIRD PAIR: img5 (WEB025) + img6 (GIF1) - Staggered Overlap */}
         <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
-          <img src={IMG_WEB025} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '290px', height: '193px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.2} src={IMG_WEB025} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '290px', height: '193px', objectFit: 'cover', zIndex: 1 }} />
           <img src={IMG_GIF1} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '140px', width: '170px', height: '113px', objectFit: 'cover', zIndex: 2 }} />
         </div>
 
@@ -690,9 +691,9 @@ export function Component() {
 
         {/* STAIRCASE: img7, img8, img9 */}
         <div style={{ position: 'relative', height: '540px', marginTop: '80px' }}>
-          <img src={IMG_WEB012} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
-          <img src={IMG_WEB011} alt="" loading="lazy" style={{ position: 'absolute', left: '125px', top: '140px', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
-          <img src={IMG_WEB007} alt="" loading="lazy" style={{ position: 'absolute', left: '230px', top: '290px', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.15} src={IMG_WEB012} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.2} src={IMG_WEB011} alt="" loading="lazy" style={{ position: 'absolute', left: '125px', top: '140px', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.25} src={IMG_WEB007} alt="" loading="lazy" style={{ position: 'absolute', left: '230px', top: '290px', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
 
           {/* Marquee overlaying img7 */}
           <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '44px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
@@ -723,8 +724,8 @@ export function Component() {
 
         {/* PORTRAIT PAIR: img10, img11 */}
         <div style={{ position: 'relative', height: '560px', marginTop: '40px', width: '100%' }}>
-          <img src={IMG_WEB005} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '200px', height: '270px', objectFit: 'cover' }} />
-          <img src={IMG_WEB022} alt="" loading="lazy" style={{ position: 'absolute', right: '0', top: '200px', width: '200px', height: '330px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={IMG_WEB005} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '200px', height: '270px', objectFit: 'cover' }} />
+          <PI speed={0.25} src={IMG_WEB022} alt="" loading="lazy" style={{ position: 'absolute', right: '0', top: '200px', width: '200px', height: '330px', objectFit: 'cover' }} />
         </div>
 
         {/* VIDEO 1 */}
@@ -733,7 +734,6 @@ export function Component() {
             <CustomVimeoPlayer
               videoUrl="https://player.vimeo.com/video/1186767280?h=ef4894270a"
               title="Más allá del Infinito - Video Arte"
-              inline={true}
             />
           </div>
         </div>
@@ -759,7 +759,7 @@ export function Component() {
 
         {/* img13 (WEB016) + img14 (WEB017) */}
         <div style={{ position: 'relative', height: '550px', marginTop: '72px' }}>
-          <img src={IMG_WEB016} alt="" loading="lazy" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.2} src={IMG_WEB016} alt="" loading="lazy" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
           <img src={IMG_WEB017} alt="" loading="lazy" style={{ position: 'absolute', right: '25px', top: '180px', width: '230px', height: '345px', objectFit: 'contain', zIndex: 2 }} />
         </div>
 
@@ -768,7 +768,7 @@ export function Component() {
 
         {/* img16, img17, img18 Staircase */}
         <div style={{ position: 'relative', height: '520px', marginTop: '80px' }}>
-          <img src={IMG_WEB014_V} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.15} src={IMG_WEB014_V} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
           <img src={IMG_WEB014} alt="" loading="lazy" style={{ position: 'absolute', left: '110px', top: '170px', width: '170px', height: '113px', objectFit: 'cover', zIndex: 3 }} />
           <img src={IMG_WEB013} alt="" loading="lazy" style={{ position: 'absolute', left: '190px', top: '270px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
         </div>
@@ -785,7 +785,7 @@ export function Component() {
 
         {/* img20 (WEB040) + img21 (WEB037) with Marquee 5 overlay */}
         <div style={{ position: 'relative', height: '540px', marginTop: '80px' }}>
-          <img src={IMG_WEB040} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.2} src={IMG_WEB040} alt="" loading="lazy" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
           <img src={IMG_WEB037} alt="" loading="lazy" style={{ position: 'absolute', left: '20px', top: '250px', width: '230px', height: '153px', objectFit: 'cover', zIndex: 2 }} />
 
           {/* Marquee 5 overlay */}

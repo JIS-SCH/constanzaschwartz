@@ -14,6 +14,27 @@ interface VideoPlayerProps {
   objectFit?: 'cover' | 'contain'
 }
 
+const ICON_SIZE = 22
+const HIDE_DELAY_MS = 2500
+
+const iconStyle: React.CSSProperties = {
+  width: ICON_SIZE,
+  height: ICON_SIZE,
+  display: 'block',
+  filter: 'invert(1)',
+  pointerEvents: 'none',
+}
+
+const btnStyle: React.CSSProperties = {
+  background: 'none',
+  border: 'none',
+  padding: 6,
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
+
 export function VideoPlayer({
   id,
   src,
@@ -24,10 +45,17 @@ export function VideoPlayer({
   subtitle,
   objectFit = 'cover',
 }: VideoPlayerProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { isMuted, activeVideoId, setActiveVideo } = useAudio()
-  const [showControls, setShowControls] = useState(false)
+  const videoRef      = useRef<HTMLVideoElement>(null)
+  const containerRef  = useRef<HTMLDivElement>(null)
+  const hideTimerRef  = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  const { isMuted, activeVideoId, toggleMute, setActiveVideo } = useAudio()
+
+  const [isPlaying,       setIsPlaying]       = useState(false)
+  const [controlsVisible, setControlsVisible] = useState(false)
+  const [isFullscreen,    setIsFullscreen]     = useState(false)
+
+  const isVideoMuted = isMuted || activeVideoId !== id
 
   // IntersectionObserver: autoplay/pause based on visibility
   useEffect(() => {
@@ -37,9 +65,10 @@ export function VideoPlayer({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => { })
+          video.play().then(() => setIsPlaying(true)).catch(() => {})
         } else {
           video.pause()
+          setIsPlaying(false)
         }
       },
       { threshold: 0.3 }
@@ -53,20 +82,92 @@ export function VideoPlayer({
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+    video.muted = isVideoMuted
+  }, [isVideoMuted])
 
-    video.muted = isMuted || activeVideoId !== id
-  }, [isMuted, activeVideoId, id])
+  // Fullscreen change detection
+  useEffect(() => {
+    const handleChange = () => setIsFullscreen(!!document.fullscreenElement)
+    document.addEventListener('fullscreenchange', handleChange)
+    return () => document.removeEventListener('fullscreenchange', handleChange)
+  }, [])
 
-  const handleClick = useCallback(() => {
-    setActiveVideo(id)
-    setShowControls(true)
-  }, [id, setActiveVideo])
+  const scheduleHide = useCallback(() => {
+    clearTimeout(hideTimerRef.current)
+    hideTimerRef.current = setTimeout(() => setControlsVisible(false), HIDE_DELAY_MS)
+  }, [])
+
+  const revealControls = useCallback(() => {
+    setControlsVisible(true)
+    scheduleHide()
+  }, [scheduleHide])
+
+  const togglePlay = useCallback(() => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true)).catch(() => {})
+    } else {
+      video.pause()
+      setIsPlaying(false)
+    }
+    revealControls()
+  }, [revealControls])
+
+  const handleMute = useCallback(() => {
+    if (isVideoMuted) {
+      setActiveVideo(id)
+      if (isMuted) toggleMute()
+    } else {
+      toggleMute()
+    }
+    revealControls()
+  }, [isVideoMuted, isMuted, id, setActiveVideo, toggleMute, revealControls])
+
+  const handleFullscreen = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation()
+    const container = containerRef.current
+    if (!container) return
+    if (!document.fullscreenElement) {
+      container.requestFullscreen()
+    } else {
+      document.exitFullscreen()
+    }
+    revealControls()
+  }, [revealControls])
+
+  const handleContainerClick = useCallback(() => {
+    togglePlay()
+  }, [togglePlay])
+
+  const handleMouseEnter = useCallback(() => {
+    clearTimeout(hideTimerRef.current)
+    setControlsVisible(true)
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    scheduleHide()
+  }, [scheduleHide])
+
+  const handleMouseMove = useCallback(() => {
+    setControlsVisible(true)
+    scheduleHide()
+  }, [scheduleHide])
 
   return (
     <div
       ref={containerRef}
       className={className}
-      style={{ position: 'relative', ...style }}
+      style={{
+        position: 'relative',
+        cursor: isFullscreen && !controlsVisible ? 'none' : 'pointer',
+        ...style,
+      }}
+      onClick={handleContainerClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+      onTouchStart={revealControls}
     >
       <video
         ref={videoRef}
@@ -75,21 +176,19 @@ export function VideoPlayer({
         loop={loop}
         muted
         playsInline
-        controls={showControls}
-        onClick={handleClick}
         style={{
           width: '100%',
           height: '100%',
           objectFit,
           display: 'block',
-          cursor: 'pointer',
         }}
       />
+
       {subtitle && (
         <span
           style={{
             position: 'absolute',
-            bottom: '12px',
+            bottom: '48px',
             left: '16px',
             color: '#FFDF00',
             fontFamily: 'HelveticaLTStd, "Helvetica Neue", sans-serif',
@@ -103,6 +202,51 @@ export function VideoPlayer({
           {subtitle}
         </span>
       )}
+
+      {/* Custom controls bar */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: '24px 8px 8px',
+          background: 'linear-gradient(transparent, rgba(0,0,0,0.55))',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          opacity: controlsVisible ? 1 : 0,
+          transition: 'opacity 0.25s ease',
+          pointerEvents: controlsVisible ? 'auto' : 'none',
+          zIndex: 10,
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button style={btnStyle} onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'}>
+          <img
+            src={isPlaying ? '/svgs/pause-1006-svgrepo-com.svg' : '/svgs/play-svgrepo-com.svg'}
+            alt=""
+            style={iconStyle}
+          />
+        </button>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <button style={btnStyle} onClick={handleMute} aria-label={isVideoMuted ? 'Unmute' : 'Mute'}>
+            <img
+              src={isVideoMuted ? '/svgs/volume-svgrepo-com_off.svg' : '/svgs/volume-svgrepo-com_on.svg'}
+              alt=""
+              style={iconStyle}
+            />
+          </button>
+          <button style={btnStyle} onClick={handleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}>
+            <img
+              src="/svgs/fullscreen-alt-svgrepo-com.svg"
+              alt=""
+              style={iconStyle}
+            />
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

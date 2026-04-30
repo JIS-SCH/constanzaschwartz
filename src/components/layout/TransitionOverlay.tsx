@@ -81,9 +81,11 @@ export function TransitionOverlay() {
       setDone()
     }
 
+    const targetRect = target ? target.getBoundingClientRect() : null
+    const hasRealTarget = targetRect && targetRect.width > 0 && targetRect.height > 0
+
     const ctx = gsap.context(() => {
-      if (target) {
-        const targetRect = target.getBoundingClientRect()
+      if (hasRealTarget && targetRect) {
         const tl = gsap.timeline()
 
         tl.to(el, {

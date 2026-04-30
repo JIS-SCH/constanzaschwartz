@@ -122,13 +122,11 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
           maxWidth: isMobile ? '100%' : '1163px',
           margin: '0 auto',
           width: '100%',
-          padding: isMobile ? '0 20px' : '160px 0 60px',
+          padding: isMobile ? '0 20px' : '80px 0',
           overflowY: 'auto',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
-          gap: projectsOpen ? '0' : '0',
-          transition: 'gap 0.4s ease',
-          justifyContent: isMobile ? 'center' : 'flex-start',
+          justifyContent: 'center',
         }}
       >
         <style dangerouslySetInnerHTML={{ __html: `nav::-webkit-scrollbar { display: none; }` }} />
@@ -144,17 +142,18 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
               flexDirection: 'column',
               alignItems: 'center',
               alignSelf: 'stretch',
-              marginBottom: isMobile 
-                ? (item === 'PROJECTS' && projectsOpen ? '40px' : '20px')
-                : (item === 'PROJECTS' ? (projectsOpen ? '0' : '48px') : (item === 'PROFILE' ? (projectsOpen ? '30px' : '43px') : '0')),
-              transition: 'margin-bottom 0.4s ease',
+              position: 'relative',
+              marginBottom: isMobile
+                ? (item === 'CONTACT' ? '0' : '20px')
+                : (item === 'PROJECTS' ? '30px' : item === 'PROFILE' ? (projectsOpen ? '25px' : '30px') : '0'),
+              transition: 'margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
               flexShrink: 0
             }}
           >
             <div
               style={{
                 overflow: 'hidden',
-                minHeight: item === 'PROJECTS' ? (isMobile ? 'auto' : '112px') : (isMobile ? 'auto' : '102px'),
+                minHeight: item === 'PROJECTS' ? (isMobile ? 'auto' : '80px') : (isMobile ? 'auto' : '72px'),
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -177,7 +176,7 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                     background: 'none',
                     border: 'none',
                     color: (hoveredItem === item) ? '#FFDF00' : '#FFF',
-                    fontSize: isMobile ? 'clamp(40px, 15vw, 70px)' : 'clamp(60px, 8vw, 128px)',
+                    fontSize: isMobile ? 'clamp(40px, 15vw, 70px)' : 'clamp(35px, 4.5vw, 72px)',
                     fontWeight: 250,
                     letterSpacing: '0.04em',
                     cursor: 'pointer',
@@ -200,68 +199,77 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
             {item === 'PROJECTS' && (
               <div
                 style={{
-                  overflow: 'hidden',
-                  maxHeight: projectsOpen ? (isMobile ? '600px' : '400px') : '0',
-                  transition: 'all 0.4s ease',
-                  marginTop: projectsOpen ? (isMobile ? '20px' : '0') : '0',
-                  marginBottom: projectsOpen ? (isMobile ? '20px' : '0') : '0',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: isMobile ? '15px' : '30px',
+                  display: 'grid',
+                  gridTemplateRows: projectsOpen ? '1fr' : '0fr',
+                  transition: 'grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                   width: '100%',
-                  alignItems: 'center',
                 }}
               >
-                {PROJECT_ROWS.map((row, rowIdx) => (
+                <div style={{ overflow: 'hidden' }}>
                   <div
-                    key={rowIdx}
                     style={{
+                      paddingTop: isMobile ? '12px' : '20px',
                       display: 'flex',
-                      gap: isMobile ? '16px' : '26px',
-                      justifyContent: 'center',
+                      flexDirection: 'column',
+                      gap: isMobile ? '12px' : '30px',
+                      width: '100%',
                       alignItems: 'center',
-                      flexWrap: 'wrap',
+                      opacity: projectsOpen ? 1 : 0,
+                      transform: projectsOpen ? 'translateY(0)' : 'translateY(-4px)',
+                      transition: 'opacity 0.4s ease, transform 0.4s ease',
                     }}
                   >
-                    {row.map((p, idx) => (
-                      <Fragment key={p.slug}>
-                        <span
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            onClose()
-                            router.push(`/project/${p.slug}`)
-                          }}
-                          style={{
-                            color: '#fff',
-                            fontSize: isMobile ? '22px' : '32px',
-                            fontWeight: 300,
-                            letterSpacing: '0.02em',
-                            textTransform: 'uppercase',
-                            fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-                            cursor: 'pointer',
-                            whiteSpace: 'nowrap',
-                            transition: 'color 0.2s ease',
-                            lineHeight: 'normal',
-                            textAlign: 'center',
-                          }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = '#FFDF00')}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
-                        >
-                          {p.name}
-                        </span>
-                        {idx < row.length - 1 && (
-                          <span style={{
-                            color: '#fff',
-                            opacity: 0.4,
-                            fontSize: isMobile ? '18px' : '32px',
-                            fontWeight: 300,
-                            fontFamily: '"Helvetica Neue LT Std", sans-serif'
-                          }}>|</span>
-                        )}
-                      </Fragment>
+                    {PROJECT_ROWS.map((row, rowIdx) => (
+                      <div
+                        key={rowIdx}
+                        style={{
+                          display: 'flex',
+                          gap: isMobile ? '16px' : '26px',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          flexWrap: 'wrap',
+                        }}
+                      >
+                        {row.map((p, idx) => (
+                          <Fragment key={p.slug}>
+                            <span
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                onClose()
+                                router.push(`/project/${p.slug}`)
+                              }}
+                              style={{
+                                color: '#fff',
+                                fontSize: isMobile ? '22px' : '40px',
+                                fontWeight: 300,
+                                textTransform: 'uppercase',
+                                fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
+                                cursor: 'pointer',
+                                whiteSpace: 'nowrap',
+                                transition: 'color 0.2s ease',
+                                lineHeight: 'normal',
+                                textAlign: 'center',
+                              }}
+                              onMouseEnter={(e) => (e.currentTarget.style.color = '#FFDF00')}
+                              onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
+                            >
+                              {p.name}
+                            </span>
+                            {idx < row.length - 1 && (
+                              <span style={{
+                                color: '#fff',
+                                opacity: 0.4,
+                                fontSize: isMobile ? '18px' : '40px',
+                                fontWeight: 300,
+                                fontFamily: '"Helvetica Neue LT Std", sans-serif'
+                              }}>|</span>
+                            )}
+                          </Fragment>
+                        ))}
+                      </div>
                     ))}
                   </div>
-                ))}
+                </div>
               </div>
             )}
           </div>

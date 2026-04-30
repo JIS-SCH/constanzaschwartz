@@ -16,7 +16,7 @@ export function useParallax(
   innerRef: React.RefObject<HTMLElement | null>,
   options: UseParallaxOptions = {}
 ) {
-  const { speed = 0, axis = 'y', intensity = 60 } = options
+  const { speed = 0, axis = 'y', intensity = 350 } = options
 
   useEffect(() => {
     const inner = innerRef.current
@@ -26,19 +26,28 @@ export function useParallax(
     const trigger = inner.parentElement ?? inner
     const range = speed * intensity
 
-    const st = ScrollTrigger.create({
-      trigger,
-      start: 'top bottom',
-      end: 'bottom top',
-      onUpdate: (self) => {
-        const offset = (self.progress * 2 - 1) * range
-        gsap.set(inner, {
-          x: axis === 'x' ? offset : 0,
-          y: axis === 'y' ? offset : 0,
-        })
+    // Use fromTo with scrub for smoother interpolation and better performance
+    const tl = gsap.fromTo(
+      inner,
+      {
+        [axis]: -range,
       },
-    })
+      {
+        [axis]: range,
+        ease: 'none',
+        scrollTrigger: {
+          trigger,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1, // Add smoothing for a less "brusque" feel
+          invalidateOnRefresh: true,
+        },
+        force3D: true,
+      }
+    )
 
-    return () => st.kill()
+    return () => {
+      tl.kill()
+    }
   }, [speed, axis, intensity, innerRef])
 }

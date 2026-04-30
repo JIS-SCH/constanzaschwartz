@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { PI } from '@/src/components/parallax/ParallaxImg'
 import { ASSETS } from './assets'
 import { TEXT_BLOCK_STYLE, CH } from '../shared'
 
@@ -438,7 +439,7 @@ export function Component() {
       {/* ── MOBILE ─────────────────────────────────────────────────── */}
       <div className="dw-mobile bg-obsidian overflow-hidden">
         {/* 1. HERO */}
-        <div style={{ width: '100%', height: '750px', position: 'relative' }}>
+        <div data-project-image style={{ width: '100%', height: '750px', position: 'relative' }}>
           <img src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
@@ -488,8 +489,8 @@ export function Component() {
 
         {/* 5. COLLAGE-2 + MARQUEE */}
         <div style={{ position: 'relative', height: 'var(--h-c2)' }}>
-          <img src={ASSETS.img3} alt="" style={{ position: 'absolute', top: '-110px', left: 'var(--c2-a-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 2 }} />
-          <img src={ASSETS.img4} alt="" style={{ position: 'absolute', top: '70px', left: 'var(--c2-b-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.2} src={ASSETS.img3} alt="" style={{ position: 'absolute', top: '-110px', left: 'var(--c2-a-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 2 }} />
+          <PI speed={0.25} src={ASSETS.img4} alt="" style={{ position: 'absolute', top: '70px', left: 'var(--c2-b-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 1 }} />
           <div style={{ position: 'absolute', top: '290px', left: 0, width: '100%', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: '40s' }}>
               {[0, 1].map((setIdx) => (
@@ -578,9 +579,9 @@ export function Component() {
           <div style={{ height: '80px' }} />
 
           <div className="dw-staircase" style={{ position: 'relative', width: '100%', height: 'calc(180px + 60vw)', marginTop: '-4px' }}>
-            <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '140px', height: '209px', zIndex: 3 }} />
-            <img src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '122px', top: '145px', width: '140px', height: '209px', zIndex: 1 }} />
-            <img src={ASSETS.img10} alt="" style={{ position: 'absolute', left: '238px', top: '290px', width: '140px', height: '209px', zIndex: 2 }} />
+            <PI speed={0.15} src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '140px', height: '209px', zIndex: 3 }} />
+            <PI speed={0.2} src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '122px', top: '145px', width: '140px', height: '209px', zIndex: 1 }} />
+            <PI speed={0.25} src={ASSETS.img10} alt="" style={{ position: 'absolute', left: '238px', top: '290px', width: '140px', height: '209px', zIndex: 2 }} />
           </div>
 
           <div style={{ width: '100%', overflow: 'hidden', marginTop: '39px', position: 'relative', zIndex: 10, mixBlendMode: 'difference' }}>

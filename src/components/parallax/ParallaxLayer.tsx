@@ -95,9 +95,19 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   const parallaxInnerRef = useRef<HTMLDivElement>(null)
   const isMarquee = layer.type === 'marquee'
 
-  const { speed = 0, axis = 'y', intensity = 60 } = layer
+  // Images default to speed 0.3 so every image gets subtle parallax without explicit config.
+  const defaultSpeed = layer.type === 'image' ? 0.3 : 0
+  const speed = layer.speed !== undefined ? layer.speed : defaultSpeed
+  const { axis = 'y', intensity = 60 } = layer
   const marqueeHeight = position.height || '72px'
   const isStickyMarquee = isMarquee && !position.top
+
+  // "Parallax within bounds" — image/video layers with speed≠0 get an oversized inner div
+  // so the image always fills the outer container with no black gaps.
+  // outer: overflow:hidden clips movement; inner: taller by 2×range, offset up by range.
+  const absRange = Math.abs(speed * intensity)
+  const isVisualParallax =
+    speed !== 0 && !isStickyMarquee && (layer.type === 'image' || layer.type === 'video')
 
   // Only apply parallax to the inner wrapper
   const parallaxRef = isStickyMarquee
@@ -125,12 +135,15 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       height: position.height,
       aspectRatio: position.aspectRatio,
       zIndex: position.zIndex,
+      overflow: isVisualParallax ? 'hidden' : undefined,
     }
 
   // ─── INNER: parallax wrapper (receives gsap transforms) ───
+  // For visual layers: extend by 2×range and shift up by range so shifts never expose background.
   const innerStyle: React.CSSProperties = {
     width: '100%',
-    height: '100%',
+    height: isVisualParallax && axis === 'y' ? `calc(100% + ${2 * absRange}px)` : '100%',
+    marginTop: isVisualParallax && axis === 'y' ? `-${absRange}px` : undefined,
   }
 
   // Only hint willChange when parallax is active

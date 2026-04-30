@@ -7,6 +7,7 @@ export interface ProjectMeta {
   date: string
   category?: string
   image: string
+  mobileImage?: string
 }
 
 export interface ProjectModule {

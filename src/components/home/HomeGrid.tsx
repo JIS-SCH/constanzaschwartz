@@ -32,12 +32,12 @@ const CARD_BASE_Z = -65                      // Original arc distance
 // • Radius = 10 (camera -24, base -34) so adjacent cards stay in front
 // • Near-square cards (4:5 aspect) to fill portrait viewport
 // • FOV=80° vertical gives ~42° horizontal at portrait aspect
-const MOBILE_CARD_W = 4
+const MOBILE_CARD_W = 5
 const MOBILE_CARD_H = 5  // portrait-ish aspect, fills ~35% of viewport height
 const MOBILE_REFLECTION_H = 1.5
-const MOBILE_CARD_SPACING = 5   // adjacent shows ~25% of card
+const MOBILE_CARD_SPACING = 6   // adjacent shows ~25% of card
 const MOBILE_CARD_BASE_Z = -34    // radius = 10 from camera
-const MOBILE_BASE_Z = -24
+const MOBILE_BASE_Z = -20
 
 function getTitle(index: number): string {
   return `Project ${String(index + 1).padStart(2, '0')}`
@@ -155,7 +155,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     scene.background = new THREE.Color(0x000000)
 
     const camera = new THREE.PerspectiveCamera(
-      mobile ? 65 : 38, // Wide vertical FOV on portrait so horizontal view is usable
+      mobile ? 70 : 38,
       window.innerWidth / window.innerHeight,
       0.1,
       200
@@ -194,15 +194,19 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     const cameraZ = mobile ? MOBILE_BASE_Z : BASE_Z
     const radius = Math.abs(baseCardZ - cameraZ)
 
+    // Calculate max rotation based on the arc of projects
+    const totalArc = (count - 1) * cardSpacing
+    const maxTheta = (totalArc / radius) / 2
+    // Give it a little bit of extra room (10%) to see the edge cards comfortably
+    const rotationLimit = maxTheta * 1.1
+
     const cardW = mobile ? MOBILE_CARD_W : CARD_W
     const cardH = mobile ? MOBILE_CARD_H : CARD_H
     const refH = mobile ? MOBILE_REFLECTION_H : REFLECTION_H
 
     projects.forEach((project, i) => {
       // 1. Arc length along the cylinder
-      const totalArc = (count - 1) * cardSpacing
-      const startArc = -totalArc / 2
-      const arcLength = startArc + i * cardSpacing
+      const arcLength = -totalArc / 2 + i * cardSpacing
 
       // 2. Cylinder angle (theta)
       const theta = arcLength / radius
@@ -211,7 +215,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       const x = radius * Math.sin(theta)
       const z = cameraZ - (radius * Math.cos(theta))
 
-      // 4. Perfect inward rotation to face the camera dead-on (Negative Y rotates left card right, right card left)
+      // 4. Perfect inward rotation to face the camera dead-on
       const rotationY = -theta
 
       arcPositions.push({ x, z })
@@ -342,7 +346,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       if (Math.abs(dx) > DRAG_TAP_THRESHOLD || Math.abs(dy) > DRAG_TAP_THRESHOLD) {
         didDrag = true
       }
-      cameraTargetRotY = dragStart.rot - (dx / window.innerWidth) * DRAG_ROTATION_RANGE * 2
+      const rawRot = dragStart.rot - (dx / window.innerWidth) * DRAG_ROTATION_RANGE * 2
+      cameraTargetRotY = THREE.MathUtils.clamp(rawRot, -rotationLimit, rotationLimit)
       pointer.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1
     }
     const onTouchEnd = () => {

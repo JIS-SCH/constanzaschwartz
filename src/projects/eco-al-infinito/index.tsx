@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { ASSETS } from './assets'
 import { TW, CH, HERO_TOP, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE } from '../shared'
@@ -80,7 +81,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'contain' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'contain' }}
             position={{ top: '80px', left: '4.17%', width: '91.66%', height: '80vh', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -161,7 +162,7 @@ export function Component() {
             layer={{ type: 'marquee', content: 'Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.', speed: 0 }}
             position={{ top: '27vh', left: '0', width: '100%', height: '50px', zIndex: 3 }}
           >
-            <div className="overflow-hidden w-full">
+            <div className="overflow-hidden w-full" style={{ mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)' }}>
               <div className="marquee-track" style={{ animationDuration: '32s' }}>
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
@@ -314,21 +315,21 @@ export function Component() {
             sectionId="collage-14-15-16"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img14, speed: 0.1, objectFit: 'contain' }}
-            position={{ top: '220px', left: '3px', width: '345', height: '517px', zIndex: 2 }}
+            position={{ top: '220px', left: '61px', width: '345', height: '517px', zIndex: 2 }}
           />
           {/* Staircase Image 15 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img15, speed: 0.1, objectFit: 'contain' }}
-            position={{ top: '360px', left: '34.02%', width: '345', height: '517px', zIndex: 2 }}
+            position={{ top: '360px', left: '547px', width: '345', height: '517px', zIndex: 2 }}
           />
           {/* Staircase Image 16 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={2}
             layer={{ type: 'image', src: ASSETS.img16, speed: 0.1, objectFit: 'contain' }}
-            position={{ top: '553px', left: '67.57%', width: '345', height: '517px', zIndex: 2 }}
+            position={{ top: '553px', left: '1033px', width: '345', height: '517px', zIndex: 2 }}
           />
 
           {/* Paragraph below staircase */}
@@ -366,7 +367,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: '2765px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
           >
-            <div style={{ padding: '0', overflow: 'hidden' }}>
+            <div style={{ mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', padding: '0', overflow: 'hidden' }}>
               <div className="marquee-track" style={{ animationDuration: '32s' }}>
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
@@ -464,7 +465,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0.1 }}
             position={{ top: '2724px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
           >
-            <div style={{ padding: '0', overflow: 'hidden' }}>
+            <div style={{ mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', padding: '0', overflow: 'hidden' }}>
               <div className="marquee-track" style={{ animationDuration: '32s' }}>
                 {[0, 1].map((setIdx) => (
                   <div key={setIdx} className="marquee-set">
@@ -698,7 +699,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '650px', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
           >
-            <div className="mr-[6.74%] text-right text-white font-light text-[var(--p-size)] leading-relaxed">
+            <div className="text-right text-white font-light text-[var(--p-size)] leading-relaxed" style={{ paddingRight: '96px', paddingTop: '110px' }}>
               Simon &amp; Garfunkel · 1964
             </div>
           </ParallaxLayer>
@@ -746,7 +747,7 @@ export function Component() {
       <div className="eco-mobile bg-obsidian overflow-hidden">
 
         {/* Hero */}
-        <div style={{ position: 'relative', width: '100%', height: '100%', marginTop: '80px' }}>
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '100%', marginTop: '80px' }}>
           <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
@@ -758,7 +759,7 @@ export function Component() {
 
         {/* 3-image cluster (staggered) */}
         <div style={{ position: 'relative', height: '443px', marginTop: '80px' }}>
-          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '0', top: 0, width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.15} src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '0', top: 0, width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
           <img src={ASSETS.img2} alt="" style={{ position: 'absolute', left: '110px', top: '177px', width: '170px', height: '114px', objectFit: 'cover', zIndex: 3 }} />
           <img src={ASSETS.img3} alt="" style={{ position: 'absolute', left: '190px', top: '275px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
         </div>
@@ -767,7 +768,7 @@ export function Component() {
         <div style={{ position: 'relative', width: '100%', height: '525px', marginTop: '46px' }}>
           <img src={ASSETS.img4} alt="" style={{ display: 'block', width: '350px', height: '100%', objectFit: 'cover', margin: '0 auto' }} />
 
-          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10 }}>
+          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)' }}>
             <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
@@ -783,7 +784,7 @@ export function Component() {
         {/* Image pair */}
         <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
           <img src={ASSETS.img6} alt="" style={{ position: 'absolute', left: '0', top: '235px', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} />
-          <img src={ASSETS.img5} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img5} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
@@ -838,9 +839,9 @@ export function Component() {
 
         {/* Three diagonal images */}
         <div style={{ position: 'relative', height: '420px', marginTop: '80px' }}>
-          <img src={ASSETS.img14} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <img src={ASSETS.img15} alt="" style={{ position: 'absolute', left: '125px', top: '146px', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <img src={ASSETS.img16} alt="" style={{ position: 'absolute', right: '20px', top: '292px', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <PI speed={0.15} src={ASSETS.img14} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img15} alt="" style={{ position: 'absolute', left: '125px', top: '146px', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <PI speed={0.25} src={ASSETS.img16} alt="" style={{ position: 'absolute', right: '20px', top: '292px', width: '140px', height: '210px', objectFit: 'cover' }} />
         </div>
 
         {/* Para 4 */}
@@ -850,12 +851,12 @@ export function Component() {
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '470px', marginTop: '80px' }}>
-          <img src={ASSETS.img17} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={ASSETS.img18} alt="" style={{ position: 'absolute', right: '20px', top: '217px', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img17} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI speed={0.25} src={ASSETS.img18} alt="" style={{ position: 'absolute', right: '20px', top: '217px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
-        <div style={{ marginTop: '5px', height: '30px', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', zIndex: 5, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', marginTop: '5px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '24s' }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
@@ -868,7 +869,7 @@ export function Component() {
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '300px', marginTop: '80px' }}>
           <img src={ASSETS.img20} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '230px', height: 'auto', zIndex: 2 }} />
-          <img src={ASSETS.img21} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '230px', height: '346px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img21} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '230px', height: '346px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
@@ -881,12 +882,12 @@ export function Component() {
 
         {/* Image pair offset */}
         <div style={{ position: 'relative', height: '400px', marginTop: '80px' }}>
-          <img src={ASSETS.img23} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={ASSETS.img24} alt="" style={{ position: 'absolute', right: '20px', top: '195px', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img23} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI speed={0.25} src={ASSETS.img24} alt="" style={{ position: 'absolute', right: '20px', top: '195px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
-        <div style={{ marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', zIndex: 5, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '28s' }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
@@ -902,7 +903,7 @@ export function Component() {
           <img src={ASSETS.img26} alt="" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '0', width: '170px', height: '113px', objectFit: 'cover', zIndex: 2 }} />
 
 
-          <img src={ASSETS.img27} alt="" style={{ position: 'absolute', right: '0px', top: '70px', width: '170px', height: '255px', objectFit: 'cover' }} />
+          <PI speed={0.15} src={ASSETS.img27} alt="" style={{ position: 'absolute', right: '0px', top: '70px', width: '170px', height: '255px', objectFit: 'cover' }} />
 
 
           <img src={ASSETS.img28} alt="" style={{ position: 'absolute', left: '0px', top: '400px', width: '200px', height: '133px', objectFit: 'cover' }} />
@@ -956,12 +957,12 @@ export function Component() {
 
         {/* Image pair (img32/img33) */}
         <div style={{ position: 'relative', height: '320px', marginTop: '12px' }}>
-          <img src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+          <PI speed={0.15} src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
           <img src={ASSETS.img33} alt="" style={{ position: 'absolute', right: '50px', top: '209px', width: '230px', height: '153px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, mixBlendMode: 'difference', marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', zIndex: 5, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '26s' }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER.</span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER.</span></div>
@@ -969,22 +970,18 @@ export function Component() {
         </div>
 
         {/* Video timelapse - Mobile */}
-        <div style={{ position: 'relative', width: '100%', height: '219px', marginTop: '80px', background: '#000' }}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            crossOrigin="anonymous"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          >
-            <source src={ASSETS.videoTimelapse} type="video/mp4" />
-          </video>
+        <div style={{ position: 'relative', width: '100%', height: '219px', marginTop: '80px', backgroundColor: '#000' }}>
+          <div className="vimeo-container" style={{ position: 'absolute', inset: 0 }}>
+            <CustomVimeoPlayer
+              videoUrl={ASSETS.videoTimelapse}
+              title="ECO AL INFINITO . Timelapse"
+            />
+          </div>
         </div>
 
         {/* Image pair (img34/img35) */}
         <div style={{ position: 'relative', height: '340px', marginTop: '80px' }}>
-          <img src={ASSETS.img34} alt="" style={{ position: 'absolute', left: '40px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img34} alt="" style={{ position: 'absolute', left: '40px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
           <img src={ASSETS.img35} alt="" style={{ position: 'absolute', right: '0px', top: '248px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
@@ -1001,7 +998,7 @@ export function Component() {
 
         {/* Image pair (img36/img37) */}
         <div style={{ position: 'relative', height: '360px', marginTop: '80px' }}>
-          <img src={ASSETS.img36} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+          <PI speed={0.15} src={ASSETS.img36} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
           <img src={ASSETS.img37} alt="" style={{ position: 'absolute', left: '20px', top: '195px', width: '230px', height: '153px', objectFit: 'cover' }} />
         </div>
 

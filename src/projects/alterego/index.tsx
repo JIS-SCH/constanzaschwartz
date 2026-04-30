@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { PI } from '@/src/components/parallax/ParallaxImg'
 import { VideoPlayer } from '@/src/components/media/VideoPlayer'
 import { cldImg, cldVideo } from '@/src/utils/cloudinary'
 import { ALT } from './assets'
@@ -285,7 +286,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 18. IMG 17 AND CREDITS  */}
-        <section style={{ position: 'relative', width: '100%', paddingBottom: '138px' }}>
+        <section style={{ position: 'relative', width: '100%', paddingBottom: '40px' }}>
           <div style={{ width: '66.25%', margin: '0 auto' }}>
             <img
               src={cldImg(ALT[17], 'w_2000')}
@@ -328,7 +329,7 @@ export function Component() {
       <div className="alterego-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '0px' }}>
 
         {/* 1. HERO */}
-        <div style={{ position: 'relative', width: '100%', height: '669px' }}>
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px' }}>
           <img src={cldImg(ALT.portadaMobile, 'w_800')} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
@@ -358,9 +359,9 @@ export function Component() {
 
         {/* 5. Photo pair 1 */}
         <div style={{ position: 'relative', marginTop: '80px', height: '144px', width: '100%' }}>
-          <img src={cldImg(ALT[5], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.3} src={cldImg(ALT[5], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: 0, right: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
-          <img src={cldImg(ALT[6], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.2} src={cldImg(ALT[6], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '48px', left: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
         </div>
 
@@ -380,9 +381,9 @@ export function Component() {
 
         {/* 8. Photo pair 2 */}
         <div style={{ position: 'relative', marginTop: '80px', height: '171px', width: '100%' }}>
-          <img src={cldImg(ALT[8], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.2} src={cldImg(ALT[8], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: 0, left: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
-          <img src={cldImg(ALT[9], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.3} src={cldImg(ALT[9], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '57px', right: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
         </div>
 
@@ -398,18 +399,18 @@ export function Component() {
 
         {/* 11. Scatter section */}
         <div style={{ position: 'relative', marginTop: '80px', height: '642px', width: '100%' }}>
-          <img src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.2} src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: 0, left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '205px' }}>
             <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} objectFit="cover" style={{ width: '100%', height: '100%' }} />
           </div>
-          <img src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.15} src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '226px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <img src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.25} src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '340px', left: '108px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <img src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.2} src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '454px', left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <img src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI speed={0.15} src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '568px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
         </div>
 
@@ -447,7 +448,7 @@ export function Component() {
         <div style={{
           marginTop: '-66px',
           width: '100%',
-          padding: '0px',
+          paddingTop: '20px',
           paddingBottom: '30px',
           color: '#FFF',
           fontFamily: '"Space Grotesk", sans-serif',

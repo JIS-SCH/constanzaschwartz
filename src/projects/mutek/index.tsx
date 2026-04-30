@@ -2,6 +2,7 @@
 
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
+import { PI } from '@/src/components/parallax/ParallaxImg'
 import { ASSETS } from './assets'
 import { TW, TEXT_BLOCK_STYLE, CH, GAP } from '../shared'
 
@@ -88,13 +89,13 @@ export function Component() {
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.8, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'cover' }}
             position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
           />
         </ParallaxSection>
 
         {/* 2. INTRO PARAGRAPH + COLLAGE 1 (img1 left tall, img2 portrait below, RITUAL AL VACÍO right) */}
-        <ParallaxSection id="intro" style={{ minHeight: '1830px' }}>
+        <ParallaxSection id="intro" style={{ minHeight: '1790px' }}>
           {/* Intro paragraph — left, 466 wide */}
           <ParallaxLayer
             sectionId="intro"
@@ -141,7 +142,7 @@ export function Component() {
             sectionId="text-block-1"
             layerIndex={0}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '0', left: '54.9%', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '0', left: '54.9%', width: TW, height: '80', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               {P_CAVE}
@@ -175,7 +176,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-1"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img3, speed: 0 }}
+            layer={{ type: 'image', src: ASSETS.img3 }}
             position={{ top: '332px', left: '12.7%', width: '831px', height: '466px', zIndex: 1 }}
           />
 
@@ -191,7 +192,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-1"
             layerIndex={3}
-            layer={{ type: 'image', src: ASSETS.img4, speed: 0 }}
+            layer={{ type: 'image', src: ASSETS.img4 }}
             position={{ top: '702px', left: '63.3%', width: '345px', height: '194px', zIndex: 3 }}
           />
         </ParallaxSection>
@@ -202,7 +203,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-2"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img5, speed: 0 }}
+            layer={{ type: 'image', src: ASSETS.img5 }}
             position={{ top: '0', left: '0', width: '710px', height: '473px', zIndex: 1 }}
           />
 
@@ -225,7 +226,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-3"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img6, speed: 0 }}
+            layer={{ type: 'image', src: ASSETS.img6 }}
             position={{ top: '0', left: '710px', width: '831px', height: '467px', zIndex: 1 }}
           />
 
@@ -233,7 +234,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-3"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img7, speed: 0 }}
+            layer={{ type: 'image', src: ASSETS.img7 }}
             position={{ top: '411px', left: '480px', width: '345px', height: '194px', zIndex: 3 }}
           />
 
@@ -256,7 +257,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-2"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img8, speed: 0 }}
+            layer={{ type: 'image', src: ASSETS.img8 }}
             position={{ top: '0', left: '790px', width: '467px', height: '700px', zIndex: 4 }}
           />
 
@@ -284,7 +285,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-2"
             layerIndex={3}
-            layer={{ type: 'image', src: ASSETS.img9, speed: 0 }}
+            layer={{ type: 'image', src: ASSETS.img9 }}
             position={{ top: '475px', left: '487px', width: '467px', height: '700px', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -374,7 +375,9 @@ export function Component() {
       <div className="mutek-mobile bg-obsidian overflow-hidden">
 
         {/* 1. Hero */}
-        <img src={ASSETS.heroMobile} alt="" className="block w-full h-[669px] object-cover" />
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px' }}>
+          <img src={ASSETS.heroMobile} alt="" className="block w-full h-full object-cover" />
+        </div>
 
         {/* 2. Intro para */}
         <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
@@ -383,7 +386,7 @@ export function Component() {
 
         {/* 3. First image pair + title + sub-text — absolute layout per Figma */}
         <div style={{ position: 'relative', height: '674px', marginTop: '80px' }}>
-          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
+          <PI speed={0.2} src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
           <h3 style={{
             position: 'absolute',
             top: '252px',
@@ -402,7 +405,7 @@ export function Component() {
           } as any}>
             Ritual al Vacío
           </h3>
-          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
+          <PI speed={0.25} src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
           <div style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10, fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
             Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
           </div>
@@ -428,8 +431,8 @@ export function Component() {
         {/* 7. Stills + marquee + DSC3353 + P_RITUAL + Still 15 + Still 126 — absolute layout */}
         {/* Still145 top:0, Still18 top:136, Marquee top:147, DSC3353 top:342, P_RITUAL top:496, Still15 top:726, Still126 top:854 */}
         <div style={{ position: 'relative', height: '950px', marginTop: '80px' }}>
-          <img src={ASSETS.img3} alt="" style={{ position: 'absolute', left: 'calc(8.33% + 17.5px)', top: 0, width: '290px', height: '163px', objectFit: 'cover' }} />
-          <img src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img3} alt="" style={{ position: 'absolute', left: 'calc(8.33% + 17.5px)', top: 0, width: '290px', height: '163px', objectFit: 'cover' }} />
+          <PI speed={0.25} src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
 
           {/* Marquee 1 — overlaps bottom of Still18 */}
           <div className="mutek-marquee-blend" style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', overflow: 'hidden' }}>
@@ -454,7 +457,7 @@ export function Component() {
           </div>
 
           {/* DSC3353 — left-aligned per Figma annotation */}
-          <img src={ASSETS.img5} alt="" style={{ position: 'absolute', left: '0px', top: '342px', width: '280px', height: '187px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img5} alt="" style={{ position: 'absolute', left: '0px', top: '342px', width: '280px', height: '187px', objectFit: 'cover' }} />
 
           {/* P_RITUAL — right-indented, nowrap per Figma */}
           <div className="mutek-p" style={{
@@ -470,10 +473,10 @@ export function Component() {
           </div>
 
           {/* Still 15 — right-aligned */}
-          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', right: 0, top: '726px', width: '280px', height: '158px', objectFit: 'cover' }} />
+          <PI speed={0.3} src={ASSETS.img6} alt="" style={{ position: 'absolute', right: 0, top: '726px', width: '280px', height: '158px', objectFit: 'cover' }} />
 
           {/* Still 126 — left edge */}
-          <img src={ASSETS.img7} alt="" style={{ position: 'absolute', left: 0, top: '854px', width: '170px', height: '96px', objectFit: 'cover' }} />
+          <PI speed={0.2} src={ASSETS.img7} alt="" style={{ position: 'absolute', left: 0, top: '854px', width: '170px', height: '96px', objectFit: 'cover' }} />
         </div>
 
         {/* 8. P_QUESTION */}
@@ -488,7 +491,7 @@ export function Component() {
 
         {/* 10. Second image pair + Marquee 2 — absolute layout */}
         <div style={{ position: 'relative', height: '500px', marginTop: '80px' }}>
-          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', right: '20px', top: 0, width: '200px', height: '300px', objectFit: 'cover', zIndex: 3 }} />
+          <PI speed={0.2} src={ASSETS.img8} alt="" style={{ position: 'absolute', right: '20px', top: 0, width: '200px', height: '300px', objectFit: 'cover', zIndex: 3 }} />
 
           {/* Marquee 2 — centered overlap between img8 and img9 */}
           <div className="mutek-marquee-blend" style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 2 }}>
@@ -512,7 +515,7 @@ export function Component() {
             </div>
           </div>
 
-          <img src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '20px', top: '200px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
+          <PI speed={0.25} src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '20px', top: '200px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
         </div>
 
         {/* 11. P_APELA */}
@@ -521,7 +524,9 @@ export function Component() {
         </div>
 
         {/* 12. Full-width image (Still 122) 390×572 */}
-        <img src={ASSETS.img10} alt="" style={{ display: 'block', width: '100%', height: '572px', objectFit: 'cover', marginTop: '105px' }} />
+        <div style={{ position: 'relative', width: '100%', height: '572px', marginTop: '105px', overflow: 'hidden' }}>
+          <PI speed={0.2} src={ASSETS.img10} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
 
         {/* 13. P_UMBRAL */}
         <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
@@ -529,7 +534,9 @@ export function Component() {
         </div>
 
         {/* 14. Still 111 — centered, 350×197 */}
-        <img src={ASSETS.img11} alt="" style={{ display: 'block', width: '350px', height: '197px', objectFit: 'cover', marginTop: '105px', marginLeft: 'auto', marginRight: 'auto' }} />
+        <div style={{ position: 'relative', width: '350px', height: '197px', marginTop: '105px', marginLeft: 'auto', marginRight: 'auto', overflow: 'hidden' }}>
+          <PI speed={0.2} src={ASSETS.img11} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
 
         {/* 15. P_CAVERNA */}
         <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>

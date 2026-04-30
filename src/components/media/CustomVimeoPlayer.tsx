@@ -14,7 +14,10 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
   const [volume, setVolumeState] = useState(1)
   const [isHovered, setIsHovered] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<any>(null)
+  const hideTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const [controlsVisible, setControlsVisible] = useState(true)
 
   useEffect(() => {
     // Check if script is already loaded
@@ -61,8 +64,21 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
     }
   }, [videoUrl])
 
-  const togglePlay = (e?: React.MouseEvent) => {
+  const scheduleHide = () => {
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
+    hideTimerRef.current = setTimeout(() => {
+      setControlsVisible(false)
+    }, 2500)
+  }
+
+  const revealControls = () => {
+    setControlsVisible(true)
+    scheduleHide()
+  }
+
+  const togglePlay = (e?: React.MouseEvent | React.TouchEvent) => {
     if (e) e.stopPropagation()
+    revealControls()
     if (playerRef.current) {
       if (isPlaying) {
         playerRef.current.pause()
@@ -99,13 +115,19 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
 
   const toggleFullscreen = (e: React.MouseEvent) => {
     e.stopPropagation()
-    if (iframeRef.current) {
-      if (iframeRef.current.requestFullscreen) {
-        iframeRef.current.requestFullscreen()
-      } else if ((iframeRef.current as any).webkitRequestFullscreen) {
-        (iframeRef.current as any).webkitRequestFullscreen()
+    const container = containerRef.current
+    if (container) {
+      if (!document.fullscreenElement) {
+        if (container.requestFullscreen) {
+          container.requestFullscreen()
+        } else if ((container as any).webkitRequestFullscreen) {
+          (container as any).webkitRequestFullscreen()
+        }
+      } else {
+        document.exitFullscreen()
       }
     }
+    revealControls()
   }
 
   const iframeStyles: React.CSSProperties = inline ? {
@@ -114,21 +136,22 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
     pointerEvents: 'none'
   } : {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: '100vw',
-    height: '56.25vw', /* 16:9 */
-    minHeight: '100vh',
-    minWidth: '177.77vh', /* 16:9 */
-    transform: 'translate(-50%, -50%)',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
     pointerEvents: 'none'
   }
 
+  const vimeoUrl = videoUrl.includes('?') ? `${videoUrl}&controls=0` : `${videoUrl}?controls=0`
+
   return (
     <div 
+      ref={containerRef}
       className={`custom-vimeo-player ${inline ? 'inline-mode' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => revealControls()}
+      onMouseLeave={() => setControlsVisible(false)}
+      onMouseMove={() => revealControls()}
       style={{
         position: 'relative',
         width: '100%',
@@ -139,7 +162,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
     >
       <iframe
         ref={iframeRef}
-        src={`${videoUrl}&controls=0`}
+        src={vimeoUrl}
         style={iframeStyles}
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
@@ -149,6 +172,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
       {/* Interaction Overlay */}
       <div 
         onClick={togglePlay}
+        onTouchStart={revealControls}
         style={{ position: 'absolute', inset: 0, zIndex: 5, cursor: 'pointer' }} 
       />
 
@@ -184,10 +208,10 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
           alignItems: 'center',
           padding: '0 40px',
           gap: '24px',
-          zIndex: 15,
-          opacity: isHovered || !isPlaying ? 1 : 0,
+          zIndex: 20,
+          opacity: controlsVisible || !isPlaying ? 1 : 0,
           transition: 'opacity 0.5s ease',
-          pointerEvents: isHovered || !isPlaying ? 'auto' : 'none'
+          pointerEvents: controlsVisible || !isPlaying ? 'auto' : 'none'
         }}
       >
         {/* Play/Pause toggle */}

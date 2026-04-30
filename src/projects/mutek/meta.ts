@@ -7,4 +7,5 @@ export const meta: ProjectMeta = {
   date: '2025',
   category: 'Sideshow · Artlab',
   image: ASSETS.hero,
+  mobileImage: ASSETS.heroMobile,
 }

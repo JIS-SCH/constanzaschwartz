@@ -7,6 +7,7 @@ import { HomeGrid } from '@/src/components/home/HomeGrid'
 import { projectList } from '@/src/projects/registry'
 import { useTransition } from '@/src/contexts/TransitionContext'
 import type { OriginRect } from '@/src/contexts/TransitionContext'
+import { isMobile } from '@/src/utils/detect'
 
 function getInitialPhase(): AppPhase {
   if (typeof window !== 'undefined' && sessionStorage.getItem('introComplete')) {
@@ -25,7 +26,8 @@ export default function Home() {
     (index: number, rect: OriginRect) => {
       const project = projectList[index]
       if (!project) return
-      start({ slug: project.slug, imageSrc: project.image, rect })
+      const imageSrc = (isMobile() && project.mobileImage) ? project.mobileImage : project.image
+      start({ slug: project.slug, imageSrc, rect })
     },
     [start]
   )

@@ -7,4 +7,5 @@ export const meta: ProjectMeta = {
   date: '2024',
   category: 'Instalación',
   image: ASSETS.hero,
+  mobileImage: ASSETS.heroMobile,
 }
