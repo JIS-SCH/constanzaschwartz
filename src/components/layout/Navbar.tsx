@@ -65,7 +65,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
       className="h-[60px] md:h-[80px]"
       style={{
         position: 'fixed',
-        top: 0,
+        top: '15px',
         left: 0,
         right: 0,
         zIndex: 50,

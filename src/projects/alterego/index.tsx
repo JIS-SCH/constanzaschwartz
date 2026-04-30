@@ -82,7 +82,7 @@ export function Component() {
             sectionId="hero"
             layerIndex={0}
             layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: 0, isHero: true, objectFit: 'cover' }}
-            position={{ left: '0', width: '100 % ', height: 'calc(100vh - 80px)', zIndex: 1 }}
+            position={{ top: '20px', left: '0', width: '100 % ', height: 'calc(100vh - 80px)', zIndex: 1 }}
           />
         </ParallaxSection>
 
@@ -142,13 +142,13 @@ export function Component() {
             sectionId="photo-pair"
             layerIndex={0}
             layer={{ type: 'image', src: cldImg(ALT[5], 'w_1200'), speed: 0.3 }}
-            position={{ top: '0', left: '45.83%', width: '32.3%', height: '246px', zIndex: 2 }}
+            position={{ top: '0', left: '45.83%', width: '32.3%', height: '246px', zIndex: 1 }}
           />
           <ParallaxLayer
             sectionId="photo-pair"
             layerIndex={1}
             layer={{ type: 'image', src: cldImg(ALT[6], 'w_1200'), speed: 0.45 }}
-            position={{ top: '23vh', left: '16.67%', width: '32.3%', height: '246px', zIndex: 1 }}
+            position={{ top: '18vh', left: '16.67%', width: '32.3%', height: '246px', zIndex: 2 }}
           />
         </ParallaxSection>
 
@@ -204,7 +204,7 @@ export function Component() {
             sectionId="inv-block"
             layerIndex={0}
             layer={{ type: 'image', src: cldImg(ALT[10], 'w_1200'), speed: 0.3 }}
-            position={{ top: '0', left: '8.33%', width: '32.3%', height: '246px', zIndex: 2 }}
+            position={{ top: '70px', left: '8.33%', width: '32.3%', height: '246px', zIndex: 2 }}
           />
           <div style={{
             position: 'absolute',
@@ -221,7 +221,7 @@ export function Component() {
               autoPlay
               loop={false}
               objectFit="cover"
-              style={{ width: '100%', height: '100%' }}
+              style={{ width: '100%', height: '759px' }}
             />
           </div>
           {/* img 11  */}
@@ -229,14 +229,14 @@ export function Component() {
             sectionId="inv-block"
             layerIndex={2}
             layer={{ type: 'image', src: cldImg(ALT[11], 'w_1200'), speed: 0 }}
-            position={{ top: 'calc(246px + 678px)', left: '62.5%', width: '32.3%', height: '245px', zIndex: 2 }}
+            position={{ top: 'calc(246px + 668px)', left: '63.5%', width: '32.3%', height: '245px', zIndex: 2 }}
           />
           {/* img 12 */}
           <ParallaxLayer
             sectionId="inv-block"
             layerIndex={3}
             layer={{ type: 'image', src: cldImg(ALT[12], 'w_1200'), speed: 0 }}
-            position={{ top: 'calc(246px + 678px + 245px + 110px)', left: 'calc(50% - 233px)', width: '32.3%', height: '245px', zIndex: 2 }}
+            position={{ top: 'calc(246px + 678px + 245px + 100px)', left: 'calc(50% - 233px)', width: '32.3%', height: '245px', zIndex: 2 }}
           />
           {/* img 13 */}
           <ParallaxLayer
@@ -250,7 +250,7 @@ export function Component() {
             sectionId="inv-block"
             layerIndex={5}
             layer={{ type: 'image', src: cldImg(ALT[14], 'w_900'), speed: 0 }}
-            position={{ top: 'calc(246px + 678px + 245px + 110px + 245px + 110px + 246px + 110px)', left: '45.83%', width: '32.3%', height: '246px', zIndex: 2 }}
+            position={{ top: 'calc(246px + 678px + 245px + 110px + 245px + 110px + 246px + 110px)', left: '58.83%', width: '32.3%', height: '246px', zIndex: 2 }}
           />
         </ParallaxSection>
 
@@ -285,7 +285,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 18. IMG 17 AND CREDITS  */}
-        <section style={{ position: 'relative', width: '100%', paddingBottom: '0px' }}>
+        <section style={{ position: 'relative', width: '100%', paddingBottom: '138px' }}>
           <div style={{ width: '66.25%', margin: '0 auto' }}>
             <img
               src={cldImg(ALT[17], 'w_2000')}
@@ -301,21 +301,20 @@ export function Component() {
             width: '100%',
             color: '#FFF',
             fontFamily: '"Space Grotesk", sans-serif',
-            fontSize: '16px',
+            fontSize: '15px',
             fontStyle: 'normal',
-            lineHeight: '150%',
+            lineHeight: '1.45',
             boxSizing: 'border-box',
-            mixBlendMode: 'difference',
             transform: 'translateZ(0)',
             zIndex: 2,
           }}>
             {CREDITS.map((entry, i) => (
               <span key={i}>
-                {i > 0 && <span>{' / '}</span>}
-                <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
+                {i > 0 && <span style={{ fontWeight: 200 }}>{' / '}</span>}
+                <span style={{ fontWeight: 700 }}>
                   {entry.role}:
                 </span>
-                <span style={{ fontWeight: 300 }}> {' '}{entry.name}</span>
+                <span style={{ fontWeight: 200 }}> {' '}{entry.name}</span>
               </span>
             ))}
           </div>
@@ -329,7 +328,7 @@ export function Component() {
       <div className="alterego-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '0px' }}>
 
         {/* 1. HERO */}
-        <div style={{ position: 'relative', width: '100%', height: '75vh' }}>
+        <div style={{ position: 'relative', width: '100%', height: '669px' }}>
           <img src={cldImg(ALT.portadaMobile, 'w_800')} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
@@ -400,18 +399,18 @@ export function Component() {
         {/* 11. Scatter section */}
         <div style={{ position: 'relative', marginTop: '80px', height: '642px', width: '100%' }}>
           <img src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async"
-            style={{ position: 'absolute', top: 0, left: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+            style={{ position: 'absolute', top: 0, left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '205px' }}>
             <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} objectFit="cover" style={{ width: '100%', height: '100%' }} />
           </div>
           <img src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async"
-            style={{ position: 'absolute', top: '226px', right: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+            style={{ position: 'absolute', top: '226px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <img src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async"
-            style={{ position: 'absolute', top: '340px', left: '180px', width: '140px', height: '74px', objectFit: 'cover' }} />
+            style={{ position: 'absolute', top: '340px', left: '108px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <img src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async"
-            style={{ position: 'absolute', top: '454px', left: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+            style={{ position: 'absolute', top: '454px', left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <img src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async"
-            style={{ position: 'absolute', top: '568px', right: '20px', width: '140px', height: '74px', objectFit: 'cover' }} />
+            style={{ position: 'absolute', top: '568px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
         </div>
 
         {/* 12. Portrait 15 + Portrait video v6 — centered, touching (no gap) */}
@@ -446,9 +445,9 @@ export function Component() {
 
         {/* 16. Credits — overlapping bottom of ALT[17] */}
         <div style={{
-          marginTop: '-32px',
+          marginTop: '-66px',
           width: '100%',
-          padding: '0 20px',
+          padding: '0px',
           paddingBottom: '30px',
           color: '#FFF',
           fontFamily: '"Space Grotesk", sans-serif',
@@ -456,15 +455,14 @@ export function Component() {
           fontStyle: 'normal',
           lineHeight: '1.45',
           boxSizing: 'border-box',
-          mixBlendMode: 'difference',
           transform: 'translateZ(0)',
           zIndex: 2,
         }}>
           {CREDITS.map((entry, i) => (
             <span key={i}>
-              {i > 0 && <span>{' / '}</span>}
-              <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>{entry.role}:</span>
-              <span style={{ fontWeight: 300 }}> {entry.name}</span>
+              {i > 0 && <span style={{ fontWeight: 200 }}>{' / '}</span>}
+              <span style={{ fontWeight: 700 }}>{entry.role}:</span>
+              <span style={{ fontWeight: 200 }}> {entry.name}</span>
             </span>
           ))}
         </div>

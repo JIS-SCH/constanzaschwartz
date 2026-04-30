@@ -11,7 +11,7 @@ export const ASSETS = {
   img6: cldImg('CONSTANZASCHWARTZ-projects-Mutek-6_hgt6ya'),
   img7: cldImg('CONSTANZASCHWARTZ-projects-Mutek-7_ufgrqq'),
   img8: cldImg('CONSTANZASCHWARTZ-projects-Mutek-8_tsrlib'),
-  img9: cldImg('CONSTANZASCHWARTZ-projects-Mutek-1_tbng2q'),
+  img9: cldImg('CONSTANZASCHWARTZ-projects-Mutek-9_n22xew'),
   img10: cldImg('CONSTANZASCHWARTZ-projects-Mutek-10_lpuzsp'),
   img11: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
   img12: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
