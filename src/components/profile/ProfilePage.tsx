@@ -171,9 +171,6 @@ function Marquee() {
 function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
 
-  // Pattern of widths from Eco al Infinito
-  const widths = ['221px', '221px', '496px', '221px', '221px', '496px']
-
   return (
     <div className="w-full h-[331px] overflow-hidden">
       <style dangerouslySetInnerHTML={{
@@ -185,16 +182,16 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
         `}} />
       <div
         className="flex h-[331px] w-max"
-        style={{ animation: `pr-anim-${id} 22s linear infinite` }}
+        style={{ animation: `pr-anim-${id} 22s linear infinite`, gap: 0 }}
       >
         {doubled.map((src, i) => (
-          <div
+          <img
             key={i}
-            className="h-[331px] flex-shrink-0"
-            style={{ width: widths[i % widths.length] }}
-          >
-            <img src={src} alt="" className="w-full h-full object-cover block" />
-          </div>
+            src={src}
+            alt=""
+            className="h-[331px] w-auto flex-shrink-0 block"
+            style={{ marginRight: '-1px' }}
+          />
         ))}
       </div>
     </div>
@@ -209,9 +206,9 @@ function EventList({ events }: { events: string[] }) {
     <div>
       {events.map((event, i) => (
         <div key={i}>
-          <p className="pr-list m-0 py-[10px]">{event}</p>
+          <p className="pr-list">{event}</p>
           {i < events.length - 1 && (
-            <div className="border-t border-white/30" />
+            <div className="pr-list-divider" />
           )}
         </div>
       ))}
@@ -432,11 +429,24 @@ const CSS = `
 
 .pr-list {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  font-size: var(--list-size);
-  line-height: var(--list-lh);
-  letter-spacing: var(--list-ls);
+  font-weight: 100;
+  font-size: 26px;
+  line-height: 121%;
+  letter-spacing: 0;
   color: #fff;
+  padding: 30px 20px;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .pr-list {
+    padding: 30px 0 30px calc(8.33% + 2px);
+  }
+}
+
+.pr-list-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  width: 100%;
 }
 
 /* ═══ MOBILE INTRO — normal flow ════════════════════════════════════════ */
@@ -514,7 +524,7 @@ const CSS = `
 .pr-year-events {
   position: relative;
   z-index: 2;
-  padding: 0 20px 0;
+  padding: 0;
   background: transparent;
 }
 
@@ -562,7 +572,7 @@ const CSS = `
     position: absolute;
     left: 163px;
     top: 63px;
-    z-index: 100;
+    z-index: 10;
     pointer-events: none;
     mix-blend-mode: difference;
   }
@@ -613,17 +623,17 @@ const CSS = `
    */
   .pr-bio-label {
     position: absolute;
-    left: 143px;
-    top: 2025px; /* adjusted to match Figma relative position */
-    width: 200px;
-    height: 432px;
+    left: 241px;
+    top: 2025px;
+    width: 250px;
+    height: 484px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     overflow: visible;
   }
-  .pr-bio-word { transform: rotate(-90deg); }
+  .pr-bio-word { transform: rotate(-90deg); font-size: 250px; line-height: 1; }
 
   .pr-bio-text {
     position: absolute;
@@ -652,6 +662,6 @@ const CSS = `
   }
 
   .pr-year-events {
-    padding: 40px calc(8.33% + 2px) 0;
+    padding-top: 40px;
   }
 }`
