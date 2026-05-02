@@ -91,32 +91,22 @@ function MarqueeContent({ content, duration }: { content: string; duration: numb
 }
 
 export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, children }: ParallaxLayerProps) {
-  // Inner ref — parallax transforms apply HERE, not on the position container
-  const parallaxInnerRef = useRef<HTMLDivElement>(null)
+  // Outer ref — scroll parallax transforms apply to the position container so the whole layer floats
+  const outerRef = useRef<HTMLDivElement>(null)
   const isMarquee = layer.type === 'marquee'
 
-  // Images default to speed 0.3 so every image gets subtle parallax without explicit config.
   const defaultSpeed = layer.type === 'image' ? 0.3 : 0
   const speed = layer.speed !== undefined ? layer.speed : defaultSpeed
   const { axis = 'y', intensity = 60 } = layer
   const marqueeHeight = position.height || '72px'
   const isStickyMarquee = isMarquee && !position.top
 
-  // "Parallax within bounds" — image/video layers with speed≠0 get an oversized inner div
-  // so the image always fills the outer container with no black gaps.
-  // outer: overflow:hidden clips movement; inner: taller by 2×range, offset up by range.
-  const absRange = Math.abs(speed * intensity)
-  const isVisualParallax =
-    speed !== 0 && !isStickyMarquee && (layer.type === 'image' || layer.type === 'video')
+  useParallax(
+    isStickyMarquee ? ({ current: null } as unknown as React.RefObject<HTMLElement>) : outerRef as React.RefObject<HTMLElement>,
+    { speed, axis, intensity }
+  )
 
-  // Only apply parallax to the inner wrapper
-  const parallaxRef = isStickyMarquee
-    ? ({ current: null } as unknown as React.RefObject<HTMLElement>)
-    : (parallaxInnerRef as React.RefObject<HTMLElement>)
-
-  useParallax(parallaxRef, { speed, axis, intensity })
-
-  // ─── OUTER: position container (NEVER transformed by parallax) ───
+  // ─── OUTER: position container (scroll parallax transform applied here) ───
   const positionStyle: React.CSSProperties = isStickyMarquee
     ? {
       position: 'sticky',
@@ -135,20 +125,13 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       height: position.height,
       aspectRatio: position.aspectRatio,
       zIndex: position.zIndex,
-      overflow: isVisualParallax ? 'hidden' : undefined,
+      willChange: speed !== 0 ? 'transform' : undefined,
     }
 
-  // ─── INNER: parallax wrapper (receives gsap transforms) ───
-  // For visual layers: extend by 2×range and shift up by range so shifts never expose background.
+  // ─── INNER: content wrapper (no parallax transforms) ───
   const innerStyle: React.CSSProperties = {
     width: '100%',
-    height: isVisualParallax && axis === 'y' ? `calc(100% + ${2 * absRange}px)` : '100%',
-    marginTop: isVisualParallax && axis === 'y' ? `-${absRange}px` : undefined,
-  }
-
-  // Only hint willChange when parallax is active
-  if (speed !== 0) {
-    innerStyle.willChange = 'transform'
+    height: '100%',
   }
 
   // Blend mode for text/marquee/credits layers
@@ -242,14 +225,12 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
 
   return (
     <div
+      ref={isStickyMarquee ? undefined : outerRef}
       style={positionStyle}
       className={layer.className}
       data-project-image={layer.isHero ? true : undefined}
     >
-      <div
-        ref={isStickyMarquee ? undefined : parallaxInnerRef}
-        style={innerStyle}
-      >
+      <div style={innerStyle}>
         {children || renderedContent}
       </div>
     </div>

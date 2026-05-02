@@ -122,11 +122,11 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
           maxWidth: isMobile ? '100%' : '1163px',
           margin: '0 auto',
           width: '100%',
-          padding: isMobile ? '0 20px' : '80px 0',
+          padding: isMobile ? '80px 20px' : '277.5px 0 10px 0',
           overflowY: 'auto',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
         }}
       >
         <style dangerouslySetInnerHTML={{ __html: `nav::-webkit-scrollbar { display: none; }` }} />
@@ -143,21 +143,17 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
               alignItems: 'center',
               alignSelf: 'stretch',
               position: 'relative',
-              marginBottom: isMobile
-                ? (item === 'CONTACT' ? '0' : '20px')
-                : (item === 'PROJECTS' ? '30px' : item === 'PROFILE' ? (projectsOpen ? '25px' : '30px') : '0'),
-              transition: 'margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+              marginBottom: isMobile ? '20px' : (item === 'PROJECTS' ? '24px' : item === 'PROFILE' ? '20px' : '0'),
               flexShrink: 0
             }}
           >
             <div
               style={{
                 overflow: 'hidden',
-                minHeight: item === 'PROJECTS' ? (isMobile ? 'auto' : '80px') : (isMobile ? 'auto' : '72px'),
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: item === 'PROJECTS' ? '0' : '4px',
+                padding: 0,
                 width: '100%',
                 position: 'relative'
               }}
@@ -176,8 +172,8 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                     background: 'none',
                     border: 'none',
                     color: (hoveredItem === item) ? '#FFDF00' : '#FFF',
-                    fontSize: isMobile ? 'clamp(40px, 15vw, 70px)' : 'clamp(35px, 4.5vw, 72px)',
-                    fontWeight: 250,
+                    fontSize: isMobile ? '54px' : '90px',
+                    fontWeight: 100,
                     letterSpacing: '0.04em',
                     cursor: 'pointer',
                     fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
@@ -188,7 +184,7 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                     transition: 'opacity 0.25s ease, color 0.25s ease',
                     display: 'block',
                     width: '100%',
-                    padding: isMobile ? '5px 0' : '10px 0'
+                    padding: 0
                   }}
                 >
                   {item}
@@ -208,10 +204,10 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                 <div style={{ overflow: 'hidden' }}>
                   <div
                     style={{
-                      paddingTop: isMobile ? '12px' : '20px',
+                      paddingTop: isMobile ? '20px' : '36px',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: isMobile ? '12px' : '30px',
+                      gap: '10px',
                       width: '100%',
                       alignItems: 'center',
                       opacity: projectsOpen ? 1 : 0,
@@ -224,7 +220,7 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                         key={rowIdx}
                         style={{
                           display: 'flex',
-                          gap: isMobile ? '16px' : '26px',
+                          gap: '10px',
                           justifyContent: 'center',
                           alignItems: 'center',
                           flexWrap: 'wrap',
@@ -240,14 +236,14 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                               }}
                               style={{
                                 color: '#fff',
-                                fontSize: isMobile ? '22px' : '40px',
-                                fontWeight: 300,
+                                fontSize: isMobile ? '20px' : '32px',
+                                fontWeight: 100,
                                 textTransform: 'uppercase',
                                 fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
                                 cursor: 'pointer',
                                 whiteSpace: 'nowrap',
                                 transition: 'color 0.2s ease',
-                                lineHeight: 'normal',
+                                lineHeight: 1,
                                 textAlign: 'center',
                               }}
                               onMouseEnter={(e) => (e.currentTarget.style.color = '#FFDF00')}
@@ -259,8 +255,8 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                               <span style={{
                                 color: '#fff',
                                 opacity: 0.4,
-                                fontSize: isMobile ? '18px' : '40px',
-                                fontWeight: 300,
+                                fontSize: isMobile ? '20px' : '32px',
+                                fontWeight: 100,
                                 fontFamily: '"Helvetica Neue LT Std", sans-serif'
                               }}>|</span>
                             )}
