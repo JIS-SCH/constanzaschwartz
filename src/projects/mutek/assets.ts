@@ -1,7 +1,7 @@
 import { cldImg, cldVideo } from '@/src/utils/cloudinary'
 
 export const ASSETS = {
-  hero: cldImg('CONSTANZASCHWARTZ-projects-Mutek-portada-desktop_sr4dif'),
+  hero: cldImg('CONSTANZASCHWARTZ-projects-Mutek-portada-desktop_sr4dif', 'f_gif'),
   img1: cldImg('CONSTANZASCHWARTZ-projects-Mutek-1_tbng2q'),
   img2: cldImg('CONSTANZASCHWARTZ-projects-Mutek-2_naofe2'),
   vid1: cldVideo('CONSTANZASCHWARTZ-projects-Mutek2025_jcasoz.mp4'),

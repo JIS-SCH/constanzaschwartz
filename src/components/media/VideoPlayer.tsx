@@ -21,7 +21,6 @@ const iconStyle: React.CSSProperties = {
   width: ICON_SIZE,
   height: ICON_SIZE,
   display: 'block',
-  filter: 'invert(1)',
   pointerEvents: 'none',
 }
 

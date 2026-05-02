@@ -22,11 +22,11 @@ const MENU_ITEMS = ['PROJECTS', 'PROFILE', 'CONTACT'] as const
 
 interface NavMenuProps {
   isOpen: boolean
-  onContactClick: () => void
+  onContactClick?: () => void
   onClose: () => void
 }
 
-export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
+export function NavMenu({ isOpen, onClose }: NavMenuProps) {
   const router = useRouter()
   const overlayRef = useRef<HTMLDivElement>(null)
   const itemWrappers = useRef<(HTMLDivElement | null)[]>([])
@@ -162,7 +162,8 @@ export function NavMenu({ isOpen, onContactClick, onClose }: NavMenuProps) {
                 <button
                   onClick={() => {
                     if (item === 'CONTACT') {
-                      onContactClick()
+                      onClose()
+                      router.push('/contact')
                     } else if (item === 'PROFILE') {
                       onClose()
                       router.push('/profile')
