@@ -85,12 +85,13 @@ export function Component() {
 
       <div className="mutek-desktop">
         {/* 1. HERO — Full-width image, fit so the baked-in title + credits stay visible. */}
+        {/* top: 77px = nav bottom (95px) - parallax range (18px) so image never gaps below nav */}
         <ParallaxSection id="hero" style={{ minHeight: `calc(80px + 80vh + 251px)` }}>
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'cover' }}
-            position={{ top: '80px', left: '0', width: '100%', height: '80vh', zIndex: 0 }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'contain' }}
+            position={{ top: '77px', left: '0', width: '100%', height: '648px', zIndex: 0 }}
           />
         </ParallaxSection>
 
@@ -310,7 +311,7 @@ export function Component() {
             sectionId="big-image"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img10, speed: 0.3 }}
-            position={{ top: '0', left: '0', width: '100%', height: '810px', zIndex: 1 }}
+            position={{ top: '-18px', left: '0', width: '100%', height: '846px', zIndex: 1 }}
           />
         </ParallaxSection>
 
@@ -334,7 +335,7 @@ export function Component() {
             sectionId="image-text"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img11, speed: 0.3 }}
-            position={{ top: '0', left: '21.1%', width: '57.7%', height: '60vh', zIndex: 1 }}
+            position={{ top: '-18px', left: '21.1%', width: '57.7%', height: 'calc(60vh + 36px)', zIndex: 1 }}
           />
 
           <ParallaxLayer
