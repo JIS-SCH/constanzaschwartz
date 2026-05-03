@@ -12,6 +12,34 @@
   --spacing-TW: 32.4305%;
 }
 
+/* ─── MOTION TOKENS ─── */
+:root {
+  --motion-duration-sm: 0.35s;
+  --motion-duration-md: 0.6s;
+  --motion-duration-lg: 0.8s;
+
+  --motion-ease-out:   cubic-bezier(0.25, 1, 0.5, 1);
+  --motion-ease-inout: cubic-bezier(0.45, 0, 0.55, 1);
+  --motion-ease-sharp: cubic-bezier(0.19, 1, 0.22, 1);
+
+  --parallax-y: 60px;
+
+  --marquee-speed-slow:   30s;
+  --marquee-speed-medium: 20s;
+  --marquee-speed-fast:   12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-sm: 0.01s;
+    --motion-duration-md: 0.01s;
+    --motion-duration-lg: 0.01s;
+    --marquee-speed-slow:   9999s;
+    --marquee-speed-medium: 9999s;
+    --marquee-speed-fast:   9999s;
+  }
+}
+
 /* ─── TYPOGRAPHY TOKENS: Figma-exact values ─── */
 /* Mobile (≤768px) */
 :root {

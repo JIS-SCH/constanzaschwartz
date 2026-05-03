@@ -3,20 +3,21 @@
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { PARALLAX } from '@/src/motion/tokens'
 
 gsap.registerPlugin(ScrollTrigger)
 
 interface UseParallaxOptions {
   speed?: number      // signed ratio, recommended range -1 to 1
   axis?: 'y' | 'x'
-  intensity?: number  // max displacement in px at speed=1 (default 60)
+  intensity?: number  // max displacement in px at speed=1
 }
 
 export function useParallax(
   innerRef: React.RefObject<HTMLElement | null>,
   options: UseParallaxOptions = {}
 ) {
-  const { speed = 0, axis = 'y', intensity = 350 } = options
+  const { speed = 0, axis = 'y', intensity = PARALLAX.intensity.desktop } = options
 
   useEffect(() => {
     const inner = innerRef.current

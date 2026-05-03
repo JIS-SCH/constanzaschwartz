@@ -2,15 +2,14 @@
 
 import { useRef } from 'react'
 import { useParallax } from '@/src/hooks/useParallax'
+import { PARALLAX } from '@/src/motion/tokens'
 
 interface ParallaxImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   speed?: number
   intensity?: number
 }
 
-const MOBILE_INTENSITY = 60
-
-export function PI({ speed = 0.5, intensity = MOBILE_INTENSITY, style, ...rest }: ParallaxImgProps) {
+export function PI({ speed = 0.5, intensity = PARALLAX.intensity.mobile, style, ...rest }: ParallaxImgProps) {
   const ref = useRef<HTMLImageElement>(null)
   useParallax(ref as React.RefObject<HTMLElement>, { speed, intensity })
   return (

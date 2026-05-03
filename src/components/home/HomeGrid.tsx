@@ -7,6 +7,7 @@ import { isMobile } from '@/src/utils/detect'
 import { setupResize } from '@/src/utils/resize'
 import type { ProjectMeta } from '@/src/projects/types'
 import type { OriginRect } from '@/src/contexts/TransitionContext'
+import { DURATION, EASE } from '@/src/motion/tokens'
 
 interface HomeGridProps {
   projects: ProjectMeta[]
@@ -297,7 +298,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       gsap.fromTo(
         containerRef.current,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+        { opacity: 1, y: 0, duration: DURATION.lg, ease: EASE.out }
       )
     }
 
@@ -315,8 +316,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     const targetZ = mobile ? MOBILE_BASE_Z : BASE_Z
     gsap.to(camera.position, {
       z: targetZ,
-      duration: 1,
-      ease: 'power2.out',
+      duration: DURATION.xl,
+      ease: EASE.out,
     })
 
     // ── Pointer / drag tracking ─────────────────────────────────────────────
@@ -382,13 +383,13 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     function applyHover(group: THREE.Group) {
       // Subtle premium hover: slight pop forward + slight lift + subtle scale
-      gsap.to(group.userData, { hoverZ: 0.5, hoverY: 0.3, duration: 0.4, ease: 'power2.out' })
-      gsap.to(group.scale, { x: 1.12, y: 1.12, z: 1.12, duration: 0.4, ease: 'power2.out' })
+      gsap.to(group.userData, { hoverZ: 0.5, hoverY: 0.3, duration: DURATION.sm, ease: EASE.out })
+      gsap.to(group.scale, { x: 1.12, y: 1.12, z: 1.12, duration: DURATION.sm, ease: EASE.out })
     }
 
     function removeHover(group: THREE.Group) {
-      gsap.to(group.userData, { hoverZ: 0, hoverY: 0, duration: 0.4, ease: 'power2.out' })
-      gsap.to(group.scale, { x: 1, y: 1, z: 1, duration: 0.4, ease: 'power2.out' })
+      gsap.to(group.userData, { hoverZ: 0, hoverY: 0, duration: DURATION.sm, ease: EASE.out })
+      gsap.to(group.scale, { x: 1, y: 1, z: 1, duration: DURATION.sm, ease: EASE.out })
     }
 
     // Desktop: mousemove hover check

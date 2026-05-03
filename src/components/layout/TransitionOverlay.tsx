@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import gsap from 'gsap'
 import { Flip } from 'gsap/Flip'
 import { useTransition } from '@/src/contexts/TransitionContext'
+import { DURATION, EASE } from '@/src/motion/tokens'
 
 export function TransitionOverlay() {
   const { state, setExpanded, setDone, setClosed, reset } = useTransition()
@@ -52,8 +53,8 @@ export function TransitionOverlay() {
     const ctx = gsap.context(() => {
       Flip.from(flipState, {
         targets: el,
-        duration: 0.7,
-        ease: 'expo.inOut',
+        duration: DURATION.lg,
+        ease: EASE.sharp,
         onComplete: () => {
           router.push(`/project/${state.slug}`)
           setExpanded()
@@ -93,21 +94,21 @@ export function TransitionOverlay() {
           top: targetRect.top,
           width: targetRect.width,
           height: targetRect.height,
-          duration: 0.8,
-          ease: 'power3.inOut',
+          duration: DURATION.lg,
+          ease: EASE.soft,
         }, 0)
 
         tl.to(overlay, {
           opacity: 0,
-          duration: 0.35,
-          ease: 'power2.out',
+          duration: DURATION.sm,
+          ease: EASE.out,
           onComplete: cleanup,
         })
       } else {
         gsap.to(overlay, {
           opacity: 0,
-          duration: 0.5,
-          ease: 'power2.out',
+          duration: DURATION.md,
+          ease: EASE.out,
           onComplete: cleanup,
         })
       }
@@ -134,8 +135,8 @@ export function TransitionOverlay() {
     const ctx = gsap.context(() => {
       gsap.to(overlay, {
         opacity: 1,
-        duration: 0.5,
-        ease: 'power2.inOut',
+        duration: DURATION.md,
+        ease: EASE.inOut,
         onComplete: () => {
           router.push('/')
           setClosed()
@@ -158,9 +159,9 @@ export function TransitionOverlay() {
     const ctx = gsap.context(() => {
       gsap.to(overlay, {
         opacity: 0,
-        duration: 0.6,
+        duration: DURATION.md,
         delay: 0.15,
-        ease: 'power2.out',
+        ease: EASE.out,
         onComplete: () => {
           gsap.set(overlay, { visibility: 'hidden', opacity: 1 })
           reset()

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { CloseIcon } from '@/src/components/icons/CloseIcon'
+import { DURATION, EASE } from '@/src/motion/tokens'
 
 interface ContactSectionProps {
   isOpen: boolean
@@ -18,14 +19,14 @@ export function ContactSection({ isOpen, onClose }: ContactSectionProps) {
 
     if (isOpen) {
       document.body.style.overflow = 'hidden'
-      gsap.to(overlayRef.current, { opacity: 1, visibility: 'visible', duration: 0.5, ease: 'power2.out' })
+      gsap.to(overlayRef.current, { opacity: 1, visibility: 'visible', duration: DURATION.md, ease: EASE.out })
       gsap.fromTo(contentRef.current,
         { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, delay: 0.2, ease: 'power3.out' }
+        { y: 0, opacity: 1, duration: DURATION.lg, delay: 0.2, ease: EASE.soft }
       )
     } else {
       document.body.style.overflow = ''
-      gsap.to(overlayRef.current, { opacity: 0, visibility: 'hidden', duration: 0.5, ease: 'power2.in' })
+      gsap.to(overlayRef.current, { opacity: 0, visibility: 'hidden', duration: DURATION.md, ease: 'power2.in' })
     }
   }, [isOpen])
 

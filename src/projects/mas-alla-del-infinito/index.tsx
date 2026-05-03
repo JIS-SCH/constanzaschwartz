@@ -8,6 +8,7 @@ import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
+import { MARQUEE } from '@/src/motion/tokens'
 import { ASSETS } from './assets'
 
 const IMG_HERO = ASSETS.hero
@@ -59,7 +60,7 @@ const CAROUSEL_2 = [
 // ---------------------------------------------------------------------------
 function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
-  const duration = images.length * 2.2
+  const duration = images.length * MARQUEE.durationPerImage
   return (
     <div className="w-full h-[var(--carousel-h)] overflow-hidden">
       <style dangerouslySetInnerHTML={{
@@ -660,7 +661,7 @@ export function Component() {
 
           {/* Marquee overlaying the images */}
           <div style={{ position: 'absolute', top: '370px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '22s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std", sans-serif',
@@ -731,7 +732,7 @@ export function Component() {
 
           {/* Marquee overlaying img7 */}
           <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '44px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '22s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std", sans-serif',
@@ -777,7 +778,7 @@ export function Component() {
           <img src={IMG_GIF2} alt="" loading="lazy" style={{ display: 'block', width: '300px', height: '233px', objectFit: 'cover', marginLeft: '40px', marginRight: '40px' }} />
           {/* Marquee 4 overlay */}
           <div style={{ position: 'absolute', top: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '22s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? </span></div>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? </span></div>
             </div>
@@ -824,7 +825,7 @@ export function Component() {
 
           {/* Marquee 5 overlay */}
           <div style={{ position: 'absolute', top: '360px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference', zIndex: 3 }}>
-            <div className="marquee-track" style={{ animationDuration: '22s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span></div>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span></div>
             </div>
@@ -868,7 +869,7 @@ export function Component() {
 
         {/* QUOTE MARQUEE */}
         <div style={{ marginTop: '40px', height: '40px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '22s' }}>
+          <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
             <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
             <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
           </div>

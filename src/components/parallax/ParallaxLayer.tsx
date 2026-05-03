@@ -3,6 +3,7 @@
 import { useRef, useMemo } from 'react'
 import { useParallax } from '@/src/hooks/useParallax'
 import { VideoPlayer } from '@/src/components/media/VideoPlayer'
+import { MARQUEE } from '@/src/motion/tokens'
 
 export type LayerType = 'image' | 'video' | 'text' | 'marquee' | 'credits'
 
@@ -66,21 +67,16 @@ interface ParallaxLayerProps {
   children?: React.ReactNode
 }
 
-// Number of text repetitions per set.
-// -50% moves exactly one set → seamless loop.
-// Each set must be wider than the viewport for the loop to be gap-free.
-const MARQUEE_SET_REPEAT = 4
-
 function MarqueeContent({ content, duration }: { content: string; duration: number }) {
   return (
     <div style={{ overflow: 'hidden', width: '100%' }}>
       <div
         className="marquee-track"
-        style={{ animationDuration: `${duration * MARQUEE_SET_REPEAT}s` }}
+        style={{ animationDuration: `${duration * MARQUEE.setRepeat}s` }}
       >
         {[0, 1].map((setIdx) => (
           <div key={setIdx} className="marquee-set">
-            {Array.from({ length: MARQUEE_SET_REPEAT }, (_, i) => (
+            {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
               <span key={i} className="marquee-item">{content}</span>
             ))}
           </div>
@@ -182,7 +178,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
           </div>
         )
       case 'marquee':
-        return <MarqueeContent content={layer.content} duration={layer.intensity ?? 22} />
+        return <MarqueeContent content={layer.content} duration={layer.intensity ?? MARQUEE.speed.medium} />
       case 'credits':
         return (
           <div

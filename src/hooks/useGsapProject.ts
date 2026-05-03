@@ -2,6 +2,7 @@
 
 import { useRef, useCallback } from 'react'
 import gsap from 'gsap'
+import { DURATION, EASE, STAGGER } from '@/src/motion/tokens'
 
 interface ProjectAnimationAPI {
   open: (rect: DOMRect, index: number) => void
@@ -99,8 +100,8 @@ export function useGsapProject(): ProjectAnimationAPI {
         // Overlay fade in
         tl.to(overlay, {
           opacity: 0.95,
-          duration: 0.5,
-          ease: 'power2.out',
+          duration: DURATION.md,
+          ease: EASE.out,
         })
 
         // Card expand to viewport
@@ -112,25 +113,25 @@ export function useGsapProject(): ProjectAnimationAPI {
             width: '100vw',
             height: '100vh',
             borderRadius: 0,
-            duration: 0.7,
-            ease: 'expo.inOut',
+            duration: DURATION.lg,
+            ease: EASE.sharp,
           },
           '<'
         )
 
         // Content fade in after card expansion
-        tl.to(content, { opacity: 1, duration: 0.3 })
+        tl.to(content, { opacity: 1, duration: DURATION.sm })
 
         // Title words stagger
         tl.fromTo(
           '.project-title-word',
           { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, stagger: 0.08, duration: 0.4, ease: 'power2.out' },
+          { opacity: 1, y: 0, stagger: STAGGER.md, duration: DURATION.sm, ease: EASE.out },
           '-=0.1'
         )
 
         // Close button
-        tl.to(closeBtn, { opacity: 1, duration: 0.3 }, '-=0.2')
+        tl.to(closeBtn, { opacity: 1, duration: DURATION.sm }, '-=0.2')
       })
 
       ctxRef.current = ctx
@@ -157,7 +158,7 @@ export function useGsapProject(): ProjectAnimationAPI {
 
       // Fade out content
       if (content) {
-        tl.to(content, { opacity: 0, duration: 0.2 })
+        tl.to(content, { opacity: 0, duration: DURATION.xs })
       }
 
       // Reverse card to saved rect
@@ -167,12 +168,12 @@ export function useGsapProject(): ProjectAnimationAPI {
         width: rect.width,
         height: rect.height,
         borderRadius: 2,
-        duration: 0.7,
-        ease: 'expo.inOut',
+        duration: DURATION.lg,
+        ease: EASE.sharp,
       })
 
       // Fade out overlay
-      tl.to(overlay, { opacity: 0, duration: 0.4 }, '-=0.4')
+      tl.to(overlay, { opacity: 0, duration: DURATION.sm }, '-=0.4')
     })
 
     ctxRef.current = ctx

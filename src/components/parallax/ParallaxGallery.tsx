@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { getLenis } from '@/src/scroll/lenis'
 import type { GalleryImage } from '@/src/types/parallax'
+import { PARALLAX } from '@/src/motion/tokens'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -19,12 +20,6 @@ const SIZE_MAP = {
   sm: 220,
   md: 320,
   lg: 450,
-} as const
-
-const Y_AMOUNT = {
-  left: 40,
-  center: 60,
-  right: 80,
 } as const
 
 // Base X position per column (in %)
@@ -77,7 +72,7 @@ export function ParallaxGallery({ images }: ParallaxGalleryProps) {
     () => {
       imageRefs.current.forEach((el, i) => {
         if (!el || !images[i]) return
-        const yAmount = Y_AMOUNT[images[i].position]
+        const yAmount = PARALLAX.gallery[images[i].position]
 
         gsap.fromTo(
           el,

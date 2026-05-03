@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import gsap from 'gsap'
 import { cldImg } from '@/src/utils/cloudinary'
+import { DURATION, EASE, STAGGER } from '@/src/motion/tokens'
 
 const PROJECT_ROWS = [
   [
@@ -57,12 +58,12 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
         .fromTo(
           overlay,
           { clipPath: 'inset(100% 0 0 0)' },
-          { clipPath: 'inset(0% 0 0 0)', duration: 0.6, ease: 'power3.inOut' }
+          { clipPath: 'inset(0% 0 0 0)', duration: DURATION.md, ease: EASE.soft }
         )
         .fromTo(
           wrappers,
           { yPercent: 110 },
-          { yPercent: 0, duration: 0.9, stagger: 0.12, ease: 'power2.out' },
+          { yPercent: 0, duration: DURATION.xl, stagger: STAGGER.lg, ease: EASE.out },
           '-=0.2'
         )
     } else {
@@ -75,13 +76,13 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
       tlRef.current
         .to(wrappers, {
           yPercent: -110,
-          duration: 0.6,
-          stagger: 0.06,
+          duration: DURATION.md,
+          stagger: STAGGER.sm,
           ease: 'power2.in',
         })
         .to(
           overlay,
-          { clipPath: 'inset(0% 0 100% 0)', duration: 0.5, ease: 'power3.inOut' },
+          { clipPath: 'inset(0% 0 100% 0)', duration: DURATION.md, ease: EASE.soft },
           '-=0.3'
         )
     }
