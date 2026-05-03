@@ -33,12 +33,12 @@ const CARD_BASE_Z = -65                      // Original arc distance
 // • Radius = 10 (camera -24, base -34) so adjacent cards stay in front
 // • Near-square cards (4:5 aspect) to fill portrait viewport
 // • FOV=80° vertical gives ~42° horizontal at portrait aspect
-const MOBILE_CARD_W = 5
-const MOBILE_CARD_H = 5  // portrait-ish aspect, fills ~35% of viewport height
-const MOBILE_REFLECTION_H = 1.5
-const MOBILE_CARD_SPACING = 6   // adjacent shows ~25% of card
-const MOBILE_CARD_BASE_Z = -34    // radius = 10 from camera
-const MOBILE_BASE_Z = -20
+const MOBILE_CARD_W = 10
+const MOBILE_CARD_H = 5
+const MOBILE_REFLECTION_H = 1.2
+const MOBILE_CARD_SPACING = 11 // adjusted for wider cards
+const MOBILE_CARD_BASE_Z = -34    // radius = 14 from camera
+const MOBILE_BASE_Z = -15
 
 function getTitle(index: number): string {
   return `Project ${String(index + 1).padStart(2, '0')}`
@@ -350,7 +350,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       if (Math.abs(dx) > DRAG_TAP_THRESHOLD || Math.abs(dy) > DRAG_TAP_THRESHOLD) {
         didDrag = true
       }
-      const rawRot = dragStart.rot - (dx / window.innerWidth) * DRAG_ROTATION_RANGE * 2
+      const rawRot = dragStart.rot + (dx / window.innerWidth) * DRAG_ROTATION_RANGE * 2
       cameraTargetRotY = THREE.MathUtils.clamp(rawRot, -rotationLimit, rotationLimit)
       pointer.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1
     }
