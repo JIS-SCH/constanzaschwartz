@@ -163,8 +163,8 @@ export function Component() {
         }
 
         /* Global fixes */
+        .dw-container { isolation: isolate; }
         .dw-container section { isolation: auto !important; }
-        .marquee-track { mix-blend-mode: difference !important; }
 
         .dw-desktop { display: block; }
         .dw-mobile  { display: none; }
@@ -270,11 +270,17 @@ export function Component() {
             layer={{ type: 'image', src: ASSETS.img4, speed: 0 }}
             position={{ top: '535px', left: '34.7%', width: '457px', height: '700px', zIndex: 1 }}
           />
-          <ParallaxLayer
-            sectionId="collage-2" layerIndex={2}
-            layer={{ type: 'marquee', content: 'UN GRUPO DE FANTASMAS (LOS SENTIDOS) DIRIGEN TODA NUESTRA VIDA Y DESDE YA NUESTRA CONEXIÓN CON EL ARTE, EL DISEÑO.', speed: 0, intensity: 22 }}
-            position={{ top: '1145px', left: '0', width: '100%', height: '8vh', zIndex: 3 }}
-          />
+          <div style={{ position: 'absolute', top: '1145px', left: 0, width: '100%', height: '8vh', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item">UN GRUPO DE FANTASMAS (LOS SENTIDOS) DIRIGEN TODA NUESTRA VIDA Y DESDE YA NUESTRA CONEXIÓN CON EL ARTE, EL DISEÑO.</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </ParallaxSection>
 
         {/* 6. PARAGRAPHS + CAROUSEL */}
@@ -336,11 +342,17 @@ export function Component() {
 
         {/* 8. COLLAGE-3 + MARQUEE */}
         <ParallaxSection id="collage-3" style={{ minHeight: 'var(--h-c3)' }}>
-          <ParallaxLayer
-            sectionId="collage-3" layerIndex={0}
-            layer={{ type: 'marquee', content: 'ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.', speed: 0, intensity: 22 }}
-            position={{ top: '170px', left: '0', width: '100%', height: '8vh', zIndex: 4 }}
-          />
+          <div style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: '8vh', zIndex: 4, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item">ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
           <ParallaxLayer
             sectionId="collage-3" layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img6, speed: 0 }}

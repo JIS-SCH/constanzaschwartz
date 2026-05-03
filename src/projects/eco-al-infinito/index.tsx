@@ -29,7 +29,7 @@ export function Component() {
         .eco-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
         .eco-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
         .eco-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: var(--h4-ls); }
-        .eco-marquee { font-size: var(--h4-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: 0.72px; text-transform: uppercase; mix-blend-mode: difference; -webkit-mix-blend-mode: difference; transform: translateZ(0); leading-trim: both; text-edge: cap; }
+        .eco-marquee { font-size: var(--h4-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: 0.72px; text-transform: uppercase; color: #fff; leading-trim: both; text-edge: cap; }
         .eco-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
         .eco-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 200; letter-spacing: var(--p-ls); color: #fff; }
         .eco-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: var(--h5-ls); text-transform: uppercase; }
@@ -54,6 +54,14 @@ export function Component() {
         @media (max-width: 1023px) {
           .eco-desktop { display: none; }
           .eco-mobile  { display: block; }
+        }
+
+        .eco-container { isolation: isolate; }
+        .eco-container section { isolation: auto !important; }
+        .eco-container img { 
+          outline: 1px solid transparent;
+          backface-visibility: hidden;
+          transform: translateZ(0) scale(1.005);
         }
       `}} />
 
@@ -82,7 +90,9 @@ export function Component() {
             sectionId="hero"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'contain' }}
-            position={{ top: '80px', left: '4.17%', width: '91.66%', height: '80vh', zIndex: 1 }}
+            position={{
+              top: '80px', width: 'full', height: '648px', zIndex: 1
+            }}
           />
         </ParallaxSection>
 
@@ -93,7 +103,7 @@ export function Component() {
               <div key={setIdx} className="marquee-set">
                 {Array.from({ length: 4 }, (_, i) => (
                   <span key={i} className="marquee-item eco-marquee">
-                    ESCULTURA COLGANTE SITE-SPECIFIC.
+                    ESCULTURA COLGANTE SITE-SPECIFIC/
                   </span>
                 ))}
               </div>
@@ -108,7 +118,7 @@ export function Component() {
             sectionId="intro"
             layerIndex={0}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '15vh', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 3 }}
+            position={{ top: '21vh', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 3 }}
           >
             <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               <p style={{ marginBottom: '1.5rem' }}>
@@ -133,7 +143,7 @@ export function Component() {
             sectionId="intro"
             layerIndex={2}
             layer={{ type: 'image', src: ASSETS.img2, speed: 0.3 }}
-            position={{ top: '86vh', left: '54vh', width: '467px', height: '312px', zIndex: 1 }}
+            position={{ top: '80vh', left: '54vh', width: '467px', height: '312px', zIndex: 1 }}
           />
 
           {/* Right image (Img 3) */}
@@ -141,12 +151,12 @@ export function Component() {
             sectionId="intro"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img3, speed: 0.3 }}
-            position={{ top: '115vh', left: '50.7%', width: '588px', height: '392px', zIndex: 3 }}
+            position={{ top: '105vh', left: '770px', width: '588px', height: '392px', zIndex: 3 }}
           />
         </ParallaxSection>
 
         {/* 3. COLLAGE 1 + MARQUEE */}
-        <ParallaxSection id="collage-1" className="min-h-[130vh]">
+        <ParallaxSection id="collage-1" className="min-h-[130vh]" style={{ marginTop: '-4px' }}>
           {/* Tall portrait center */}
           <ParallaxLayer
             sectionId="collage-1"
@@ -156,30 +166,23 @@ export function Component() {
           />
 
           {/* Marquee overlay - H4 Helvetica Thin style */}
-          <ParallaxLayer
-            sectionId="collage-1"
-            layerIndex={1}
-            layer={{ type: 'marquee', content: 'Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.', speed: 0 }}
-            position={{ top: '27vh', left: '0', width: '100%', height: '50px', zIndex: 3 }}
-          >
-            <div className="overflow-hidden w-full" style={{ mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)' }}>
-              <div className="marquee-track" style={{ animationDuration: '32s' }}>
-                {[0, 1].map((setIdx) => (
-                  <div key={setIdx} className="marquee-set">
-                    {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} className="marquee-item eco-marquee">
-                        Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
-                      </span>
-                    ))}
-                  </div>
-                ))}
-              </div>
+          <div style={{ position: 'absolute', top: '27vh', left: 0, width: '100%', height: '50px', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item eco-marquee">
+                      Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
-          </ParallaxLayer>
+          </div>
         </ParallaxSection>
 
         {/* 4. TEXT + COLLAGE 2 — "Constanza Schwartz tampoco cede..." */}
-        <ParallaxSection id="text-collage-2" className="relative min-h-[140vh]">
+        <ParallaxSection id="text-collage-2" className="relative min-h-[140vh]" style={{ marginTop: '-92px' }}>
           {/* Left text */}
           <ParallaxLayer
             sectionId="text-collage-2"
@@ -210,13 +213,13 @@ export function Component() {
         </ParallaxSection>
 
         {/* 5. COLLAGE 3 + TEXT — "Al desplazarnos..." */}
-        <ParallaxSection id="collage-3" className="relative min-h-[2150px]">
+        <ParallaxSection id="collage-3" className="relative min-h-[2150px]" style={{ marginTop: '9px' }}>
           {/* Full-width Image 7 */}
           <ParallaxLayer
             sectionId="collage-3"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img7, speed: 0.3, objectFit: 'cover' }}
-            position={{ top: '222px', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+            position={{ top: '240px', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
           />
 
           {/* Staggered Image 8 */}
@@ -240,7 +243,7 @@ export function Component() {
             sectionId="collage-3"
             layerIndex={3}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '1985px', left: 'calc(8.33% + 10px)', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '2056px', left: 'calc(8.33% + 10px)', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div className="eco-p" style={{
               fontSize: '15px',
@@ -266,38 +269,40 @@ export function Component() {
             sectionId="collage-4"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img10, speed: 0.1, objectFit: 'cover' }}
-            position={{ top: '140px', left: '46.46%', width: '710px', height: '473px', zIndex: 1 }}
+            position={{ top: '218px', left: '46.46%', width: '710px', height: '473px', zIndex: 1 }}
           />
           {/* BIG Bottom Left Image (Img 11) - 710px width x 473px height */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img11, speed: 0.2, objectFit: 'cover' }}
-            position={{ top: '502px', left: '4.35%', width: '710px', height: '473px', zIndex: 2 }}
+            position={{ top: '580px', left: '4.35%', width: '710px', height: '473px', zIndex: 2 }}
           />
           {/* SMALL Top Right Image (Img 12) - 467px width x 312px height */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={2}
             layer={{ type: 'image', src: ASSETS.img12, speed: 0.1, objectFit: 'cover' }}
-            position={{ top: '1205px', left: '59.10%', width: '467px', height: '312px', zIndex: 4 }}
+            position={{ top: '1275px', left: '59.10%', width: '467px', height: '312px', zIndex: 4 }}
           />
           {/* SMALL Bottom Left Image (Img 13) - 467px width x 312px height */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img13, speed: 0.2, objectFit: 'cover' }}
-            position={{ top: '1418px', left: '33.82%', width: '467px', height: '312px', zIndex: 3 }}
+            position={{
+              top: '1488px', left: '33.82%', width: '467px', height: '312px', zIndex: 3,
+            }}
           />
         </ParallaxSection>
 
         {/* 7. VIDEO MAKING OFF (Full Width) */}
-        <ParallaxSection id="video-making-off" className="min-h-[110vh]">
+        <ParallaxSection id="video-making-off" style={{ minHeight: 'calc(100px + 56.25vw + 100px)' }}>
           <ParallaxLayer
             sectionId="video-making-off"
             layerIndex={0}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '22vh', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+            position={{ top: '222px', left: '0', width: '100%', height: '56.25vw', aspectRatio: '16/9', zIndex: 1 }}
           >
             <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
               <CustomVimeoPlayer
@@ -309,27 +314,27 @@ export function Component() {
         </ParallaxSection>
 
         {/* 8. COLLAGE STAIRCASE + PARAGRAPH + IMG 17 & 18 */}
-        <ParallaxSection id="collage-14-15-16" className="relative min-h-[2900px]">
+        <ParallaxSection id="collage-14-15-16" className="relative min-h-[2900px]" style={{ top: '5px' }}>
           {/* Staircase Image 14 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img14, speed: 0.1, objectFit: 'contain' }}
-            position={{ top: '220px', left: '61px', width: '345', height: '517px', zIndex: 2 }}
+            position={{ top: '220px', left: '61px', width: '345px', height: '517px', zIndex: 2 }}
           />
           {/* Staircase Image 15 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img15, speed: 0.1, objectFit: 'contain' }}
-            position={{ top: '360px', left: '547px', width: '345', height: '517px', zIndex: 2 }}
+            position={{ top: '360px', left: '547px', width: '345px', height: '517px', zIndex: 2 }}
           />
           {/* Staircase Image 16 - 467x312 */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={2}
             layer={{ type: 'image', src: ASSETS.img16, speed: 0.1, objectFit: 'contain' }}
-            position={{ top: '553px', left: '1033px', width: '345', height: '517px', zIndex: 2 }}
+            position={{ top: '553px', left: '1033px', width: '345px', height: '517px', zIndex: 2 }}
           />
 
           {/* Paragraph below staircase */}
@@ -337,7 +342,7 @@ export function Component() {
             sectionId="collage-14-15-16"
             layerIndex={3}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '1300px', left: 'calc(8.33% + 3px)', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '1286px', left: 'calc(8.33% + 3px)', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
@@ -349,7 +354,7 @@ export function Component() {
             sectionId="collage-14-15-16"
             layerIndex={4}
             layer={{ type: 'image', src: ASSETS.img17, speed: 0.1, objectFit: 'cover' }}
-            position={{ top: '1719px', left: '21.11%', width: '467px', height: '700px', zIndex: 3 }}
+            position={{ top: '1696px', left: '21.11%', width: '467px', height: '700px', zIndex: 3 }}
           />
 
           {/* Img 18 (Red Triangles) - 467x312 */}
@@ -361,32 +366,25 @@ export function Component() {
           />
 
           {/* Marquee Text ON TOP of Img 17 and 18 */}
-          <ParallaxLayer
-            sectionId="collage-14-15-16"
-            layerIndex={6}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '2765px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
-          >
-            <div style={{ mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', padding: '0', overflow: 'hidden' }}>
-              <div className="marquee-track" style={{ animationDuration: '32s' }}>
-                {[0, 1].map((setIdx) => (
-                  <div key={setIdx} className="marquee-set">
-                    {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} className="marquee-item eco-marquee">
-                        SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·
-                      </span>
-                    ))}
-                  </div>
-                ))}
-              </div>
+          <div style={{ position: 'absolute', top: '2765px', left: 0, width: '100%', zIndex: 5, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item eco-marquee">
+                      SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
-          </ParallaxLayer>
+          </div>
         </ParallaxSection>
 
 
 
         {/* 10. FINAL FULL IMAGE (19) */}
-        <ParallaxSection id="final-image-19" className="min-h-[calc(66.6vw+440px)]">
+        <ParallaxSection id="final-image-19" className="min-h-[calc(66.6vw+440px)]" style={{ top: '8px' }}>
           <ParallaxLayer
             sectionId="final-image-19"
             layerIndex={0}
@@ -419,7 +417,7 @@ export function Component() {
             sectionId="final-sequence"
             layerIndex={2}
             layer={{ type: 'image', src: ASSETS.img22, speed: 0.15 }}
-            position={{ top: '1160px', left: '8.62%', width: '831px', height: '554px', zIndex: 2 }}
+            position={{ top: '1155px', left: '8.62%', width: '831px', height: '554px', zIndex: 2 }}
           />
 
           {/* Concluding Paragraph on the Right */}
@@ -427,7 +425,7 @@ export function Component() {
             sectionId="final-sequence"
             layerIndex={3}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '1940px', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 2 }}
+            position={{ top: '1925px', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
               Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo.
@@ -441,13 +439,11 @@ export function Component() {
               Es nuestro universo…
             </div>
           </ParallaxLayer>
-
-          {/* Img 23 (Left) */}
           <ParallaxLayer
             sectionId="final-sequence"
             layerIndex={4}
             layer={{ type: 'image', src: ASSETS.img23, speed: 0.1, objectFit: 'cover' }}
-            position={{ top: '2499px', left: '8.47%', width: '467px', height: '700px', zIndex: 2 }}
+            position={{ top: '2473px', left: '8.47%', width: '467px', height: '700px', zIndex: 2 }}
           />
 
           {/* Img 24 (Right, overlapping 23) */}
@@ -455,34 +451,27 @@ export function Component() {
             sectionId="final-sequence"
             layerIndex={5}
             layer={{ type: 'image', src: ASSETS.img24, speed: 0.15, objectFit: 'cover' }}
-            position={{ top: '2968px', left: '33.82%', width: '470px', height: '700px', zIndex: 3 }}
+            position={{ top: '2962px', left: '33.82%', width: '470px', height: '700px', zIndex: 3 }}
           />
 
           {/* Marquee Text ON TOP of Img 23 and 24 */}
-          <ParallaxLayer
-            sectionId="final-sequence"
-            layerIndex={6}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '2724px', left: '0', width: '100%', height: 'auto', zIndex: 5 }}
-          >
-            <div style={{ mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', padding: '0', overflow: 'hidden' }}>
-              <div className="marquee-track" style={{ animationDuration: '32s' }}>
-                {[0, 1].map((setIdx) => (
-                  <div key={setIdx} className="marquee-set">
-                    {Array.from({ length: 4 }, (_, i) => (
-                      <span key={i} className="marquee-item eco-marquee">
-                        SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ ·
-                      </span>
-                    ))}
-                  </div>
-                ))}
-              </div>
+          <div style={{ position: 'absolute', top: '2695px', left: 0, width: '100%', zIndex: 5, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item eco-marquee">
+                      SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ ·
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
-          </ParallaxLayer>
+          </div>
 
         </ParallaxSection>
         {/* 13. IMAGE 25 (Full Width) + COLLAGE 26-27 */}
-        <ParallaxSection id="final-sequence-25-29" className="relative min-h-[4220px]">
+        <ParallaxSection id="final-sequence-25-29" className="relative min-h-[4220px]" style={{ top: '9px' }}>
           <ParallaxLayer
             sectionId="final-sequence-25-29"
             layerIndex={0}
@@ -495,13 +484,13 @@ export function Component() {
             sectionId="final-sequence-25-29"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img26, speed: 0.3, objectFit: 'cover' }}
-            position={{ top: '1441px', left: '34.02%', width: '467px', height: '311px', zIndex: 3 }}
+            position={{ top: '1411px', left: '34.02%', width: '467px', height: '311px', zIndex: 3 }}
           />
           <ParallaxLayer
             sectionId="final-sequence-25-29"
             layerIndex={2}
             layer={{ type: 'image', src: ASSETS.img27, speed: 0.3, objectFit: 'cover' }}
-            position={{ top: '1620px', left: '59.3%', width: '466px', height: '699px', zIndex: 2 }}
+            position={{ top: '1590px', left: '59.3%', width: '466px', height: '699px', zIndex: 2 }}
           />
 
           {/* Photos 28 & 29 */}
@@ -509,13 +498,13 @@ export function Component() {
             sectionId="final-sequence-25-29"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img28, speed: 0.1, objectFit: 'cover' }}
-            position={{ top: '2563px', left: '8.47%', width: '467px', height: '311px', zIndex: 2 }}
+            position={{ top: '2515px', left: '8.47%', width: '467px', height: '311px', zIndex: 2 }}
           />
           <ParallaxLayer
             sectionId="final-sequence-25-29"
             layerIndex={4}
             layer={{ type: 'image', src: ASSETS.img29, speed: 0.2, objectFit: 'cover' }}
-            position={{ top: '2835px', left: '29.7%', width: '467px', height: '311px', zIndex: 3 }}
+            position={{ top: '2787px', left: '29.7%', width: '467px', height: '311px', zIndex: 3 }}
           />
 
           {/* Infinite Carousel - Integrated below 28/29 */}
@@ -523,7 +512,7 @@ export function Component() {
             sectionId="final-sequence-25-29"
             layerIndex={5}
             layer={{ type: 'image', src: '', speed: 0 }}
-            position={{ top: '3366px', left: '0', width: '100%', height: CH, zIndex: 2 }}
+            position={{ top: '3323px', left: '0', width: '100%', height: CH, zIndex: 2 }}
           >
             <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
               <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'eco-carousel-scroll 18s linear infinite' }}>
@@ -548,7 +537,7 @@ export function Component() {
             sectionId="final-sequence-25-29"
             layerIndex={6}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '3909px', left: 'calc(8% + 12px)', width: TW, height: 'auto', zIndex: 1 }}
+            position={{ top: '3861px', left: 'calc(8% + 12px)', width: TW, height: 'auto', zIndex: 1 }}
           >
             <div className="eco-p">
               Sí, claro. Todavía no conocemos muchos universos, pero puede ser que los haya.
@@ -561,7 +550,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 14. FINAL SEQUENCE 30-35 */}
-        <ParallaxSection id="final-sequence-30-35" className="relative min-h-[3691px]">
+        <ParallaxSection id="final-sequence-30-35" className="relative min-h-[3800px]" style={{ top: '-51px' }}>
           {/* Group 30-32 */}
           <ParallaxLayer
             sectionId="final-sequence-30-35"
@@ -579,15 +568,30 @@ export function Component() {
             sectionId="final-sequence-30-35"
             layerIndex={2}
             layer={{ type: 'image', src: ASSETS.img32, speed: 0.1, objectFit: 'cover' }}
-            position={{ top: '859px', left: '126px', width: '345px', height: '517px', zIndex: 3 }}
+            position={{ top: '871px', left: '126px', width: '345px', height: '517px', zIndex: 3 }}
           />
+
+          {/* Marquee Text ON TOP of Img 32 */}
+          <div style={{ position: 'absolute', top: '962px', left: 0, width: '100%', zIndex: 5, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item eco-marquee">
+                      SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER  ·
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Group 33 (Now sitting in the same coordinate system) */}
           <ParallaxLayer
             sectionId="final-sequence-30-35"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img33, speed: 0.2, objectFit: 'cover' }}
-            position={{ top: '1268px', left: '29.82%', width: '467px', height: '312px', zIndex: 2 }}
+            position={{ top: '1280px', left: '29.82%', width: '467px', height: '312px', zIndex: 2 }}
           />
 
 
@@ -596,7 +600,7 @@ export function Component() {
             sectionId="final-sequence-30-35"
             layerIndex={4}
             layer={{ type: 'text', content: '', speed: 0.1 }}
-            position={{ top: '1800px', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
+            position={{ top: '1812px', left: '0', width: '100%', height: '56.25vw', aspectRatio: '16/9', zIndex: 1 }}
           >
             <div className="vimeo-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
               <CustomVimeoPlayer
@@ -611,18 +615,18 @@ export function Component() {
             sectionId="final-sequence-30-35"
             layerIndex={5}
             layer={{ type: 'image', src: ASSETS.img34, speed: 0.15, objectFit: 'cover' }}
-            position={{ top: '2790px', left: '8.47%', width: '467px', height: '700px', zIndex: 2 }}
+            position={{ top: '2842px', left: '8.47%', width: '467px', height: '700px', zIndex: 2 }}
           />
           <ParallaxLayer
             sectionId="final-sequence-30-35"
             layerIndex={6}
             layer={{ type: 'image', src: ASSETS.img35, speed: 0.2, objectFit: 'cover' }}
-            position={{ top: '3380px', left: '33.4%', width: '467px', height: '311px', zIndex: 3 }}
+            position={{ top: '3432px', left: '33.4%', width: '467px', height: '311px', zIndex: 3 }}
           />
         </ParallaxSection>
 
         {/* 18. CAROUSEL 2 (carousel6-10) */}
-        <ParallaxSection id="carousel-section-2" className="min-h-[771px]">
+        <ParallaxSection id="carousel-section-2" className="min-h-[771px]" style={{ top: '-98px' }}>
           <ParallaxLayer
             sectionId="carousel-section-2"
             layerIndex={0}
@@ -649,7 +653,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 19. FINAL COLLAGE 36-37 */}
-        <ParallaxSection id="collage-36-37" className="min-h-[130vh]">
+        <ParallaxSection id="collage-36-37" className="min-h-[130vh]" style={{ top: '-98px' }}>
           <ParallaxLayer
             sectionId="collage-36-37"
             layerIndex={0}
@@ -660,12 +664,12 @@ export function Component() {
             sectionId="collage-36-37"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img37, speed: 0.3 }}
-            position={{ top: '56vh', left: '610px', width: TW, height: '311px', zIndex: 1 }}
+            position={{ top: '49vh', left: '610px', width: TW, height: '311px', zIndex: 1 }}
           />
         </ParallaxSection>
 
         {/* 20. FINAL FULL IMAGE (38) */}
-        <ParallaxSection id="final-image-38" className="min-h-[120vh] -mt-[100px]">
+        <ParallaxSection id="final-image-38" className="min-h-[120vh]" style={{ top: '-230px' }} >
           <ParallaxLayer
             sectionId="final-image-38"
             layerIndex={0}
@@ -675,20 +679,20 @@ export function Component() {
         </ParallaxSection>
 
         {/* 21. LYRICS SECTION (Sound of Silence) — Figma 1571:1033..1038 + 1867:1262 */}
-        <ParallaxSection id="lyrics-section" className="bg-obsidian min-h-[1050px]">
+        <ParallaxSection id="lyrics-section" className="bg-obsidian min-h-[858px]" style={{ top: '-152px' }}>
           {/* Lyrics */}
           <ParallaxLayer
             sectionId="lyrics-section"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: 0 }}
+            layer={{ type: 'text', content: '', speed: 0, className: 'blend-difference' }}
             position={{ top: '110px', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
           >
             <div className="eco-h4 text-white uppercase tracking-[0.72px] leading-none">
-              <div style={{ marginLeft: 'calc(37.5% + 22px)', marginBottom: '70px' }}>BECAUSE A VISION SOFTLY CREEPING</div>
-              <div style={{ marginLeft: 'calc(4.17% + 1px)', marginBottom: '70px' }}>LEFT ITS SEEDS WHILE I WAS SLEEPING</div>
-              <div style={{ marginLeft: 'calc(41.67% + 8px)', marginBottom: '70px' }}>AND THE VISION THAT WAS PLANTED IN MY BRAIN</div>
+              <div style={{ marginLeft: '562px', marginBottom: '70px' }}>BECAUSE A VISION SOFTLY CREEPING</div>
+              <div style={{ marginLeft: '61px', marginBottom: '70px' }}>LEFT ITS SEEDS WHILE I WAS SLEEPING</div>
+              <div style={{ marginLeft: '600px', marginBottom: '70px' }}>AND THE VISION THAT WAS PLANTED IN MY BRAIN</div>
               <div style={{ marginLeft: 'calc(29.17% - 14px)', marginBottom: '70px' }}>STILL REMAINS</div>
-              <div style={{ marginLeft: '50%' }}>WITHIN THE SOUND OF SILENCE</div>
+              <div style={{ marginLeft: '720px' }}>WITHIN THE SOUND OF SILENCE</div>
             </div>
           </ParallaxLayer>
 
@@ -696,51 +700,39 @@ export function Component() {
           <ParallaxLayer
             sectionId="lyrics-section"
             layerIndex={1}
-            layer={{ type: 'text', content: '', speed: 0 }}
+            layer={{ type: 'text', content: '', speed: 0, className: 'blend-difference' }}
             position={{ top: '650px', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
           >
             <div className="text-right text-white font-light text-[var(--p-size)] leading-relaxed" style={{ paddingRight: '96px', paddingTop: '110px' }}>
               Simon &amp; Garfunkel · 1964
             </div>
           </ParallaxLayer>
-          <ParallaxLayer
-            sectionId="lyrics-section"
-            layerIndex={2}
-            layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ bottom: '22px', left: '0', width: '100%', height: 'auto', zIndex: 2 }}
-          >
-            <div style={{
-              color: '#fff',
-              width: '100%',
-              padding: '0 3px',
-              mixBlendMode: 'difference',
-              transform: 'translateZ(0)',
-              textAlign: 'left'
-            }}>
-              <p style={{ fontSize: '14px', lineHeight: '1.6', width: '100%', maxWidth: 'none', display: 'block', textTransform: 'uppercase', fontFamily: '"Helvetica Neue LT Std", sans-serif', fontWeight: 100 }}>
-                <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
-                <span style={{ fontWeight: 700 }}>Realización: </span>
-                <span>Gastón Aliaga (INDIGO Lumieres) y Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>Instalación: </span>
-                <span>Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>Acompañamiento Curatorial: </span>
-                <span>Facundo López &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>Dirección Audiovisual: </span>
-                <span>Martín Rois &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>Composición Musical: </span>
-                <span>Francisco Rousset Osio &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>Registro Fotográfico: </span>
-                <span>Bianca Siffredi &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>2do en Cámara: </span>
-                <span>Felipe Malatesta &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado: </span>
-                <span>Francisca Gil Sosa &nbsp;/&nbsp;</span>
-                <span style={{ fontWeight: 700 }}>Colaboración Integral Post-Montaje: </span>
-                <span>Juan Ignacio Scheller</span>
-              </p>
-            </div>
-          </ParallaxLayer>
         </ParallaxSection>
+
+        {/* Credits — pinned to the very bottom of the project */}
+        <div style={{ padding: '0 3px 22px', backgroundColor: '#0F0F0F' }}>
+          <p style={{ fontSize: '14px', lineHeight: '1.6', width: '100%', maxWidth: 'none', display: 'block', textTransform: 'uppercase', fontFamily: '"Helvetica Neue LT Std", sans-serif', fontWeight: 100, color: '#fff', margin: 0 }}>
+            <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
+            <span style={{ fontWeight: 700 }}>Realización: </span>
+            <span>Gastón Aliaga (INDIGO Lumieres) y Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Instalación: </span>
+            <span>Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Acompañamiento Curatorial: </span>
+            <span>Facundo López &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Dirección Audiovisual: </span>
+            <span>Martín Rois &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Composición Musical: </span>
+            <span>Francisco Rousset Osio &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Registro Fotográfico: </span>
+            <span>Bianca Siffredi &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>2do en Cámara: </span>
+            <span>Felipe Malatesta &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado: </span>
+            <span>Francisca Gil Sosa &nbsp;/&nbsp;</span>
+            <span style={{ fontWeight: 700 }}>Colaboración Integral Post-Montaje: </span>
+            <span>Juan Ignacio Scheller</span>
+          </p>
+        </div>
       </div>{/* /eco-desktop */}
 
       {/* ── ECO MOBILE ───────────────────────────────────────────────── */}
@@ -768,7 +760,7 @@ export function Component() {
         <div style={{ position: 'relative', width: '100%', height: '525px', marginTop: '46px' }}>
           <img src={ASSETS.img4} alt="" style={{ display: 'block', width: '350px', height: '100%', objectFit: 'cover', margin: '0 auto' }} />
 
-          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)' }}>
+          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10 }}>
             <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
@@ -828,7 +820,7 @@ export function Component() {
         </div>
 
         {/* Video Making Off - Mobile */}
-        <div style={{ position: 'relative', width: '100%', height: '219px', marginTop: '74px', backgroundColor: '#000' }}>
+        <div style={{ position: 'relative', width: '100%', height: '56.25vw', marginTop: '74px', backgroundColor: '#000' }}>
           <div className="vimeo-container" style={{ position: 'absolute', inset: 0 }}>
             <CustomVimeoPlayer
               videoUrl={ASSETS.videoMakingOff}
@@ -856,7 +848,7 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', marginTop: '5px', height: '30px', overflow: 'hidden' }}>
+        <div className="blend-difference" style={{ position: 'relative', zIndex: 5, marginTop: '40px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '24s' }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
@@ -887,7 +879,7 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden' }}>
+        <div style={{ position: 'relative', zIndex: 5, marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '28s' }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
@@ -962,15 +954,15 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, mixBlendMode: 'difference', isolation: 'isolate', transform: 'translateZ(0)', marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden' }}>
+        <div className="blend-difference" style={{ position: 'relative', zIndex: 5, marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden' }}>
           <div className="marquee-track" style={{ animationDuration: '26s' }}>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER.</span></div>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER.</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
           </div>
         </div>
 
         {/* Video timelapse - Mobile */}
-        <div style={{ position: 'relative', width: '100%', height: '219px', marginTop: '80px', backgroundColor: '#000' }}>
+        <div style={{ position: 'relative', width: '100%', height: '56.25vw', marginTop: '80px', backgroundColor: '#000' }}>
           <div className="vimeo-container" style={{ position: 'absolute', inset: 0 }}>
             <CustomVimeoPlayer
               videoUrl={ASSETS.videoTimelapse}
@@ -1050,7 +1042,6 @@ export function Component() {
             fontSize: '12px',
             lineHeight: '1.6',
             mixBlendMode: 'difference',
-            transform: 'translateZ(0)',
             textTransform: 'uppercase'
           }}>
             <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;

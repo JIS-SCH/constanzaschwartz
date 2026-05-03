@@ -134,12 +134,6 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     height: '100%',
   }
 
-  // Blend mode for text/marquee/credits layers
-  if (layer.type === 'text' || layer.type === 'marquee' || layer.type === 'credits') {
-    innerStyle.mixBlendMode = 'difference'
-    innerStyle.transform = 'translateZ(0)'
-  }
-
   const renderedContent = useMemo(() => {
     switch (layer.type) {
       case 'image':
@@ -182,8 +176,6 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               fontSize: 'clamp(1rem, 2.5vw, 3rem)',
               display: 'flex',
               alignItems: 'center',
-              mixBlendMode: 'difference',
-              transform: 'translateZ(0)',
             }}
           >
             {layer.content}
@@ -201,8 +193,6 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
               fontSize: 'clamp(14px, 1.4vw, 20px)',
               lineHeight: 1.8,
               boxSizing: 'border-box',
-              mixBlendMode: 'difference',
-              transform: 'translateZ(0)',
             }}
           >
             {layer.credits.map((entry, i) => (

@@ -42,26 +42,44 @@ export function Component() {
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mutek-container -mt-20">
       <style dangerouslySetInnerHTML={{
         __html: `
-        /* MUTEK overrides - use global tokens from globals.css */
+        /* MUTEK overrides - precise client specs (no clamps) */
+        .mutek-h1, .mutek-h2, .mutek-h3 { font-family: 'Helvetica Neue LT Std', sans-serif; font-weight: 100; text-transform: uppercase; }
+        .mutek-h1 { font-size: var(--h1-size); line-height: 1; letter-spacing: 0; }
+        .mutek-h2 { font-size: var(--h2-size); line-height: 1; letter-spacing: 0; }
+        .mutek-h3 { font-size: var(--h3-size); line-height: 1; letter-spacing: 0; }
+        .mutek-h4 { font-size: var(--h4-size); line-height: normal; font-family: 'Helvetica Neue LT Std', sans-serif; font-weight: 250; letter-spacing: 0.02em; text-transform: uppercase; }
+        
+        .mutek-list { font-family: 'Helvetica Neue LT Std', sans-serif; font-weight: 300; font-size: var(--list-size); line-height: 1.21; letter-spacing: 0; }
+        .mutek-p { font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: var(--p-size); line-height: 1.5; letter-spacing: 0; }
+        .mutek-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', sans-serif; font-weight: 100; line-height: 1; letter-spacing: 0; }
 
-        .mutek-h1, .mutek-h2, .mutek-h3 { font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; }
-        .mutek-h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
-        .mutek-h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
-        .mutek-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
-        .mutek-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: var(--h4-ls); }
-        .mutek-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
-        .mutek-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 200; letter-spacing: var(--p-ls); }
-        .mutek-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: var(--h5-ls); }
+        .mutek-container .marquee-item {
+          font-family: 'Helvetica Neue LT Std', sans-serif !important;
+          font-weight: 250 !important;
+          text-transform: uppercase;
+          padding-right: 80px !important;
+          white-space: nowrap;
+          leading-trim: both;
+          text-edge: cap;
+        }
 
-        /* Marquee gap fix: designer requested 80px between phrases on desktop */
-        .mutek-container .marquee-item { padding-right: 80px !important; }
+        .mutek-container img {
+          /* Fix for sub-pixel white borders in Chrome/Safari */
+          outline: 1px solid transparent;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transform: translateZ(0) scale(1.005);
+          display: block;
+          background-color: transparent !important;
+          border: none !important;
+        }
 
-        /* Marquees over imagery use difference blend like the navbar */
-        .mutek-marquee-blend {
-          mix-blend-mode: difference;
-          -webkit-mix-blend-mode: difference;
-          transform: translateZ(0);
+        .mutek-container {
           isolation: isolate;
+        }
+
+        .mutek-container section {
+          isolation: auto !important;
         }
 
         .mutek-desktop { display: block; }
@@ -69,8 +87,12 @@ export function Component() {
         @media (max-width: 1023px) {
           .mutek-desktop { display: none; }
           .mutek-mobile  { display: block; }
-          /* Mobile marquee gap = 40px per Figma annotation */
-          .mutek-container .marquee-item { padding-right: 40px !important; padding-left: 0 !important; }
+          .mutek-container .marquee-item {
+            padding-right: 40px !important;
+            font-size: 28px !important;
+          }
+          .mutek-list { line-height: 1.15; }
+          .mutek-p { line-height: 1.45; }
         }
 
         /* Carousel — seamless loop */
@@ -182,12 +204,17 @@ export function Component() {
           />
 
           {/* Marquee — difference blend */}
-          <ParallaxLayer
-            sectionId="marquee-1"
-            layerIndex={2}
-            layer={{ type: 'marquee', content: 'COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE, ENVUELTA EN PROYECCIONES TRASLÚCIDAS DE LUZ.', speed: 0, className: 'mutek-marquee-blend' }}
-            position={{ top: '742px', left: '0', width: '100%', height: '80px', zIndex: 2 }}
-          />
+          <div style={{ position: 'absolute', top: '742px', left: 0, width: '100%', height: '80px', zIndex: 2, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item mutek-h4">COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE, ENVUELTA EN PROYECCIONES TRASLÚCIDAS DE LUZ.</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Image 345 — Front layer overlapping marquee and img3 */}
           <ParallaxLayer
@@ -274,13 +301,18 @@ export function Component() {
             </div>
           </ParallaxLayer>
 
-          {/* Marquee (Middle) — difference blend via ParallaxLayer */}
-          <ParallaxLayer
-            sectionId="marquee-2"
-            layerIndex={2}
-            layer={{ type: 'marquee', content: 'EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO. ', intensity: 22, speed: 0, className: 'mutek-h4 mutek-marquee-blend' }}
-            position={{ top: '579px', left: '0', width: '100%', height: '80px', zIndex: 3 }}
-          />
+          {/* Marquee (Middle) — difference blend */}
+          <div style={{ position: 'absolute', top: '579px', left: 0, width: '100%', height: '80px', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item mutek-h4">EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO.</span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Image 9 (Back) — 467 wide, left: 487px */}
           <ParallaxLayer
@@ -363,7 +395,7 @@ export function Component() {
           {/* 13. FINAL TITLE — Positioned over the carousel */}
           <div style={{ position: 'absolute', bottom: '-95px', left: 0, width: '100%', zIndex: 10, pointerEvents: 'none' }}>
             <div className="pr-[46.5%] w-full">
-              <h2 style={{ ...TITLE_STYLE, lineHeight: 1.1, marginLeft: '600px' }} className="mutek-h3">
+              <h2 style={{ ...TITLE_STYLE, marginLeft: '600px' }} className="mutek-h3">
                 Y AÚN APAGADA,<br />
                 ESPERA, AL PRÓXIMO RITUAL.
               </h2>
@@ -381,7 +413,7 @@ export function Component() {
         </div>
 
         {/* 2. Intro para */}
-        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+        <div className="mutek-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px' }}>
           En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
         </div>
 
@@ -407,7 +439,7 @@ export function Component() {
             Ritual al Vacío
           </h3>
           <PI speed={0.25} src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
-          <div style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10, fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          <div className="mutek-p" style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10 }}>
             Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
           </div>
         </div>
@@ -436,21 +468,15 @@ export function Component() {
           <PI speed={0.25} src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
 
           {/* Marquee 1 — overlaps bottom of Still18 */}
-          <div className="mutek-marquee-blend" style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: '20s' }}>
               <div className="marquee-set">
-                <span className="marquee-item" style={{
-                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 250, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
-                } as any}>
+                <span className="marquee-item">
                   Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
                 </span>
               </div>
               <div className="marquee-set">
-                <span className="marquee-item" style={{
-                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 250, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
-                } as any}>
+                <span className="marquee-item">
                   Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
                 </span>
               </div>
@@ -495,21 +521,15 @@ export function Component() {
           <PI speed={0.2} src={ASSETS.img8} alt="" style={{ position: 'absolute', right: '20px', top: 0, width: '200px', height: '300px', objectFit: 'cover', zIndex: 3 }} />
 
           {/* Marquee 2 — centered overlap between img8 and img9 */}
-          <div className="mutek-marquee-blend" style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 2 }}>
+          <div style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 2, mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set">
-                <span className="marquee-item" style={{
-                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 250, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
-                } as any}>
+                <span className="marquee-item">
                   El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
                 </span>
               </div>
               <div className="marquee-set">
-                <span className="marquee-item" style={{
-                  fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-                  fontWeight: 250, fontSize: '28px', letterSpacing: '0.56px', textTransform: 'uppercase', color: '#fff', leadingTrim: 'both', textEdge: 'cap',
-                } as any}>
+                <span className="marquee-item">
                   El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
                 </span>
               </div>
@@ -557,11 +577,7 @@ export function Component() {
 
           {/* 17. Closing title — Absolute positioned over carousel */}
           <div style={{ position: 'absolute', top: '307px', left: '0', paddingLeft: '80px', zIndex: 10, pointerEvents: 'none' }}>
-            <div style={{
-              fontFamily: '"Helvetica Neue LT Std","Helvetica Neue",Helvetica,sans-serif',
-              fontWeight: 100, fontSize: '28px', lineHeight: 'normal', color: '#fff',
-              textTransform: 'uppercase', letterSpacing: '0.56px',
-            }}>
+            <div className="mutek-h4" style={{ fontWeight: 100 }}>
               <div>Y aún apagada,</div>
               <div>espera,</div>
               <div>al próximo ritual.</div>

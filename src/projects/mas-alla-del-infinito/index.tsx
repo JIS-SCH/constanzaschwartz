@@ -1,10 +1,13 @@
 'use client'
 
+import { useEffect } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { getLenis } from '@/src/scroll/lenis'
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
-import { TW, CH } from '../shared'
 import { ASSETS } from './assets'
 
 const IMG_HERO = ASSETS.hero
@@ -14,13 +17,13 @@ const IMG_WEB009 = ASSETS.img2   // 710×473
 const IMG_FULL_1 = ASSETS.img3   // 1440×960  3:2
 const IMG_WEB008 = ASSETS.img4   // 345×517
 const IMG_WEB025 = ASSETS.img5   // 954×636   3:2
-const IMG_GIF1 = ASSETS.img6   // 467×311
+const IMG_GIF1 = 'https://res.cloudinary.com/dapjholek/image/upload/f_gif,q_auto/CONSTANZASCHWARTZ-projects-masalladelinfinito-6_h9gjd7'
 const IMG_WEB012 = ASSETS.img7   // 345×517
 const IMG_WEB011 = ASSETS.img8   // 345×517
 const IMG_WEB007 = ASSETS.img9   // 345×518
 const IMG_WEB005 = ASSETS.img10  // 467×700
 const IMG_WEB022 = ASSETS.img11  // 467×701
-const IMG_GIF2 = ASSETS.img12  // 954×636
+const IMG_GIF2 = 'https://res.cloudinary.com/dapjholek/image/upload/f_gif,q_auto/CONSTANZASCHWARTZ-projects-masalladelinfinito-12_kazkok'
 const IMG_WEB016 = ASSETS.img13  // 345×517
 const IMG_WEB017 = ASSETS.img14  // 294×441
 const IMG_WEB018 = ASSETS.img15  // 294×441
@@ -56,7 +59,7 @@ const CAROUSEL_2 = [
 // ---------------------------------------------------------------------------
 function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
-  const duration = images.length * 2.0
+  const duration = images.length * 2.2
   return (
     <div className="w-full h-[var(--carousel-h)] overflow-hidden">
       <style dangerouslySetInnerHTML={{
@@ -87,6 +90,20 @@ export { meta } from './meta'
 
 
 export function Component() {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    const lenis = getLenis()
+    if (lenis) {
+      lenis.on('scroll', ScrollTrigger.update)
+      gsap.ticker.lagSmoothing(0)
+    }
+    const t = setTimeout(() => ScrollTrigger.refresh(), 150)
+    return () => {
+      clearTimeout(t)
+      if (lenis) lenis.off('scroll', ScrollTrigger.update)
+    }
+  }, [])
+
   return (
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mal-container -mt-20">
       <style dangerouslySetInnerHTML={{
@@ -104,6 +121,7 @@ export function Component() {
           text-transform: uppercase;
           font-size: 36px;
           padding-top: 2px;
+          padding-right: 80px !important;
           letter-spacing: 0.72px;
           white-space: pre !important;
         }
@@ -122,9 +140,19 @@ export function Component() {
         }
 
         .mal-marquee-blend {
-          mix-blend-mode: difference;
-          -webkit-mix-blend-mode: difference;
-          transform: translateZ(0);
+          mix-blend-mode: difference !important;
+          -webkit-mix-blend-mode: difference !important;
+        }
+
+        .mal-container { isolation: isolate; }
+        .mal-container section { isolation: auto !important; }
+        
+        .mal-container img {
+          outline: 1px solid transparent;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transform: scale(1.005);
+          display: block;
         }
 
         .mal-h4 {
@@ -136,6 +164,12 @@ export function Component() {
           line-height: normal;
           letter-spacing: 0.72px;
           text-transform: uppercase;
+        }
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee-scroll linear infinite;
+          will-change: transform;
         }
         .mal-desktop {
           display: block;
@@ -151,13 +185,13 @@ export function Component() {
       <div className="mal-desktop">
 
         {/* 1. HERO ─────────────────────────────────────────────────────── */}
-        <ParallaxSection id="mal-hero" style={{ minHeight: '728px' }}>
+        <ParallaxSection id="mal-hero" style={{ minHeight: '748px' }}>
           <ParallaxLayer
-            layer={{ type: 'image', src: IMG_HERO, speed: 0.3, isHero: true, objectFit: 'cover', className: 'mal-hero-desktop' }}
-            position={{ top: '80px', left: '0', width: '100%', height: '648px', aspectRatio: '20/9', zIndex: 1 }}
+            layer={{ type: 'image', src: IMG_HERO, speed: 0.3, isHero: true, objectFit: 'contain', className: 'mal-hero-desktop' }}
+            position={{ top: '124px', left: '0', width: '100%', height: '648px', aspectRatio: '20/9', zIndex: 1 }}
           />
           <ParallaxLayer
-            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.3, isHero: true, objectFit: 'cover', className: 'mal-hero-mobile' }}
+            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.3, isHero: true, objectFit: 'contain', className: 'mal-hero-mobile' }}
             position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
           />
           <style dangerouslySetInnerHTML={{
@@ -596,7 +630,7 @@ export function Component() {
       </div>{/* /mal-desktop */}
 
       {/* ── MAS ALLA MOBILE ─────────────────────────────────────────────── */}
-      <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '40px' }}>
+      <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'visible', paddingBottom: '40px' }}>
 
         {/* HERO */}
         <div data-project-image style={{ position: 'relative', height: '85vh', minHeight: '600px' }}>
@@ -626,7 +660,7 @@ export function Component() {
 
           {/* Marquee overlaying the images */}
           <div style={{ position: 'absolute', top: '370px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '10s' }}>
+            <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std", sans-serif',
@@ -697,7 +731,7 @@ export function Component() {
 
           {/* Marquee overlaying img7 */}
           <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '44px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '12s' }}>
+            <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std", sans-serif',
@@ -743,7 +777,7 @@ export function Component() {
           <img src={IMG_GIF2} alt="" loading="lazy" style={{ display: 'block', width: '300px', height: '233px', objectFit: 'cover', marginLeft: '40px', marginRight: '40px' }} />
           {/* Marquee 4 overlay */}
           <div style={{ position: 'absolute', top: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '10s' }}>
+            <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? </span></div>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>¿CÓMO SEGUIR HABITANDO EL PLANETA? </span></div>
             </div>
@@ -790,7 +824,7 @@ export function Component() {
 
           {/* Marquee 5 overlay */}
           <div style={{ position: 'absolute', top: '360px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference', zIndex: 3 }}>
-            <div className="marquee-track" style={{ animationDuration: '12s' }}>
+            <div className="marquee-track" style={{ animationDuration: '22s' }}>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span></div>
               <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span></div>
             </div>
@@ -834,7 +868,7 @@ export function Component() {
 
         {/* QUOTE MARQUEE */}
         <div style={{ marginTop: '40px', height: '40px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '12s' }}>
+          <div className="marquee-track" style={{ animationDuration: '22s' }}>
             <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
             <div className="marquee-set"><span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF', leadingTrim: 'both', textEdge: 'cap' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span></div>
           </div>

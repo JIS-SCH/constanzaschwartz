@@ -18,6 +18,15 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
   const playerRef = useRef<any>(null)
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null)
   const [controlsVisible, setControlsVisible] = useState(true)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement)
+    }
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  }, [])
 
   useEffect(() => {
     // Check if script is already loaded
@@ -202,112 +211,57 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
           bottom: 0,
           left: 0,
           right: 0,
-          height: '100px',
-          background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
+          padding: '24px 8px 8px',
+          background: 'linear-gradient(transparent, rgba(0,0,0,0.55))',
           display: 'flex',
           alignItems: 'center',
-          padding: '0 40px',
-          gap: '24px',
-          zIndex: 20,
+          justifyContent: 'space-between',
           opacity: controlsVisible || !isPlaying ? 1 : 0,
-          transition: 'opacity 0.5s ease',
-          pointerEvents: controlsVisible || !isPlaying ? 'auto' : 'none'
+          transition: 'opacity 0.25s ease',
+          pointerEvents: controlsVisible || !isPlaying ? 'auto' : 'none',
+          zIndex: 20,
         }}
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Play/Pause toggle */}
-        <div onClick={togglePlay} style={{ cursor: 'pointer', width: '24px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-          {isPlaying ? (
-            <svg width="16" height="20" viewBox="0 0 16 20" fill="white">
-              <rect x="0" y="0" width="5" height="20" />
-              <rect x="11" y="0" width="5" height="20" />
-            </svg>
-          ) : (
-            <svg width="18" height="20" viewBox="0 0 20 20" fill="white">
-              <path d="M20 10L0 20V0L20 10Z" />
-            </svg>
-          )}
-        </div>
-
-        {/* Progress line */}
-        <div style={{ flex: 1, position: 'relative', height: '4px', display: 'flex', alignItems: 'center' }}>
-          {/* Background line */}
-          <div style={{ position: 'absolute', inset: 0, height: '2px', background: 'rgba(255,255,255,0.25)' }} />
-          {/* Active progress line */}
-          <div style={{ position: 'absolute', left: 0, top: 0, height: '2px', background: 'white', width: `${progress}%` }} />
-          {/* Handle/Circle */}
-          <div 
-            style={{ 
-              position: 'absolute', 
-              left: `${progress}%`, 
-              width: '10px', 
-              height: '10px', 
-              background: 'white', 
-              borderRadius: '50%',
-              transform: 'translateX(-50%)',
-              boxShadow: '0 0 8px rgba(0,0,0,0.5)'
-            }} 
+        <button 
+          onClick={togglePlay} 
+          style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          aria-label={isPlaying ? 'Pause' : 'Play'}
+        >
+          <img
+            src={isPlaying ? '/svgs/pause-1006-svgrepo-com.svg' : '/svgs/play-svgrepo-com.svg'}
+            alt=""
+            style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }}
           />
-          {/* Hidden range input for seeking */}
-          <input 
-            type="range"
-            min="0"
-            max="100"
-            step="0.1"
-            value={progress}
-            onChange={handleSeek}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '30px',
-              opacity: 0,
-              cursor: 'pointer',
-              zIndex: 2
-            }}
-          />
-        </div>
+        </button>
 
-        {/* Volume selector */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div onClick={toggleMute} style={{ cursor: 'pointer', width: '20px', display: 'flex', alignItems: 'center' }}>
-            {volume === 0 ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" />
-              </svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-                <path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-              </svg>
-            )}
-          </div>
-          <div style={{ width: '60px', height: '2px', position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <div style={{ position: 'absolute', inset: 0, height: '1px', background: 'rgba(255,255,255,0.15)' }} />
-            <div style={{ position: 'absolute', left: 0, top: 0, height: '1px', background: 'white', width: `${volume * 100}%` }} />
-            <input 
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={handleVolumeChange}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '20px',
-                opacity: 0,
-                cursor: 'pointer',
-                zIndex: 2
-              }}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          {/* Volume toggle */}
+          <button 
+            onClick={toggleMute} 
+            style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+            aria-label={volume === 0 ? 'Unmute' : 'Mute'}
+          >
+            <img
+              src={volume === 0 ? '/svgs/volume-svgrepo-com_off.svg' : '/svgs/volume-svgrepo-com_on.svg'}
+              alt=""
+              style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }}
             />
-          </div>
-        </div>
+          </button>
 
-        {/* Fullscreen icon */}
-        <div onClick={toggleFullscreen} style={{ cursor: 'pointer', width: '20px', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
-            <path d="M15 3h6v6M9 21H3v-6M21 15v6h-6M3 9V3h6" />
-          </svg>
+          {/* Fullscreen icon */}
+          <button 
+            onClick={toggleFullscreen} 
+            style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+            aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+          >
+            <img
+              src="/svgs/fullscreen-alt-svgrepo-com.svg"
+              alt=""
+              style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }}
+            />
+          </button>
         </div>
       </div>
     </div>

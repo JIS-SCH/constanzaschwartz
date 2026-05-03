@@ -214,7 +214,11 @@ canvas {
   display: flex;
   width: max-content;
   animation: marquee-scroll linear infinite;
-  will-change: transform;
+}
+
+.blend-difference {
+  mix-blend-mode: difference !important;
+  -webkit-mix-blend-mode: difference !important;
 }
 
 .marquee-set {
@@ -231,8 +235,6 @@ canvas {
   text-transform: uppercase;
   color: #fff;
   white-space: pre;
-  mix-blend-mode: difference;
-  -webkit-mix-blend-mode: difference;
   leading-trim: both;
   text-edge: cap;
   

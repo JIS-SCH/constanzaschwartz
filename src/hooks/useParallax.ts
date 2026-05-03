@@ -39,7 +39,6 @@ export function useParallax(
           trigger,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1, // Add smoothing for a less "brusque" feel
           invalidateOnRefresh: true,
         },
         force3D: true,

@@ -24,7 +24,7 @@ export const ASSETS = {
   img16: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-16_vsyype'),
   img17: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-17_jmf1ms'),
   img18: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-18_t0fmko'),
-  img19: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-19_nbo6rj'),
+  img19: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-19_qjz7h1'),
   img20: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-20_m2dkmh'),
   img21: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-21_fdqruz'),
   img22: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-22_ynf7wj'),
