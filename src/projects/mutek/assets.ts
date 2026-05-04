@@ -1,7 +1,7 @@
-import { cldImg, cldVideo } from '@/src/utils/cloudinary'
+import { cldImg, cldGif, cldVideo } from '@/src/utils/cloudinary'
 
 export const ASSETS = {
-  hero: cldImg('CONSTANZASCHWARTZ-projects-Mutek-portada-desktop_sr4dif', 'f_gif'),
+  hero: cldGif('CONSTANZASCHWARTZ-projects-Mutek-portada-desktop_sr4dif'),
   img1: cldImg('CONSTANZASCHWARTZ-projects-Mutek-1_tbng2q'),
   img2: cldImg('CONSTANZASCHWARTZ-projects-Mutek-2_naofe2'),
   vid1: cldVideo('CONSTANZASCHWARTZ-projects-Mutek2025_jcasoz.mp4'),
@@ -16,12 +16,12 @@ export const ASSETS = {
   img11: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
   img12: cldImg('CONSTANZASCHWARTZ-projects-Mutek-11_xoxvfd'),
   // carousel
-  carousel1: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-1_shofak'),
-  carousel2: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-2_jfhxqr'),
-  carousel3: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-3_w80buf'),
-  carousel4: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-4_oh0zip'),
-  carousel5: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-5_lgjktm'),
-  carousel6: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-6_jwoms7'),
-  carousel7: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-7_hbk9rm'),
+  carousel1: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-1_shofak', 'h_330,c_scale'),
+  carousel2: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-2_jfhxqr', 'h_330,c_scale'),
+  carousel3: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-3_w80buf', 'h_330,c_scale'),
+  carousel4: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-4_oh0zip', 'h_330,c_scale'),
+  carousel5: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-5_lgjktm', 'h_330,c_scale'),
+  carousel6: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-6_jwoms7', 'h_330,c_scale'),
+  carousel7: cldImg('CONSTANZASCHWARTZ-projects-Mutek-carrousel-7_hbk9rm', 'h_330,c_scale'),
   heroMobile: '/CONSTANZASCHWARTZ-projects-mutek-portada-mobile.gif',
 } as const

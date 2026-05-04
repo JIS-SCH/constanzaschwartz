@@ -297,7 +297,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 7. VIDEO MAKING OFF (Full Width) */}
-        <ParallaxSection id="video-making-off" style={{ minHeight: 'calc(100px + 56.25vw + 100px)' }}>
+        <ParallaxSection id="video-making-off" style={{ minHeight: 'calc(222px + 56.25vw + 120px)' }}>
           <ParallaxLayer
             sectionId="video-making-off"
             layerIndex={0}
