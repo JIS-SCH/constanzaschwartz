@@ -10,12 +10,12 @@ import { DURATION, EASE, STAGGER } from '@/src/motion/tokens'
 const PROJECT_ROWS = [
   [
     { name: 'MÁS ALLÁ DEL INFINITO', slug: 'mas-alla-del-infinito' },
-    { name: 'ECO AL INFINITO', slug: 'eco-al-infinito' },
+    { name: 'DESIGN WEEK MEXICO', slug: 'design-week-mexico' },
   ],
   [
-    { name: 'DESIGN WEEK MEXICO', slug: 'design-week-mexico' },
     { name: 'MUTEK', slug: 'mutek' },
-    { name: 'SYLN "ALTEREGO"', slug: 'silvestre-y-la-naranja-alterego' },
+    { name: 'ECO AL INFINITO', slug: 'eco-al-infinito' },
+    { name: 'SILVESTRE Y LA NARANJA "ALTEREGO"', slug: 'silvestre-y-la-naranja-alterego' },
   ]
 ]
 
@@ -127,7 +127,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
           overflowY: 'auto',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
-          justifyContent: 'flex-start',
+          justifyContent: isMobile ? 'center' : 'flex-start',
         }}
       >
         <style dangerouslySetInnerHTML={{ __html: `nav::-webkit-scrollbar { display: none; }` }} />
@@ -217,55 +217,84 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                       transition: 'opacity 0.4s ease, transform 0.4s ease',
                     }}
                   >
-                    {PROJECT_ROWS.map((row, rowIdx) => (
-                      <div
-                        key={rowIdx}
-                        style={{
-                          display: 'flex',
-                          gap: '10px',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          flexWrap: 'wrap',
-                        }}
-                      >
-                        {row.map((p, idx) => (
-                          <Fragment key={p.slug}>
-                            <span
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                onClose()
-                                router.push(`/project/${p.slug}`)
-                              }}
-                              style={{
-                                color: '#fff',
-                                fontSize: isMobile ? '20px' : '32px',
-                                fontWeight: 100,
-                                textTransform: 'uppercase',
-                                fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-                                cursor: 'pointer',
-                                whiteSpace: 'nowrap',
-                                transition: 'color 0.2s ease',
-                                lineHeight: 1,
-                                textAlign: 'center',
-                              }}
-                              onMouseEnter={(e) => (e.currentTarget.style.color = '#FFDF00')}
-                              onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
-                            >
-                              {p.name}
-                            </span>
-                            {idx < row.length - 1 && (
-                              <span style={{
-                                color: '#fff',
-                                opacity: 0.4,
-                                fontSize: isMobile ? '20px' : '32px',
-                                fontWeight: 100,
-                                fontFamily: '"Helvetica Neue LT Std", sans-serif'
-                              }}>|</span>
-                            )}
-                          </Fragment>
-                        ))}
-                      </div>
-                    ))}
+                    {isMobile ? (
+                      PROJECT_ROWS.flat().map((p) => (
+                        <span
+                          key={p.slug}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            onClose()
+                            router.push(`/project/${p.slug}`)
+                          }}
+                          style={{
+                            color: '#fff',
+                            fontSize: '20px',
+                            fontWeight: 100,
+                            textTransform: 'uppercase',
+                            fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
+                            cursor: 'pointer',
+                            transition: 'color 0.2s ease',
+                            lineHeight: 1,
+                            textAlign: 'center',
+                            display: 'block',
+                            width: '100%',
+                            padding: '5px 0',
+                          }}
+                        >
+                          {p.name}
+                        </span>
+                      ))
+                    ) : (
+                      PROJECT_ROWS.map((row, rowIdx) => (
+                        <div
+                          key={rowIdx}
+                          style={{
+                            display: 'flex',
+                            gap: '10px',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexWrap: 'wrap',
+                          }}
+                        >
+                          {row.map((p, idx) => (
+                            <Fragment key={p.slug}>
+                              <span
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  onClose()
+                                  router.push(`/project/${p.slug}`)
+                                }}
+                                style={{
+                                  color: '#fff',
+                                  fontSize: '32px',
+                                  fontWeight: 100,
+                                  textTransform: 'uppercase',
+                                  fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
+                                  cursor: 'pointer',
+                                  whiteSpace: 'nowrap',
+                                  transition: 'color 0.2s ease',
+                                  lineHeight: 1,
+                                  textAlign: 'center',
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFDF00')}
+                                onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
+                              >
+                                {p.name}
+                              </span>
+                              {idx < row.length - 1 && (
+                                <span style={{
+                                  color: '#fff',
+                                  opacity: 0.4,
+                                  fontSize: '32px',
+                                  fontWeight: 100,
+                                  fontFamily: '"Helvetica Neue LT Std", sans-serif'
+                                }}>|</span>
+                              )}
+                            </Fragment>
+                          ))}
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>

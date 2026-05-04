@@ -38,7 +38,7 @@ const MOBILE_CARD_H = 5
 const MOBILE_REFLECTION_H = 1.2
 const MOBILE_CARD_SPACING = 11 // adjusted for wider cards
 const MOBILE_CARD_BASE_Z = -34    // radius = 14 from camera
-const MOBILE_BASE_Z = -15
+const MOBILE_BASE_Z = -12
 
 function getTitle(index: number): string {
   return `Project ${String(index + 1).padStart(2, '0')}`

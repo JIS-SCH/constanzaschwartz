@@ -710,7 +710,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* Credits — pinned to the very bottom of the project */}
-        <div style={{ padding: '0 3px 22px', backgroundColor: '#0F0F0F' }}>
+        <div style={{ padding: '0 3px 40px', backgroundColor: '#0F0F0F' }}>
           <p style={{ fontSize: '14px', lineHeight: '1.6', width: '100%', maxWidth: 'none', display: 'block', textTransform: 'uppercase', fontFamily: '"Helvetica Neue LT Std", sans-serif', fontWeight: 100, color: '#fff', margin: 0 }}>
             <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
             <span style={{ fontWeight: 700 }}>Realización: </span>
@@ -739,8 +739,8 @@ export function Component() {
       <div className="eco-mobile bg-obsidian overflow-hidden">
 
         {/* Hero */}
-        <div data-project-image style={{ position: 'relative', width: '100%', height: '100%', marginTop: '80px' }}>
-          <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px', isolation: 'isolate' }}>
+          <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', transform: 'translateZ(0)' }} />
         </div>
 
         {/* Para 1 */}
@@ -1022,7 +1022,7 @@ export function Component() {
           {/* Simon & Garfunkel — 51px below WITHIN top → marginTop 35px (51 - 16) */}
           <div style={{
             marginTop: '35px',
-            marginBottom: '150px',
+            marginBottom: '40px',
             color: '#fff',
             fontFamily: '"Space Grotesk", sans-serif',
             fontWeight: 300,
