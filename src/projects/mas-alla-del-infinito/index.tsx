@@ -192,11 +192,11 @@ export function Component() {
         {/* 1. HERO ─────────────────────────────────────────────────────── */}
         <ParallaxSection id="mal-hero" style={{ minHeight: '748px' }}>
           <ParallaxLayer
-            layer={{ type: 'image', src: IMG_HERO, speed: 0.3, isHero: true, objectFit: 'contain', className: 'mal-hero-desktop' }}
+            layer={{ type: 'image', src: IMG_HERO, speed: 0, isHero: true, objectFit: 'contain', className: 'mal-hero-desktop' }}
             position={{ top: '124px', left: '0', width: '100%', height: '648px', aspectRatio: '20/9', zIndex: 1 }}
           />
           <ParallaxLayer
-            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0.3, isHero: true, objectFit: 'contain', className: 'mal-hero-mobile' }}
+            layer={{ type: 'image', src: ASSETS.heroMobile, speed: 0, isHero: true, objectFit: 'contain', className: 'mal-hero-mobile' }}
             position={{ top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}
           />
           <style dangerouslySetInnerHTML={{

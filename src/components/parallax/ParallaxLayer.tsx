@@ -1,19 +1,26 @@
 'use client'
 
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useState, useEffect } from 'react'
 import { useParallax } from '@/src/hooks/useParallax'
+import { useParallaxBg } from '@/src/hooks/useParallaxBg'
+import { useParallaxFloat } from '@/src/hooks/useParallaxFloat'
 import { VideoPlayer } from '@/src/components/media/VideoPlayer'
-import { MARQUEE } from '@/src/motion/tokens'
+import { MARQUEE, PARALLAX } from '@/src/motion/tokens'
+import type { ParallaxEffect } from '@/src/types/parallax'
 
+export type { ParallaxEffect } from '@/src/types/parallax'
 export type LayerType = 'image' | 'video' | 'text' | 'marquee' | 'credits'
 
 export interface BaseLayerProps {
   type: LayerType
   speed?: number
+  effect?: ParallaxEffect
   axis?: 'y' | 'x'
   intensity?: number
   className?: string
   isHero?: boolean
+  floatAmplitude?: number
+  floatFrequency?: number
 }
 
 export interface MarqueeLayerProps extends BaseLayerProps {
@@ -87,22 +94,73 @@ function MarqueeContent({ content, duration }: { content: string; duration: numb
 }
 
 export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, children }: ParallaxLayerProps) {
-  // Outer ref — scroll parallax transforms apply to the position container so the whole layer floats
   const outerRef = useRef<HTMLDivElement>(null)
+  const mediaRef = useRef<HTMLElement>(null)
   const isMarquee = layer.type === 'marquee'
+  const isImage = layer.type === 'image'
+  const isVideo = layer.type === 'video'
+  const isMedia = isImage || isVideo
+  const effect = layer.effect || 'inner'
+  const isHero = layer.isHero === true
 
-  const defaultSpeed = layer.type === 'image' ? 0.3 : 0
-  const speed = layer.speed !== undefined ? layer.speed : defaultSpeed
-  const { axis = 'y', intensity = 60 } = layer
+  const speed = layer.speed !== undefined ? layer.speed : PARALLAX.speed.standard
+  const { axis = 'y', intensity = PARALLAX.intensity.desktop } = layer
   const marqueeHeight = position.height || '72px'
   const isStickyMarquee = isMarquee && !position.top
+  const objectFit = isImage ? (layer.objectFit || 'cover') : undefined
+  const isContain = objectFit === 'contain'
 
-  useParallax(
-    isStickyMarquee ? ({ current: null } as unknown as React.RefObject<HTMLElement>) : outerRef as React.RefObject<HTMLElement>,
-    { speed, axis, intensity }
-  )
+  // STANDARDIZED MEDIA PARALLAX
+  // All images/videos use the same speed factor regardless of what the layer prop passes.
+  // Travel scales with the frame's actual height so visual intensity feels uniform on
+  // small thumbnails AND large hero crops. Pass speed:0 explicitly to anchor a layer
+  // (e.g. stacked grids that should not drift apart).
+  const isMediaParallax = isMedia && !isHero && !isContain && (effect === 'inner' || effect === 'viewport') && speed !== 0
+  const STANDARD = PARALLAX.speed.standard
+  const BLEED_RATIO = STANDARD * 0.5 * 1.15
+  const bleedPct = BLEED_RATIO * 100
 
-  // ─── OUTER: position container (scroll parallax transform applied here) ───
+  const [frameHeight, setFrameHeight] = useState(0)
+  useEffect(() => {
+    const frame = outerRef.current
+    if (!frame || !isMediaParallax) return
+    const measure = () => setFrameHeight(frame.offsetHeight)
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(frame)
+    return () => ro.disconnect()
+  }, [isMediaParallax])
+
+  const moveMedia = isMediaParallax && frameHeight > 0
+  const moveOuter = effect === 'inner' && !isMedia && !isStickyMarquee && speed !== 0
+
+  useParallax(mediaRef, {
+    speed: moveMedia ? STANDARD : 0,
+    axis,
+    intensity: moveMedia ? frameHeight * 0.5 : 0,
+    triggerRef: outerRef,
+  })
+
+  useParallax(outerRef, {
+    speed: moveOuter ? speed : 0,
+    axis,
+    intensity,
+  })
+
+  if (effect === 'bg') {
+    useParallaxBg(outerRef)
+  }
+
+  if (effect === 'float') {
+    useParallaxFloat(outerRef, {
+      amplitude: layer.floatAmplitude ?? 12,
+      frequency: layer.floatFrequency ?? 0.5,
+      axis,
+      phaseOffset: (position.zIndex || 0) * 0.3,
+    })
+  }
+
+  const needsClip = isMedia || effect === 'bg'
   const positionStyle: React.CSSProperties = isStickyMarquee
     ? {
       position: 'sticky',
@@ -121,41 +179,58 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       height: position.height,
       aspectRatio: position.aspectRatio,
       zIndex: position.zIndex,
-      willChange: speed !== 0 ? 'transform' : undefined,
+      overflow: needsClip ? 'hidden' : undefined,
     }
 
-  // ─── INNER: content wrapper (no parallax transforms) ───
   const innerStyle: React.CSSProperties = {
     width: '100%',
     height: '100%',
   }
+
+  const mediaBleedStyle: React.CSSProperties = isMediaParallax
+    ? {
+      width: '100%',
+      height: `${100 + bleedPct * 2}%`,
+      marginTop: `-${bleedPct}%`,
+      willChange: 'transform',
+    }
+    : {
+      width: '100%',
+      height: '100%',
+    }
+
+  const imageStyle: React.CSSProperties = isImage
+    ? {
+      ...mediaBleedStyle,
+      objectFit,
+      display: 'block',
+    }
+    : {}
 
   const renderedContent = useMemo(() => {
     switch (layer.type) {
       case 'image':
         return (
           <img
+            ref={mediaRef as React.RefObject<HTMLImageElement>}
             src={layer.src}
             alt={layer.alt || ''}
-            loading={layer.isHero ? 'eager' : 'lazy'}
+            loading={isHero ? 'eager' : 'lazy'}
             decoding="async"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: layer.objectFit || 'cover',
-              display: 'block',
-            }}
+            style={imageStyle}
           />
         )
       case 'video':
         return (
-          <VideoPlayer
-            id={`${sectionId || 'section'}-video-${layerIndex}`}
-            src={layer.src}
-            autoPlay={layer.autoPlay ?? true}
-            loop={layer.loop ?? true}
-            style={{ width: '100%', height: '100%' }}
-          />
+          <div ref={mediaRef as React.RefObject<HTMLDivElement>} style={mediaBleedStyle}>
+            <VideoPlayer
+              id={`${sectionId || 'section'}-video-${layerIndex}`}
+              src={layer.src}
+              autoPlay={layer.autoPlay ?? true}
+              loop={layer.loop ?? true}
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
         )
       case 'text':
         return (
@@ -207,14 +282,14 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       default:
         return null
     }
-  }, [layer])
+  }, [layer, isHero, imageStyle])
 
   return (
     <div
       ref={isStickyMarquee ? undefined : outerRef}
       style={positionStyle}
       className={layer.className}
-      data-project-image={layer.isHero ? true : undefined}
+      data-project-image={isHero ? true : undefined}
     >
       <div style={innerStyle}>
         {children || renderedContent}

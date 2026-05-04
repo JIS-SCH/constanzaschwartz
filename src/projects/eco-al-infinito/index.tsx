@@ -89,7 +89,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: 0.3, isHero: true, objectFit: 'contain' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'contain' }}
             position={{
               top: '80px', width: 'full', height: '648px', zIndex: 1
             }}

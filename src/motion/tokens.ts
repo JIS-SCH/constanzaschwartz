@@ -21,12 +21,13 @@ export const STAGGER = {
 } as const
 
 export const PARALLAX = {
-  intensity: { desktop: 350, mobile: 60 },
+  intensity: { desktop: 120, mobile: 40 },
   speed: {
-    subtle: 0.15, // Background textures
-    normal: 0.3,  // Standard images
-    strong: 0.5,  // Hero foreground elements
-    hero: 0.8,  // Focal elements
+    subtle: 0.12,
+    normal: 0.18,
+    strong: 0.24,
+    hero: 0.15,
+    standard: 0.15, // Single value applied to ALL media for visual consistency
   },
   gallery: { left: 40, center: 60, right: 80 },
 } as const

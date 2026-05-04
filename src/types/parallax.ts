@@ -5,11 +5,14 @@ export interface CreditEntry {
   name: string
 }
 
+export type ParallaxEffect = 'inner' | 'bg' | 'viewport' | 'float'
+
 export interface Layer {
   type: 'image' | 'video' | 'text' | 'marquee' | 'credits'
   src?: string
   content?: string
   speed: number
+  effect?: ParallaxEffect
   direction?: 'y' | 'x' | 'both'
   multiplier?: number
   objectFit?: 'cover' | 'contain' | 'fill'

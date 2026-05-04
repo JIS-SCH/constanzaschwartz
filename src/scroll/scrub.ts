@@ -11,12 +11,10 @@ export function initScrub(
   camera: THREE.PerspectiveCamera,
   blackoutMaterial: THREE.MeshBasicMaterial,
   canvas: HTMLCanvasElement,
-) {
-  // Connect Lenis scroll to GSAP ScrollTrigger
+): () => void {
   lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
+  const tick = (time: number) => { lenis.raf(time * 1000); };
+  gsap.ticker.add(tick);
   gsap.ticker.lagSmoothing(0);
 
   // Main scroll-driven timeline
@@ -25,7 +23,7 @@ export function initScrub(
       trigger: '#tunnel-container',
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 1.5,
+      scrub: 0.8,
       onUpdate: (self) => {
         // Disable canvas pointer-events after tunnel completes
         if (self.progress >= 0.99) {
@@ -55,5 +53,9 @@ export function initScrub(
     0.925,
   );
 
-  return tl;
+  return () => {
+    gsap.ticker.remove(tick);
+    lenis.off('scroll', ScrollTrigger.update);
+    tl.kill();
+  };
 }

@@ -31,11 +31,12 @@ export default function TunnelCanvas() {
     const cleanupResize = setupResize(camera, renderer);
 
     // 5. Scroll setup
+    let cleanupScrub: (() => void) | undefined;
     let cleanupLenis: (() => void) | undefined;
 
     if (!reducedMotion) {
       const lenis = initLenis();
-      initScrub(lenis, camera, blackoutMaterial, canvas);
+      cleanupScrub = initScrub(lenis, camera, blackoutMaterial, canvas);
       cleanupLenis = () => destroyLenis();
     }
 
@@ -57,6 +58,7 @@ export default function TunnelCanvas() {
     return () => {
       cancelAnimationFrame(frameId);
       cleanupResize();
+      cleanupScrub?.();
       cleanupLenis?.();
       renderer.dispose();
       scene.clear();

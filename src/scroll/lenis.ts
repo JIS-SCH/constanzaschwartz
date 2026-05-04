@@ -4,8 +4,8 @@ let instance: Lenis | null = null;
 
 export function initLenis(): Lenis {
   instance = new Lenis({
-    duration: 1.2,
-    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    duration: 1.8,
+    easing: (t: number) => 1 - Math.pow(1 - t, 4),
     smoothWheel: true,
   });
 

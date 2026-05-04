@@ -179,7 +179,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                     letterSpacing: '0.04em',
                     cursor: 'pointer',
                     fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
-                    lineHeight: 1,
+                    lineHeight: '1.1',
                     textTransform: 'uppercase',
                     textAlign: 'center',
                     opacity: hoveredItem !== null && hoveredItem !== item ? 0.2 : 1,
