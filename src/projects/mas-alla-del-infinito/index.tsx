@@ -65,12 +65,16 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
     <div className="w-full h-[var(--carousel-h)] overflow-hidden">
       <style dangerouslySetInnerHTML={{
         __html: `
+        @-webkit-keyframes mal-c-${id} {
+          from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
+          to   { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0); }
+        }
         @keyframes mal-c-${id} {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          from { transform: translate3d(0,0,0); }
+          to   { transform: translate3d(-50%,0,0); }
         }
       `}} />
-      <div className="flex h-[var(--carousel-h)] w-max" style={{ animation: `mal-c-${id} ${duration}s linear infinite` }}>
+      <div className="flex h-[var(--carousel-h)] w-max" style={{ willChange: 'transform', WebkitAnimation: `mal-c-${id} ${duration}s linear infinite`, animation: `mal-c-${id} ${duration}s linear infinite` }}>
         {doubled.map((src, i) => (
           <img key={i} src={src} alt="" className="h-[var(--carousel-h)] w-auto block shrink-0" />
         ))}

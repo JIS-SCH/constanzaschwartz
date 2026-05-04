@@ -515,7 +515,7 @@ export function Component() {
             position={{ top: '3323px', left: '0', width: '100%', height: CH, zIndex: 2 }}
           >
             <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-              <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'eco-carousel-scroll 18s linear infinite' }}>
+              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: 'eco-carousel-scroll 18s linear infinite', animation: 'eco-carousel-scroll 18s linear infinite' }}>
                 {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5,
                 ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5].map((src, i) => (
                   <img key={i} src={src} alt="" style={{ height: CH, width: CAROUSEL_1_WIDTHS[i % CAROUSEL_1_WIDTHS.length], objectFit: 'cover', display: 'block', flexShrink: 0 }} />
@@ -526,9 +526,13 @@ export function Component() {
 
           <style dangerouslySetInnerHTML={{
             __html: `
+            @-webkit-keyframes eco-carousel-scroll {
+              from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
+              to   { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0); }
+            }
             @keyframes eco-carousel-scroll {
-              from { transform: translateX(0); }
-              to   { transform: translateX(-50%); }
+              from { transform: translate3d(0,0,0); }
+              to   { transform: translate3d(-50%,0,0); }
             }
           `}} />
 
@@ -634,7 +638,7 @@ export function Component() {
             position={{ top: '220px', left: '0', width: '100%', height: '331px', zIndex: 2 }}
           >
             <div style={{ width: '100%', height: '331px', overflow: 'hidden' }}>
-              <div style={{ display: 'flex', height: '331px', width: 'max-content', animation: 'eco-carousel-scroll-2 18s linear infinite' }}>
+              <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: 'eco-carousel-scroll-2 18s linear infinite', animation: 'eco-carousel-scroll-2 18s linear infinite' }}>
                 {[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11,
                 ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11].map((src, i) => (
                   <img key={i} src={src} alt="" style={{ height: '331px', width: CAROUSEL_2_WIDTHS[i % CAROUSEL_2_WIDTHS.length], objectFit: 'cover', display: 'block', flexShrink: 0 }} />
@@ -645,9 +649,13 @@ export function Component() {
 
           <style dangerouslySetInnerHTML={{
             __html: `
+          @-webkit-keyframes eco-carousel-scroll-2 {
+            from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
+            to   { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0); }
+          }
           @keyframes eco-carousel-scroll-2 {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
+            from { transform: translate3d(0,0,0); }
+            to   { transform: translate3d(-50%,0,0); }
           }
         `}} />
         </ParallaxSection>
@@ -914,7 +922,7 @@ export function Component() {
             ))}
           </div>
         </div>
-        <style dangerouslySetInnerHTML={{ __html: `@keyframes eco-m-c1 { from { transform: translateX(0) } to { transform: translateX(-50%) } }` }} />
+        <style dangerouslySetInnerHTML={{ __html: `@-webkit-keyframes eco-m-c1 { from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0) } to { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0) } } @keyframes eco-m-c1 { from { transform: translate3d(0,0,0) } to { transform: translate3d(-50%,0,0) } }` }} />
 
         <div className="eco-p" style={{
           color: '#fff',
@@ -986,7 +994,7 @@ export function Component() {
             ))}
           </div>
         </div>
-        <style dangerouslySetInnerHTML={{ __html: `@keyframes eco-m-c2 { from { transform: translateX(0) } to { transform: translateX(-50%) } }` }} />
+        <style dangerouslySetInnerHTML={{ __html: `@-webkit-keyframes eco-m-c2 { from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0) } to { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0) } } @keyframes eco-m-c2 { from { transform: translate3d(0,0,0) } to { transform: translate3d(-50%,0,0) } }` }} />
 
         {/* Image pair (img36/img37) */}
         <div style={{ position: 'relative', height: '360px', marginTop: '80px' }}>
