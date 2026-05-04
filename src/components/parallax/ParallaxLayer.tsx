@@ -115,7 +115,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   // Travel scales with the frame's actual height so visual intensity feels uniform on
   // small thumbnails AND large hero crops. Pass speed:0 explicitly to anchor a layer
   // (e.g. stacked grids that should not drift apart).
-  const isMediaParallax = isMedia && !isHero && !isContain && (effect === 'inner' || effect === 'viewport') && speed !== 0
+  const isMediaParallax = isMedia && !isHero && !isContain && (effect === 'inner' || effect === 'viewport' || effect === 'bg') && speed !== 0
   const STANDARD = PARALLAX.speed.standard
   const BLEED_RATIO = STANDARD * 0.5 * 1.15
   const bleedPct = BLEED_RATIO * 100
@@ -147,7 +147,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     intensity,
   })
 
-  if (effect === 'bg') {
+  if (effect === 'bg' && !isMedia) {
     useParallaxBg(outerRef)
   }
 
