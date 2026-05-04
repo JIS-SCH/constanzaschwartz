@@ -18,13 +18,13 @@ const IMG_WEB009 = ASSETS.img2   // 710×473
 const IMG_FULL_1 = ASSETS.img3   // 1440×960  3:2
 const IMG_WEB008 = ASSETS.img4   // 345×517
 const IMG_WEB025 = ASSETS.img5   // 954×636   3:2
-const IMG_GIF1 = 'https://res.cloudinary.com/dapjholek/image/upload/f_gif,q_auto/CONSTANZASCHWARTZ-projects-masalladelinfinito-6_h9gjd7'
+const IMG_GIF1 = 'https://res.cloudinary.com/dapjholek/image/upload/f_gif,fl_animated,q_auto/CONSTANZASCHWARTZ-projects-masalladelinfinito-6_h9gjd7'
 const IMG_WEB012 = ASSETS.img7   // 345×517
 const IMG_WEB011 = ASSETS.img8   // 345×517
 const IMG_WEB007 = ASSETS.img9   // 345×518
 const IMG_WEB005 = ASSETS.img10  // 467×700
 const IMG_WEB022 = ASSETS.img11  // 467×701
-const IMG_GIF2 = 'https://res.cloudinary.com/dapjholek/image/upload/f_gif,q_auto/CONSTANZASCHWARTZ-projects-masalladelinfinito-12_kazkok'
+const IMG_GIF2 = 'https://res.cloudinary.com/dapjholek/image/upload/f_gif,fl_animated,q_auto/CONSTANZASCHWARTZ-projects-masalladelinfinito-12_kazkok'
 const IMG_WEB016 = ASSETS.img13  // 345×517
 const IMG_WEB017 = ASSETS.img14  // 294×441
 const IMG_WEB018 = ASSETS.img15  // 294×441
@@ -690,7 +690,7 @@ export function Component() {
 
 
         {/* SECOND PAIR: img3 (FULL_1) + img4 (WEB008) - Staggered with Marquee */}
-        <div style={{ position: 'relative', height: '480px', marginTop: '80px' }}>
+        <div style={{ position: 'relative', height: '480px', marginTop: '-58px' }}>
           <img src={IMG_FULL_1} alt="" loading="lazy" style={{ position: 'absolute', left: '0', top: '0', width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
           <PI speed={0.15} src={IMG_WEB008} alt="" loading="lazy" style={{ position: 'absolute', right: '40px', top: '350px', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
 

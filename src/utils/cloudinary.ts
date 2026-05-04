@@ -11,3 +11,7 @@ export function cldImg(publicId: string, transforms = ''): string {
 export function cldVideo(publicId: string): string {
   return `${BASE_VID}/f_auto,q_auto/${publicId}`
 }
+
+export function cldGif(publicId: string): string {
+  return `${BASE_IMG}/f_gif,fl_animated,q_auto/${publicId}`
+}

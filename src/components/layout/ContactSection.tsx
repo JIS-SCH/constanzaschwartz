@@ -192,17 +192,19 @@ const CSS = `
 
   .cs-svg--vert {
     top: 10%;
-    right: 0;
-    left: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
     bottom: auto;
-    height: 80%;
+    height: 85%;
     aspect-ratio: 410 / 899;
   }
 
   .cs-svg--horiz {
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     top: auto;
-    left: 0;
     right: auto;
     width: 100%;
     aspect-ratio: 899 / 410;
