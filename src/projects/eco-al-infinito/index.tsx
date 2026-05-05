@@ -117,7 +117,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="intro"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '21vh', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 3 }}
           >
             <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
@@ -187,7 +187,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="text-collage-2"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '43vh', left: 'calc(8.33% + 3px)', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
@@ -242,7 +242,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-3"
             layerIndex={3}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '2056px', left: 'calc(8.33% + 10px)', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div className="eco-p" style={{
@@ -301,7 +301,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="video-making-off"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '222px', left: '0', width: '100%', height: '56.25vw', aspectRatio: '16/9', zIndex: 1 }}
           >
             <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
@@ -341,7 +341,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={3}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '1286px', left: 'calc(8.33% + 3px)', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
@@ -424,7 +424,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="final-sequence"
             layerIndex={3}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '1925px', left: 'calc(58.33% + 12px)', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div className="eco-p" style={{ fontSize: 'var(--p-size)', lineHeight: 'var(--p-lh)' }}>
@@ -540,7 +540,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="final-sequence-25-29"
             layerIndex={6}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '3861px', left: 'calc(8% + 12px)', width: TW, height: 'auto', zIndex: 1 }}
           >
             <div className="eco-p">
@@ -603,7 +603,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="final-sequence-30-35"
             layerIndex={4}
-            layer={{ type: 'text', content: '', speed: 0.1 }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '1812px', left: '0', width: '100%', height: '56.25vw', aspectRatio: '16/9', zIndex: 1 }}
           >
             <div className="vimeo-container" style={{ position: 'relative', width: '100%', height: '100%' }}>

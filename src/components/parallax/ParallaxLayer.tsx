@@ -8,6 +8,8 @@ import { VideoPlayer } from '@/src/components/media/VideoPlayer'
 import { MARQUEE, PARALLAX } from '@/src/motion/tokens'
 import type { ParallaxEffect } from '@/src/types/parallax'
 
+
+
 export type { ParallaxEffect } from '@/src/types/parallax'
 export type LayerType = 'image' | 'video' | 'text' | 'marquee' | 'credits'
 
@@ -110,12 +112,8 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   const objectFit = isImage ? (layer.objectFit || 'cover') : undefined
   const isContain = objectFit === 'contain'
 
-  // STANDARDIZED MEDIA PARALLAX
-  // All images/videos use the same speed factor regardless of what the layer prop passes.
-  // Travel scales with the frame's actual height so visual intensity feels uniform on
-  // small thumbnails AND large hero crops. Pass speed:0 explicitly to anchor a layer
-  // (e.g. stacked grids that should not drift apart).
-  const isMediaParallax = isMedia && !isHero && !isContain && (effect === 'inner' || effect === 'viewport' || effect === 'bg') && speed !== 0
+  // Video bleed parallax: videos taller than their frame scroll within it
+  const isVideoBleedParallax = isVideo && !isHero && !isContain && (effect === 'inner' || effect === 'viewport' || effect === 'bg') && speed !== 0
   const STANDARD = PARALLAX.speed.standard
   const BLEED_RATIO = STANDARD * 0.5 * 1.15
   const bleedPct = BLEED_RATIO * 100
@@ -123,21 +121,21 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
   const [frameHeight, setFrameHeight] = useState(0)
   useEffect(() => {
     const frame = outerRef.current
-    if (!frame || !isMediaParallax) return
+    if (!frame || !isVideoBleedParallax) return
     const measure = () => setFrameHeight(frame.offsetHeight)
     measure()
     const ro = new ResizeObserver(measure)
     ro.observe(frame)
     return () => ro.disconnect()
-  }, [isMediaParallax])
+  }, [isVideoBleedParallax])
 
-  const moveMedia = isMediaParallax && frameHeight > 0
-  const moveOuter = effect === 'inner' && !isMedia && !isStickyMarquee && speed !== 0
+  const moveVideoBleed = isVideoBleedParallax && frameHeight > 0
+  const moveOuter = effect === 'inner' && !moveVideoBleed && !isStickyMarquee && speed !== 0
 
   useParallax(mediaRef, {
-    speed: moveMedia ? STANDARD : 0,
+    speed: moveVideoBleed ? STANDARD : 0,
     axis,
-    intensity: moveMedia ? frameHeight * 0.5 : 0,
+    intensity: moveVideoBleed ? frameHeight * 0.5 : 0,
     triggerRef: outerRef,
   })
 
@@ -160,7 +158,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     })
   }
 
-  const needsClip = isMedia || effect === 'bg'
+  const needsClip = isVideoBleedParallax || effect === 'bg'
   const positionStyle: React.CSSProperties = isStickyMarquee
     ? {
       position: 'sticky',
@@ -187,7 +185,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     height: '100%',
   }
 
-  const mediaBleedStyle: React.CSSProperties = isMediaParallax
+  const mediaBleedStyle: React.CSSProperties = isVideoBleedParallax
     ? {
       width: '100%',
       height: `${100 + bleedPct * 2}%`,
@@ -201,7 +199,8 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
 
   const imageStyle: React.CSSProperties = isImage
     ? {
-      ...mediaBleedStyle,
+      width: '100%',
+      height: '100%',
       objectFit,
       display: 'block',
     }
@@ -282,7 +281,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       default:
         return null
     }
-  }, [layer, isHero, imageStyle])
+  }, [layer, isHero, imageStyle, mediaBleedStyle, sectionId, layerIndex])
 
   return (
     <div

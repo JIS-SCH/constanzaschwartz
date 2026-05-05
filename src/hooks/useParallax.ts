@@ -29,9 +29,9 @@ export function useParallax(
     const trigger = triggerRef?.current ?? target.parentElement ?? target
     const range = speed * intensity
 
-    const fromVars: gsap.TweenVars = { [axis]: -range }
+    const fromVars: gsap.TweenVars = { [axis]: range }
     const toVars: gsap.TweenVars = {
-      [axis]: range,
+      [axis]: -range,
       ease: 'none',
       scrollTrigger: {
         trigger,

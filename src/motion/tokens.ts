@@ -15,19 +15,24 @@ export const EASE = {
 } as const
 
 export const STAGGER = {
-  sm: 0.06, // Fast menu close stagger
-  md: 0.08, // Title word reveals
-  lg: 0.12, // Menu item open stagger
+  sm: 0.06,
+  md: 0.08,
+  lg: 0.12,
 } as const
 
 export const PARALLAX = {
-  intensity: { desktop: 120, mobile: 40 },
+  intensity: { desktop: 500, mobile: 80 },
   speed: {
-    subtle: 0.12,
-    normal: 0.18,
-    strong: 0.24,
-    hero: 0.15,
-    standard: 0.15, // Single value applied to ALL media for visual consistency
+    subtle: 0.8,
+    normal: 0.8,
+    strong: 0.8,
+    hero: 0.8,
+    standard: 0.8,
+  },
+  uniform: {
+    factor: 0.22,
+    lerp: 0.12,
+    ramp: 1400,
   },
   gallery: { left: 40, center: 60, right: 80 },
 } as const

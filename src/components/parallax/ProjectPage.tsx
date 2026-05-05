@@ -14,10 +14,6 @@ interface ProjectPageProps {
   parallaxConfig: ParallaxConfig
 }
 
-function hasMarqueeLayer(layers: Layer[]): boolean {
-  return layers.some((l) => l.type === 'marquee')
-}
-
 function renderStandardSection(section: Section) {
   return section.layers.map((layer, layerIndex) => (
     <ParallaxLayer
@@ -178,7 +174,6 @@ export function ProjectPage({ parallaxConfig }: ProjectPageProps) {
     <div style={{ width: '100%', position: 'relative' }}>
       {parallaxConfig.sections.map((section) => {
         const sectionType = section.type || 'standard'
-        const disableOverflow = hasMarqueeLayer(section.layers)
 
         let content
         switch (sectionType) {
@@ -202,7 +197,7 @@ export function ProjectPage({ parallaxConfig }: ProjectPageProps) {
           <ParallaxSection
             key={section.id}
             id={section.id}
-            overflowHidden={!disableOverflow}
+            overflowHidden={false}
             style={{
               ...(section.height ? { height: section.height } : {}),
               minHeight: section.minHeight || '100vh',

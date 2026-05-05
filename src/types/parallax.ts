@@ -24,6 +24,7 @@ export interface Layer {
   isHero?: boolean
   subtitle?: string
   credits?: CreditEntry[]
+  groupId?: string
   position?: {
     top?: string
     left?: string

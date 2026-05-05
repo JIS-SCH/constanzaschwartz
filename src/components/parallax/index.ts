@@ -1,6 +1,7 @@
 // Parallax system components
 export { ParallaxSection } from './ParallaxSection'
 export { ParallaxLayer } from './ParallaxLayer'
+export { ScrollParallaxWrapper } from './ScrollParallaxWrapper'
 export { PI } from './ParallaxImg'
 export { ParallaxGallery } from './ParallaxGallery'
 export { ProjectPage } from './ProjectPage'

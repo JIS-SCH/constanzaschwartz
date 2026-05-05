@@ -17,7 +17,7 @@ export function ParallaxSection({
   id,
   className = '',
   style = {},
-  overflowHidden = true,
+  overflowHidden = false,
 }: ParallaxSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
 
