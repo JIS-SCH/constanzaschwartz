@@ -14,8 +14,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!data) return {};
 
-  const url = `${BASE_URL}/project/${slug}`;
-  const imageUrl = `${BASE_URL}${data.ogImage}`;
+  const url = `/project/${slug}`;
+  const imageUrl = data.ogImage;
+
 
   return {
     title: data.title,

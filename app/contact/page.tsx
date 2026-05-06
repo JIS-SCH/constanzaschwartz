@@ -10,16 +10,16 @@ export const metadata: Metadata = {
   title: seo.title,
   description: seo.description,
   alternates: {
-    canonical: `${BASE_URL}/contact`,
+    canonical: '/contact',
   },
   openGraph: {
     type: 'website',
     title: seo.title,
     description: seo.description,
-    url: `${BASE_URL}/contact`,
+    url: '/contact',
     images: [
       {
-        url: `${BASE_URL}${seo.ogImage}`,
+        url: seo.ogImage,
         width: 1200,
         height: 630,
         alt: seo.title,
@@ -30,9 +30,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: seo.title,
     description: seo.description,
-    images: [`${BASE_URL}${seo.ogImage}`],
+    images: [seo.ogImage],
   },
 }
+
 
 export default function ContactRoute() {
   return (

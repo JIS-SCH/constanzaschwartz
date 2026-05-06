@@ -5,7 +5,16 @@ export interface SEOData {
   schema: 'Person' | 'CreativeWork';
 }
 
-export const BASE_URL = 'https://constanzaschwartz.com';
+const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.DEPLOY_PRIME_URL) return process.env.DEPLOY_PRIME_URL; // Netlify specific
+  if (process.env.URL) return process.env.URL; // Netlify/General
+  return 'https://constanzaschwartz.com';
+};
+
+export const BASE_URL = getBaseUrl().replace(/\/$/, '');
+
+
 
 export const PAGE_SEO: Record<string, SEOData> = {
   home: {
