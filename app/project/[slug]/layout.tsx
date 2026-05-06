@@ -3,9 +3,10 @@ import { PROJECT_SEO, BASE_URL } from '@/src/data/seo';
 import { JsonLd } from '@/src/components/layout/JsonLd';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
   children: React.ReactNode;
 }
+
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
