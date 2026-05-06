@@ -15,6 +15,8 @@ export function TransitionOverlay() {
   const ctxRef = useRef<gsap.Context | null>(null)
 
   // ── Phase: expanding → animate card rect to fullscreen ──────────────────
+
+  // ── Phase: expanding → animate card rect to hero-like position ────────────────
   useEffect(() => {
     if (state.phase !== 'expanding') return
     const el = imageRef.current

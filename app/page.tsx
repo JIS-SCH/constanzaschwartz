@@ -8,6 +8,9 @@ import { projectList } from '@/src/projects/registry'
 import { useTransition } from '@/src/contexts/TransitionContext'
 import type { OriginRect } from '@/src/contexts/TransitionContext'
 import { isMobile } from '@/src/utils/detect'
+import { PAGE_SEO, BASE_URL } from '@/src/data/seo'
+import { JsonLd } from '@/src/components/layout/JsonLd'
+
 
 function getInitialPhase(): AppPhase {
   if (typeof window !== 'undefined' && sessionStorage.getItem('introComplete')) {
@@ -43,6 +46,8 @@ export default function Home() {
 
   return (
     <div id="app-root">
+      <JsonLd data={PAGE_SEO.home} url={BASE_URL} />
+
       {/* Tunnel video — stays mounted once started (ScrollTrigger pin modifies DOM,
           unmounting causes React removeChild errors). It hides itself on complete. */}
       {tunnelStarted && (

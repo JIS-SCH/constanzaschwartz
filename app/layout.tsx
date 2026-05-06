@@ -10,9 +10,18 @@ import { TransitionProvider } from "@/src/contexts/TransitionContext";
 import { TransitionOverlay } from "@/src/components/layout/TransitionOverlay";
 import { NavController } from "@/src/components/layout/NavController";
 
+import { PAGE_SEO, BASE_URL } from "@/src/data/seo";
+import { JsonLd } from "@/src/components/layout/JsonLd";
+
+const seo = PAGE_SEO.home;
+
 export const metadata: Metadata = {
-  title: "Constanza Schwartz",
-  description: "Artist portfolio",
+  title: seo.title,
+  description: seo.description,
+  metadataBase: new URL(BASE_URL),
+  alternates: {
+    canonical: '/',
+  },
   icons: {
     icon: [
       { url: "/CONSTANZASCHWARTZ_48X48_Favicon.png", sizes: "48x48", type: "image/png" },
@@ -22,7 +31,28 @@ export const metadata: Metadata = {
       { url: "/CONSTANZASCHWARTZ_FAVICON 192X192.png", sizes: "192x192", type: "image/png" },
     ],
   },
+  openGraph: {
+    type: 'website',
+    title: seo.title,
+    description: seo.description,
+    url: BASE_URL,
+    images: [
+      {
+        url: seo.ogImage,
+        width: 1200,
+        height: 630,
+        alt: seo.title,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: seo.title,
+    description: seo.description,
+    images: [seo.ogImage],
+  },
 };
+
 
 export default function RootLayout({
   children,
