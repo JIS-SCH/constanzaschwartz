@@ -11,8 +11,6 @@ interface TunnelVideoProps {
   onComplete: () => void
 }
 
-const LOGO_FADE_START_S = 1    // video second at which logo starts fading
-const LOGO_FADE_END_S   = 4    // video second at which logo is fully gone
 const PX_PER_SEC        = 180  // scroll pixels per second of video
 
 export function TunnelVideo({ onComplete }: TunnelVideoProps) {
@@ -54,8 +52,11 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       const duration = video.duration
       const videoPx  = Math.round(duration * PX_PER_SEC)
 
-      const logoStartPx    = LOGO_FADE_START_S * PX_PER_SEC
-      const logoDurationPx = (LOGO_FADE_END_S - LOGO_FADE_START_S) * PX_PER_SEC
+      const logoStartS = isMobile() ? 1 : 1
+      const logoEndS   = isMobile() ? 4 : 5
+
+      const logoStartPx    = logoStartS * PX_PER_SEC
+      const logoDurationPx = (logoEndS - logoStartS) * PX_PER_SEC
 
       const seekProxy = { t: 0 }
       const tl = gsap.timeline({ paused: true })
@@ -115,7 +116,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         end: `+=${videoPx}`,
         pin: true,
         anticipatePin: 1,
-        scrub: 0.5,
+        scrub: isMobile() ? 0.5 : 2,
         animation: tl,
         onUpdate: (self) => {
           if (self.progress >= 0.97 && !completedRef.current) {
