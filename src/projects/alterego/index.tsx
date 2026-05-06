@@ -78,7 +78,7 @@ export function Component() {
       `}} />
 
       <div className="alterego-desktop">
-        <ParallaxSection id="hero" overflowHidden={false} className="h-screen">
+        <ParallaxSection id="hero" overflowHidden={false} className="h-screen" style={{ marginTop: '23px' }}>
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
@@ -456,6 +456,6 @@ export function Component() {
         </div>
 
       </div>
-    </div>
+    </div >
   )
 }

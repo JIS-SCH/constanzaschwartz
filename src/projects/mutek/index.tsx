@@ -115,7 +115,7 @@ export function Component() {
       <div className="mutek-desktop">
         {/* 1. HERO — Full-width image, fit so the baked-in title + credits stay visible. */}
         {/* top: 77px = nav bottom (95px) - parallax range (18px) so image never gaps below nav */}
-        <ParallaxSection id="hero" style={{ minHeight: `calc(80px + 80vh + 251px)` }}>
+        <ParallaxSection id="hero" style={{ minHeight: `calc(80px + 80vh + 251px)`, marginTop: '-30px' }}>
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}

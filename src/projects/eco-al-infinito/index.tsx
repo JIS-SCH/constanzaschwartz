@@ -84,7 +84,7 @@ export function Component() {
 
       <div className="eco-desktop">
         {/* 1. HERO — Full width sculpture */}
-        <ParallaxSection id="hero" style={{ marginTop: 0, minHeight: '648px', marginBottom: '170px' }}>
+        <ParallaxSection id="hero" style={{ minHeight: '648px', marginBottom: '170px', marginTop: '100px' }}>
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
