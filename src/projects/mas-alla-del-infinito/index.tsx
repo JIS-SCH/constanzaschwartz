@@ -96,7 +96,7 @@ export { meta } from './meta'
 
 
 export function Component() {
-    // GSAP and Lenis are initialized globally in the layout or scrub.ts
+  // GSAP and Lenis are initialized globally in the layout or scrub.ts
 
   return (
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mal-container -mt-20">
@@ -213,7 +213,7 @@ export function Component() {
             }}
             position={{ top: '0', left: '0', width: '100%', height: '44px', zIndex: 10 }}
           />
-          
+
           {/* ANCHOR: Intro text (determines section height) */}
           <div style={{ position: 'relative', marginTop: '264px', marginLeft: '59.2%', width: '467px', zIndex: 2 }}>
             <TextBlock>
@@ -264,7 +264,7 @@ export function Component() {
             layer={{ type: 'image', src: IMG_WEB008 }}
             position={{ top: '-110px', left: '63.33%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 30 }}
           />
-          
+
           {/* Text 2 — Absolute */}
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: 0 }}
@@ -306,7 +306,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 5. PHOTOS CLUSTER 1 ─────────────────────────────────────────── */}
-        <ParallaxSection id="mal-cluster1">
+        <ParallaxSection id="mal-cluster1" >
           {/* Sticky marquee 2 — absolute behind */}
           <ParallaxLayer
             layer={{
@@ -319,33 +319,35 @@ export function Component() {
             position={{ top: '40px', left: '0', width: '100%', height: '56px', zIndex: 0 }}
           />
 
-          {/* Absolute images staircase */}
-          <ParallaxLayer
-            layer={{ type: 'image', src: IMG_WEB012 }}
-            position={{ top: '0px', left: '4.16%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
-          />
-          <ParallaxLayer
-            layer={{ type: 'image', src: IMG_WEB011 }}
-            position={{ top: '150px', left: '38%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
-          />
-          <ParallaxLayer
-            layer={{ type: 'image', src: IMG_WEB007 }}
-            position={{ top: '300px', left: '71.8%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
-          />
+          {/* Absolute images staircase (wrapped to create flow) */}
+          <div style={{ position: 'relative', height: '817px' }}>
+            <ParallaxLayer
+              layer={{ type: 'image', src: IMG_WEB012 }}
+              position={{ top: '0px', left: '4.16%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
+            />
+            <ParallaxLayer
+              layer={{ type: 'image', src: IMG_WEB011 }}
+              position={{ top: '150px', left: '38%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
+            />
+            <ParallaxLayer
+              layer={{ type: 'image', src: IMG_WEB007 }}
+              position={{ top: '300px', left: '71.8%', width: '23.96%', height: '517px', aspectRatio: '343/514', zIndex: 1 }}
+            />
+          </div>
 
-          {/* ANCHOR: img10 (WEB005) */}
-          <div style={{ position: 'relative', marginTop: '1015px', marginLeft: '8.47%', width: '467px', height: '700px', zIndex: 1 }}>
+          {/* ANCHOR: img10 (WEB005) — 220px gap from staircase end */}
+          <div style={{ position: 'relative', marginTop: '170px', marginLeft: '8.47%', width: '467px', height: '700px', zIndex: 1 }}>
             <PI src={IMG_WEB005} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
-          {/* img11 (WEB022) — Absolute staggered */}
+          {/* img11 (WEB022) — Absolute staggered (relative to section top, so it overlaps img10 correctly) */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB022 }}
-            position={{ top: '1480px', left: '33.82%', width: '468px', height: '701px', zIndex: 2 }}
+            position={{ top: '1350px', left: '33.82%', width: '468px', height: '701px', zIndex: 2 }}
           />
         </ParallaxSection>
 
-        <ParallaxSection id="mal-video1">
+        <ParallaxSection id="mal-video1" style={{ marginTop: '530px' }}>
           {/* ANCHOR: Video 1 */}
           <div style={{ position: 'relative', left: '0', width: '100%', height: '810px', zIndex: 2 }}>
             <div className="vimeo-container" style={{ width: '100%', height: '100%' }}>
@@ -358,7 +360,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 7. GIF 2 + MARQUEE 3 ────────────────────────────────────────── */}
-        <ParallaxSection id="mal-gif2">
+        <ParallaxSection id="mal-gif2"  >
           {/* ANCHOR: GIF 2 center wide */}
           <div style={{ position: 'relative', marginTop: '30px', marginLeft: '16.88%', width: '954px', height: '636px', zIndex: 1 }}>
             <img src={IMG_GIF2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -380,7 +382,7 @@ export function Component() {
         {/* 8. TEXT 4 ──────────────────────────────────────────────────── */}
         <ParallaxSection id="mal-text4">
           {/* ANCHOR: Text 4 right */}
-          <div style={{ position: 'relative', marginTop: '10px', marginLeft: '59.02%', width: '467px', zIndex: 2 }}>
+          <div style={{ position: 'relative', marginTop: '-10px', marginLeft: '59.02%', width: '467px', zIndex: 2, marginBottom: '-56px' }}>
             <TextBlock>
               <p className="mal-p">
                 Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Requiere, sin duda, de una integración de nuestro sentir y pensar. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético, la literatura y las computadoras y por qué no, las magníficas y aterradoras creaciones de la inteligencia artificial.
@@ -390,7 +392,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 9. PHOTOS CLUSTER 2 ─────────────────────────────────────────── */}
-        <ParallaxSection id="mal-cluster2">
+        <ParallaxSection id="mal-cluster2" style={{ marginBottom: '-66px' }}>
           {/* img16 (WEB016) — Absolute */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB016 }}
@@ -402,7 +404,7 @@ export function Component() {
           </div>
         </ParallaxSection>
 
-        <ParallaxSection id="mal-fw2">
+        <ParallaxSection id="mal-fw2" style={{ marginBottom: '-142px' }}>
           {/* ANCHOR: img15 */}
           <div style={{ position: 'relative', marginTop: '59px', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}>
             <img src={IMG_WEB018} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -410,7 +412,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 11. PHOTOS CLUSTER 3 ────────────────────────────────────────── */}
-        <ParallaxSection id="mal-collage2">
+        <ParallaxSection id="mal-collage2" style={{ marginBottom: '450px' }}>
           {/* img16 (Vertical) — Vertical on left (Absolute) */}
           <ParallaxLayer
             layer={{ type: 'image', src: IMG_WEB014_V }}
@@ -428,7 +430,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 12. FULLWIDTH 3 (img19) ────────────────────────────────── */}
-        <ParallaxSection id="mal-fw3">
+        <ParallaxSection id="mal-fw3" style={{ marginBottom: '-26px' }}>
           {/* ANCHOR: img19 */}
           <div style={{ position: 'relative', marginTop: '77px', left: '0', width: '100%', height: '960px', aspectRatio: '3/2', zIndex: 1 }}>
             <img src={IMG_WEB015} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -465,7 +467,7 @@ export function Component() {
           />
 
           {/* ANCHOR 2: img21 (WEB037) center-bottom staggered landscape */}
-          <div style={{ position: 'relative', marginTop: '370px', marginLeft: '38.5%', width: '467px', height: '311px', zIndex: 2 }}>
+          <div style={{ position: 'relative', marginTop: '230px', marginLeft: '38.5%', width: '467px', height: '311px', zIndex: 2 }}>
             <PI src={IMG_WEB037} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </ParallaxSection>
@@ -489,7 +491,7 @@ export function Component() {
         {/* 17. FINAL SEQUENCE: TEXT - PHOTO 23 - TEXT ────────────────── */}
         <ParallaxSection id="mal-final-sequence">
           {/* ANCHOR: Text 6 - Right aligned */}
-          <div style={{ position: 'relative', marginTop: '220px', marginLeft: '59.16%', width: '467px', zIndex: 1 }}>
+          <div style={{ position: 'relative', marginTop: '-10px', marginLeft: '59.16%', width: '467px', zIndex: 1 }}>
             <TextBlock>
               <p className="mal-p">
                 La ciencia y la técnica han triunfado hasta participar de la construcción completa de los paisajes de nuestras ciudades. "Más allá del infinito" es una alerta cruda e implacable que subraya los aspectos amenazantes de esta victoria.
@@ -498,7 +500,7 @@ export function Component() {
           </div>
 
           {/* ANCHOR 2: img23 */}
-          <div style={{ position: 'relative', marginTop: '122px', marginLeft: '28%', width: '923px', height: '430px', zIndex: 1 }}>
+          <div style={{ position: 'relative', marginTop: '170px', marginLeft: '28%', width: '923px', height: '430px', zIndex: 1 }}>
             <PI src={IMG_WEB050} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
@@ -513,21 +515,21 @@ export function Component() {
         </ParallaxSection>
 
         {/* 18. img24 (Wide) ───────────────────────────────────────────── */}
-        <ParallaxSection id="mal-finish-img-24">
+        <ParallaxSection id="mal-finish-img-24" style={{ marginTop: '180px' }}>
           <div style={{ position: 'relative', width: '100%', height: '810px', zIndex: 1 }}>
-            <PI layer={{ type: 'image', src: IMG_WEB054, speed: 0 }} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={IMG_WEB054} speed={0} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </ParallaxSection>
 
         {/* 19. FINAL SECTION: CAROUSEL 2, QUOTE & CREDITS ───────────────── */}
-        <ParallaxSection id="mal-finish-footer" overflowHidden={false}>
+        <ParallaxSection id="mal-finish-footer" overflowHidden={false} style={{ marginTop: '260px' }}>
           {/* ANCHOR: Carousel 2 */}
           <div style={{ position: 'relative', marginTop: '0', left: '0', width: '100%', height: '333px', zIndex: 1 }}>
             <Carousel images={CAROUSEL_2} id="c2-final" />
           </div>
 
           {/* ANCHOR 2: Quote */}
-          <div style={{ position: 'relative', marginTop: '100px', width: '100%', zIndex: 3 }}>
+          <div style={{ position: 'relative', marginTop: '-30px', width: '100%', zIndex: 3 }}>
             <div style={{ textAlign: 'right', paddingRight: '4.24%' }}>
               <p style={{
                 color: '#fff',
@@ -548,14 +550,14 @@ export function Component() {
           {/* ANCHOR 3: Credits */}
           <div style={{
             position: 'relative',
-            marginTop: '200px',
+            marginTop: '180px',
             color: '#fff',
             width: '100%',
             maxWidth: 'none',
             paddingLeft: '3px',
             paddingRight: '3px',
-            paddingTop: '10px',
-            paddingBottom: '40px',
+            paddingTop: '20px',
+            paddingBottom: '0px',
             mixBlendMode: 'difference',
             transform: 'translateZ(0)',
             textAlign: 'left'
