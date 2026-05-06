@@ -106,7 +106,7 @@ export function Component() {
         <ParallaxSection id="wide-1" style={{ minHeight: '503px' }}>
           <ParallaxLayer
             sectionId="wide-1"
-            layer={{ type: 'image', src: cldImg(ALT[1], 'w_2000'), speed: 0.25 }}
+            layer={{ type: 'image', src: cldImg(ALT[1], 'w_2000') }}
             position={{ top: '0', left: '16.67%', width: '66.25%', height: '503px', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -117,24 +117,11 @@ export function Component() {
         </ParallaxSection>
 
         <ParallaxSection id="stacked-stills" style={{ minHeight: '735px' }}>
-          <ParallaxLayer
-            sectionId="stacked-stills"
-            layerIndex={0}
-            layer={{ type: 'image', src: cldImg(ALT[2], 'w_1200'), speed: 0 }}
-            position={{ top: '0', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
-          />
-          <ParallaxLayer
-            sectionId="stacked-stills"
-            layerIndex={1}
-            layer={{ type: 'image', src: cldImg(ALT[3], 'w_1200'), speed: 0 }}
-            position={{ top: '245px', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
-          />
-          <ParallaxLayer
-            sectionId="stacked-stills"
-            layerIndex={2}
-            layer={{ type: 'image', src: cldImg(ALT[4], 'w_1200'), speed: 0 }}
-            position={{ top: '490px', left: '33.33%', width: '32.3%', height: '245px', zIndex: 1 }}
-          />
+          <div className="relative z-10 mx-auto" style={{ width: '32.3%', marginLeft: '33.33%' }}>
+            <img src={cldImg(ALT[2], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
+            <img src={cldImg(ALT[3], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
+            <img src={cldImg(ALT[4], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
+          </div>
         </ParallaxSection>
 
         {/* 5. PHOTO PAIR  */}
@@ -142,13 +129,13 @@ export function Component() {
           <ParallaxLayer
             sectionId="photo-pair"
             layerIndex={0}
-            layer={{ type: 'image', src: cldImg(ALT[5], 'w_1200'), speed: 0.3 }}
+            layer={{ type: 'image', src: cldImg(ALT[5], 'w_1200') }}
             position={{ top: '0', left: '45.83%', width: '32.3%', height: '246px', zIndex: 1 }}
           />
           <ParallaxLayer
             sectionId="photo-pair"
             layerIndex={1}
-            layer={{ type: 'image', src: cldImg(ALT[6], 'w_1200'), speed: 0.45 }}
+            layer={{ type: 'image', src: cldImg(ALT[6], 'w_1200') }}
             position={{ top: '18vh', left: '16.67%', width: '32.3%', height: '246px', zIndex: 2 }}
           />
         </ParallaxSection>
@@ -157,7 +144,7 @@ export function Component() {
         <ParallaxSection id="portrait-st107" style={{ minHeight: '828px' }}>
           <ParallaxLayer
             sectionId="portrait-st107"
-            layer={{ type: 'image', src: cldImg(ALT[7], 'w_900'), speed: 0.25 }}
+            layer={{ type: 'image', src: cldImg(ALT[7], 'w_900') }}
             position={{ top: '0', left: 'calc(50% - 233px)', width: '466px', height: '828px', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -172,13 +159,13 @@ export function Component() {
           <ParallaxLayer
             sectionId="photo-pair-2"
             layerIndex={0}
-            layer={{ type: 'image', src: cldImg(ALT[8], 'w_1200'), speed: 0.3 }}
+            layer={{ type: 'image', src: cldImg(ALT[8], 'w_1200') }}
             position={{ top: '0', left: '16.67%', width: '32.3%', height: '291px', zIndex: 1 }}
           />
           <ParallaxLayer
             sectionId="photo-pair-2"
             layerIndex={1}
-            layer={{ type: 'image', src: cldImg(ALT[9], 'w_1200'), speed: 0.45 }}
+            layer={{ type: 'image', src: cldImg(ALT[9], 'w_1200') }}
             position={{ top: '20vh', left: '45.83%', width: '32.3%', height: '291px', zIndex: 2 }}
           />
         </ParallaxSection>
@@ -204,7 +191,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="inv-block"
             layerIndex={0}
-            layer={{ type: 'image', src: cldImg(ALT[10], 'w_1200'), speed: 0.3 }}
+            layer={{ type: 'image', src: cldImg(ALT[10], 'w_1200') }}
             position={{ top: '70px', left: '8.33%', width: '32.3%', height: '246px', zIndex: 2 }}
           />
           <div style={{
@@ -217,7 +204,7 @@ export function Component() {
             zIndex: 1,
           }}>
             <VideoPlayer
-              id="fw-video-5"
+              id="fw-video-inv"
               src={cldVideo(ALT.v5)}
               autoPlay
               loop={false}
@@ -229,28 +216,28 @@ export function Component() {
           <ParallaxLayer
             sectionId="inv-block"
             layerIndex={2}
-            layer={{ type: 'image', src: cldImg(ALT[11], 'w_1200'), speed: 0 }}
+            layer={{ type: 'image', src: cldImg(ALT[11], 'w_1200') }}
             position={{ top: 'calc(246px + 668px)', left: '63.5%', width: '32.3%', height: '245px', zIndex: 2 }}
           />
           {/* img 12 */}
           <ParallaxLayer
             sectionId="inv-block"
             layerIndex={3}
-            layer={{ type: 'image', src: cldImg(ALT[12], 'w_1200'), speed: 0 }}
+            layer={{ type: 'image', src: cldImg(ALT[12], 'w_1200') }}
             position={{ top: 'calc(246px + 678px + 245px + 100px)', left: 'calc(50% - 233px)', width: '32.3%', height: '245px', zIndex: 2 }}
           />
           {/* img 13 */}
           <ParallaxLayer
             sectionId="inv-block"
             layerIndex={4}
-            layer={{ type: 'image', src: cldImg(ALT[13], 'w_1200'), speed: 0 }}
+            layer={{ type: 'image', src: cldImg(ALT[13], 'w_1200') }}
             position={{ top: 'calc(246px + 678px + 245px + 110px + 245px + 110px)', left: '122px', width: '32.3%', height: '246px', zIndex: 2 }}
           />
           {/* img 14 */}
           <ParallaxLayer
             sectionId="inv-block"
             layerIndex={5}
-            layer={{ type: 'image', src: cldImg(ALT[14], 'w_900'), speed: 0 }}
+            layer={{ type: 'image', src: cldImg(ALT[14], 'w_900') }}
             position={{ top: 'calc(246px + 678px + 245px + 110px + 245px + 110px + 246px + 110px)', left: '58.83%', width: '32.3%', height: '246px', zIndex: 2 }}
           />
         </ParallaxSection>
@@ -260,27 +247,27 @@ export function Component() {
           <ParallaxLayer
             sectionId="stacked-portraits"
             layerIndex={0}
-            layer={{ type: 'image', src: cldImg(ALT[15], 'w_900'), speed: 0.25 }}
+            layer={{ type: 'image', src: cldImg(ALT[15], 'w_900') }}
             position={{ top: '0', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
           />
           <ParallaxLayer
             sectionId="stacked-portraits"
             layerIndex={1}
-            layer={{ type: 'video', src: cldVideo(ALT.v6), speed: 0.25 }}
+            layer={{ type: 'video', src: cldVideo(ALT.v6) }}
             position={{ top: '828px', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
           />
         </ParallaxSection>
 
-        {/* 16. FULL-WIDTH VIDEO 5  */}
-        <ParallaxSection id="fw-video-5" className="min-h-[80vh] bg-obsidian">
-          <VideoSection id="fw-video-5" src={cldVideo(ALT.v7)} />
+        {/* 16. FULL-WIDTH VIDEO 7  */}
+        <ParallaxSection id="fw-video-7" className="min-h-[80vh] bg-obsidian">
+          <VideoSection id="fw-video-7" src={cldVideo(ALT.v7)} />
         </ParallaxSection>
 
         {/* 17. PORTRAIT  */}
         <ParallaxSection id="portrait-img16" style={{ minHeight: '828px' }}>
           <ParallaxLayer
             sectionId="portrait-img16"
-            layer={{ type: 'image', src: cldImg(ALT[16], 'w_900'), speed: 0 }}
+            layer={{ type: 'image', src: cldImg(ALT[16], 'w_900') }}
             position={{ top: '0', left: '33.33%', width: '32.3%', height: '828px', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -359,9 +346,9 @@ export function Component() {
 
         {/* 5. Photo pair 1 */}
         <div style={{ position: 'relative', marginTop: '80px', height: '144px', width: '100%' }}>
-          <PI speed={0.3} src={cldImg(ALT[5], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[5], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: 0, right: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
-          <PI speed={0.2} src={cldImg(ALT[6], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[6], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '48px', left: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
         </div>
 
@@ -381,9 +368,9 @@ export function Component() {
 
         {/* 8. Photo pair 2 */}
         <div style={{ position: 'relative', marginTop: '80px', height: '171px', width: '100%' }}>
-          <PI speed={0.2} src={cldImg(ALT[8], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[8], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: 0, left: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
-          <PI speed={0.3} src={cldImg(ALT[9], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[9], 'w_600')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '57px', right: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
         </div>
 
@@ -399,18 +386,18 @@ export function Component() {
 
         {/* 11. Scatter section */}
         <div style={{ position: 'relative', marginTop: '80px', height: '642px', width: '100%' }}>
-          <PI speed={0.2} src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: 0, left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '205px' }}>
             <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} objectFit="cover" style={{ width: '100%', height: '100%' }} />
           </div>
-          <PI speed={0.15} src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '226px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <PI speed={0.25} src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '340px', left: '108px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <PI speed={0.2} src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '454px', left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <PI speed={0.15} src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async"
             style={{ position: 'absolute', top: '568px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
         </div>
 

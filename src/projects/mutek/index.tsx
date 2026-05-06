@@ -141,7 +141,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="intro"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img1, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img1 }}
             position={{ top: '396px', left: '8.47%', width: '467px', height: '700px', zIndex: 1 }}
           />
 
@@ -161,7 +161,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="intro"
             layerIndex={3}
-            layer={{ type: 'image', src: ASSETS.img2, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img2 }}
             position={{ top: '875px', left: '33.8%', width: '467px', height: '700px', zIndex: 2 }}
           />
         </ParallaxSection>
@@ -348,7 +348,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="big-image"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img10, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img10 }}
             position={{ top: '-18px', left: '0', width: '100%', height: '846px', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -372,7 +372,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="image-text"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img11, speed: 0.3 }}
+            layer={{ type: 'image', src: ASSETS.img11 }}
             position={{ top: '-18px', left: '21.1%', width: '57.7%', height: 'calc(60vh + 36px)', zIndex: 1 }}
           />
 
@@ -425,7 +425,7 @@ export function Component() {
 
         {/* 3. First image pair + title + sub-text — absolute layout per Figma */}
         <div style={{ position: 'relative', height: '674px', marginTop: '80px' }}>
-          <PI speed={0.2} src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
+          <PI src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
           <h3 style={{
             position: 'absolute',
             top: '252px',
@@ -444,7 +444,7 @@ export function Component() {
           } as any}>
             Ritual al Vacío
           </h3>
-          <PI speed={0.25} src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
+          <PI src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
           <div className="mutek-p" style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10 }}>
             Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
           </div>
@@ -470,8 +470,8 @@ export function Component() {
         {/* 7. Stills + marquee + DSC3353 + P_RITUAL + Still 15 + Still 126 — absolute layout */}
         {/* Still145 top:0, Still18 top:136, Marquee top:147, DSC3353 top:342, P_RITUAL top:496, Still15 top:726, Still126 top:854 */}
         <div style={{ position: 'relative', height: '950px', marginTop: '80px' }}>
-          <PI speed={0.2} src={ASSETS.img3} alt="" style={{ position: 'absolute', left: 'calc(8.33% + 17.5px)', top: 0, width: '290px', height: '163px', objectFit: 'cover' }} />
-          <PI speed={0.25} src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img3} alt="" style={{ position: 'absolute', left: 'calc(8.33% + 17.5px)', top: 0, width: '290px', height: '163px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
 
           {/* Marquee 1 — overlaps bottom of Still18 */}
           <div style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
@@ -490,7 +490,7 @@ export function Component() {
           </div>
 
           {/* DSC3353 — left-aligned per Figma annotation */}
-          <PI speed={0.2} src={ASSETS.img5} alt="" style={{ position: 'absolute', left: '0px', top: '342px', width: '280px', height: '187px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img5} alt="" style={{ position: 'absolute', left: '0px', top: '342px', width: '280px', height: '187px', objectFit: 'cover' }} />
 
           {/* P_RITUAL — right-indented, nowrap per Figma */}
           <div className="mutek-p" style={{
@@ -506,10 +506,10 @@ export function Component() {
           </div>
 
           {/* Still 15 — right-aligned */}
-          <PI speed={0.3} src={ASSETS.img6} alt="" style={{ position: 'absolute', right: 0, top: '726px', width: '280px', height: '158px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img6} alt="" style={{ position: 'absolute', right: 0, top: '726px', width: '280px', height: '158px', objectFit: 'cover' }} />
 
           {/* Still 126 — left edge */}
-          <PI speed={0.2} src={ASSETS.img7} alt="" style={{ position: 'absolute', left: 0, top: '854px', width: '170px', height: '96px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img7} alt="" style={{ position: 'absolute', left: 0, top: '854px', width: '170px', height: '96px', objectFit: 'cover' }} />
         </div>
 
         {/* 8. P_QUESTION */}
@@ -524,7 +524,7 @@ export function Component() {
 
         {/* 10. Second image pair + Marquee 2 — absolute layout */}
         <div style={{ position: 'relative', height: '500px', marginTop: '80px' }}>
-          <PI speed={0.2} src={ASSETS.img8} alt="" style={{ position: 'absolute', right: '20px', top: 0, width: '200px', height: '300px', objectFit: 'cover', zIndex: 3 }} />
+          <PI src={ASSETS.img8} alt="" style={{ position: 'absolute', right: '20px', top: 0, width: '200px', height: '300px', objectFit: 'cover', zIndex: 3 }} />
 
           {/* Marquee 2 — centered overlap between img8 and img9 */}
           <div style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 2, mixBlendMode: 'difference' }}>
@@ -542,7 +542,7 @@ export function Component() {
             </div>
           </div>
 
-          <PI speed={0.25} src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '20px', top: '200px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
+          <PI src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '20px', top: '200px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
         </div>
 
         {/* 11. P_APELA */}
@@ -552,7 +552,7 @@ export function Component() {
 
         {/* 12. Full-width image (Still 122) 390×572 */}
         <div style={{ position: 'relative', width: '100%', height: '572px', marginTop: '105px', overflow: 'hidden' }}>
-          <PI speed={0.2} src={ASSETS.img10} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <PI src={ASSETS.img10} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
         {/* 13. P_UMBRAL */}
@@ -562,7 +562,7 @@ export function Component() {
 
         {/* 14. Still 111 — centered, 350×197 */}
         <div style={{ position: 'relative', width: '350px', height: '197px', marginTop: '105px', marginLeft: 'auto', marginRight: 'auto', overflow: 'hidden' }}>
-          <PI speed={0.2} src={ASSETS.img11} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          <PI src={ASSETS.img11} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
         {/* 15. P_CAVERNA */}

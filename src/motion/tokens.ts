@@ -23,11 +23,11 @@ export const STAGGER = {
 export const PARALLAX = {
   intensity: { desktop: 500, mobile: 80 },
   speed: {
-    subtle: 0.8,
-    normal: 0.8,
-    strong: 0.8,
-    hero: 0.8,
-    standard: 0.8,
+    subtle: 0.02,
+    normal: 0.04,
+    strong: 0.06,
+    hero: 0.02,
+    standard: 0.1,
   },
   uniform: {
     factor: 0.22,
