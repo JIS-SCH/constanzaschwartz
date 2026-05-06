@@ -8,7 +8,7 @@ import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
-import { MARQUEE } from '@/src/motion/tokens'
+import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
 import { ASSETS } from './assets'
 import { GAP, TW, TEXT_BLOCK_STYLE } from '../shared'
 
@@ -61,7 +61,7 @@ const CAROUSEL_2 = [
 // ---------------------------------------------------------------------------
 function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
-  const duration = images.length * MARQUEE.durationPerImage
+  const duration = images.length * CAROUSEL.durationPerImage
   return (
     <div className="w-full h-[var(--carousel-h)] overflow-hidden">
       <style dangerouslySetInnerHTML={{
@@ -138,6 +138,8 @@ export function Component() {
           -webkit-mix-blend-mode: difference !important;
         }
 
+
+
         .mal-container { isolation: isolate; }
         .mal-container section { isolation: auto !important; }
         
@@ -164,6 +166,12 @@ export function Component() {
           width: max-content;
           animation: marquee-scroll linear infinite;
           will-change: transform;
+          mix-blend-mode: difference !important;
+        }
+
+        @keyframes marquee-scroll {
+          from { transform: translate3d(0, 0, 0); }
+          to { transform: translate3d(-50%, 0, 0); }
         }
         .mal-desktop {
           display: block;
@@ -208,8 +216,8 @@ export function Component() {
               type: 'marquee',
               content: 'DIRECCIÓN CREATIVA Y EJECUTIVA  /   ESCENOGRAFÍA  /   DISEÑO LUMÍNICO DE ESPECTÁCULOS  /   DISEÑO SONORO QUINTAFÓNICO  /   DIRECCIÓN DE OBRA',
               speed: 0,
-              intensity: 24,
-              className: 'mal-marquee-blend mal-h4'
+              className: 'mal-h4',
+              duration: 134 * MARQUEE.secondsPerChar
             }}
             position={{ top: '0', left: '0', width: '100%', height: '44px', zIndex: 10 }}
           />
@@ -238,8 +246,8 @@ export function Component() {
               type: 'marquee',
               content: 'Somos responsables de los mundos que creamos',
               speed: 0,
-              intensity: 24,
-              className: 'mal-marquee-blend mal-h4'
+              className: 'mal-marquee-blend mal-h4',
+              duration: 44 * MARQUEE.secondsPerChar
             }}
             position={{ top: '880px', left: '0', width: '100%', height: '56px', zIndex: 11 }}
           />
@@ -313,8 +321,8 @@ export function Component() {
               type: 'marquee',
               content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.',
               speed: 0,
-              intensity: 24,
-              className: 'mal-marquee-blend mal-h4'
+              className: 'mal-marquee-blend mal-h4',
+              duration: 71 * MARQUEE.secondsPerChar
             }}
             position={{ top: '40px', left: '0', width: '100%', height: '56px', zIndex: 0 }}
           />
@@ -372,8 +380,8 @@ export function Component() {
               type: 'marquee',
               content: '¿CÓMO SEGUIR HABITANDO EL PLANETA?',
               speed: 0,
-              intensity: 24,
-              className: 'mal-marquee-blend mal-h4'
+              className: 'mal-marquee-blend mal-h4',
+              duration: 34 * MARQUEE.secondsPerChar
             }}
             position={{ top: '115px', left: '0', width: '100%', height: '56px', zIndex: 3 }}
           />
@@ -454,8 +462,8 @@ export function Component() {
               type: 'marquee',
               content: 'NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA',
               speed: 0,
-              intensity: 24,
-              className: 'mal-marquee-blend mal-h4'
+              className: 'mal-marquee-blend mal-h4',
+              duration: 84 * MARQUEE.secondsPerChar
             }}
             position={{ top: '630px', left: '0', width: '100%', height: '56px', zIndex: 2 }}
           />
@@ -617,8 +625,18 @@ export function Component() {
           </div>
 
           {/* Marquee overlay */}
-          <div style={{ position: 'absolute', bottom: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
+          <div style={{ position: 'absolute', bottom: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3 }}>
+            <div className="marquee-track" style={{ animationDuration: `${45 * MARQUEE.secondsPerChar}s` }}>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std", sans-serif',
+                  fontSize: '28px',
+                  fontWeight: 250,
+                  letterSpacing: '0.56px',
+                  textTransform: 'uppercase',
+                  color: '#FFF'
+                } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS </span>
+              </div>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std", sans-serif',
@@ -682,7 +700,17 @@ export function Component() {
 
           {/* Marquee overlay */}
           <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '44px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
+            <div className="marquee-track" style={{ animationDuration: `${71 * MARQUEE.secondsPerChar}s` }}>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{
+                  fontFamily: '"Helvetica Neue LT Std", sans-serif',
+                  fontSize: '28px',
+                  fontWeight: 250,
+                  letterSpacing: '0.56px',
+                  textTransform: 'uppercase',
+                  color: '#FFF'
+                } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD </span>
+              </div>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
                   fontFamily: '"Helvetica Neue LT Std", sans-serif',
@@ -698,13 +726,13 @@ export function Component() {
         </div>
 
         {/* PORTRAIT PAIR */}
-        <div style={{ position: 'relative', marginTop: '40px', height: '560px', width: '100%' }}>
+        <div style={{ position: 'relative', marginTop: '0px', height: '560px', width: '100%' }}>
           <PI src={IMG_WEB005} alt="" style={{ position: 'absolute', left: '0', top: '0', width: '200px', height: '270px' }} />
           <PI src={IMG_WEB022} alt="" style={{ position: 'absolute', right: '0', top: '200px', width: '200px', height: '330px' }} />
         </div>
 
         {/* VIDEO 1 */}
-        <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', marginTop: '80px' }}>
+        <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%', marginTop: '50px' }}>
           <div className="vimeo-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
             <CustomVimeoPlayer
               videoUrl="https://player.vimeo.com/video/1186767280?h=ef4894270a"
@@ -719,7 +747,12 @@ export function Component() {
             <img src={IMG_GIF2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div style={{ position: 'absolute', top: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
+            <div className="marquee-track" style={{ animationDuration: `${34 * MARQUEE.secondsPerChar}s` }}>
+              <div className="marquee-set">
+                <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>
+                  ¿CÓMO SEGUIR HABITANDO EL PLANETA?
+                </span>
+              </div>
               <div className="marquee-set">
                 <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>
                   ¿CÓMO SEGUIR HABITANDO EL PLANETA?
@@ -750,14 +783,14 @@ export function Component() {
         </div>
 
         {/* STAIRCASE 2 */}
-        <div style={{ position: 'relative', height: '520px', marginTop: '80px' }}>
+        <div style={{ position: 'relative', height: '520px', marginTop: '62px' }}>
           <PI src={IMG_WEB014_V} alt="" style={{ position: 'absolute', left: '0', top: '0', width: '140px', height: '210px' }} />
           <img src={IMG_WEB014} alt="" style={{ position: 'absolute', left: '110px', top: '170px', width: '170px', height: '113px', objectFit: 'cover', zIndex: 3 }} />
           <img src={IMG_WEB013} alt="" style={{ position: 'absolute', left: '190px', top: '270px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
         </div>
 
         {/* FINISH */}
-        <div style={{ marginTop: '80px' }}>
+        <div style={{ marginTop: '-30px' }}>
           <div style={{ width: '100%', aspectRatio: '3/2' }}>
             <img src={IMG_WEB015} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
@@ -770,13 +803,16 @@ export function Component() {
             </TextBlock>
           </div>
 
-          <div style={{ position: 'relative', height: '540px', marginTop: '80px' }}>
+          <div style={{ position: 'relative', height: '540px', marginTop: '50px' }}>
             <PI src={IMG_WEB040} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px' }} />
             <PI src={IMG_WEB037} alt="" style={{ position: 'absolute', left: '20px', top: '250px', width: '230px', height: '153px' }} />
 
             {/* Marquee overlay */}
             <div style={{ position: 'absolute', top: '360px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference', zIndex: 3 }}>
-              <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
+              <div className="marquee-track" style={{ animationDuration: `${85 * MARQUEE.secondsPerChar}s` }}>
+                <div className="marquee-set">
+                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span>
+                </div>
                 <div className="marquee-set">
                   <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span>
                 </div>
@@ -784,7 +820,7 @@ export function Component() {
             </div>
           </div>
 
-          <div style={{ width: '100%', aspectRatio: '3/2', marginTop: '40px' }}>
+          <div style={{ width: '100%', aspectRatio: '3/2', marginTop: '-50px' }}>
             <img src={IMG_WEB054} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
@@ -793,18 +829,11 @@ export function Component() {
           </div>
 
           <div style={{ color: '#fff', marginTop: '80px', padding: '20px' }}>
-            <p style={{
-              textTransform: 'uppercase',
-              fontFamily: '"Helvetica Neue LT Std", sans-serif',
-              fontSize: '32px',
-              fontWeight: 200,
-              lineHeight: '1.1',
-            }}>
-              SI TIENES APEGO A TU<br />CORDURA, NO ENTRES.
-            </p>
-
-            <div style={{ marginTop: '60px', height: '40px', overflow: 'hidden' }}>
-              <div className="marquee-track" style={{ animationDuration: `${MARQUEE.speed.medium}s` }}>
+            <div style={{ marginTop: '0px', height: '40px', overflow: 'hidden' }}>
+              <div className="marquee-track" style={{ animationDuration: `${41 * MARQUEE.secondsPerChar}s` }}>
+                <div className="marquee-set">
+                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span>
+                </div>
                 <div className="marquee-set">
                   <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span>
                 </div>

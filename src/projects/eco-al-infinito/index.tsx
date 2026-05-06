@@ -5,18 +5,13 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { ASSETS } from './assets'
+import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
 import { TW, CH, HERO_TOP, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE } from '../shared'
 
 /** Consistent vertical gap between sections (px) */
 const GAP = '220px'
 
-// Carousel widths per Figma component 5/6 — narrow=221px, wide=496px
-const CAROUSEL_1_WIDTHS = [
-  CAROUSEL_W_NARROW, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE, CAROUSEL_W_NARROW, CAROUSEL_W_NARROW,
-] as const
-const CAROUSEL_2_WIDTHS = [
-  CAROUSEL_W_WIDE, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE, CAROUSEL_W_NARROW, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE,
-] as const
+
 
 export { meta } from './meta'
 
@@ -33,6 +28,7 @@ export function Component() {
         .eco-h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
         .eco-h4 { font-size: var(--h4-size); line-height: var(--h4-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: var(--h4-ls); }
         .eco-marquee { font-size: var(--h4-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 250; letter-spacing: 0.72px; text-transform: uppercase; color: #fff; leading-trim: both; text-edge: cap; }
+        .marquee-track { display: flex; width: max-content; animation: marquee-scroll linear infinite; will-change: transform; mix-blend-mode: difference !important; }
         .eco-list { font-size: var(--list-size); line-height: var(--list-lh); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; letter-spacing: var(--list-ls); }
         .eco-p { font-size: var(--p-size); line-height: var(--p-lh); font-family: 'Space Grotesk', sans-serif; font-weight: 200; letter-spacing: var(--p-ls); color: #fff; }
         .eco-credits { font-size: var(--h5-size); font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 100; letter-spacing: var(--h5-ls); text-transform: uppercase; }
@@ -100,11 +96,12 @@ export function Component() {
         </ParallaxSection>
 
         {/* ESCULTURA COLGANTE SITE-SPECIFIC. band */}
-        <div style={{ padding: '20px 0', overflow: 'hidden', backgroundColor: '#0F0F0F', marginBottom: '-30px' }}>
-          <div className="marquee-track" style={{ animationDuration: '32s' }}>
+        <div style={{ padding: '20px 0', overflow: 'hidden', marginBottom: '-30px' }}>
+          {/* Marquee 1 — ESCULTURA COLGANTE */}
+          <div className="marquee-track" style={{ animationDuration: `${33 * MARQUEE.secondsPerChar}s` }}>
             {[0, 1].map((setIdx) => (
               <div key={setIdx} className="marquee-set">
-                {Array.from({ length: 4 }, (_, i) => (
+                {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
                   <span key={i} className="marquee-item eco-marquee">
                     ESCULTURA COLGANTE SITE-SPECIFIC/
                   </span>
@@ -159,10 +156,10 @@ export function Component() {
 
           {/* Marquee overlay - Absolute on top of the anchor */}
           <div style={{ position: 'absolute', top: '100px', left: 0, width: '100%', height: '50px', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${59 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
-                  {Array.from({ length: 4 }, (_, i) => (
+                  {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
                     <span key={i} className="marquee-item eco-marquee">
                       Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
                     </span>
@@ -322,10 +319,10 @@ export function Component() {
 
           {/* Marquee Text ON TOP of Img 17 and 18 */}
           <div style={{ position: 'absolute', top: '2460px', left: 0, width: '100%', zIndex: 5, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${74 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
-                  {Array.from({ length: 4 }, (_, i) => (
+                  {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
                     <span key={i} className="marquee-item eco-marquee">
                       SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·
                     </span>
@@ -401,10 +398,10 @@ export function Component() {
 
           {/* Marquee Text ON TOP of Img 23 and 24 */}
           <div style={{ position: 'absolute', top: '2540px', left: 0, width: '100%', zIndex: 5, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${61 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
-                  {Array.from({ length: 4 }, (_, i) => (
+                  {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
                     <span key={i} className="marquee-item eco-marquee">
                       SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ ·
                     </span>
@@ -456,10 +453,10 @@ export function Component() {
             position={{ top: '2963px', left: '0', width: '100%', height: CH, zIndex: 2 }}
           >
             <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: 'eco-carousel-scroll 18s linear infinite', animation: 'eco-carousel-scroll 18s linear infinite' }}>
+              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: `eco-carousel-scroll ${5 * CAROUSEL.durationPerImage}s linear infinite`, animation: `eco-carousel-scroll ${5 * CAROUSEL.durationPerImage}s linear infinite` }}>
                 {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5,
                 ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5].map((src, i) => (
-                  <img key={i} src={src} alt="" style={{ height: CH, width: CAROUSEL_1_WIDTHS[i % CAROUSEL_1_WIDTHS.length], objectFit: 'cover', display: 'block', flexShrink: 0 }} />
+                  <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
                 ))}
               </div>
             </div>
@@ -500,11 +497,12 @@ export function Component() {
           />
 
           {/* Marquee Text ON TOP of Img 32 */}
+          {/* Marquee 3 — CREDITS */}
           <div style={{ position: 'absolute', top: '962px', left: 0, width: '100%', zIndex: 5, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '32s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${71 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
-                  {Array.from({ length: 4 }, (_, i) => (
+                  {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
                     <span key={i} className="marquee-item eco-marquee">
                       SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER  ·
                     </span>
@@ -555,10 +553,10 @@ export function Component() {
         {/* 18. CAROUSEL 2 (carousel6-10) */}
         <ParallaxSection id="carousel-section-2" style={{ marginTop: GAP, marginBottom: '-60px' }}>
           <div className="relative w-full h-[331px] z-2 overflow-hidden">
-            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: 'eco-carousel-scroll-2 18s linear infinite', animation: 'eco-carousel-scroll-2 18s linear infinite' }}>
+            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: `eco-carousel-scroll-2 ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `eco-carousel-scroll-2 ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
               {[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11,
               ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11].map((src, i) => (
-                <img key={i} src={src} alt="" style={{ height: '331px', width: CAROUSEL_2_WIDTHS[i % CAROUSEL_2_WIDTHS.length], objectFit: 'cover', display: 'block', flexShrink: 0 }} />
+                <img key={i} src={src} alt="" style={{ height: '331px', width: 'auto', display: 'block', flexShrink: 0 }} />
               ))}
             </div>
           </div>
@@ -691,8 +689,8 @@ export function Component() {
         <div style={{ position: 'relative', width: '100%', height: '525px', marginTop: '46px' }}>
           <img src={ASSETS.img4} alt="" style={{ display: 'block', width: '350px', height: '100%', objectFit: 'cover', margin: '0 auto' }} />
 
-          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10 }}>
-            <div className="marquee-track" style={{ animationDuration: '22s' }}>
+          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
+            <div className="marquee-track" style={{ animationDuration: `${59 * MARQUEE.secondsPerChar}s` }}>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
             </div>
@@ -779,8 +777,8 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div className="blend-difference" style={{ position: 'relative', zIndex: 5, marginTop: '40px', height: '30px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '24s' }}>
+        <div style={{ position: 'relative', zIndex: 5, marginTop: '40px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
+          <div className="marquee-track" style={{ animationDuration: `${74 * MARQUEE.secondsPerChar}s` }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
           </div>
@@ -810,8 +808,8 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '28s' }}>
+        <div style={{ position: 'relative', zIndex: 5, marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
+          <div className="marquee-track" style={{ animationDuration: `${60 * MARQUEE.secondsPerChar}s` }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
           </div>
@@ -838,10 +836,10 @@ export function Component() {
 
         {/* Carousel 1 */}
         <div style={{ marginTop: '-243px', width: '100%', height: CH, overflow: 'hidden' }}>
-          <div style={{ display: 'flex', height: CH, width: 'max-content', animation: 'eco-m-c1 14s linear infinite' }}>
+          <div style={{ display: 'flex', height: CH, width: 'max-content', animation: `eco-m-c1 ${5 * CAROUSEL.durationPerImage}s linear infinite` }}>
             {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5,
             ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5].map((src, i) => (
-              <img key={i} src={src} alt="" style={{ height: CH, width: CAROUSEL_1_WIDTHS[i % CAROUSEL_1_WIDTHS.length], objectFit: 'cover', display: 'block', flexShrink: 0 }} />
+              <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
             ))}
           </div>
         </div>
@@ -885,8 +883,8 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div className="blend-difference" style={{ position: 'relative', zIndex: 5, marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden' }}>
-          <div className="marquee-track" style={{ animationDuration: '26s' }}>
+        <div style={{ position: 'relative', zIndex: 5, marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
+          <div className="marquee-track" style={{ animationDuration: `${75 * MARQUEE.secondsPerChar}s` }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
           </div>
@@ -910,10 +908,10 @@ export function Component() {
 
         {/* Carousel 2 */}
         <div style={{ marginTop: '122px', width: '100%', height: '331px', overflow: 'hidden' }}>
-          <div style={{ display: 'flex', height: '331px', width: 'max-content', animation: 'eco-m-c2 18s linear infinite' }}>
+          <div style={{ display: 'flex', height: '331px', width: 'max-content', animation: `eco-m-c2 ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
             {[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11,
             ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11].map((src, i) => (
-              <img key={i} src={src} alt="" style={{ height: '331px', width: CAROUSEL_2_WIDTHS[i % CAROUSEL_2_WIDTHS.length], objectFit: 'cover', display: 'block', flexShrink: 0 }} />
+              <img key={i} src={src} alt="" style={{ height: '331px', width: 'auto', display: 'block', flexShrink: 0 }} />
             ))}
           </div>
         </div>

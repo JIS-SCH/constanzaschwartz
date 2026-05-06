@@ -5,7 +5,7 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { ASSETS } from './assets'
 import { TEXT_BLOCK_STYLE, CH } from '../shared'
-import { PARALLAX } from '@/src/motion/tokens'
+import { PARALLAX, MARQUEE, CAROUSEL } from '@/src/motion/tokens'
 
 export { meta } from './meta'
 
@@ -33,8 +33,6 @@ export function Component() {
           font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
           font-weight: 250 !important;
           text-transform: uppercase;
-          mix-blend-mode: difference;
-          -webkit-mix-blend-mode: difference;
           leading-trim: both;
           text-edge: cap;
         }
@@ -275,8 +273,8 @@ export function Component() {
             layer={{ type: 'image', src: ASSETS.img4, speed: PARALLAX.speed.subtle, effect: 'bg' }}
             position={{ top: '535px', left: '34.7%', width: '457px', height: '700px', zIndex: 1 }}
           />
-          <div style={{ position: 'absolute', top: '1145px', left: 0, width: '100%', height: '8vh', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+          <div style={{ position: 'absolute', top: '1145px', left: 0, width: '100%', height: '8vh', zIndex: 3, overflow: 'hidden' }}>
+            <div className="marquee-track" style={{ animationDuration: `${111 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -314,7 +312,7 @@ export function Component() {
             position={{ top: '590px', left: '0', width: '100%', height: CH, zIndex: 2 }}
           >
             <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: 'dwm-carousel-scroll 10s linear infinite', animation: 'dwm-carousel-scroll 10s linear infinite' }}>
+              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
                 {[
                   ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3,
                   ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6,
@@ -348,7 +346,7 @@ export function Component() {
         {/* 8. COLLAGE-3 + MARQUEE */}
         <ParallaxSection id="collage-3" style={{ minHeight: 'var(--h-c3)' }}>
           <div style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: '8vh', zIndex: 4, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${154 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -404,12 +402,12 @@ export function Component() {
           {/* Marquee — overlapping img10 bottom */}
           <div style={{
             width: '100%', overflow: 'hidden',
-            marginTop: '-17px', // Superposición para que se vea el efecto difference
+            marginTop: '-17px',
             position: 'relative',
             zIndex: 10,
             mixBlendMode: 'difference',
           }}>
-            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+          <div className="marquee-track" style={{ animationDuration: `${116 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -505,8 +503,8 @@ export function Component() {
         <div style={{ position: 'relative', height: 'var(--h-c2)' }}>
           <PI speed={PARALLAX.speed.subtle} src={ASSETS.img3} alt="" style={{ position: 'absolute', top: '-110px', left: 'var(--c2-a-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 2 }} />
           <PI speed={PARALLAX.speed.subtle} src={ASSETS.img4} alt="" style={{ position: 'absolute', top: '70px', left: 'var(--c2-b-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 1 }} />
-          <div style={{ position: 'absolute', top: '290px', left: 0, width: '100%', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '40s' }}>
+          <div style={{ position: 'absolute', top: '290px', left: 0, width: '100%', overflow: 'hidden', zIndex: 10 }}>
+            <div className="marquee-track" style={{ animationDuration: `${111 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -534,7 +532,7 @@ export function Component() {
             </div>
           </div>
           <div style={{ position: 'absolute', top: '-54px', left: 0, width: '100%', height: '330px', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', height: '330px', width: 'max-content', willChange: 'transform', WebkitAnimation: 'dwm-carousel-scroll 12s linear infinite', animation: 'dwm-carousel-scroll 12s linear infinite' }}>
+            <div style={{ display: 'flex', height: '330px', width: 'max-content', willChange: 'transform', WebkitAnimation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
               {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6].map((src, i) => (
                 <img key={i} src={src} alt="" style={{ height: '330px', width: 'auto', display: 'block', flexShrink: 0 }} />
               ))}
@@ -558,7 +556,7 @@ export function Component() {
         {/* 8. COLLAGE-3 + MARQUEE */}
         <div style={{ position: 'relative', height: 'var(--h-c3)', top: '-650px' }}>
           <div style={{ position: 'absolute', top: '60px', left: 0, width: '100%', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '40s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${154 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -599,7 +597,7 @@ export function Component() {
           </div>
 
           <div style={{ width: '100%', overflow: 'hidden', marginTop: '39px', position: 'relative', zIndex: 10, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '40s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${116 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (

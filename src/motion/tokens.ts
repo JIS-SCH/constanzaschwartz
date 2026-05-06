@@ -37,12 +37,11 @@ export const PARALLAX = {
   gallery: { left: 40, center: 60, right: 80 },
 } as const
 
+export const CAROUSEL = {
+  durationPerImage: 2.2, // Seconds per image slot
+} as const
+
 export const MARQUEE = {
-  durationPerImage: 2.2, // Carousel: seconds per image slot
-  setRepeat: 4,          // Number of repeated sets for seamless loop
-  speed: {
-    slow: 30, // Ambient text tickers
-    medium: 20, // Standard project marquees
-    fast: 12, // High-energy marquees
-  },
+  secondsPerChar: 0.68, // Base velocity: ~50s for 73 chars
+  setRepeat: 4,
 } as const

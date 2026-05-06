@@ -5,6 +5,7 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { ASSETS } from './assets'
 import { TW, TEXT_BLOCK_STYLE, CH, GAP } from '../shared'
+import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
 
 export { meta } from './meta'
 
@@ -106,8 +107,8 @@ export function Component() {
         }
         .mutek-animate-carousel {
           will-change: transform;
-          -webkit-animation: mutek-carousel-scroll 20s linear infinite;
-          animation: mutek-carousel-scroll 20s linear infinite;
+          -webkit-animation: mutek-carousel-scroll var(--carousel-duration, 20s) linear infinite;
+          animation: mutek-carousel-scroll var(--carousel-duration, 20s) linear infinite;
         }
       `}} />
 
@@ -210,8 +211,8 @@ export function Component() {
           />
 
           {/* Marquee — difference blend */}
-          <div style={{ position: 'absolute', top: '742px', left: 0, width: '100%', height: '80px', zIndex: 2, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+          <div style={{ position: 'absolute', top: '742px', left: 0, width: '100%', height: '80px', zIndex: 2, overflow: 'hidden' }}>
+            <div className="marquee-track" style={{ animationDuration: `${90 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -309,7 +310,7 @@ export function Component() {
 
           {/* Marquee (Middle) — difference blend */}
           <div style={{ position: 'absolute', top: '579px', left: 0, width: '100%', height: '80px', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${81 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -390,7 +391,7 @@ export function Component() {
 
         <div style={{ position: 'relative', marginBottom: '190px' }}>
           <div className="w-full h-[var(--carousel-h)] overflow-hidden">
-            <div className="flex h-[var(--carousel-h)] w-max mutek-animate-carousel">
+            <div className="flex h-[var(--carousel-h)] w-max mutek-animate-carousel" style={{ '--carousel-duration': `${7 * CAROUSEL.durationPerImage}s` } as any}>
               {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7,
               ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
                 <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
@@ -474,18 +475,17 @@ export function Component() {
           <PI src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
 
           {/* Marquee 1 — overlaps bottom of Still18 */}
-          <div style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '20s' }}>
-              <div className="marquee-set">
-                <span className="marquee-item">
-                  Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
-                </span>
-              </div>
-              <div className="marquee-set">
-                <span className="marquee-item">
-                  Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
-                </span>
-              </div>
+          <div style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', overflow: 'hidden' }}>
+            <div className="marquee-track" style={{ animationDuration: `${104 * MARQUEE.secondsPerChar}s` }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item">
+                      Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -528,17 +528,16 @@ export function Component() {
 
           {/* Marquee 2 — centered overlap between img8 and img9 */}
           <div style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 2, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: '22s' }}>
-              <div className="marquee-set">
-                <span className="marquee-item">
-                  El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
-                </span>
-              </div>
-              <div className="marquee-set">
-                <span className="marquee-item">
-                  El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
-                </span>
-              </div>
+            <div className="marquee-track" style={{ animationDuration: `${83 * MARQUEE.secondsPerChar}s` }}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="marquee-set">
+                  {Array.from({ length: 4 }, (_, i) => (
+                    <span key={i} className="marquee-item">
+                      El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
+                    </span>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -573,10 +572,10 @@ export function Component() {
         {/* 16. Carousel + Closing Title — Text overlaps carousel */}
         <div style={{ position: 'relative', marginTop: '105px', marginBottom: '105px', width: '100%', height: '331px' }}>
           <div style={{ width: '100%', height: '331px', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: 'mutek-m-c 14s linear infinite', animation: 'mutek-m-c 14s linear infinite' }}>
+            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: `mutek-m-c ${7 * CAROUSEL.durationPerImage}s linear infinite`, animation: `mutek-m-c ${7 * CAROUSEL.durationPerImage}s linear infinite` }}>
               {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7,
               ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
-                <img key={i} src={src} alt="" style={{ height: '331px', width: '588px', objectFit: 'cover', display: 'block', flexShrink: 0 }} />
+                <img key={i} src={src} alt="" style={{ height: '331px', width: 'auto', display: 'block', flexShrink: 0 }} />
               ))}
             </div>
           </div>

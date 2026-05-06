@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { cldImg } from '@/src/utils/cloudinary'
 import { useParallax } from '@/src/hooks/useParallax'
+import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
 
 const IMG_PORTRAIT = cldImg('CONSTANZASCHWARTZ_Profile_1_yx5v5r')
 const IMG_PORTRAIT_2 = cldImg('CONSTANZASCHWARTZ_Profile_2_uipjg1')
@@ -143,22 +144,26 @@ const YEARS: YearData[] = [
 // ---------------------------------------------------------------------------
 function Marquee() {
   const trackRef = useRef<HTMLDivElement>(null)
+  const text = 'Es posible que la objetividad sea un proyecto inalcanzable de la modernidad.'
+  
   useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-    const tl = gsap.to(track, { xPercent: -50, ease: 'none', duration: 28, repeat: -1 })
+    if (!trackRef.current) return
+    const duration = text.length * MARQUEE.secondsPerChar
+    const tl = gsap.to(trackRef.current, { xPercent: -50, ease: 'none', duration, repeat: -1 })
     return () => { tl.kill() }
   }, [])
-
-  const text = 'Es posible que la objetividad sea un proyecto inalcanzable de la modernidad.'
 
   return (
     <div className="overflow-hidden w-full">
       <div ref={trackRef} className="flex whitespace-nowrap w-max">
         {[0, 1].map((i) => (
-          <span key={i} className="pr-marquee-text mr-[5em]">
-            {text}
-          </span>
+          <div key={i} className="flex">
+            {Array.from({ length: 4 }, (_, j) => (
+              <span key={j} className="pr-marquee-text mr-[5em]">
+                {text}
+              </span>
+            ))}
+          </div>
         ))}
       </div>
     </div>
@@ -182,7 +187,7 @@ function Carousel({ images, id }: { images: string[]; id: string }) {
         `}} />
       <div
         className="flex h-[331px] w-max"
-        style={{ animation: `pr-anim-${id} 22s linear infinite`, gap: 0 }}
+        style={{ animation: `pr-anim-${id} ${images.length * CAROUSEL.durationPerImage}s linear infinite`, gap: 0 }}
       >
         {doubled.map((src, i) => (
           <img

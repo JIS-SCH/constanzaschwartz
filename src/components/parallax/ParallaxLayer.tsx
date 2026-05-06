@@ -28,6 +28,7 @@ export interface BaseLayerProps {
 export interface MarqueeLayerProps extends BaseLayerProps {
   type: 'marquee'
   content: string
+  duration?: number
 }
 
 export interface ImageLayerProps extends BaseLayerProps {
@@ -254,7 +255,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
           </div>
         )
       case 'marquee':
-        return <MarqueeContent content={layer.content} duration={layer.intensity ?? MARQUEE.speed.medium} />
+        return <MarqueeContent content={layer.content} duration={layer.duration ?? layer.intensity ?? (layer.content.length * MARQUEE.secondsPerChar)} />
       case 'credits':
         return (
           <div
