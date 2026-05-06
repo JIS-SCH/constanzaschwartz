@@ -608,7 +608,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 21. LYRICS SECTION (Sound of Silence) — Figma 1571:1033..1038 + 1867:1262 */}
-        <ParallaxSection id="lyrics-section" className="bg-obsidian" style={{ marginTop: GAP, minHeight: '800px', marginBottom: '200px' }}>
+        <ParallaxSection id="lyrics-section" className="bg-obsidian" style={{ marginTop: '450px', minHeight: '800px' }}>
           {/* Lyrics */}
           <ParallaxLayer
             sectionId="lyrics-section"
@@ -639,7 +639,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* Credits — pinned to the very bottom of the project */}
-        <div style={{ padding: '0 3px 40px', backgroundColor: '#0F0F0F' }}>
+        <div style={{ padding: '0 3px 40px', backgroundColor: '#0F0F0F', marginTop: '200px' }}>
           <p style={{ fontSize: '14px', lineHeight: '1.6', width: '100%', maxWidth: 'none', display: 'block', textTransform: 'uppercase', fontFamily: '"Helvetica Neue LT Std", sans-serif', fontWeight: 100, color: '#fff', margin: 0 }}>
             <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
             <span style={{ fontWeight: 700 }}>Realización: </span>
