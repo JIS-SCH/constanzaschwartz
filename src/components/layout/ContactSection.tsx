@@ -120,19 +120,15 @@ const CSS = `
 .cs-svg--vert {
   top: 0;
   right: 0;
-  left: auto;
-  bottom: auto;
   height: 100%;
-  aspect-ratio: 410 / 899;
+  width: 28.47%;
 }
 
 .cs-svg--horiz {
   bottom: 0;
   left: 0;
-  top: auto;
-  right: auto;
-  width: 62%;
-  aspect-ratio: 899 / 410;
+  width: 62.43%;
+  height: 45.56%;
 }
 
 /* ── Rows ────────────────────────────────────────────────────── */

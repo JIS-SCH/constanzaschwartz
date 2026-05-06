@@ -8,6 +8,7 @@ export function ContactPage() {
 
       <svg
         className="ct-svg ct-svg--vert"
+        preserveAspectRatio="none"
         viewBox="0 0 410 899"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +21,7 @@ export function ContactPage() {
       {/* Bottom horizontal leaf */}
       <svg
         className="ct-svg ct-svg--horiz"
+        preserveAspectRatio="none"
         viewBox="0 0 899 410"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +73,6 @@ const CSS = `
 
 .ct-svg--vert {
   top: 0;
-  left: 71.53%;
   right: 0;
   bottom: 0;
   width: 28.47%;
