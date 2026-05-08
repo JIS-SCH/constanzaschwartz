@@ -28,53 +28,34 @@ export function TransitionOverlay() {
     const { left, top, width, height } = state.originRect
 
     gsap.set(overlay, { visibility: 'visible', opacity: 1 })
+
+    if (el instanceof HTMLImageElement) {
+      el.src = state.imageSrc
+    }
+
     gsap.set(el, {
       left,
       top,
       width,
       height,
+      x: 0,
+      y: 0,
+      scaleX: 1,
+      scaleY: 1,
       borderRadius: '2px',
       visibility: 'visible',
       opacity: 1,
-      yPercent: 0,
-      backgroundImage: `url(${state.imageSrc})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backfaceVisibility: 'hidden',
+      WebkitBackfaceVisibility: 'hidden',
+      transformStyle: 'preserve-3d',
+      WebkitTransformStyle: 'preserve-3d',
     })
 
     const ctx = gsap.context(() => {
-      // 1. Main expansion
-      gsap.to(el, {
-        left: 0,
-        top: 0,
-        width: '100vw',
-        height: '100vh',
-        borderRadius: '0px',
-        duration: DURATION.lg,
-        ease: 'power2.inOut',
-        force3D: true, // Force GPU
-        z: 0.01,       // Prevent jitter
-        onComplete: () => {
-          router.push(`/project/${state.slug}`)
-          setExpanded()
-        },
-      })
-
-      // 2. "Thick Liquid" (Viscous) Flex effect
-      const disp = document.querySelector('#liquid-morph feDisplacementMap')
-      if (disp) {
-        const tl = gsap.timeline()
-        tl.to(disp, {
-          attr: { scale: 40 }, // Higher scale but blurred for "thickness"
-          duration: DURATION.lg,
-          ease: 'power1.inOut',
-        })
-        tl.to(disp, {
-          attr: { scale: 0 },
-          duration: DURATION.lg,
-          ease: 'power2.inOut',
-        })
-      }
+      // Direct Navigation: We don't animate to fullscreen anymore.
+      // We jump straight to the navigation and let the 'revealing' phase handle the direct morph.
+      router.push(`/project/${state.slug}`)
+      setExpanded()
     })
 
     ctxRef.current = ctx
@@ -94,13 +75,13 @@ export function TransitionOverlay() {
 
     const cleanup = () => {
       gsap.set(overlay, { visibility: 'hidden', background: '#0F0F0F', opacity: 1 })
-      gsap.set(el, { 
-        visibility: 'hidden', 
-        left: '', 
-        top: '', 
-        width: '', 
-        height: '', 
-        opacity: 1, 
+      gsap.set(el, {
+        visibility: 'hidden',
+        left: '',
+        top: '',
+        width: '',
+        height: '',
+        opacity: 1,
         backgroundImage: '',
         filter: 'none'
       })
@@ -112,30 +93,54 @@ export function TransitionOverlay() {
 
     const ctx = gsap.context(() => {
       if (hasRealTarget && targetRect) {
+        // Set initial state to the origin card rect
+        gsap.set(el, {
+          left: state.originRect!.left,
+          top: state.originRect!.top,
+          width: state.originRect!.width,
+          height: state.originRect!.height,
+          borderRadius: '2px',
+        })
+
         const tl = gsap.timeline()
 
+        // 1. Morph directly to target
         tl.to(el, {
           left: targetRect.left,
           top: targetRect.top,
           width: targetRect.width,
           height: targetRect.height,
-          duration: DURATION.md,
-          ease: 'power2.out',
+          borderRadius: '0px',
+          duration: DURATION.lg,
+          ease: 'power2.inOut',
+          willChange: 'width, height, left, top',
+          filter: 'url(#liquid-morph)',
         }, 0)
 
-        // Settle the liquid filter if still active
+        // 2. Liquid effect during movement
         const disp = document.querySelector('#liquid-morph feDisplacementMap')
         if (disp) {
-          gsap.to(disp, {
-            attr: { scale: 0 },
-            duration: DURATION.md, // Slower settle for viscosity
-          })
+          gsap.timeline()
+            .to(disp, {
+              attr: { scale: 20 },
+              duration: DURATION.lg * 0.5,
+              ease: 'power1.out',
+            })
+            .to(disp, {
+              attr: { scale: 0 },
+              duration: DURATION.lg * 0.5,
+              ease: 'power2.inOut',
+              onComplete: () => {
+                gsap.set(el, { filter: 'none', willChange: 'auto' })
+              }
+            })
         }
 
         tl.to(overlay, {
           opacity: 0,
           duration: DURATION.sm,
           ease: EASE.out,
+          delay: DURATION.lg * 0.2, // Small delay to enjoy the morph settle
           onComplete: cleanup,
         })
       } else {
@@ -218,21 +223,21 @@ export function TransitionOverlay() {
   return (
     <>
       {/* Liquid morph filter definition */}
-      <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}>
-        <filter id="liquid-morph" colorInterpolationFilters="sRGB">
-          <feTurbulence 
-            type="fractalNoise" 
-            baseFrequency="0.003" 
-            numOctaves="1" 
-            result="noise" 
+      <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none', visibility: 'hidden' }}>
+        <filter id="liquid-morph" x="-50%" y="-50%" width="200%" height="200%" filterUnits="userSpaceOnUse" colorInterpolationFilters="linearRGB">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.005 0.003"
+            numOctaves="1"
+            result="noise"
           />
-          <feGaussianBlur in="noise" stdDeviation="20" result="blurredNoise" />
-          <feDisplacementMap 
-            in="SourceGraphic" 
-            in2="blurredNoise" 
-            scale="0" 
-            xChannelSelector="R" 
-            yChannelSelector="G" 
+          <feGaussianBlur in="noise" stdDeviation="15" result="blurredNoise" />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="blurredNoise"
+            scale="0"
+            xChannelSelector="R"
+            yChannelSelector="G"
           />
         </filter>
       </svg>
@@ -246,17 +251,26 @@ export function TransitionOverlay() {
           pointerEvents: isActive ? 'auto' : 'none',
           visibility: 'hidden',
           background: '#0F0F0F',
+          isolation: 'isolate',
+          contain: 'strict',
         }}
       >
-        <div
-          ref={imageRef}
+        <img
+          ref={imageRef as any}
+          alt=""
+          decoding="async"
           style={{
             position: 'fixed',
             visibility: 'hidden',
-            willChange: 'transform, width, height, left, top, opacity',
-            filter: 'url(#liquid-morph)',
-            backgroundRepeat: 'no-repeat',
-            imageRendering: 'crisp-edges', // Try to keep it sharp
+            objectFit: 'cover',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transformStyle: 'preserve-3d',
+            WebkitTransformStyle: 'preserve-3d',
+            filter: 'none',
+            transform: 'translate3d(0,0,0)',
+            willChange: 'width, height, left, top, filter',
+            WebkitFilter: 'drop-shadow(0 0 0 transparent)', // WebKit composition hack
           }}
         />
       </div>

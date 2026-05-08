@@ -68,6 +68,7 @@ function preloadTexture(src: string): Promise<THREE.Texture> {
   })
 }
 
+// ─── Build an overlay canvas texture (dark + text) ───────────────────────────
 function createOverlayTexture(project: ProjectMeta, index: number): THREE.CanvasTexture {
   const w = 512
   const h = 320
@@ -176,15 +177,9 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     // Tilt to center cards: -atan(camY / radius). radius=10 → -atan(0.05) ≈ -0.05
     camera.rotation.x = mobile ? -0.05 : CAMERA_TILT
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: false, // Better performance in Safari, 1.5x pixel ratio handles the edge smoothing
-      alpha: false,
-      powerPreference: 'high-performance',
-      failIfMajorPerformanceCaveat: true
-    })
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: 'high-performance' })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 2 : 1.5))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2))
 
     const cleanupResize = setupResize(camera, renderer)
 
@@ -396,20 +391,20 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     function applyHover(group: THREE.Group) {
       // Pronounced premium hover: more lift and depth, slower and smoother
-      gsap.to(group.userData, {
-        hoverZ: 1.2,
-        hoverY: 0.6,
-        duration: DURATION.md,
-        ease: EASE.soft
+      gsap.to(group.userData, { 
+        hoverZ: 1.2, 
+        hoverY: 0.6, 
+        duration: DURATION.md, 
+        ease: EASE.soft 
       })
     }
 
     function removeHover(group: THREE.Group) {
-      gsap.to(group.userData, {
-        hoverZ: 0,
-        hoverY: 0,
-        duration: DURATION.md,
-        ease: EASE.soft
+      gsap.to(group.userData, { 
+        hoverZ: 0, 
+        hoverY: 0, 
+        duration: DURATION.md, 
+        ease: EASE.soft 
       })
     }
 
@@ -450,19 +445,19 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
         // 1. Capture exact projected rect at this moment
         const rect = getCardScreenRect(g, camera)
-
+        
         // 2. Hide the original card immediately (hand-off to DOM)
         g.visible = false
-
+        
         // 3. Fade out other cards
         cardGroups.forEach((other, i) => {
           if (i !== idx) {
-            gsap.to(other.scale, {
-              x: 0,
-              y: 0,
-              z: 0,
-              duration: 0.4,
-              ease: "power2.inOut"
+            gsap.to(other.scale, { 
+              x: 0, 
+              y: 0, 
+              z: 0, 
+              duration: 0.4, 
+              ease: "power2.inOut" 
             })
             overlayMats[i] && gsap.to(overlayMats[i], { opacity: 0, duration: 0.2 })
           }
