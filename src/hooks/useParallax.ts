@@ -14,30 +14,53 @@ interface UseParallaxOptions {
   intensity?: number
   triggerRef?: React.RefObject<HTMLElement | null>
   withZoom?: boolean
+  isAbsolute?: boolean
 }
 
 export function useParallax(
   targetRef: React.RefObject<HTMLElement | null>,
   options: UseParallaxOptions = {}
 ) {
-  const { speed = 0, axis = 'y', intensity = PARALLAX.intensity.desktop, triggerRef, withZoom = false } = options
+  const {
+    speed = PARALLAX.speed.standard,
+    axis = 'y',
+    intensity = PARALLAX.intensity.desktop,
+    triggerRef,
+    withZoom = false,
+    isAbsolute = false
+  } = options
 
   useEffect(() => {
     const target = targetRef.current
     if (!target || speed === 0 || prefersReducedMotion()) return
 
     const trigger = triggerRef?.current ?? target.parentElement ?? target
-    const range = speed * intensity
 
-    const fromVars: gsap.TweenVars = { [axis]: range }
+    // Total travel distance should be a factor of the total scroll distance
+    // (trigger height + viewport height) to ensure constant speed across different heights.
+    // We normalize relative to speed 4 and intensity 50.
+    const getRange = () => {
+      if (isAbsolute) return speed * intensity
+
+      const h = trigger.offsetHeight
+      const v = window.innerHeight
+      const factor = (speed / 4) * (intensity / 50) * PARALLAX.uniform.imageFactor
+      return (h + v) * factor / 2
+    }
+
+    const fromVars: gsap.TweenVars = {
+      [axis]: getRange,
+      immediateRender: false
+    }
+
     const toVars: gsap.TweenVars = {
-      [axis]: -range,
+      [axis]: () => -getRange(),
       ease: 'none',
       scrollTrigger: {
         trigger,
         start: 'top bottom',
         end: 'bottom top',
-        scrub: true,
+        scrub: PARALLAX.uniform.scrub,
         invalidateOnRefresh: true,
       },
       force3D: true,

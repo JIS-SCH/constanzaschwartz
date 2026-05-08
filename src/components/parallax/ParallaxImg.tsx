@@ -9,7 +9,12 @@ interface ParallaxImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   intensity?: number
 }
 
-export function PI({ speed = 0.5, intensity = PARALLAX.intensity.mobile, style, ...rest }: ParallaxImgProps) {
+export function PI({ 
+  speed = PARALLAX.speed.standard, 
+  intensity = PARALLAX.intensity.desktop, 
+  style, 
+  ...rest 
+}: ParallaxImgProps) {
   const ref = useRef<HTMLImageElement>(null)
   useParallax(ref as React.RefObject<HTMLElement>, { speed, intensity })
   return (

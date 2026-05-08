@@ -11,7 +11,11 @@ interface TunnelVideoProps {
   onComplete: () => void
 }
 
-const PX_PER_SEC        = 180  // scroll pixels per second of video
+const PX_PER_SEC_DESKTOP = 300
+const PX_PER_SEC_MOBILE  = 180
+
+// Safari detection
+const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
 
 export function TunnelVideo({ onComplete }: TunnelVideoProps) {
   const containerRef  = useRef<HTMLDivElement>(null)
@@ -46,17 +50,27 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
 
     video.src = isMobile()
       ? '/Tunel_Interestellar_Vert_A.mp4'
-      : '/home/Tunel_Interestellar_A.mp4'
+      : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
+
+    // Safari "wake up" decoder trick
+    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+      video.play().then(() => {
+        video.pause()
+      }).catch(() => {})
+    }
+
     video.load()
+
     const setupAnimation = () => {
+      const pxPerSec = isMobile() ? PX_PER_SEC_MOBILE : PX_PER_SEC_DESKTOP
       const duration = video.duration
-      const videoPx  = Math.round(duration * PX_PER_SEC)
+      const videoPx  = Math.round(duration * pxPerSec)
 
       const logoStartS = isMobile() ? 1 : 1
       const logoEndS   = isMobile() ? 4 : 5
 
-      const logoStartPx    = logoStartS * PX_PER_SEC
-      const logoDurationPx = (logoEndS - logoStartS) * PX_PER_SEC
+      const logoStartPx    = logoStartS * pxPerSec
+      const logoDurationPx = (logoEndS - logoStartS) * pxPerSec
 
       const seekProxy = { t: 0 }
       const tl = gsap.timeline({ paused: true })
@@ -88,7 +102,30 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         logoStartPx
       )
 
-      // Scrub video through its entire duration
+      // Scrub video through its entire duration - LERP SMOOTHING
+      let currentVideoTime = 0
+      let targetVideoTime = 0
+      const safari = isSafari()
+      const LERP_FACTOR = safari ? 0.08 : 0.15 // Safari needs slower lerp
+      const SEEK_THRESHOLD = safari ? 0.05 : 0.03 // Safari needs larger threshold
+      let rafId: number
+
+      const lerpLoop = () => {
+        if (Math.abs(targetVideoTime - currentVideoTime) > SEEK_THRESHOLD) {
+          currentVideoTime += (targetVideoTime - currentVideoTime) * LERP_FACTOR
+
+          if (video.readyState >= 2 && !video.seeking) {
+            if (typeof video.fastSeek === 'function') {
+              video.fastSeek(currentVideoTime)
+            } else {
+              video.currentTime = currentVideoTime
+            }
+          }
+        }
+        rafId = requestAnimationFrame(lerpLoop)
+      }
+      lerpLoop()
+
       tl.to(
         seekProxy,
         {
@@ -96,18 +133,18 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
           duration: videoPx,
           ease: 'none',
           onUpdate() {
-            video.currentTime = seekProxy.t
+            targetVideoTime = seekProxy.t
           },
         },
         0
       )
 
-      // Black overlay fades in near the end of the video
+      // Black overlay fades in near the end of the video - moved later to show seconds 6-7
       tl.fromTo(
         overlay,
         { opacity: 0 },
-        { opacity: 1, duration: videoPx * 0.15, ease: 'power2.in' },
-        videoPx * 0.85
+        { opacity: 1, duration: videoPx * 0.08, ease: 'power2.in' },
+        videoPx * 0.92
       )
 
       stRef.current = ScrollTrigger.create({
@@ -116,7 +153,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         end: `+=${videoPx}`,
         pin: true,
         anticipatePin: 1,
-        scrub: isMobile() ? 0.5 : 2,
+        scrub: safari ? 1 : 1.5, // More smoothing for Safari
         animation: tl,
         onUpdate: (self) => {
           if (self.progress >= 0.97 && !completedRef.current) {
@@ -132,6 +169,12 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       })
 
       setIsReady(true)
+
+      return () => {
+        cancelAnimationFrame(rafId)
+        video.removeEventListener('loadedmetadata', setupAnimation)
+        killST()
+      }
     }
 
     video.addEventListener('loadedmetadata', setupAnimation, { once: true })
@@ -143,8 +186,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
   }, [doComplete, killST])
 
   return (
-    // h-[100dvh]: dynamic viewport height — excludes mobile browser chrome
-    // (address bar, navigation bar). Fixes the classic 100vh bug on iOS/Android.
     <div
       ref={containerRef}
       className="relative w-full bg-black overflow-hidden"
@@ -159,9 +200,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         playsInline
       />
 
-      {/* Logo wrapper fills the screen — transformOrigin center = screen center.
-          Logo sits at top: 37% (Figma: 331px / ~900px, optical offset above center).
-          Scaling the full-screen div makes the logo recede toward the vanishing point. */}
       <div
         ref={logoRef}
         className="absolute inset-0"
@@ -183,7 +221,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         </div>
       </div>
 
-      {/* Scroll indicator — bottom: 90px + safe-area-inset for iPhone home indicator */}
       <div
         ref={scrollRef}
         className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2"

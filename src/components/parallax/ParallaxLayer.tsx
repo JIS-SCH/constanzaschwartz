@@ -139,6 +139,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     axis,
     intensity: moveVideoBleed ? frameHeight * 0.5 : 0,
     triggerRef: outerRef,
+    isAbsolute: true,
   })
 
   useParallax(outerRef, {
@@ -293,8 +294,8 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
       className={layer.className}
       data-project-image={isHero ? true : undefined}
     >
-      <div 
-        ref={isStickyMarquee ? undefined : outerRef} 
+      <div
+        ref={isStickyMarquee ? undefined : outerRef}
         style={innerStyle}
       >
         {children || renderedContent}

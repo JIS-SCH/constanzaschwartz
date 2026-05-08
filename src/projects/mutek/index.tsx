@@ -125,7 +125,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 2. INTRO PARAGRAPH + COLLAGE 1 (img1 left tall, img2 portrait below, RITUAL AL VACÍO right) */}
-        <ParallaxSection id="intro" style={{ minHeight: '1790px' }}>
+        <ParallaxSection id="intro" style={{ minHeight: '1790px', marginTop: '0px' }}>
           {/* Intro paragraph — left, 466 wide */}
           <ParallaxLayer
             sectionId="intro"
@@ -143,7 +143,7 @@ export function Component() {
             sectionId="intro"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img1 }}
-            position={{ top: '396px', left: '8.47%', width: '467px', height: '700px', zIndex: 1 }}
+            position={{ top: '326px', left: '8.47%', width: '467px', height: '700px', zIndex: 1 }}
           />
 
           {/* RITUAL AL VACÍO title — right column */}
@@ -163,11 +163,11 @@ export function Component() {
             sectionId="intro"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img2 }}
-            position={{ top: '875px', left: '33.8%', width: '467px', height: '700px', zIndex: 2 }}
+            position={{ top: '725px', left: '33.8%', width: '467px', height: '700px', zIndex: 2 }}
           />
         </ParallaxSection>
 
-        <ParallaxSection id="text-block-1" style={{ minHeight: 'calc(320px + 56.25vw + 220px)' }}>
+        <ParallaxSection id="text-block-1" style={{ minHeight: 'calc(320px + 56.25vw + 220px)', marginTop: '-205px' }}>
           <ParallaxLayer
             sectionId="text-block-1"
             layerIndex={0}
@@ -189,7 +189,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 4. IMAGE 831 + MARQUEE (difference blend) + IMAGE 345 PORTRAIT RIGHT */}
-        <ParallaxSection id="marquee-1" style={{ minHeight: '1116px' }}>
+        <ParallaxSection id="marquee-1" style={{ minHeight: '1116px', marginTop: '0' }}>
           {/* P_VACIO — left, 466 wide, 183 from left */}
           <ParallaxLayer
             sectionId="marquee-1"
@@ -207,11 +207,11 @@ export function Component() {
             sectionId="marquee-1"
             layerIndex={1}
             layer={{ type: 'image', src: ASSETS.img3 }}
-            position={{ top: '332px', left: '12.7%', width: '831px', height: '466px', zIndex: 1 }}
+            position={{ top: '260px', left: '12.7%', width: '831px', height: '466px', zIndex: 1 }}
           />
 
           {/* Marquee — difference blend */}
-          <div style={{ position: 'absolute', top: '742px', left: 0, width: '100%', height: '80px', zIndex: 2, overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: '670px', left: 0, width: '100%', height: '80px', zIndex: 2, overflow: 'hidden' }}>
             <div className="marquee-track" style={{ animationDuration: `${90 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
@@ -228,12 +228,12 @@ export function Component() {
             sectionId="marquee-1"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img4 }}
-            position={{ top: '702px', left: '63.3%', width: '345px', height: '194px', zIndex: 3 }}
+            position={{ top: '582px', left: '63.3%', width: '345px', height: '194px', zIndex: 3 }}
           />
         </ParallaxSection>
 
         {/* 5. COLLAGE — IMAGE 710 LEFT + TEXT OVERLAPPING */}
-        <ParallaxSection id="collage-2" style={{ minHeight: '693px' }}>
+        <ParallaxSection id="collage-2" style={{ minHeight: '693px', marginTop: '-200px' }}>
           {/* Image 710 left — speed 0 */}
           <ParallaxLayer
             sectionId="collage-2"
@@ -256,7 +256,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 5b. COLLAGE — IMAGE 831 + IMAGE 345 + TEXT */}
-        <ParallaxSection id="collage-3" style={{ minHeight: '1145px' }}>
+        <ParallaxSection id="collage-3" style={{ minHeight: '1145px', marginTop: '-100px' }}>
           {/* Image 831 right — speed 0 */}
           <ParallaxLayer
             sectionId="collage-3"
@@ -278,7 +278,7 @@ export function Component() {
             sectionId="collage-3"
             layerIndex={2}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: '825px', left: '46.4%', width: TW, height: 'auto', zIndex: 4 }}
+            position={{ top: '865px', left: '46.4%', width: TW, height: 'auto', zIndex: 4 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
               ¿Y qué es un ritual cuando ya no convoca, cuando no transforma, cuando sólo queda la forma vacía como una piel transparente, invisible colgando del tiempo?
@@ -287,7 +287,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 6. COLLAGE — IMAGE 467 x2 + MARQUEE */}
-        <ParallaxSection id="marquee-2" style={{ minHeight: '1350px', marginTop: '-30px' }}>
+        <ParallaxSection id="marquee-2" style={{ minHeight: '1350px', marginTop: '-110px' }}>
           {/* Image 8 (Back) — 467 wide, right aligned to margin */}
           <ParallaxLayer
             sectionId="marquee-2"
@@ -303,7 +303,7 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '103px', left: '183px', width: '466px', height: '700px', zIndex: 2 }}
           >
-            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
+            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line', marginTop: '100px' }} className="mutek-p ">
               {P_MENTE}
             </div>
           </ParallaxLayer>
@@ -326,12 +326,12 @@ export function Component() {
             sectionId="marquee-2"
             layerIndex={3}
             layer={{ type: 'image', src: ASSETS.img9 }}
-            position={{ top: '475px', left: '487px', width: '467px', height: '700px', zIndex: 1 }}
+            position={{ top: '415px', left: '487px', width: '467px', height: '700px', zIndex: 1 }}
           />
         </ParallaxSection>
 
         {/* 8. TEXT BLOCK — "Esta obra apela..." */}
-        <ParallaxSection id="text-block-3" style={{ minHeight: '50vh' }}>
+        <ParallaxSection id="text-block-3" style={{ minHeight: '50vh', }}>
           <ParallaxLayer
             sectionId="text-block-3"
             layerIndex={0}
@@ -345,7 +345,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 9. BIG FULL-WIDTH IMAGE */}
-        <ParallaxSection id="big-image" style={{ minHeight: '810px' }}>
+        <ParallaxSection id="big-image" style={{ minHeight: '810px', marginTop: '-130px' }}>
           <ParallaxLayer
             sectionId="big-image"
             layerIndex={0}
@@ -355,7 +355,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 10. TEXT RIGHT — "Una posibilidad. Como umbral..." */}
-        <ParallaxSection id="text-block-4" style={{ minHeight: '500px' }}>
+        <ParallaxSection id="text-block-4" style={{ minHeight: '500px', marginTop: '40px' }}>
           <ParallaxLayer
             sectionId="text-block-4"
             layerIndex={0}
@@ -369,7 +369,9 @@ export function Component() {
         </ParallaxSection>
 
         {/* 11. IMAGE 831 CENTERED + TEXT LEFT "La caverna de luz..." */}
-        <ParallaxSection id="image-text" style={{ minHeight: 'calc(60vh + 470px)' }}>
+        <ParallaxSection id="image-text" style={{
+          minHeight: 'calc(60vh + 470px)', marginTop: '-100px'
+        }}>
           <ParallaxLayer
             sectionId="image-text"
             layerIndex={0}
@@ -381,7 +383,7 @@ export function Component() {
             sectionId="image-text"
             layerIndex={1}
             layer={{ type: 'text', content: '', speed: 0 }}
-            position={{ top: 'calc(60vh + 230px)', left: '8.47%', width: '40%', height: 'auto', zIndex: 2 }}
+            position={{ top: 'calc(60vh + 290px)', left: '8.47%', width: '40%', height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
               {P_CAVERNA}
@@ -389,7 +391,7 @@ export function Component() {
           </ParallaxLayer>
         </ParallaxSection>
 
-        <div style={{ position: 'relative', marginBottom: '190px' }}>
+        <div style={{ position: 'relative', marginBottom: '190px', marginTop: '70px' }}>
           <div className="w-full h-[var(--carousel-h)] overflow-hidden">
             <div className="flex h-[var(--carousel-h)] w-max mutek-animate-carousel" style={{ '--carousel-duration': `${7 * CAROUSEL.durationPerImage}s` } as any}>
               {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7,

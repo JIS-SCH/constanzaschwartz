@@ -51,7 +51,7 @@ export function ScrollParallaxWrapper({ children, className }: ScrollParallaxWra
       )
       const distanceFromEnd = Math.max(0, scrollMax - scrollY)
       const dampening = Math.min(1, distanceFromEnd / PARALLAX.uniform.ramp)
-      return -scrollY * PARALLAX.uniform.factor * dampening
+      return -scrollY * PARALLAX.uniform.layoutFactor * dampening
     }
 
     let targetOffset = computeOffset()

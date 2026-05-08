@@ -21,18 +21,20 @@ export const STAGGER = {
 } as const
 
 export const PARALLAX = {
-  intensity: { desktop: 500, mobile: 80 },
+  intensity: { desktop: 300, mobile: 80 },
   speed: {
-    subtle: 0.02,
-    normal: 0.04,
-    strong: 0.06,
-    hero: 0.02,
-    standard: 0.1,
+    subtle: 0.5,
+    normal: 0.5,
+    strong: 0.5,
+    hero: 0,
+    standard: 0.5,
   },
   uniform: {
-    factor: 0.22,
-    lerp: 0.12,
+    layoutFactor: 0.05, // Very subtle layout movement
+    imageFactor: 0.18,  // Moderate image travel
+    lerp: 0.035,        // Extra smooth tracking (was 0.05)
     ramp: 1400,
+    scrub: 1.5,         // More GSAP smoothing for images
   },
   gallery: { left: 40, center: 60, right: 80 },
 } as const

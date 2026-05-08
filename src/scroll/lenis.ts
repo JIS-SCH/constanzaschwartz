@@ -3,8 +3,11 @@ import Lenis from 'lenis';
 let instance: Lenis | null = null;
 
 export function initLenis(): Lenis {
+  if (instance) {
+    instance.destroy();
+  }
   instance = new Lenis({
-    duration: 1.8,
+    duration: 2.2,
     easing: (t: number) => 1 - Math.pow(1 - t, 4),
     smoothWheel: true,
   });

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import type { AppPhase } from '@/src/types/app'
 import { TunnelVideo } from '@/src/components/tunnel/TunnelVideo'
 import { HomeGrid } from '@/src/components/home/HomeGrid'
@@ -20,10 +20,16 @@ function getInitialPhase(): AppPhase {
 }
 
 export default function Home() {
-  const [phase, setPhase] = useState<AppPhase>(getInitialPhase)
+  const [phase, setPhase] = useState<AppPhase>('tunnel')
   const { start } = useTransition()
+  const [tunnelStarted, setTunnelStarted] = useState(true)
 
-  const [tunnelStarted] = useState(() => phase === 'tunnel')
+  useEffect(() => {
+    if (sessionStorage.getItem('introComplete')) {
+      setPhase('home')
+      setTunnelStarted(false)
+    }
+  }, [])
 
   const handleProjectClick = useCallback(
     (index: number, rect: OriginRect) => {

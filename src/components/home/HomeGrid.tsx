@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import gsap from 'gsap'
 import { isMobile } from '@/src/utils/detect'
@@ -16,7 +16,7 @@ interface HomeGridProps {
 
 const BASE_Z = -20
 const GROUP_ROTATION = 0              // arc is symmetric in front of camera
-const MOUSE_ROTATION_RANGE = Math.PI / 10    // ±18° max camera yaw on desktop hover
+const MOUSE_ROTATION_RANGE = Math.PI / 7    // Increased from PI/10 for more movement
 const DRAG_ROTATION_RANGE = Math.PI / 3      // full-window drag = ±60° on mobile
 const DRAG_TAP_THRESHOLD = 10                // px movement to count as drag (not tap)
 const CAMERA_Y = 1.5    // Height of the camera (higher = more floor visible)
@@ -147,6 +147,11 @@ function getCardScreenRect(
 export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -452,18 +457,18 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       const delta = (now - lastTime) / 1000
       lastTime = now
 
-      // Camera Y rotation: smoothly chase the target set by mouse (desktop) or drag (mobile)
+      // Camera Y rotation: more inertia (0.04 instead of 0.08)
       camera.rotation.y = THREE.MathUtils.lerp(
         camera.rotation.y,
         cameraTargetRotY,
-        0.08
+        0.04
       )
 
-      // Camera Z depth from mouse Y
+      // Camera Z depth: more amplitude (* 2) and more smoothing (lambda 4 instead of 7)
       camera.position.z = THREE.MathUtils.damp(
         camera.position.z,
-        targetZ - pointer.y,
-        7,
+        targetZ - (pointer.y * 2),
+        4,
         delta
       )
 
@@ -498,7 +503,21 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       renderer.dispose()
       scene.clear()
     }
-  }, [projects, onProjectClick])
+  }, [projects, onProjectClick, isMounted])
+
+  if (!isMounted) {
+    return (
+      <div
+        ref={containerRef}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 20,
+          opacity: 0,
+        }}
+      />
+    )
+  }
 
   return (
     <div

@@ -226,7 +226,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 3. COLLAGE-1 */}
-        <ParallaxSection id="collage-1" style={{ minHeight: 'var(--h-c1)' }}>
+        <ParallaxSection id="collage-1" style={{ minHeight: 'var(--h-c1)', marginTop: '-30px' }}>
           <ParallaxLayer
             sectionId="collage-1" layerIndex={0}
             layer={{ type: 'image', src: ASSETS.img2, speed: PARALLAX.speed.subtle, effect: 'bg' }}
@@ -344,7 +344,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 8. COLLAGE-3 + MARQUEE */}
-        <ParallaxSection id="collage-3" style={{ minHeight: 'var(--h-c3)' }}>
+        <ParallaxSection id="collage-3" style={{ minHeight: 'var(--h-c3)', marginTop: '-50px' }}>
           <div style={{ position: 'absolute', top: '170px', left: 0, width: '100%', height: '8vh', zIndex: 4, overflow: 'hidden', mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${154 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
@@ -374,7 +374,7 @@ export function Component() {
         </ParallaxSection>
 
         {/* 9. FINISH — flow layout for natural 220px gaps */}
-        <section id="finish" style={{ position: 'relative', width: '100%' }}>
+        <section id="finish" style={{ position: 'relative', width: '100%', marginTop: '-100px' }}>
           {/* Text paragraph */}
           <div style={{ paddingLeft: '12.5305%', paddingRight: '55%', marginTop: '-70px' }} className="dw-paragraph-container">
             <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '466px' }} className="dw-p">
@@ -393,7 +393,7 @@ export function Component() {
           <div style={{ height: '220px' }} />
 
           {/* Staircase images: 3 images in a row, staggered vertically */}
-          <div className="dw-staircase" style={{ position: 'relative', width: '100%', height: 'calc(260px + 33vw)' }}>
+          <div className="dw-staircase" style={{ position: 'relative', width: '100%', height: 'calc(260px + 33vw)', marginTop: '-80px' }}>
             <PI speed={PARALLAX.speed.subtle} src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '4.24%', top: 0, width: '23.96%', height: 'auto', display: 'block' }} />
             <PI speed={PARALLAX.speed.normal} src={ASSETS.img9} alt="" style={{ position: 'absolute', left: '38.12%', top: '130px', width: '23.96%', height: 'auto', display: 'block' }} />
             <PI speed={PARALLAX.speed.strong} src={ASSETS.img10} alt="" style={{ position: 'absolute', left: '71.81%', top: '260px', width: '23.96%', height: 'auto', display: 'block' }} />
@@ -407,7 +407,7 @@ export function Component() {
             zIndex: 10,
             mixBlendMode: 'difference',
           }}>
-          <div className="marquee-track" style={{ animationDuration: `${116 * MARQUEE.secondsPerChar}s` }}>
+            <div className="marquee-track" style={{ animationDuration: `${116 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
@@ -421,7 +421,7 @@ export function Component() {
           </div>
 
           {/* Gap ajustado para que Foto -> Párrafo sea 220px (Gap = 220 - altura marquee) */}
-          <div style={{ height: '160px' }} />
+          <div style={{ height: '160px', marginTop: '-15px' }} />
 
           {/* Closing text */}
           <div style={{ paddingLeft: '13%', paddingRight: '30%', marginTop: '60px', marginBottom: '110px', }} className="dw-closing-container">
