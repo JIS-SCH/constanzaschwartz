@@ -191,8 +191,8 @@ export function Component() {
         {/* 1. HERO ─────────────────────────────────────────────────────── */}
         <ParallaxSection id="mal-hero" style={{ minHeight: '748px' }}>
           {/* Hero Desktop - Static, no parallax */}
-          <div className="mal-hero-desktop" style={{ position: 'absolute', top: '124px', left: '0', width: '100%', height: '648px', zIndex: 1 }}>
-            <img src={IMG_HERO} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <div data-project-image className="mal-hero-desktop" style={{ position: 'absolute', top: '124px', left: '0', width: '100%', height: '648px', zIndex: 1 }}>
+            <img src={IMG_HERO} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Hero Mobile - Static, no parallax */}

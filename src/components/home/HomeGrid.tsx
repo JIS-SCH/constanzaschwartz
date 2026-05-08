@@ -148,6 +148,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isMounted, setIsMounted] = useState(false)
+  const isTransitioning = useRef(false)
+  const transitioningIndex = useRef<number | null>(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -378,6 +380,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     let mobileActiveGroup: THREE.Group | null = null
 
     function getHitGroup(clientX: number, clientY: number): THREE.Group | null {
+      if (isTransitioning.current) return null
       mouse2d.x = (clientX / window.innerWidth) * 2 - 1
       mouse2d.y = -(clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse2d, camera)
@@ -387,14 +390,22 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     }
 
     function applyHover(group: THREE.Group) {
-      // Subtle premium hover: slight pop forward + slight lift + subtle scale
-      gsap.to(group.userData, { hoverZ: 0.5, hoverY: 0.3, duration: DURATION.sm, ease: EASE.out })
-      gsap.to(group.scale, { x: 1.12, y: 1.12, z: 1.12, duration: DURATION.sm, ease: EASE.out })
+      // Subtle premium hover: slight lift for depth, NO scale pop
+      gsap.to(group.userData, { 
+        hoverZ: 0.5, 
+        hoverY: 0.3, 
+        duration: DURATION.sm, 
+        ease: EASE.out 
+      })
     }
 
     function removeHover(group: THREE.Group) {
-      gsap.to(group.userData, { hoverZ: 0, hoverY: 0, duration: DURATION.sm, ease: EASE.out })
-      gsap.to(group.scale, { x: 1, y: 1, z: 1, duration: DURATION.sm, ease: EASE.out })
+      gsap.to(group.userData, { 
+        hoverZ: 0, 
+        hoverY: 0, 
+        duration: DURATION.sm, 
+        ease: EASE.out 
+      })
     }
 
     // Desktop: mousemove hover check
@@ -427,8 +438,32 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       }
 
       const triggerProject = (g: THREE.Group) => {
+        if (isTransitioning.current) return
+        isTransitioning.current = true
         const idx = g.userData.index as number
+        transitioningIndex.current = idx
+
+        // 1. Capture exact projected rect at this moment
         const rect = getCardScreenRect(g, camera)
+        
+        // 2. Hide the original card immediately (hand-off to DOM)
+        g.visible = false
+        
+        // 3. Fade out other cards
+        cardGroups.forEach((other, i) => {
+          if (i !== idx) {
+            gsap.to(other.scale, { 
+              x: 0, 
+              y: 0, 
+              z: 0, 
+              duration: 0.4, 
+              ease: "power2.inOut" 
+            })
+            overlayMats[i] && gsap.to(overlayMats[i], { opacity: 0, duration: 0.2 })
+          }
+        })
+
+        // 4. Trigger the DOM transition overlay
         onProjectClick(idx, rect)
       }
 
@@ -473,6 +508,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       )
 
       cardGroups.forEach((group, i) => {
+        if (isTransitioning.current && i === transitioningIndex.current) return
+
         const baseZ = arcPositions[i].z
         const hoverZ = group.userData.hoverZ || 0
         const hoverY = group.userData.hoverY || 0
@@ -500,6 +537,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       }
       canvas.removeEventListener('click', onClick)
       window.removeEventListener('intro:showCards', onShowCards)
+      isTransitioning.current = false
+      transitioningIndex.current = null
       renderer.dispose()
       scene.clear()
     }

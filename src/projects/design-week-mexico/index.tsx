@@ -191,7 +191,7 @@ export function Component() {
 
           <ParallaxLayer
             sectionId="hero" layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.hero, speed: PARALLAX.speed.normal, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'cover' }}
             position={{ top: '45px', left: '0', width: '100%', height: '648px', zIndex: 1 }}
           />
         </ParallaxSection>

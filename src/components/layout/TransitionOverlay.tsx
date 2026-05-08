@@ -42,26 +42,39 @@ export function TransitionOverlay() {
       backgroundPosition: 'center',
     })
 
-    const flipState = Flip.getState(el)
-
-    gsap.set(el, {
-      left: 0,
-      top: 0,
-      width: '100vw',
-      height: '100vh',
-      borderRadius: '0px',
-    })
-
     const ctx = gsap.context(() => {
-      Flip.from(flipState, {
-        targets: el,
+      // 1. Main expansion
+      gsap.to(el, {
+        left: 0,
+        top: 0,
+        width: '100vw',
+        height: '100vh',
+        borderRadius: '0px',
         duration: DURATION.lg,
-        ease: EASE.sharp,
+        ease: 'power2.inOut',
+        force3D: true, // Force GPU
+        z: 0.01,       // Prevent jitter
         onComplete: () => {
           router.push(`/project/${state.slug}`)
           setExpanded()
         },
       })
+
+      // 2. "Thick Liquid" (Viscous) Flex effect
+      const disp = document.querySelector('#liquid-morph feDisplacementMap')
+      if (disp) {
+        const tl = gsap.timeline()
+        tl.to(disp, {
+          attr: { scale: 40 }, // Higher scale but blurred for "thickness"
+          duration: DURATION.lg,
+          ease: 'power1.inOut',
+        })
+        tl.to(disp, {
+          attr: { scale: 0 },
+          duration: DURATION.lg,
+          ease: 'power2.inOut',
+        })
+      }
     })
 
     ctxRef.current = ctx
@@ -74,13 +87,23 @@ export function TransitionOverlay() {
     const overlay = overlayRef.current
     if (!el || !overlay) return
 
-    ctxRef.current?.revert()
+    // We DON'T revert here because we want to maintain the fullscreen state 
+    // reached in the 'expanding' phase for a continuous morph.
 
     const target = document.querySelector<HTMLElement>('[data-project-image]')
 
     const cleanup = () => {
       gsap.set(overlay, { visibility: 'hidden', background: '#0F0F0F', opacity: 1 })
-      gsap.set(el, { visibility: 'hidden', left: '', top: '', width: '', height: '', opacity: 1, backgroundImage: '' })
+      gsap.set(el, { 
+        visibility: 'hidden', 
+        left: '', 
+        top: '', 
+        width: '', 
+        height: '', 
+        opacity: 1, 
+        backgroundImage: '',
+        filter: 'none'
+      })
       setDone()
     }
 
@@ -96,9 +119,18 @@ export function TransitionOverlay() {
           top: targetRect.top,
           width: targetRect.width,
           height: targetRect.height,
-          duration: DURATION.lg,
-          ease: EASE.soft,
+          duration: DURATION.md,
+          ease: 'power2.out',
         }, 0)
+
+        // Settle the liquid filter if still active
+        const disp = document.querySelector('#liquid-morph feDisplacementMap')
+        if (disp) {
+          gsap.to(disp, {
+            attr: { scale: 0 },
+            duration: DURATION.md, // Slower settle for viscosity
+          })
+        }
 
         tl.to(overlay, {
           opacity: 0,
@@ -184,25 +216,50 @@ export function TransitionOverlay() {
   const isActive = !['idle', 'done'].includes(state.phase)
 
   return (
-    <div
-      ref={overlayRef}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 100,
-        pointerEvents: isActive ? 'auto' : 'none',
-        visibility: 'hidden',
-        background: '#0F0F0F',
-      }}
-    >
+    <>
+      {/* Liquid morph filter definition */}
+      <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}>
+        <filter id="liquid-morph" colorInterpolationFilters="sRGB">
+          <feTurbulence 
+            type="fractalNoise" 
+            baseFrequency="0.003" 
+            numOctaves="1" 
+            result="noise" 
+          />
+          <feGaussianBlur in="noise" stdDeviation="20" result="blurredNoise" />
+          <feDisplacementMap 
+            in="SourceGraphic" 
+            in2="blurredNoise" 
+            scale="0" 
+            xChannelSelector="R" 
+            yChannelSelector="G" 
+          />
+        </filter>
+      </svg>
+
       <div
-        ref={imageRef}
+        ref={overlayRef}
         style={{
           position: 'fixed',
+          inset: 0,
+          zIndex: 100,
+          pointerEvents: isActive ? 'auto' : 'none',
           visibility: 'hidden',
-          willChange: 'transform, width, height, left, top, opacity',
+          background: '#0F0F0F',
         }}
-      />
-    </div>
+      >
+        <div
+          ref={imageRef}
+          style={{
+            position: 'fixed',
+            visibility: 'hidden',
+            willChange: 'transform, width, height, left, top, opacity',
+            filter: 'url(#liquid-morph)',
+            backgroundRepeat: 'no-repeat',
+            imageRendering: 'crisp-edges', // Try to keep it sharp
+          }}
+        />
+      </div>
+    </>
   )
 }
