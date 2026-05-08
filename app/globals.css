@@ -200,6 +200,14 @@
   box-sizing: border-box;
 }
 
+/* ─── CUSTOM CURSOR RESET ─── */
+/* Hide native cursor on all elements when a mouse is used */
+@media (pointer: fine) {
+  html, body, a, button, [role="button"], canvas, input, textarea {
+    cursor: none !important;
+  }
+}
+
 html,
 body {
   overflow-x: hidden;
