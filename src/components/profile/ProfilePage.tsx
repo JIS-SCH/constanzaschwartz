@@ -145,7 +145,7 @@ const YEARS: YearData[] = [
 function Marquee() {
   const trackRef = useRef<HTMLDivElement>(null)
   const text = 'Es posible que la objetividad sea un proyecto inalcanzable de la modernidad.'
-  
+
   useEffect(() => {
     if (!trackRef.current) return
     const duration = text.length * MARQUEE.secondsPerChar
@@ -170,9 +170,6 @@ function Marquee() {
   )
 }
 
-// ---------------------------------------------------------------------------
-// Carousel — same pattern as eco-al-infinito / ProjectPage
-// ---------------------------------------------------------------------------
 function Carousel({ images, id }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
 
@@ -246,6 +243,12 @@ function YearSection({ data }: { data: YearData }) {
   )
 }
 export function ProfilePage() {
+  const portrait1Ref = useRef<HTMLImageElement>(null)
+  const portrait2Ref = useRef<HTMLImageElement>(null)
+
+  useParallax(portrait1Ref, { speed: 0.8, withZoom: true })
+  useParallax(portrait2Ref, { speed: 0.8, withZoom: true })
+
   return (
     <div className="pr-root project-page-padding">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
@@ -254,14 +257,18 @@ export function ProfilePage() {
        * INTRO AREA
        * Mobile:  normal flow, stacked vertically
        * Desktop: position:relative + fixed height; all children position:absolute
-       *          matching Figma 1440px coordinates (adjusted -96px for fixed navbar)
+       *          matching Figma 1440px coordinates
        */}
       <div className="pr-intro">
 
         {/* Portrait */}
         <div className="pr-portrait">
-          <img src={IMG_PORTRAIT} alt="Constanza Schwartz"
-            className="w-full h-full object-cover" />
+          <img 
+            ref={portrait1Ref}
+            src={IMG_PORTRAIT} 
+            alt="Constanza Schwartz"
+            className="w-full h-full object-cover" 
+          />
         </div>
 
         {/* CONSTANZA / SCHWARTZ — overlays portrait */}
@@ -308,8 +315,12 @@ export function ProfilePage() {
 
         {/* Second portrait */}
         <div className="pr-photo2">
-          <img src={IMG_PORTRAIT_2} alt=""
-            className="w-full h-full object-cover" />
+          <img 
+            ref={portrait2Ref}
+            src={IMG_PORTRAIT_2} 
+            alt=""
+            className="w-full h-full object-cover" 
+          />
         </div>
 
         {/* Text 2 */}
@@ -576,7 +587,7 @@ const CSS = `
   .pr-title {
     position: absolute;
     left: 163px;
-    top: 63px;
+    top: 159px;
     z-index: 10;
     pointer-events: none;
     mix-blend-mode: difference;
