@@ -177,9 +177,9 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     // Tilt to center cards: -atan(camY / radius). radius=10 → -atan(0.05) ≈ -0.05
     camera.rotation.x = mobile ? -0.05 : CAMERA_TILT
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: 'high-performance' })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2))
+     const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: 'high-performance' })
+     renderer.setSize(window.innerWidth, window.innerHeight)
+     renderer.setPixelRatio(window.devicePixelRatio)
 
     const cleanupResize = setupResize(camera, renderer)
 
@@ -467,18 +467,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
         onProjectClick(idx, rect)
       }
 
-      if (mobile) {
-        // First tap → hover; second tap → open
-        if (mobileActiveGroup === group) {
-          triggerProject(group)
-          return
-        }
-        if (mobileActiveGroup) removeHover(mobileActiveGroup)
-        applyHover(group)
-        mobileActiveGroup = group
-      } else {
-        triggerProject(group)
-      }
+      // Unified behavior: single tap/click opens project on both mobile and desktop
+      triggerProject(group)
     }
     canvas.addEventListener('click', onClick)
 

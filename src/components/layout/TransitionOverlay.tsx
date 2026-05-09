@@ -92,28 +92,38 @@ export function TransitionOverlay() {
     const hasRealTarget = targetRect && targetRect.width > 0 && targetRect.height > 0
 
     const ctx = gsap.context(() => {
-      if (hasRealTarget && targetRect) {
-        // Set initial state to the origin card rect
+      if (hasRealTarget && targetRect && state.originRect) {
+
+
+        const scaleX = state.originRect.width / targetRect.width
+        const scaleY = state.originRect.height / targetRect.height
+        const x = state.originRect.left - targetRect.left
+        const y = state.originRect.top - targetRect.top
+
         gsap.set(el, {
-          left: state.originRect!.left,
-          top: state.originRect!.top,
-          width: state.originRect!.width,
-          height: state.originRect!.height,
-          borderRadius: '2px',
-        })
-
-        const tl = gsap.timeline()
-
-        // 1. Morph directly to target
-        tl.to(el, {
           left: targetRect.left,
           top: targetRect.top,
           width: targetRect.width,
           height: targetRect.height,
+          x,
+          y,
+          scaleX,
+          scaleY,
+          borderRadius: '2px',
+          transformOrigin: '0 0',
+        })
+
+        const tl = gsap.timeline()
+
+        // 1. Morph directly to target using scale and translate (GPU)
+        tl.to(el, {
+          x: 0,
+          y: 0,
+          scaleX: 1,
+          scaleY: 1,
           borderRadius: '0px',
           duration: DURATION.lg,
           ease: 'power2.inOut',
-          willChange: 'width, height, left, top',
           filter: 'url(#liquid-morph)',
         }, 0)
 
@@ -122,16 +132,16 @@ export function TransitionOverlay() {
         if (disp) {
           gsap.timeline()
             .to(disp, {
-              attr: { scale: 20 },
-              duration: DURATION.lg * 0.5,
+              attr: { scale: 15 }, // Reduced from 20 for Safari stability
+              duration: DURATION.lg * 0.4,
               ease: 'power1.out',
             })
             .to(disp, {
               attr: { scale: 0 },
-              duration: DURATION.lg * 0.5,
+              duration: DURATION.lg * 0.6,
               ease: 'power2.inOut',
               onComplete: () => {
-                gsap.set(el, { filter: 'none', willChange: 'auto' })
+                gsap.set(el, { filter: 'none' })
               }
             })
         }
@@ -140,7 +150,7 @@ export function TransitionOverlay() {
           opacity: 0,
           duration: DURATION.sm,
           ease: EASE.out,
-          delay: DURATION.lg * 0.2, // Small delay to enjoy the morph settle
+          delay: DURATION.lg * 0.1,
           onComplete: cleanup,
         })
       } else {
@@ -227,11 +237,11 @@ export function TransitionOverlay() {
         <filter id="liquid-morph" x="-50%" y="-50%" width="200%" height="200%" filterUnits="userSpaceOnUse" colorInterpolationFilters="linearRGB">
           <feTurbulence
             type="fractalNoise"
-            baseFrequency="0.005 0.003"
+            baseFrequency="0.008 0.005"
             numOctaves="1"
             result="noise"
           />
-          <feGaussianBlur in="noise" stdDeviation="15" result="blurredNoise" />
+          <feGaussianBlur in="noise" stdDeviation="4" result="blurredNoise" />
           <feDisplacementMap
             in="SourceGraphic"
             in2="blurredNoise"

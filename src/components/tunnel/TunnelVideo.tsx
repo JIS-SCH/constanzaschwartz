@@ -48,9 +48,9 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     const logo      = logoRef.current
     if (!video || !container || !overlay || !logo) return
 
-    video.src = isMobile()
-      ? '/Tunel_Interestellar_Vert_A.mp4'
-      : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
+     video.src = isMobile()
+       ? '/Tunel_Interestellar_Vert_A_mobile_opt.mp4'
+       : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
 
     // Safari "wake up" decoder trick
     if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {

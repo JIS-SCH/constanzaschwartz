@@ -219,7 +219,7 @@ export function Component() {
               content: 'DIRECCIÓN CREATIVA Y EJECUTIVA  /   ESCENOGRAFÍA  /   DISEÑO LUMÍNICO DE ESPECTÁCULOS  /   DISEÑO SONORO QUINTAFÓNICO  /   DIRECCIÓN DE OBRA',
               speed: 0,
               className: 'mal-h4',
-              duration: 134 * MARQUEE.secondsPerChar
+              duration: 143 * MARQUEE.secondsPerChar
             }}
             position={{ top: '25px', left: '0', width: '100%', height: '44px', zIndex: 10 }}
           />

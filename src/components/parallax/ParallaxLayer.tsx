@@ -82,7 +82,7 @@ function MarqueeContent({ content, duration }: { content: string; duration: numb
     <div style={{ overflow: 'hidden', width: '100%' }}>
       <div
         className="marquee-track"
-        style={{ animationDuration: `${duration * MARQUEE.setRepeat}s` }}
+        style={{ animationDuration: `${duration}s` }}
       >
         {[0, 1].map((setIdx) => (
           <div key={setIdx} className="marquee-set">
