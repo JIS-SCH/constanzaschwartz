@@ -60,7 +60,8 @@ export function useParallax(
         trigger,
         start: 'top bottom',
         end: 'bottom top',
-        scrub: PARALLAX.uniform.scrub,
+        // Use mobileScrub for mobile devices
+        scrub: window.innerWidth <= 1023 ? PARALLAX.uniform.mobileScrub : PARALLAX.uniform.scrub,
         invalidateOnRefresh: true,
       },
       force3D: true,
@@ -76,5 +77,5 @@ export function useParallax(
     return () => {
       tl.kill()
     }
-  }, [speed, axis, intensity, targetRef, triggerRef, withZoom])
+  }, [speed, axis, intensity, targetRef, triggerRef, withZoom, isAbsolute])
 }

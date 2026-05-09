@@ -5,8 +5,8 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { ASSETS } from './assets'
-import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
-import { TW, CH, HERO_TOP, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE } from '../shared'
+import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
+import { TW, CH } from '../shared'
 
 /** Consistent vertical gap between sections (px) */
 const GAP = '220px'
@@ -129,7 +129,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="intro"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img1 }}
+            layer={{ type: 'image', src: ASSETS.img1, speed: PARALLAX.speed.depthMid }}
             position={{ top: '0', left: '8.47%', width: '345px', height: '517px', zIndex: 3 }}
           />
 
@@ -137,25 +137,25 @@ export function Component() {
           <ParallaxLayer
             sectionId="intro"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img2 }}
-            position={{ top: '49vh', left: '54vh', width: '467px', height: '312px', zIndex: 1 }}
+            layer={{ type: 'image', src: ASSETS.img2, speed: PARALLAX.speed.depthLow }}
+            position={{ top: '45vh', left: '45vh', width: '467px', height: '312px', zIndex: 1 }}
           />
 
           {/* Right image (Img 3) - THE BOTTOM ANCHOR (Pushes the section height further) */}
           <div className="relative z-10" style={{ marginTop: 'calc(74vh - 200px)', marginLeft: '770px', width: '588px', height: '392px' }}>
-            <PI src={ASSETS.img3} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={ASSETS.img3} speed={PARALLAX.speed.depthHigh} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </ParallaxSection>
 
         {/* 3. COLLAGE 1 + MARQUEE */}
-        <ParallaxSection id="collage-1" style={{ marginTop: GAP }}>
+        <ParallaxSection id="collage-1" style={{ marginTop: '110px' }}>
           {/* Tall portrait center - THE ANCHOR (Relative) */}
           <div className="relative mx-auto" style={{ width: '588px', height: '882px', marginLeft: '16.9444%', zIndex: 1 }}>
             <PI src={ASSETS.img4} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
 
           {/* Marquee overlay - Absolute on top of the anchor */}
-          <div style={{ position: 'absolute', top: '100px', left: 0, width: '100%', height: '50px', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
+          <div style={{ position: 'absolute', top: '130px', left: 0, width: '100%', height: '50px', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${59 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
@@ -183,13 +183,13 @@ export function Component() {
           <ParallaxLayer
             sectionId="text-collage-2"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img5 }}
+            layer={{ type: 'image', src: ASSETS.img5, speed: 1.4 }}
             position={{ top: '0vh', left: '59.10%', width: '467px', height: '700px', zIndex: 1 }}
           />
 
           {/* BOTTOM ANCHOR: Bottom horizontal image (Img 6) - In flow to push height */}
           <div className="relative z-10" style={{ marginTop: 'calc(74vh - 340px)', marginLeft: '488px', width: '467px', height: '311px' }}>
-            <PI src={ASSETS.img6} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={ASSETS.img6} speed={PARALLAX.speed.depthLow} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </ParallaxSection>
 
@@ -204,13 +204,13 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-3"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img8 }}
+            layer={{ type: 'image', src: ASSETS.img8, speed: PARALLAX.speed.depthMid }}
             position={{ top: 'calc(100vh + 220px)', left: '8.54%', width: '476px', height: '311px', zIndex: 20 }}
           />
 
           {/* BOTTOM ANCHOR: Staggered Image 9 - In flow */}
           <div className="relative z-10" style={{ marginTop: '340px', marginLeft: '33.82%', width: '476px', height: '312px' }}>
-            <PI src={ASSETS.img9} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={ASSETS.img9} speed={PARALLAX.speed.depthHigh} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Text bottom relative to images */}
@@ -238,26 +238,26 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img10, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.img10, speed: PARALLAX.speed.depthLow, objectFit: 'cover' }}
             position={{ top: '0', left: '46.46%', width: '710px', height: '473px', zIndex: 1 }}
           />
           {/* BIG Bottom Left Image (Img 11) - Floating */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img11, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.img11, speed: PARALLAX.speed.depthHigh, objectFit: 'cover' }}
             position={{ top: '362px', left: '4.35%', width: '710px', height: '473px', zIndex: 2 }}
           />
           {/* SMALL Top Right Image (Img 12) - Floating */}
           <ParallaxLayer
             sectionId="collage-4"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img12, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.img12, speed: PARALLAX.speed.depthMid, objectFit: 'cover' }}
             position={{ top: '1057px', left: '59.10%', width: '467px', height: '312px', zIndex: 4 }}
           />
           {/* BOTTOM ANCHOR: SMALL Bottom Left Image (Img 13) - In Flow */}
           <div className="relative z-30" style={{ marginTop: '1270px', marginLeft: '33.82%', width: '467px', height: '312px' }}>
-            <PI src={ASSETS.img13} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={ASSETS.img13} speed={PARALLAX.speed.depthLow} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </ParallaxSection>
 
@@ -279,21 +279,21 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.img14, objectFit: 'contain' }}
+            layer={{ type: 'image', src: ASSETS.img14, speed: PARALLAX.speed.depthLow, objectFit: 'contain' }}
             position={{ top: '0', left: '61px', width: '345px', height: '517px', zIndex: 2 }}
           />
           {/* Staircase Image 15 - Floating */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.img15, objectFit: 'contain' }}
+            layer={{ type: 'image', src: ASSETS.img15, speed: PARALLAX.speed.depthMid, objectFit: 'contain' }}
             position={{ top: '140px', left: '547px', width: '345px', height: '517px', zIndex: 2 }}
           />
           {/* Staircase Image 16 - Floating */}
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={2}
-            layer={{ type: 'image', src: ASSETS.img16, objectFit: 'contain' }}
+            layer={{ type: 'image', src: ASSETS.img16, speed: PARALLAX.speed.depthHigh, objectFit: 'contain' }}
             position={{ top: '333px', left: '1033px', width: '345px', height: '517px', zIndex: 2 }}
           />
 
@@ -308,13 +308,13 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-14-15-16"
             layerIndex={4}
-            layer={{ type: 'image', src: ASSETS.img17, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.img17, speed: PARALLAX.speed.depthMid, objectFit: 'cover' }}
             position={{ top: '1416px', left: '21.11%', width: '467px', height: '700px', zIndex: 3 }}
           />
 
           {/* BOTTOM ANCHOR: Img 18 (Red Triangles) - In Flow */}
           <div className="relative z-4" style={{ marginTop: 'calc(1960px - 1300px)', marginLeft: '47%', width: '467px', height: '700px' }}>
-            <PI src={ASSETS.img18} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={ASSETS.img18} speed={PARALLAX.speed.depthLow} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Marquee Text ON TOP of Img 17 and 18 */}
@@ -680,9 +680,9 @@ export function Component() {
 
         {/* 3-image cluster (staggered) */}
         <div style={{ position: 'relative', height: '443px', marginTop: '80px' }}>
-          <PI src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '0', top: 0, width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
-          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', left: '110px', top: '177px', width: '170px', height: '114px', objectFit: 'cover', zIndex: 3 }} />
-          <img src={ASSETS.img3} alt="" style={{ position: 'absolute', left: '190px', top: '275px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img1} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', left: '0', top: 0, width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <PI src={ASSETS.img2} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '110px', top: '177px', width: '170px', height: '114px', objectFit: 'cover', zIndex: 3 }} />
+          <PI src={ASSETS.img3} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', left: '190px', top: '275px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
         </div>
 
         {/* Large portrait + marquee overlay */}
@@ -704,8 +704,8 @@ export function Component() {
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
-          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', left: '0', top: '235px', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} />
-          <PI src={ASSETS.img5} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img6} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '0', top: '235px', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img5} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
@@ -713,8 +713,8 @@ export function Component() {
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '240px', marginTop: '80px' }}>
-          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} />
-          <img src={ASSETS.img9} alt="" style={{ position: 'absolute', right: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img8} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img9} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', right: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Para 3 */}
@@ -738,14 +738,14 @@ export function Component() {
 
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '240px', marginTop: '80px' }}>
-          <img src={ASSETS.img10} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} />
-          <img src={ASSETS.img11} alt="" style={{ position: 'absolute', left: '0px', top: '107px', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img10} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img11} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', left: '0px', top: '107px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '240px', marginTop: '76px' }}>
-          <img src={ASSETS.img12} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
-          <img src={ASSETS.img13} alt="" style={{ position: 'absolute', left: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img12} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img13} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Video Making Off - Mobile */}
@@ -760,9 +760,9 @@ export function Component() {
 
         {/* Three diagonal images */}
         <div style={{ position: 'relative', height: '420px', marginTop: '80px' }}>
-          <PI src={ASSETS.img14} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <PI src={ASSETS.img15} alt="" style={{ position: 'absolute', left: '125px', top: '146px', width: '140px', height: '210px', objectFit: 'cover' }} />
-          <PI src={ASSETS.img16} alt="" style={{ position: 'absolute', right: '20px', top: '292px', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img14} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img15} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', left: '125px', top: '146px', width: '140px', height: '210px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img16} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', right: '20px', top: '292px', width: '140px', height: '210px', objectFit: 'cover' }} />
         </div>
 
         {/* Para 4 */}
@@ -772,8 +772,8 @@ export function Component() {
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '470px', marginTop: '80px' }}>
-          <PI src={ASSETS.img17} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <PI src={ASSETS.img18} alt="" style={{ position: 'absolute', right: '20px', top: '217px', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img17} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img18} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', right: '20px', top: '217px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
@@ -789,8 +789,8 @@ export function Component() {
 
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '300px', marginTop: '80px' }}>
-          <img src={ASSETS.img20} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '230px', height: 'auto', zIndex: 2 }} />
-          <PI src={ASSETS.img21} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '230px', height: '346px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img20} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '230px', height: 'auto', zIndex: 2 }} />
+          <PI src={ASSETS.img21} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '230px', height: '346px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
@@ -803,8 +803,8 @@ export function Component() {
 
         {/* Image pair offset */}
         <div style={{ position: 'relative', height: '400px', marginTop: '80px' }}>
-          <PI src={ASSETS.img23} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <PI src={ASSETS.img24} alt="" style={{ position: 'absolute', right: '20px', top: '195px', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img23} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img24} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', right: '20px', top: '195px', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
@@ -821,16 +821,12 @@ export function Component() {
 
         <div style={{ position: 'relative', height: '950px', marginTop: '80px' }}>
 
-          <img src={ASSETS.img26} alt="" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '0', width: '170px', height: '113px', objectFit: 'cover', zIndex: 2 }} />
-
-
-          <PI src={ASSETS.img27} alt="" style={{ position: 'absolute', right: '0px', top: '70px', width: '170px', height: '255px', objectFit: 'cover' }} />
-
-
-          <img src={ASSETS.img28} alt="" style={{ position: 'absolute', left: '0px', top: '400px', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img26} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '0', width: '170px', height: '113px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img27} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', right: '0px', top: '70px', width: '170px', height: '255px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img28} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '0px', top: '400px', width: '200px', height: '133px', objectFit: 'cover' }} />
 
           {/* 29 a la derecha */}
-          <img src={ASSETS.img29} alt="" style={{ position: 'absolute', right: '0px', top: '494px', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img29} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', right: '0px', top: '494px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
 
@@ -878,8 +874,8 @@ export function Component() {
 
         {/* Image pair (img32/img33) */}
         <div style={{ position: 'relative', height: '320px', marginTop: '12px' }}>
-          <PI src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
-          <img src={ASSETS.img33} alt="" style={{ position: 'absolute', right: '50px', top: '209px', width: '230px', height: '153px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img32} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img33} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', right: '50px', top: '209px', width: '230px', height: '153px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
@@ -902,8 +898,8 @@ export function Component() {
 
         {/* Image pair (img34/img35) */}
         <div style={{ position: 'relative', height: '340px', marginTop: '80px' }}>
-          <PI src={ASSETS.img34} alt="" style={{ position: 'absolute', left: '40px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
-          <img src={ASSETS.img35} alt="" style={{ position: 'absolute', right: '0px', top: '248px', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img34} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '40px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img35} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', right: '0px', top: '248px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Carousel 2 */}
@@ -919,8 +915,8 @@ export function Component() {
 
         {/* Image pair (img36/img37) */}
         <div style={{ position: 'relative', height: '360px', marginTop: '80px' }}>
-          <PI src={ASSETS.img36} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
-          <img src={ASSETS.img37} alt="" style={{ position: 'absolute', left: '20px', top: '195px', width: '230px', height: '153px', objectFit: 'cover' }} />
+          <PI src={ASSETS.img36} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img37} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', left: '20px', top: '195px', width: '230px', height: '153px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}

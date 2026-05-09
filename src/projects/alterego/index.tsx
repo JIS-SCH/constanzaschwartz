@@ -5,6 +5,7 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { VideoPlayer } from '@/src/components/media/VideoPlayer'
 import { cldImg, cldVideo } from '@/src/utils/cloudinary'
+import { PARALLAX } from '@/src/motion/tokens'
 import { ALT } from './assets'
 
 export { meta } from './meta'
@@ -346,9 +347,9 @@ export function Component() {
 
         {/* 5. Photo pair 1 */}
         <div style={{ position: 'relative', marginTop: '80px', height: '144px', width: '100%' }}>
-          <PI src={cldImg(ALT[5], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[5], 'w_600')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthHigh}
             style={{ position: 'absolute', top: 0, right: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
-          <PI src={cldImg(ALT[6], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[6], 'w_600')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthMid}
             style={{ position: 'absolute', top: '48px', left: '20px', width: '182px', height: '96px', objectFit: 'cover' }} />
         </div>
 
@@ -368,9 +369,9 @@ export function Component() {
 
         {/* 8. Photo pair 2 */}
         <div style={{ position: 'relative', marginTop: '80px', height: '171px', width: '100%' }}>
-          <PI src={cldImg(ALT[8], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[8], 'w_600')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthLow}
             style={{ position: 'absolute', top: 0, left: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
-          <PI src={cldImg(ALT[9], 'w_600')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[9], 'w_600')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthHigh}
             style={{ position: 'absolute', top: '57px', right: '20px', width: '182px', height: '114px', objectFit: 'cover' }} />
         </div>
 
@@ -386,18 +387,18 @@ export function Component() {
 
         {/* 11. Scatter section */}
         <div style={{ position: 'relative', marginTop: '80px', height: '642px', width: '100%' }}>
-          <PI src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[10], 'w_400')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthLow}
             style={{ position: 'absolute', top: 0, left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '205px' }}>
             <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} objectFit="cover" style={{ width: '100%', height: '100%' }} />
           </div>
-          <PI src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[11], 'w_400')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthMid}
             style={{ position: 'absolute', top: '226px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <PI src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[12], 'w_400')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthHigh}
             style={{ position: 'absolute', top: '340px', left: '108px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <PI src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[13], 'w_400')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthMid}
             style={{ position: 'absolute', top: '454px', left: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
-          <PI src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async"
+          <PI src={cldImg(ALT[14], 'w_400')} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthHigh}
             style={{ position: 'absolute', top: '568px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
         </div>
 
