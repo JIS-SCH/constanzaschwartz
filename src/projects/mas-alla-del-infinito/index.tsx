@@ -8,7 +8,7 @@ import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
-import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
+import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
 import { ASSETS } from './assets'
 import { GAP, TW, TEXT_BLOCK_STYLE } from '../shared'
 
@@ -191,9 +191,13 @@ export function Component() {
         {/* 1. HERO ─────────────────────────────────────────────────────── */}
         <ParallaxSection id="mal-hero" style={{ minHeight: '748px' }}>
           {/* Hero Desktop - Static, no parallax */}
-          <div data-project-image className="mal-hero-desktop" style={{ position: 'absolute', top: '124px', left: '0', width: '100%', height: '648px', zIndex: 1 }}>
-            <img src={IMG_HERO} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </div>
+          <ParallaxLayer
+            sectionId="mal-hero"
+            layerIndex={0}
+            layer={{ type: 'image', src: IMG_HERO, speed: PARALLAX.speed.hero, isHero: true, objectFit: 'cover' }}
+            position={{ top: '124px', left: '0', width: '100%', height: '648px', zIndex: 1 }}
+            className="mal-hero-desktop"
+          />
 
           {/* Hero Mobile - Static, no parallax */}
           <div className="mal-hero-mobile" style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}>
@@ -217,7 +221,7 @@ export function Component() {
             layer={{
               type: 'marquee',
               content: 'DIRECCIÓN CREATIVA Y EJECUTIVA  /   ESCENOGRAFÍA  /   DISEÑO LUMÍNICO DE ESPECTÁCULOS  /   DISEÑO SONORO QUINTAFÓNICO  /   DIRECCIÓN DE OBRA',
-              speed: 0,
+              speed: PARALLAX.speed.subtle,
               className: 'mal-h4',
               duration: 143 * MARQUEE.secondsPerChar
             }}
@@ -246,7 +250,7 @@ export function Component() {
             layer={{
               type: 'marquee',
               content: 'Somos responsables de los mundos que creamos',
-              speed: 0,
+              speed: PARALLAX.speed.subtle,
               className: 'mal-marquee-blend mal-h4',
               duration: 44 * MARQUEE.secondsPerChar
             }}
@@ -275,7 +279,7 @@ export function Component() {
 
           {/* Text 2 — Absolute */}
           <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: 0 }}
+            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
             position={{ top: '222px', left: '21.1%', width: '32.4%', height: 'auto', zIndex: 2 }}
           >
             <TextBlock>
@@ -320,7 +324,7 @@ export function Component() {
             layer={{
               type: 'marquee',
               content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.',
-              speed: 0,
+              speed: PARALLAX.speed.subtle,
               className: 'mal-marquee-blend mal-h4',
               duration: 71 * MARQUEE.secondsPerChar
             }}
@@ -375,7 +379,7 @@ export function Component() {
             layer={{
               type: 'marquee',
               content: '¿CÓMO SEGUIR HABITANDO EL PLANETA?',
-              speed: 0,
+              speed: PARALLAX.speed.subtle,
               className: 'mal-marquee-blend mal-h4',
               duration: 34 * MARQUEE.secondsPerChar
             }}
@@ -455,7 +459,7 @@ export function Component() {
             layer={{
               type: 'marquee',
               content: 'NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA',
-              speed: 0,
+              speed: PARALLAX.speed.subtle,
               className: 'mal-marquee-blend mal-h4',
               duration: 84 * MARQUEE.secondsPerChar
             }}
@@ -592,20 +596,25 @@ export function Component() {
       <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'visible', paddingBottom: '40px' }}>
 
         {/* HERO */}
-        <div data-project-image style={{ position: 'relative', height: '85vh', minHeight: '600px' }}>
-          <img src={ASSETS.heroMobile} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        <div data-project-image style={{ position: 'relative', height: '85vh', minHeight: '600px', overflow: 'hidden' }}>
+          <PI src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.hero} />
         </div>
 
         {/* TEXT 1 */}
-        <div style={{ color: '#fff', marginTop: '80px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
-          <TextBlock>
-            <p style={{ marginBottom: '1.5rem' }}>
-              Dado que la objetividad es un proyecto inalcanzable, Constanza Schwartz crea con el subjetivismo escénico experiencias intensamente subjetivas por las que el espectador participativo puede ir cambiando su inserción y su influencia en su entorno.
-            </p>
-            <p>
-              Somos responsables de los mundos que creamos pero solo en la medida en que aceptamos que nuestra contribución y nuestra influencia va a estar guiada por una extrema subjetividad.
-            </p>
-          </TextBlock>
+        <div style={{ position: 'relative', color: '#fff', marginTop: '80px', width: 'calc(100% - 40px)', marginLeft: '20px', minHeight: '120px' }}>
+          <ParallaxLayer
+            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
+          >
+            <TextBlock>
+              <p style={{ marginBottom: '1.5rem' }}>
+                Dado que la objetividad es un proyecto inalcanzable, Constanza Schwartz crea con el subjetivismo escénico experiencias intensamente subjetivas por las que el espectador participativo puede ir cambiando su inserción y su influencia en su entorno.
+              </p>
+              <p>
+                Somos responsables de los mundos que creamos pero solo en la medida en que aceptamos que nuestra contribución y nuestra influencia va a estar guiada por una extrema subjetividad.
+              </p>
+            </TextBlock>
+          </ParallaxLayer>
         </div>
 
         {/* FIRST PAIR: img1 (WEB009) + img2 (WEB028) */}
@@ -618,7 +627,7 @@ export function Component() {
           </div>
 
           {/* Marquee overlay */}
-          <div style={{ position: 'absolute', bottom: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3 }}>
+          <div style={{ position: 'absolute', bottom: '20px', left: 0, width: '100%', height: '40px', zIndex: 3, overflow: 'hidden' }}>
             <div className="marquee-track" style={{ animationDuration: `${45 * MARQUEE.secondsPerChar}s` }}>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
@@ -647,23 +656,28 @@ export function Component() {
         {/* SECOND PAIR: img3 (FULL_1) + img4 (WEB008) */}
         <div style={{ position: 'relative', marginTop: '80px' }}>
           <div style={{ width: '100%', aspectRatio: '3/2' }}>
-            <img src={IMG_FULL_1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={IMG_FULL_1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div style={{ position: 'absolute', right: '20px', bottom: '-100px', width: '170px', height: '255px', zIndex: 2 }}>
-            <PI src={IMG_WEB008} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={IMG_WEB008} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
           </div>
         </div>
 
         {/* TEXT 2 */}
-        <div style={{ color: '#fff', marginTop: '180px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
-          <TextBlock>
-            <p style={{ marginBottom: '1.5rem' }}>
-              La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
-            </p>
-            <p>
-              Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy. Los horrores de su existencia son velozmente atenuados por un bosque de acrílico, altar en homenaje a nuestros orígenes.
-            </p>
-          </TextBlock>
+        <div style={{ position: 'relative', color: '#fff', marginTop: '180px', width: 'calc(100% - 40px)', marginLeft: '20px', minHeight: '120px' }}>
+          <ParallaxLayer
+            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
+          >
+            <TextBlock>
+              <p style={{ marginBottom: '1.5rem' }}>
+                La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
+              </p>
+              <p>
+                Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy. Los horrores de su existence son velozmente atenuados por un bosque de acrílico, altar en homenaje a nuestros orígenes.
+              </p>
+            </TextBlock>
+          </ParallaxLayer>
         </div>
         {/* THIRD PAIR: img5 (WEB025) + img6 (GIF1) */}
         <div style={{ position: 'relative', marginTop: '80px', width: '100%' }}>
@@ -671,28 +685,33 @@ export function Component() {
             <PI src={IMG_WEB025} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
           <div style={{ position: 'relative', marginTop: '-60px', marginLeft: '20px', width: '170px', height: '113px', zIndex: 2 }}>
-            <img src={IMG_GIF1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={IMG_GIF1} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
           </div>
         </div>
 
         {/* TEXT 3 */}
-        <div style={{ color: '#fff', marginTop: '40px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
-          <TextBlock>
-            <p style={{ marginBottom: '1.5rem' }}>
-              Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
-            </p>
-            <p>¿De dónde viene la electricidad que fluye hacia las pantallas?</p>
-          </TextBlock>
+        <div style={{ position: 'relative', color: '#fff', marginTop: '40px', width: 'calc(100% - 40px)', marginLeft: '20px', minHeight: '100px' }}>
+          <ParallaxLayer
+            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
+          >
+            <TextBlock>
+              <p style={{ marginBottom: '1.5rem' }}>
+                Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
+              </p>
+              <p>¿De dónde viene la electricidad que fluye hacia las pantallas?</p>
+            </TextBlock>
+          </ParallaxLayer>
         </div>
 
         {/* STAIRCASE */}
         <div style={{ position: 'relative', marginTop: '80px', height: '540px' }}>
-          <PI src={IMG_WEB012} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px' }} />
-          <PI src={IMG_WEB011} alt="" style={{ position: 'absolute', left: '115px', top: '140px', width: '140px', height: '210px' }} />
-          <PI src={IMG_WEB007} alt="" style={{ position: 'absolute', left: '210px', top: '280px', width: '140px', height: '210px' }} />
+          <PI src={IMG_WEB012} alt="" style={{ position: 'absolute', left: '20px', top: '0', width: '140px', height: '210px' }} speed={PARALLAX.speed.subtle} />
+          <PI src={IMG_WEB011} alt="" style={{ position: 'absolute', left: '115px', top: '140px', width: '140px', height: '210px' }} speed={PARALLAX.speed.subtle} />
+          <PI src={IMG_WEB007} alt="" style={{ position: 'absolute', left: '210px', top: '280px', width: '140px', height: '210px' }} speed={PARALLAX.speed.subtle} />
 
           {/* Marquee overlay */}
-          <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '44px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
+          <div style={{ position: 'absolute', top: '40px', left: 0, width: '100%', height: '44px', zIndex: 10, overflow: 'hidden', mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${71 * MARQUEE.secondsPerChar}s` }}>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
@@ -720,8 +739,8 @@ export function Component() {
 
         {/* PORTRAIT PAIR */}
         <div style={{ position: 'relative', marginTop: '0px', height: '560px', width: '100%' }}>
-          <PI src={IMG_WEB005} alt="" style={{ position: 'absolute', left: '0', top: '0', width: '200px', height: '270px' }} />
-          <PI src={IMG_WEB022} alt="" style={{ position: 'absolute', right: '0', top: '200px', width: '200px', height: '330px' }} />
+          <PI src={IMG_WEB005} alt="" style={{ position: 'absolute', left: '0', top: '0', width: '200px', height: '270px' }} speed={PARALLAX.speed.subtle} />
+          <PI src={IMG_WEB022} alt="" style={{ position: 'absolute', right: '0', top: '200px', width: '200px', height: '330px' }} speed={PARALLAX.speed.subtle} />
         </div>
 
         {/* VIDEO 1 */}
@@ -737,7 +756,7 @@ export function Component() {
         {/* GIF 2 */}
         <div style={{ position: 'relative', marginTop: '80px' }}>
           <div style={{ width: 'calc(100% - 40px)', marginLeft: '20px', aspectRatio: '3/2' }}>
-            <img src={IMG_GIF2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={IMG_GIF2} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
           </div>
           <div style={{ position: 'absolute', top: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${34 * MARQUEE.secondsPerChar}s` }}>
@@ -756,52 +775,62 @@ export function Component() {
         </div>
 
         {/* TEXT 4 */}
-        <div style={{ color: '#fff', marginTop: '40px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
-          <TextBlock>
-            <p>
-              Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético.
-            </p>
-          </TextBlock>
+        <div style={{ position: 'relative', color: '#fff', marginTop: '40px', width: 'calc(100% - 40px)', marginLeft: '20px', minHeight: '80px' }}>
+          <ParallaxLayer
+            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
+          >
+            <TextBlock>
+              <p>
+                Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético.
+              </p>
+            </TextBlock>
+          </ParallaxLayer>
         </div>
 
         {/* CLUSTER 2 */}
         <div style={{ position: 'relative', height: '550px', marginTop: '40px' }}>
-          <PI src={IMG_WEB016} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '300px' }} />
-          <PI src={IMG_WEB017} alt="" style={{ position: 'absolute', right: '20px', top: '180px', width: '230px', height: '345px' }} />
+          <PI src={IMG_WEB016} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '300px' }} speed={PARALLAX.speed.subtle} />
+          <PI src={IMG_WEB017} alt="" style={{ position: 'absolute', right: '20px', top: '180px', width: '230px', height: '345px' }} speed={PARALLAX.speed.subtle} />
         </div>
 
         {/* FULL WIDTH */}
         <div style={{ width: '100%', aspectRatio: '3/2', marginTop: '40px' }}>
-          <img src={IMG_WEB018} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <PI src={IMG_WEB018} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
         </div>
 
         {/* STAIRCASE 2 */}
         <div style={{ position: 'relative', height: '520px', marginTop: '62px' }}>
-          <PI src={IMG_WEB014_V} alt="" style={{ position: 'absolute', left: '0', top: '0', width: '140px', height: '210px' }} />
-          <img src={IMG_WEB014} alt="" style={{ position: 'absolute', left: '110px', top: '170px', width: '170px', height: '113px', objectFit: 'cover', zIndex: 3 }} />
-          <img src={IMG_WEB013} alt="" style={{ position: 'absolute', left: '190px', top: '270px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={IMG_WEB014_V} alt="" style={{ position: 'absolute', left: '0', top: '0', width: '140px', height: '210px' }} speed={PARALLAX.speed.subtle} />
+          <PI src={IMG_WEB014} alt="" style={{ position: 'absolute', left: '110px', top: '170px', width: '170px', height: '113px', objectFit: 'cover', zIndex: 3 }} speed={PARALLAX.speed.subtle} />
+          <PI src={IMG_WEB013} alt="" style={{ position: 'absolute', left: '190px', top: '270px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
         </div>
 
         {/* FINISH */}
         <div style={{ marginTop: '-30px' }}>
           <div style={{ width: '100%', aspectRatio: '3/2' }}>
-            <img src={IMG_WEB015} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={IMG_WEB015} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
           </div>
 
-          <div style={{ color: '#fff', marginTop: '80px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
-            <TextBlock>
-              <p>
-                De esas raíces y las tensiones de nuestra vida cotidiana, nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde de algunas plantitas traviesas que asoman en un balcón.
-              </p>
-            </TextBlock>
+          <div style={{ position: 'relative', color: '#fff', marginTop: '80px', width: 'calc(100% - 40px)', marginLeft: '20px', minHeight: '80px' }}>
+            <ParallaxLayer
+              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
+            >
+              <TextBlock>
+                <p>
+                  De esas raíces y las tensiones de nuestra vida cotidiana, nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde de algunas plantitas traviesas que asoman en un balcón.
+                </p>
+              </TextBlock>
+            </ParallaxLayer>
           </div>
 
           <div style={{ position: 'relative', height: '540px', marginTop: '50px' }}>
-            <PI src={IMG_WEB040} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px' }} />
-            <PI src={IMG_WEB037} alt="" style={{ position: 'absolute', left: '20px', top: '250px', width: '230px', height: '153px' }} />
+            <PI src={IMG_WEB040} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px' }} speed={PARALLAX.speed.subtle} />
+            <PI src={IMG_WEB037} alt="" style={{ position: 'absolute', left: '20px', top: '250px', width: '230px', height: '153px' }} speed={PARALLAX.speed.subtle} />
 
             {/* Marquee overlay */}
-            <div style={{ position: 'absolute', top: '360px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference', zIndex: 3 }}>
+            <div style={{ position: 'absolute', top: '360px', left: 0, width: '100%', height: '40px', zIndex: 3, overflow: 'hidden', mixBlendMode: 'difference' }}>
               <div className="marquee-track" style={{ animationDuration: `${85 * MARQUEE.secondsPerChar}s` }}>
                 <div className="marquee-set">
                   <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span>
@@ -814,15 +843,15 @@ export function Component() {
           </div>
 
           <div style={{ width: '100%', aspectRatio: '3/2', marginTop: '-50px' }}>
-            <img src={IMG_WEB054} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <PI src={IMG_WEB054} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
           </div>
 
           <div style={{ marginTop: '80px' }}>
             <Carousel images={CAROUSEL_2} id="c-mobile-final" />
           </div>
 
-          <div style={{ color: '#fff', marginTop: '80px', padding: '20px' }}>
-            <div style={{ marginTop: '0px', height: '40px', overflow: 'hidden' }}>
+          <div style={{ position: 'relative', color: '#fff', marginTop: '80px', padding: '20px' }}>
+            <div style={{ position: 'relative', width: '100%', height: '40px', overflow: 'hidden' }}>
               <div className="marquee-track" style={{ animationDuration: `${41 * MARQUEE.secondsPerChar}s` }}>
                 <div className="marquee-set">
                   <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span>

@@ -123,7 +123,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
           maxWidth: isMobile ? '100%' : '1163px',
           margin: '0 auto',
           width: '100%',
-          padding: isMobile ? '80px 20px' : '277.5px 0 10px 0',
+          padding: isMobile ? '80px 20px' : '206px 0 10px 0',
           overflowY: 'auto',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
@@ -144,7 +144,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
               alignItems: 'center',
               alignSelf: 'stretch',
               position: 'relative',
-              marginBottom: isMobile ? '20px' : (item === 'PROJECTS' ? '24px' : item === 'PROFILE' ? '20px' : '0'),
+              marginBottom: isMobile ? '20px' : (item === 'PROJECTS' ? '76px' : item === 'PROFILE' ? '39px' : '0'),
               flexShrink: 0
             }}
           >
@@ -206,10 +206,10 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                 <div style={{ overflow: 'hidden' }}>
                   <div
                     style={{
-                      paddingTop: isMobile ? '20px' : '0px',
+                      paddingTop: isMobile ? '20px' : '44px',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '10px',
+                      gap: '20px',
                       width: '100%',
                       alignItems: 'center',
                       opacity: projectsOpen ? 1 : 0,
