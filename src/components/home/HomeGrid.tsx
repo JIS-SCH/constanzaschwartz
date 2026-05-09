@@ -46,58 +46,64 @@ function getTitle(index: number): string {
 
 // ─── Preload a single image and return a Three.js texture ────────────────────
 function preloadTexture(src: string): Promise<THREE.Texture> {
-  return new Promise((resolve) => {
-    const img = new Image()
-    img.crossOrigin = 'anonymous'
-    img.onload = () => {
-      const tex = new THREE.Texture(img)
-      tex.colorSpace = THREE.SRGBColorSpace
-      tex.flipY = true
-      tex.minFilter = THREE.LinearMipmapLinearFilter
-      tex.magFilter = THREE.LinearFilter
-      tex.anisotropy = 16
-      tex.needsUpdate = true
-      resolve(tex)
-    }
-    img.onerror = () => {
-      const fallback = new THREE.Texture()
-      fallback.flipY = true
-      resolve(fallback)
-    }
-    img.src = src
-  })
-}
+   return new Promise((resolve) => {
+     const img = new Image()
+     img.crossOrigin = 'anonymous'
+     img.onload = () => {
+       const tex = new THREE.Texture(img)
+       tex.colorSpace = THREE.SRGBColorSpace
+       tex.flipY = true
+       // Mobile-specific texture filtering to avoid Safari downscaling issues
+       const mobile = typeof window !== 'undefined' && window.innerWidth < 768
+       tex.minFilter = mobile ? THREE.LinearFilter : THREE.LinearMipmapLinearFilter
+       tex.magFilter = THREE.LinearFilter
+       tex.generateMipmaps = !mobile // Disable mipmaps on mobile
+       tex.anisotropy = mobile ? 2 : 8 // Reduce anisotropy on mobile
+       tex.needsUpdate = true
+       resolve(tex)
+     }
+     img.onerror = () => {
+       const fallback = new THREE.Texture()
+       fallback.flipY = true
+       resolve(fallback)
+     }
+     img.src = src
+   })
+ }
 
 // ─── Build an overlay canvas texture (dark + text) ───────────────────────────
 function createOverlayTexture(project: ProjectMeta, index: number): THREE.CanvasTexture {
-  const w = 512
-  const h = 320
-  const canvas = document.createElement('canvas')
-  canvas.width = w
-  canvas.height = h
-  const ctx = canvas.getContext('2d')!
+   const w = 512
+   const h = 320
+   const mobile = typeof window !== 'undefined' && window.innerWidth < 768
+   const scale = mobile ? 2 : 1
+   const canvas = document.createElement('canvas')
+   canvas.width = w * scale
+   canvas.height = h * scale
+   const ctx = canvas.getContext('2d')!
+   ctx.scale(scale, scale)
 
-  // Dark translucent fill
-  ctx.fillStyle = 'rgba(0,0,0,0.55)'
-  ctx.fillRect(0, 0, w, h)
+   // Dark translucent fill
+   ctx.fillStyle = 'rgba(0,0,0,0.55)'
+   ctx.fillRect(0, 0, w, h)
 
-  // Date — top left, 9px equivalent scaled to canvas
-  ctx.fillStyle = 'rgba(255,255,255,0.5)'
-  ctx.font = '300 20px sans-serif'
-  ctx.letterSpacing = '3px'
-  ctx.fillText(project.date, 20, 38)
+   // Date — top left, 9px equivalent scaled to canvas
+   ctx.fillStyle = 'rgba(255,255,255,0.5)'
+   ctx.font = '300 20px sans-serif'
+   ctx.letterSpacing = '3px'
+   ctx.fillText(project.date, 20, 38)
 
-  // Title — centered
-  ctx.fillStyle = '#ffffff'
-  ctx.font = '300 48px Georgia, serif'
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'middle'
-  ctx.fillText(getTitle(index), w / 2, h / 2)
+   // Title — centered
+   ctx.fillStyle = '#ffffff'
+   ctx.font = '300 48px Georgia, serif'
+   ctx.textAlign = 'center'
+   ctx.textBaseline = 'middle'
+   ctx.fillText(getTitle(index), w / 2, h / 2)
 
-  const tex = new THREE.CanvasTexture(canvas)
-  tex.colorSpace = THREE.SRGBColorSpace
-  tex.flipY = true
-  return tex
+   const tex = new THREE.CanvasTexture(canvas)
+   tex.colorSpace = THREE.SRGBColorSpace
+   tex.flipY = true
+   return tex
 }
 
 // ─── Project 3D card corners to screen rect ──────────────────────────────────
@@ -177,9 +183,9 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     // Tilt to center cards: -atan(camY / radius). radius=10 → -atan(0.05) ≈ -0.05
     camera.rotation.x = mobile ? -0.05 : CAMERA_TILT
 
-     const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: 'high-performance' })
-     renderer.setSize(window.innerWidth, window.innerHeight)
-     renderer.setPixelRatio(window.devicePixelRatio)
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: 'high-performance' })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2))
 
     const cleanupResize = setupResize(camera, renderer)
 
