@@ -140,14 +140,36 @@ export function Component() {
 
 
 
-        .mal-container { isolation: isolate; }
+        .mal-container { 
+          isolation: isolate; 
+          /* Text variables */
+          --p-size: 20px;
+          --p-lh: 1.5;
+          --p-ls: 0;
+
+          /* Mobile layout variables (missing previously) */
+          --h-c1: 580px;
+          --c1-a-x: 20px;
+          --c1-a-w: 230px;
+          --c1-a-h: 345px;
+          --c1-b-w: 280px;
+          --c1-b-h: 187px;
+
+          --h-c3: 540px;
+          --c3-a-x: 20px;
+          --c3-a-w: 138px;
+          --c3-a-h: 93px;
+          --c3-b-x: 0px;
+          --c3-c-x: 229px;
+          --c3-c-w: 141px;
+          --c3-c-h: 94px;
+        }
         .mal-container section { isolation: auto !important; }
         
         .mal-container img {
           outline: 1px solid transparent;
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
-          /* Removed transform: scale(1.005) to avoid conflict with GSAP parallax */
           display: block;
         }
 
@@ -181,6 +203,12 @@ export function Component() {
         @media (max-width: 1023px) {
           .mal-desktop { display: none; }
           .mal-mobile { display: block; }
+          
+          .mal-container {
+            --p-size: 15px;
+            --p-lh: 1.45;
+            --p-ls: 0;
+          }
         }
 
         .mal-desktop > section + section { margin-top: ${GAP}; }
@@ -611,12 +639,12 @@ export function Component() {
         {/* FIRST PAIR: img1 (WEB009) + img2 (WEB028) */}
         <div style={{ position: 'relative', marginTop: '80px', width: '100%' }}>
           <div style={{ position: 'relative', height: 'var(--h-c1)' }}>
-            <PI src={ASSETS.img1} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', top: '-25px', left: '28.3%', width: 'var(--c1-b-w)', height: 'var(--c1-b-h)', objectFit: 'cover', zIndex: 2 }} />
-            <PI src={ASSETS.img2} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', top: '122px', left: 'var(--c1-a-x)', width: 'var(--c1-a-w)', height: 'var(--c1-a-h)', objectFit: 'cover', zIndex: 1 }} />
+            <PI src={ASSETS.img1} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', top: '55px', left: '190px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 1 }} />
+            <PI src={ASSETS.img2} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', top: '0px', left: '20px', width: '230px', height: '154px', objectFit: 'contain', zIndex: 2 }} />
           </div>
 
           {/* Marquee overlay */}
-          <div style={{ position: 'absolute', bottom: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3 }}>
+          <div style={{ position: 'absolute', top: '290px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 3 }} className="mal-marquee-blend">
             <div className="marquee-track" style={{ animationDuration: `${45 * MARQUEE.secondsPerChar}s` }}>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
@@ -643,17 +671,17 @@ export function Component() {
         </div>
 
         {/* SECOND PAIR: img3 (FULL_1) + img4 (WEB008) */}
-        <div style={{ position: 'relative', marginTop: '80px' }}>
+        <div style={{ position: 'relative', marginTop: '-160px' }}>
           <div style={{ width: '100%', aspectRatio: '3/2' }}>
             <PI src={IMG_FULL_1} speed={PARALLAX.speed.depthLow} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
-          <div style={{ position: 'absolute', right: '20px', bottom: '-100px', width: '170px', height: '255px', zIndex: 2 }}>
+          <div style={{ position: 'absolute', right: '20px', bottom: '-100px', width: '170px', height: '255px', zIndex: 2, top: '200px' }}>
             <PI src={IMG_WEB008} speed={PARALLAX.speed.depthHigh} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         </div>
 
         {/* TEXT 2 */}
-        <div style={{ color: '#fff', marginTop: '180px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
+        <div style={{ color: '#fff', marginTop: '255px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
           <TextBlock>
             <p style={{ marginBottom: '1.5rem' }}>
               La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
@@ -664,27 +692,15 @@ export function Component() {
           </TextBlock>
         </div>
         {/* THIRD PAIR: img5 (WEB025) + img6 (GIF1) */}
-        <div style={{ position: 'relative', height: 'var(--h-c3)', top: '-650px' }}>
+        <div style={{ position: 'relative', height: 'var(--h-c3)', marginTop: '0px' }}>
           <div style={{ position: 'absolute', top: '60px', left: 0, width: '100%', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
-            <div className="marquee-track" style={{ animationDuration: `${154 * MARQUEE.secondsPerChar}s` }}>
-              {[0, 1].map((setIdx) => (
-                <div key={setIdx} className="marquee-set">
-                  {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item" style={{ fontSize: '28px' }}>
-                      ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
           </div>
-          <PI src={ASSETS.img5} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', top: '47px', left: 'var(--c3-a-x)', width: 'var(--c3-a-w)', height: 'var(--c3-a-h)', objectFit: 'cover', zIndex: 2 }} />
-          <PI src={ASSETS.img6} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', top: '120px', left: 'var(--c3-b-x)', width: '390px', height: '261px', objectFit: 'contain', zIndex: 1 }} />
-          <PI src={ASSETS.img7} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', top: '356px', left: 'var(--c3-c-x)', width: 'var(--c3-c-w)', height: 'var(--c3-c-h)', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img5} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', top: '47px', left: '80px', width: '290px', height: '193px', objectFit: 'cover', zIndex: 1 }} />
+          <PI src={ASSETS.img6} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', top: '220px', left: '20px', width: '170px', height: '114px', objectFit: 'contain', zIndex: 2 }} />
         </div>
 
         {/* TEXT 3 */}
-        <div style={{ color: '#fff', marginTop: '40px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
+        <div style={{ color: '#fff', marginTop: '-130px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
           <TextBlock>
             <p style={{ marginBottom: '1.5rem' }}>
               Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
