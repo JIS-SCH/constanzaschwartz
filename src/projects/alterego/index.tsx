@@ -1,6 +1,5 @@
 'use client'
 
-import { PARALLAX } from '@/src/motion/tokens'
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
@@ -83,7 +82,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: PARALLAX.speed.hero, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: cldImg(ALT.portada, 'w_2000'), speed: 0, isHero: true, objectFit: 'cover' }}
             position={{ top: '20px', left: '0', width: '100 % ', height: 'calc(100vh - 80px)', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -119,9 +118,9 @@ export function Component() {
 
         <ParallaxSection id="stacked-stills" style={{ minHeight: '735px' }}>
           <div className="relative z-10 mx-auto" style={{ width: '32.3%', marginLeft: '33.33%' }}>
-            <PI src={cldImg(ALT[2], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
-            <PI src={cldImg(ALT[3], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
-            <PI src={cldImg(ALT[4], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
+            <img src={cldImg(ALT[2], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
+            <img src={cldImg(ALT[3], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
+            <img src={cldImg(ALT[4], 'w_1200')} alt="" className="w-full h-[245px] object-cover block" />
           </div>
         </ParallaxSection>
 
@@ -195,12 +194,15 @@ export function Component() {
             layer={{ type: 'image', src: cldImg(ALT[10], 'w_1200') }}
             position={{ top: '70px', left: '8.33%', width: '32.3%', height: '246px', zIndex: 2 }}
           />
-          <ParallaxLayer
-            sectionId="inv-block"
-            layerIndex={1}
-            layer={{ type: 'video', src: cldVideo(ALT.v5), speed: PARALLAX.speed.standard }}
-            position={{ top: '246px', left: '0', width: '100%', height: '678px', zIndex: 1 }}
-          >
+          <div style={{
+            position: 'absolute',
+            top: '246px',
+            left: '0',
+            width: '100%',
+            height: '678px',
+            background: '#0F0F0F',
+            zIndex: 1,
+          }}>
             <VideoPlayer
               id="fw-video-inv"
               src={cldVideo(ALT.v5)}
@@ -209,7 +211,7 @@ export function Component() {
               objectFit="cover"
               style={{ width: '100%', height: '759px' }}
             />
-          </ParallaxLayer>
+          </div>
           {/* img 11  */}
           <ParallaxLayer
             sectionId="inv-block"
@@ -314,8 +316,8 @@ export function Component() {
       <div className="alterego-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'hidden', paddingBottom: '0px' }}>
 
         {/* 1. HERO */}
-        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px', overflow: 'hidden' }}>
-          <PI src={cldImg(ALT.portadaMobile, 'w_800')} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.hero} />
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px' }}>
+          <img src={cldImg(ALT.portadaMobile, 'w_800')} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
         {/* 2.*/}
@@ -431,36 +433,26 @@ export function Component() {
 
         {/* 16. Credits — overlapping bottom of ALT[17] */}
         <div style={{
-          position: 'relative',
           marginTop: '-66px',
           width: '100%',
           paddingTop: '20px',
           paddingBottom: '30px',
+          color: '#FFF',
+          fontFamily: '"Space Grotesk", sans-serif',
+          fontSize: '15px',
+          fontStyle: 'normal',
+          lineHeight: '1.45',
+          boxSizing: 'border-box',
+          transform: 'translateZ(0)',
           zIndex: 2,
-          minHeight: '100px'
         }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
-          >
-            <div style={{
-              color: '#FFF',
-              fontFamily: '"Space Grotesk", sans-serif',
-              fontSize: '15px',
-              fontStyle: 'normal',
-              lineHeight: '1.45',
-              boxSizing: 'border-box',
-              transform: 'translateZ(0)',
-            }}>
-              {CREDITS.map((entry, i) => (
-                <span key={i}>
-                  {i > 0 && <span style={{ fontWeight: 200 }}>{' / '}</span>}
-                  <span style={{ fontWeight: 700 }}>{entry.role}:</span>
-                  <span style={{ fontWeight: 200 }}> {entry.name}</span>
-                </span>
-              ))}
-            </div>
-          </ParallaxLayer>
+          {CREDITS.map((entry, i) => (
+            <span key={i}>
+              {i > 0 && <span style={{ fontWeight: 200 }}>{' / '}</span>}
+              <span style={{ fontWeight: 700 }}>{entry.role}:</span>
+              <span style={{ fontWeight: 200 }}> {entry.name}</span>
+            </span>
+          ))}
         </div>
 
       </div>

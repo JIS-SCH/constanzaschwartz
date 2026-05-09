@@ -69,12 +69,11 @@ interface ParallaxLayerProps {
     width?: string
     height?: string
     aspectRatio?: string
-    zIndex?: number
+    zIndex: number
     paddingBottom?: string
   }
   sectionId?: string
   layerIndex?: number
-  className?: string
   children?: React.ReactNode
 }
 
@@ -97,7 +96,7 @@ function MarqueeContent({ content, duration }: { content: string; duration: numb
   )
 }
 
-export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, className, children }: ParallaxLayerProps) {
+export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, children }: ParallaxLayerProps) {
   const triggerRef = useRef<HTMLDivElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)
   const mediaRef = useRef<HTMLElement>(null)
@@ -292,7 +291,7 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, clas
     <div
       ref={isStickyMarquee ? undefined : triggerRef}
       style={positionStyle}
-      className={className || layer.className}
+      className={layer.className}
       data-project-image={isHero ? true : undefined}
     >
       <div

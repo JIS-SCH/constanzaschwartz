@@ -21,12 +21,12 @@ export const STAGGER = {
 } as const
 
 export const PARALLAX = {
-  intensity: { desktop: 500, mobile: 80 },
+  intensity: { desktop: 300, mobile: 80 },
   speed: {
-    subtle: 0.25, // For text layers
+    subtle: 0.5,
     normal: 0.5,
-    strong: 0.7,
-    hero: 0.0,
+    strong: 0.5,
+    hero: 0,
     standard: 0.5,
   },
   uniform: {

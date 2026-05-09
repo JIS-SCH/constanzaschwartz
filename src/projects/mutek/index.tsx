@@ -5,7 +5,7 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { ASSETS } from './assets'
 import { TW, TEXT_BLOCK_STYLE, CH, GAP } from '../shared'
-import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
+import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
 
 export { meta } from './meta'
 
@@ -119,7 +119,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: PARALLAX.speed.hero, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'cover' }}
             position={{ top: '77px', left: '0', width: '100%', height: '648px', zIndex: 0 }}
           />
         </ParallaxSection>
@@ -130,7 +130,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="intro"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '0', left: '8.47%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
@@ -150,7 +150,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="intro"
             layerIndex={2}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '499px', left: '54.9%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <h2 style={TITLE_STYLE} className="mutek-h3">RITUAL AL VACÍO</h2>
@@ -171,7 +171,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="text-block-1"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '0', left: '54.9%', width: TW, height: '80', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
@@ -194,7 +194,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-1"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '0', left: '12.7%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
@@ -246,7 +246,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-2"
             layerIndex={1}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '240px', left: '42.3%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
@@ -277,7 +277,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="collage-3"
             layerIndex={2}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '865px', left: '46.4%', width: TW, height: 'auto', zIndex: 4 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
@@ -300,7 +300,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="marquee-2"
             layerIndex={1}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '103px', left: '183px', width: '466px', height: '700px', zIndex: 2 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line', marginTop: '100px' }} className="mutek-p ">
@@ -335,7 +335,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="text-block-3"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '0px', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
@@ -359,7 +359,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="text-block-4"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '220px', left: '59.2%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
@@ -382,7 +382,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="image-text"
             layerIndex={1}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: 'calc(60vh + 290px)', left: '8.47%', width: '40%', height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
@@ -417,67 +417,45 @@ export function Component() {
       <div className="mutek-mobile bg-obsidian overflow-hidden">
 
         {/* 1. Hero */}
-        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px', overflow: 'hidden' }}>
-          <PI src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.hero} />
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px' }}>
+          <img src={ASSETS.heroMobile} alt="" className="block w-full h-full object-cover" />
         </div>
 
         {/* 2. Intro para */}
-        <div style={{ position: 'relative', marginTop: '80px', width: '350px', marginLeft: '20px', minHeight: '100px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div className="mutek-p" style={{ color: '#fff' }}>
-              En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
-            </div>
-          </ParallaxLayer>
+        <div className="mutek-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px' }}>
+          En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
         </div>
 
         {/* 3. First image pair + title + sub-text — absolute layout per Figma */}
         <div style={{ position: 'relative', height: '674px', marginTop: '80px' }}>
           <PI src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '20px', top: 0, width: '200px', height: '299px', objectFit: 'cover', zIndex: 0 }} />
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '252px', left: '20px', width: 'auto', height: 'auto', zIndex: 10 }}
-          >
-            <h3 style={{
-              margin: 0,
-              fontFamily: '"Helvetica Neue LT Std", sans-serif',
-              fontWeight: 250,
-              fontSize: '36px',
-              lineHeight: 1,
-              color: '#FFF',
-              textTransform: 'uppercase',
-              fontStyle: 'normal',
-              leadingTrim: 'both',
-              textEdge: 'cap'
-            } as any}>
-              Ritual al Vacío
-            </h3>
-          </ParallaxLayer>
+          <h3 style={{
+            position: 'absolute',
+            top: '252px',
+            left: '20px',
+            margin: 0,
+            fontFamily: '"Helvetica Neue LT Std", sans-serif',
+            fontWeight: 250,
+            fontSize: '36px',
+            lineHeight: 1,
+            color: '#FFF',
+            textTransform: 'uppercase',
+            fontStyle: 'normal',
+            leadingTrim: 'both',
+            textEdge: 'cap',
+            zIndex: 10
+          } as any}>
+            Ritual al Vacío
+          </h3>
           <PI src={ASSETS.img2} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
-          <div className="mutek-p" style={{ position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10 }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div style={{ color: '#fff' }}>
-                Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
-              </div>
-            </ParallaxLayer>
+          <div className="mutek-p" style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10 }}>
+            Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
           </div>
         </div>
 
         {/* 4. P_CAVE — 80px after image container */}
-        <div style={{ position: 'relative', marginTop: '80px', width: '350px', marginLeft: '20px', minHeight: '100px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              {P_CAVE}
-            </div>
-          </ParallaxLayer>
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          {P_CAVE}
         </div>
 
         {/* 5. Video */}
@@ -488,15 +466,8 @@ export function Component() {
         </div>
 
         {/* 6. P_VACIO */}
-        <div style={{ position: 'relative', marginTop: '80px', width: '350px', marginLeft: '20px', minHeight: '80px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              {P_VACIO}
-            </div>
-          </ParallaxLayer>
+        <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          {P_VACIO}
         </div>
 
         {/* 7. Stills + marquee + DSC3353 + P_RITUAL + Still 15 + Still 126 — absolute layout */}
@@ -506,7 +477,7 @@ export function Component() {
           <PI src={ASSETS.img4} alt="" style={{ position: 'absolute', left: 'calc(58.33% - 7.5px)', top: '136px', width: '170px', height: '96px', objectFit: 'cover' }} />
 
           {/* Marquee 1 — overlaps bottom of Still18 */}
-          <div style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', zIndex: 10, overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: '143px', left: 0, width: '100%', height: '40px', overflow: 'hidden' }}>
             <div className="marquee-track" style={{ animationDuration: `${104 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
@@ -524,20 +495,16 @@ export function Component() {
           <PI src={ASSETS.img5} alt="" style={{ position: 'absolute', left: '0px', top: '342px', width: '280px', height: '187px', objectFit: 'cover' }} />
 
           {/* P_RITUAL — right-indented, nowrap per Figma */}
-          <div style={{ position: 'absolute', top: '496px', left: 'calc(25% + 12.5px)', zIndex: 10 }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="mutek-p" style={{ color: '#fff', whiteSpace: 'nowrap' }}>
-                <p style={{ margin: 0 }}>La luz se apaga, todo se disuelve.</p>
-                <p style={{ margin: 0 }}>La caverna desaparece,</p>
-                <p style={{ margin: 0 }}>el ritmo se interrumpe.</p>
-                <p style={{ margin: 0 }}>Y en ese vaivén constante,</p>
-                <p style={{ margin: 0 }}>se funda un nuevo ritual:</p>
-                <p style={{ margin: 0 }}>un Ritual al Vacío.</p>
-              </div>
-            </ParallaxLayer>
+          <div className="mutek-p" style={{
+            position: 'absolute', top: '496px', left: 'calc(25% + 12.5px)',
+            color: '#fff', whiteSpace: 'nowrap',
+          }}>
+            <p style={{ margin: 0 }}>La luz se apaga, todo se disuelve.</p>
+            <p style={{ margin: 0 }}>La caverna desaparece,</p>
+            <p style={{ margin: 0 }}>el ritmo se interrumpe.</p>
+            <p style={{ margin: 0 }}>Y en ese vaivén constante,</p>
+            <p style={{ margin: 0 }}>se funda un nuevo ritual:</p>
+            <p style={{ margin: 0 }}>un Ritual al Vacío.</p>
           </div>
 
           {/* Still 15 — right-aligned */}
@@ -548,27 +515,13 @@ export function Component() {
         </div>
 
         {/* 8. P_QUESTION */}
-        <div style={{ position: 'relative', marginTop: '105px', width: '350px', marginLeft: '20px', minHeight: '80px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              {P_QUESTION}
-            </div>
-          </ParallaxLayer>
+        <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          {P_QUESTION}
         </div>
 
         {/* 9. P_MENTE */}
-        <div style={{ position: 'relative', marginTop: '100px', width: '350px', marginLeft: '20px', minHeight: '80px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div className="mutek-p text-white">
-              {P_MENTE}
-            </div>
-          </ParallaxLayer>
+        <div className="mutek-p text-white" style={{ marginTop: '100px', width: '350px', marginLeft: '20px' }}>
+          {P_MENTE}
         </div>
 
         {/* 10. Second image pair + Marquee 2 — absolute layout */}
@@ -576,7 +529,7 @@ export function Component() {
           <PI src={ASSETS.img8} alt="" style={{ position: 'absolute', right: '20px', top: 0, width: '200px', height: '300px', objectFit: 'cover', zIndex: 3 }} />
 
           {/* Marquee 2 — centered overlap between img8 and img9 */}
-          <div style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: '40px', zIndex: 2, overflow: 'hidden', mixBlendMode: 'difference' }}>
+          <div style={{ position: 'absolute', top: '230px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 2, mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${83 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
@@ -594,15 +547,8 @@ export function Component() {
         </div>
 
         {/* 11. P_APELA */}
-        <div style={{ position: 'relative', marginTop: '100px', width: '350px', marginLeft: '20px', minHeight: '80px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              {P_APELA}
-            </div>
-          </ParallaxLayer>
+        <div style={{ color: '#fff', marginTop: '100px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          {P_APELA}
         </div>
 
         {/* 12. Full-width image (Still 122) 390×572 */}
@@ -611,15 +557,8 @@ export function Component() {
         </div>
 
         {/* 13. P_UMBRAL */}
-        <div style={{ position: 'relative', marginTop: '105px', width: '350px', marginLeft: '20px', minHeight: '80px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              {P_UMBRAL}
-            </div>
-          </ParallaxLayer>
+        <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          {P_UMBRAL}
         </div>
 
         {/* 14. Still 111 — centered, 350×197 */}
@@ -628,15 +567,8 @@ export function Component() {
         </div>
 
         {/* 15. P_CAVERNA */}
-        <div style={{ position: 'relative', marginTop: '105px', width: '350px', marginLeft: '20px', minHeight: '80px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              {P_CAVERNA}
-            </div>
-          </ParallaxLayer>
+        <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          {P_CAVERNA}
         </div>
 
         {/* 16. Carousel + Closing Title — Text overlaps carousel */}
@@ -652,16 +584,11 @@ export function Component() {
 
           {/* 17. Closing title — Absolute positioned over carousel */}
           <div style={{ position: 'absolute', top: '307px', left: '0', paddingLeft: '80px', zIndex: 10, pointerEvents: 'none' }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="mutek-h4" style={{ fontWeight: 100 }}>
-                <div>Y aún apagada,</div>
-                <div>espera,</div>
-                <div>al próximo ritual.</div>
-              </div>
-            </ParallaxLayer>
+            <div className="mutek-h4" style={{ fontWeight: 100 }}>
+              <div>Y aún apagada,</div>
+              <div>espera,</div>
+              <div>al próximo ritual.</div>
+            </div>
           </div>
         </div>
         <style dangerouslySetInnerHTML={{ __html: `@-webkit-keyframes mutek-m-c { from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0) } to { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0) } } @keyframes mutek-m-c { from { transform: translate3d(0,0,0) } to { transform: translate3d(-50%,0,0) } }` }} />

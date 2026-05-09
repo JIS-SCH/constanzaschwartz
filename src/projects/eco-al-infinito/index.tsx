@@ -5,7 +5,7 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { ASSETS } from './assets'
-import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
+import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
 import { TW, CH, HERO_TOP, CAROUSEL_W_NARROW, CAROUSEL_W_WIDE } from '../shared'
 
 /** Consistent vertical gap between sections (px) */
@@ -88,7 +88,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="hero"
             layerIndex={0}
-            layer={{ type: 'image', src: ASSETS.hero, speed: PARALLAX.speed.hero, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'cover' }}
             position={{
               top: '0', width: 'full', height: '648px', zIndex: 1
             }}
@@ -114,21 +114,15 @@ export function Component() {
         {/* 2. INTRO — First paragraph + first collage images */}
         <ParallaxSection id="intro" className="relative bg-obsidian" style={{ marginTop: GAP, paddingBottom: '0px' }}>
           {/* Text Block - THE TOP ANCHOR (Relative pushes the height) */}
-          <div className="relative z-10" style={{ marginLeft: 'calc(58.33% + 12px)', width: TW, minHeight: '100px' }}>
-            <ParallaxLayer
-              sectionId="intro"
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="eco-p">
-                <p style={{ marginBottom: '1.5rem' }}>
-                  Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
-                </p>
-                <p>
-                  No es más ese conjunto de neuronas que no cede en su lucha por mantenernos vivos. Ha pasado años sumergido en las incontables marejadas de tecnología que nos abruma sin piedad desde que pusimos un caballo delante de un arado.
-                </p>
-              </div>
-            </ParallaxLayer>
+          <div className="relative z-10" style={{ marginLeft: 'calc(58.33% + 12px)', width: TW }}>
+            <div className="eco-p">
+              <p style={{ marginBottom: '1.5rem' }}>
+                Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
+              </p>
+              <p>
+                No es más ese conjunto de neuronas que no cede en su lucha por mantenernos vivos. Ha pasado años sumergido en las incontables marejadas de tecnología que nos abruma sin piedad desde que pusimos un caballo delante de un arado.
+              </p>
+            </div>
           </div>
 
           {/* Left image (Img 1) - Floating */}
@@ -179,16 +173,10 @@ export function Component() {
         {/* 4. TEXT + COLLAGE 2 — "Constanza Schwartz tampoco cede..." */}
         <ParallaxSection id="text-collage-2" className="relative" style={{ marginTop: '190px' }}>
           {/* TOP ANCHOR: Left text in flow */}
-          <div className="relative z-10" style={{ marginTop: '130px', marginLeft: 'calc(8.33% + 3px)', width: TW, minHeight: '100px' }}>
-            <ParallaxLayer
-              sectionId="text-collage-2"
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="eco-p">
-                Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
-              </div>
-            </ParallaxLayer>
+          <div className="relative z-10" style={{ marginTop: '130px', marginLeft: 'calc(8.33% + 3px)', width: TW }}>
+            <div className="eco-p">
+              Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
+            </div>
           </div>
 
           {/* Right portrait image (Img 5) - Floating */}
@@ -226,27 +214,21 @@ export function Component() {
           </div>
 
           {/* Text bottom relative to images */}
-          <div className="relative z-10" style={{ marginTop: '210px', marginBottom: '-13px', marginLeft: 'calc(8.33% + 10px)', width: TW, minHeight: '100px' }}>
-            <ParallaxLayer
-              sectionId="collage-3"
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="eco-p" style={{
-                fontSize: '15px',
-                fontStyle: 'normal',
-                fontFamily: '"Space Grotesk", sans-serif',
-                fontWeight: 300,
-                lineHeight: '21.75px',
-                letterSpacing: 'normal',
-                WebkitFontSmoothing: 'antialiased',
-                ['leadingTrim' as any]: 'both',
-                ['textEdge' as any]: 'cap',
-                color: '#fff'
-              }}>
-                Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos<br /> de su obra.
-              </div>
-            </ParallaxLayer>
+          <div className="relative z-10" style={{ marginTop: '210px', marginBottom: '-13px', marginLeft: 'calc(8.33% + 10px)', width: TW }}>
+            <div className="eco-p" style={{
+              fontSize: '15px',
+              fontStyle: 'normal',
+              fontFamily: '"Space Grotesk", sans-serif',
+              fontWeight: 300,
+              lineHeight: '21.75px',
+              letterSpacing: 'normal',
+              WebkitFontSmoothing: 'antialiased',
+              ['leadingTrim' as any]: 'both',
+              ['textEdge' as any]: 'cap',
+              color: '#fff'
+            }}>
+              Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos<br /> de su obra.
+            </div>
           </div>
         </ParallaxSection>
 
@@ -316,16 +298,10 @@ export function Component() {
           />
 
           {/* Paragraph below staircase - Flow Anchor */}
-          <div className="relative z-10" style={{ marginTop: '1020px', marginLeft: 'calc(8.33% + 3px)', width: TW, minHeight: '100px' }}>
-            <ParallaxLayer
-              sectionId="collage-14-15-16"
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="eco-p">
-                La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
-              </div>
-            </ParallaxLayer>
+          <div className="relative z-10" style={{ marginTop: '1020px', marginLeft: 'calc(8.33% + 3px)', width: TW }}>
+            <div className="eco-p">
+              La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
+            </div>
           </div>
 
           {/* Img 17 (Shadows) - Floating */}
@@ -394,24 +370,18 @@ export function Component() {
           />
 
           {/* Concluding Paragraph - Flow Anchor */}
-          <div className="relative z-10" style={{ marginTop: '1780px', marginLeft: 'calc(58.33% + 12px)', width: TW, minHeight: '100px' }}>
-            <ParallaxLayer
-              sectionId="final-sequence"
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="eco-p">
-                Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo.
-                Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son
-                las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por
-                la Tierra. Nos traslada a los inicios, mientras nos apoyamos confiados en las formas abiertas
-                y fundamentales de nuestro alfabeto de formas. No importa el siglo de nuestra ubicación
-                defensiva. Seguiremos dudando hasta que realmente nos <br />reconozcamos allí. Somos habitantes
-                de un extenso<br />universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos.
-                Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos.
-                Es nuestro universo…
-              </div>
-            </ParallaxLayer>
+          <div className="relative z-10" style={{ marginTop: '1780px', marginLeft: 'calc(58.33% + 12px)', width: TW }}>
+            <div className="eco-p">
+              Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo.
+              Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son
+              las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por
+              la Tierra. Nos traslada a los inicios, mientras nos apoyamos confiados en las formas abiertas
+              y fundamentales de nuestro alfabeto de formas. No importa el siglo de nuestra ubicación
+              defensiva. Seguiremos dudando hasta que realmente nos <br />reconozcamos allí. Somos habitantes
+              de un extenso<br />universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos.
+              Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos.
+              Es nuestro universo…
+            </div>
           </div>
 
           <ParallaxLayer
@@ -493,20 +463,14 @@ export function Component() {
           </ParallaxLayer>
 
           {/* Final Reflective Text below carousel - BOTTOM ANCHOR */}
-          <div className="relative z-10" style={{ marginTop: '2500px', marginLeft: 'calc(8% + 12px)', width: TW, paddingBottom: '100px', minHeight: '100px' }}>
-            <ParallaxLayer
-              sectionId="final-sequence-25-29"
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div className="eco-p">
-                Sí, claro. Todavía no conocemos muchos universos, pero puede ser que los haya.
-                Y dentro de ellos, siempre habrá un lugar para el arte que expande nuestra
-                posibilidad de entender y percibir lo diferente. Tal vez nos aterra que esa
-                posibilidad desaparezca. Pero no lo hará. Porque las cosas existen también en
-                nuestras memorias. Quizá aún más intensamente.
-              </div>
-            </ParallaxLayer>
+          <div className="relative z-10" style={{ marginTop: '2500px', marginLeft: 'calc(8% + 12px)', width: TW, paddingBottom: '100px' }}>
+            <div className="eco-p">
+              Sí, claro. Todavía no conocemos muchos universos, pero puede ser que los haya.
+              Y dentro de ellos, siempre habrá un lugar para el arte que expande nuestra
+              posibilidad de entender y percibir lo diferente. Tal vez nos aterra que esa
+              posibilidad desaparezca. Pero no lo hará. Porque las cosas existen también en
+              nuestras memorias. Quizá aún más intensamente.
+            </div>
           </div>
         </ParallaxSection>
 
@@ -649,7 +613,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="lyrics-section"
             layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle, className: 'blend-difference' }}
+            layer={{ type: 'text', content: '', speed: 0, className: 'blend-difference' }}
             position={{ top: '110px', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
           >
             <div className="eco-h4 text-white uppercase tracking-[0.72px] leading-none">
@@ -665,7 +629,7 @@ export function Component() {
           <ParallaxLayer
             sectionId="lyrics-section"
             layerIndex={1}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle, className: 'blend-difference' }}
+            layer={{ type: 'text', content: '', speed: 0, className: 'blend-difference' }}
             position={{ top: '650px', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
           >
             <div className="text-right text-white font-light text-[var(--p-size)] leading-relaxed" style={{ paddingRight: '96px', paddingTop: '110px' }}>
@@ -704,8 +668,8 @@ export function Component() {
       <div className="eco-mobile bg-obsidian overflow-hidden">
 
         {/* Hero */}
-        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px', isolation: 'isolate', overflow: 'hidden' }}>
-          <PI src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.hero} />
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px', isolation: 'isolate' }}>
+          <img src={ASSETS.heroMobile} alt="" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', transform: 'translateZ(0)' }} />
         </div>
 
         {/* Para 1 */}
@@ -716,16 +680,16 @@ export function Component() {
 
         {/* 3-image cluster (staggered) */}
         <div style={{ position: 'relative', height: '443px', marginTop: '80px' }}>
-          <PI src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '0', top: 0, width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img2} alt="" style={{ position: 'absolute', left: '110px', top: '177px', width: '170px', height: '114px', objectFit: 'cover', zIndex: 3 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img3} alt="" style={{ position: 'absolute', left: '190px', top: '275px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
+          <PI src={ASSETS.img1} alt="" style={{ position: 'absolute', left: '0', top: 0, width: '140px', height: '210px', objectFit: 'cover', zIndex: 1 }} />
+          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', left: '110px', top: '177px', width: '170px', height: '114px', objectFit: 'cover', zIndex: 3 }} />
+          <img src={ASSETS.img3} alt="" style={{ position: 'absolute', left: '190px', top: '275px', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
         </div>
 
         {/* Large portrait + marquee overlay */}
         <div style={{ position: 'relative', width: '100%', height: '525px', marginTop: '46px' }}>
-          <PI src={ASSETS.img4} alt="" style={{ display: 'block', width: '350px', height: '100%', objectFit: 'cover', margin: '0 auto' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img4} alt="" style={{ display: 'block', width: '350px', height: '100%', objectFit: 'cover', margin: '0 auto' }} />
 
-          <div style={{ position: 'relative', width: '100%', height: '30px', marginTop: '44px', zIndex: 10, overflow: 'hidden', mixBlendMode: 'difference' }}>
+          <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${59 * MARQUEE.secondsPerChar}s` }}>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
               <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
@@ -734,65 +698,54 @@ export function Component() {
         </div>
 
         {/* Para 2 */}
-        <div style={{ position: 'relative', marginTop: '80px', width: '350px', marginLeft: '20px', minHeight: '100px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div className="eco-p" style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
-            </div>
-          </ParallaxLayer>
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
         </div>
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
-          <PI src={ASSETS.img6} alt="" style={{ position: 'absolute', left: '0', top: '235px', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img5} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', left: '0', top: '235px', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} />
+          <PI src={ASSETS.img5} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
-        <PI src={ASSETS.img7} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '160px' }} speed={PARALLAX.speed.subtle} />
+        <img src={ASSETS.img7} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '160px' }} />
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '240px', marginTop: '80px' }}>
-          <PI src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img9} alt="" style={{ position: 'absolute', right: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img8} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '200px', height: '134px', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img9} alt="" style={{ position: 'absolute', right: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Para 3 */}
-        <div style={{ position: 'relative', marginTop: '70px', width: '350px', marginLeft: '20px', minHeight: '80px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div className="eco-p" style={{
-              color: '#fff',
-              fontSize: '15px',
-              fontStyle: 'normal',
-              fontFamily: '"Space Grotesk", sans-serif',
-              fontWeight: 300,
-              lineHeight: '21.75px',
-              letterSpacing: 'normal',
-              WebkitFontSmoothing: 'antialiased',
-              ['leadingTrim' as any]: 'both',
-              ['textEdge' as any]: 'cap'
-            }}>
-              Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos de su obra.
-            </div>
-          </ParallaxLayer>
+        <div className="eco-p" style={{
+          color: '#fff',
+          marginTop: '70px',
+          width: '350px',
+          marginLeft: '20px',
+          fontSize: '15px',
+          fontStyle: 'normal',
+          fontFamily: '"Space Grotesk", sans-serif',
+          fontWeight: 300,
+          lineHeight: '21.75px',
+          letterSpacing: 'normal',
+          WebkitFontSmoothing: 'antialiased',
+          ['leadingTrim' as any]: 'both',
+          ['textEdge' as any]: 'cap'
+        }}>
+          Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos de su obra.
         </div>
 
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '240px', marginTop: '80px' }}>
-          <PI src={ASSETS.img10} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img11} alt="" style={{ position: 'absolute', left: '0px', top: '107px', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img10} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover' }} />
+          <img src={ASSETS.img11} alt="" style={{ position: 'absolute', left: '0px', top: '107px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '240px', marginTop: '76px' }}>
-          <PI src={ASSETS.img12} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img13} alt="" style={{ position: 'absolute', left: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img12} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img13} alt="" style={{ position: 'absolute', left: '0px', top: '100px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Video Making Off - Mobile */}
@@ -813,15 +766,8 @@ export function Component() {
         </div>
 
         {/* Para 4 */}
-        <div style={{ position: 'relative', marginTop: '156px', marginBottom: '80px', width: '350px', marginLeft: '20px', minHeight: '120px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div className="eco-p" style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
-            </div>
-          </ParallaxLayer>
+        <div className="eco-p" style={{ color: '#fff', marginTop: '156px', marginBottom: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
         </div>
 
         {/* Image pair */}
@@ -831,7 +777,7 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, marginTop: '40px', width: '100%', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
+        <div style={{ position: 'relative', zIndex: 5, marginTop: '40px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
           <div className="marquee-track" style={{ animationDuration: `${74 * MARQUEE.secondsPerChar}s` }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
@@ -839,27 +785,20 @@ export function Component() {
         </div>
 
         {/* Full-width */}
-        <PI src={ASSETS.img19} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '91px', marginBottom: '20px' }} speed={PARALLAX.speed.subtle} />
+        <img src={ASSETS.img19} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '91px', marginBottom: '20px' }} />
 
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '300px', marginTop: '80px' }}>
-          <PI src={ASSETS.img20} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '230px', height: 'auto', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img21} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '230px', height: '346px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img20} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '230px', height: 'auto', zIndex: 2 }} />
+          <PI src={ASSETS.img21} alt="" style={{ position: 'absolute', left: '20px', top: '100px', width: '230px', height: '346px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
-        <PI src={ASSETS.img22} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '228px' }} speed={PARALLAX.speed.subtle} />
+        <img src={ASSETS.img22} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '228px' }} />
 
         {/* Para 5 */}
-        <div style={{ position: 'relative', marginTop: '80px', width: '350px', marginLeft: '20px', minHeight: '200px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div className="eco-p" style={{ color: '#fff', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-              Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo. Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por la Tierra. Nos traslada a los inicios, mientras nos apoyamos confiados en las formas abiertas y fundamentales de nuestro alfabeto de formas. No importa el siglo de nuestra ubicación defensiva. Seguiremos dudando hasta que realmente nos reconozcamos allí. Somos habitantes de un extenso universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos. Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos. Es nuestro universo…
-            </div>
-          </ParallaxLayer>
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+          Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo. Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por la Tierra. Nos traslada a los inicios, mientras nos apoyamos confiados en las formas abiertas y fundamentales de nuestro alfabeto de formas. No importa el siglo de nuestra ubicación defensiva. Seguiremos dudando hasta que realmente nos reconozcamos allí. Somos habitantes de un extenso universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos. Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos. Es nuestro universo…
         </div>
 
         {/* Image pair offset */}
@@ -869,7 +808,7 @@ export function Component() {
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, marginTop: '-370px', marginBottom: '515px', width: '100%', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
+        <div style={{ position: 'relative', zIndex: 5, marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
           <div className="marquee-track" style={{ animationDuration: `${60 * MARQUEE.secondsPerChar}s` }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
@@ -877,21 +816,21 @@ export function Component() {
         </div>
 
         {/* Full-width */}
-        <PI src={ASSETS.img25} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '80px' }} speed={PARALLAX.speed.subtle} />
+        <img src={ASSETS.img25} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '80px' }} />
 
 
         <div style={{ position: 'relative', height: '950px', marginTop: '80px' }}>
 
-          <PI src={ASSETS.img26} alt="" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '0', width: '170px', height: '113px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img26} alt="" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: '0', width: '170px', height: '113px', objectFit: 'cover', zIndex: 2 }} />
 
 
-          <PI src={ASSETS.img27} alt="" style={{ position: 'absolute', right: '0px', top: '70px', width: '170px', height: '255px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <PI src={ASSETS.img27} alt="" style={{ position: 'absolute', right: '0px', top: '70px', width: '170px', height: '255px', objectFit: 'cover' }} />
 
 
-          <PI src={ASSETS.img28} alt="" style={{ position: 'absolute', left: '0px', top: '400px', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img28} alt="" style={{ position: 'absolute', left: '0px', top: '400px', width: '200px', height: '133px', objectFit: 'cover' }} />
 
           {/* 29 a la derecha */}
-          <PI src={ASSETS.img29} alt="" style={{ position: 'absolute', right: '0px', top: '494px', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img29} alt="" style={{ position: 'absolute', right: '0px', top: '494px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
 
@@ -906,49 +845,45 @@ export function Component() {
         </div>
         <style dangerouslySetInnerHTML={{ __html: `@-webkit-keyframes eco-m-c1 { from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0) } to { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0) } } @keyframes eco-m-c1 { from { transform: translate3d(0,0,0) } to { transform: translate3d(-50%,0,0) } }` }} />
 
-        <div style={{ position: 'relative', marginTop: '80px', width: '350px', marginLeft: '20px', minHeight: '120px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
-            <div className="eco-p" style={{
-              color: '#fff',
-              fontSize: '15px',
-              fontStyle: 'normal',
-              fontFamily: '"Space Grotesk", sans-serif',
-              fontWeight: 300,
-              lineHeight: '21.75px',
-              letterSpacing: 'normal',
-              WebkitFontSmoothing: 'antialiased',
-              ['leadingTrim' as any]: 'both',
-              ['textEdge' as any]: 'cap'
-            }}>
-              Sí, claro. Todavía no conocemos muchos<br />
-              universos, pero puede ser que los haya. Y<br />
-              dentro de ellos, siempre habrá un lugar para el<br />
-              arte que expande nuestra posibilidad de<br />
-              entender y percibir lo diferente. Tal vez nos<br />
-              aterra que esa posibilidad desaparezca. Pero no<br />
-              lo hará. Porque las cosas existen también en<br />
-              nuestras memorias. Quizá aún más<br />
-              intensamente.
-            </div>
-          </ParallaxLayer>
+        <div className="eco-p" style={{
+          color: '#fff',
+          marginTop: '80px',
+          width: '350px',
+          marginLeft: '20px',
+          fontSize: '15px',
+          fontStyle: 'normal',
+          fontFamily: '"Space Grotesk", sans-serif',
+          fontWeight: 300,
+          lineHeight: '21.75px',
+          letterSpacing: 'normal',
+          WebkitFontSmoothing: 'antialiased',
+          ['leadingTrim' as any]: 'both',
+          ['textEdge' as any]: 'cap'
+        }}>
+          Sí, claro. Todavía no conocemos muchos<br />
+          universos, pero puede ser que los haya. Y<br />
+          dentro de ellos, siempre habrá un lugar para el<br />
+          arte que expande nuestra posibilidad de<br />
+          entender y percibir lo diferente. Tal vez nos<br />
+          aterra que esa posibilidad desaparezca. Pero no<br />
+          lo hará. Porque las cosas existen también en<br />
+          nuestras memorias. Quizá aún más<br />
+          intensamente.
         </div>
 
         <div style={{ position: 'relative', height: '300px', marginTop: '80px' }}>
-          <PI src={ASSETS.img30} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img31} alt="" style={{ position: 'absolute', left: '0px', top: '101px', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img30} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img31} alt="" style={{ position: 'absolute', left: '0px', top: '101px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Image pair (img32/img33) */}
         <div style={{ position: 'relative', height: '320px', marginTop: '12px' }}>
-          <PI src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img33} alt="" style={{ position: 'absolute', right: '50px', top: '209px', width: '230px', height: '153px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <PI src={ASSETS.img32} alt="" style={{ position: 'absolute', left: '0px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img33} alt="" style={{ position: 'absolute', right: '50px', top: '209px', width: '230px', height: '153px', objectFit: 'cover' }} />
         </div>
 
         {/* Marquee */}
-        <div style={{ position: 'relative', zIndex: 5, marginTop: '-302px', marginBottom: '394px', width: '100%', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
+        <div style={{ position: 'relative', zIndex: 5, marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
           <div className="marquee-track" style={{ animationDuration: `${75 * MARQUEE.secondsPerChar}s` }}>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
             <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
@@ -967,8 +902,8 @@ export function Component() {
 
         {/* Image pair (img34/img35) */}
         <div style={{ position: 'relative', height: '340px', marginTop: '80px' }}>
-          <PI src={ASSETS.img34} alt="" style={{ position: 'absolute', left: '40px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img35} alt="" style={{ position: 'absolute', right: '0px', top: '248px', width: '200px', height: '133px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <PI src={ASSETS.img34} alt="" style={{ position: 'absolute', left: '40px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+          <img src={ASSETS.img35} alt="" style={{ position: 'absolute', right: '0px', top: '248px', width: '200px', height: '133px', objectFit: 'cover' }} />
         </div>
 
         {/* Carousel 2 */}
@@ -984,12 +919,12 @@ export function Component() {
 
         {/* Image pair (img36/img37) */}
         <div style={{ position: 'relative', height: '360px', marginTop: '80px' }}>
-          <PI src={ASSETS.img36} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img37} alt="" style={{ position: 'absolute', left: '20px', top: '195px', width: '230px', height: '153px', objectFit: 'cover' }} speed={PARALLAX.speed.subtle} />
+          <PI src={ASSETS.img36} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '170px', height: '255px', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img37} alt="" style={{ position: 'absolute', left: '20px', top: '195px', width: '230px', height: '153px', objectFit: 'cover' }} />
         </div>
 
         {/* Full-width */}
-        <PI src={ASSETS.img38} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '67px' }} speed={PARALLAX.speed.subtle} />
+        <img src={ASSETS.img38} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '67px' }} />
 
         {/* Para 6 */}
         {/* <div className="eco-p" style={{ color: '#fff', padding: '80px 20px 0', maxWidth: '350px' }}>
@@ -997,11 +932,7 @@ export function Component() {
         </div> */}
 
         {/* Lyrics — Figma 1571:1135..1141 (mobile) — Helvetica Neue LT Std Thin 16px, centered */}
-        <div style={{ position: 'relative', backgroundColor: '#0F0F0F', marginTop: '23px', padding: '60px 20px 0', textAlign: 'center', minHeight: '300px' }}>
-          <ParallaxLayer
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-          >
+        <div style={{ backgroundColor: '#0F0F0F', marginTop: '23px', padding: '60px 20px 0', textAlign: 'center' }}>
           <div style={{
             color: '#fff',
             textTransform: 'uppercase',
@@ -1028,9 +959,7 @@ export function Component() {
             lineHeight: 1.45,
           }}>
             Simon &amp; Garfunkel · 1964
-            </div>
-          </ParallaxLayer>
-        </div>
+          </div>
 
           {/* Credits Mobile */}
           {/* <div style={{
@@ -1064,7 +993,7 @@ export function Component() {
             <span style={{ fontWeight: 700 }}>Colaboración Integral Post-Montaje: </span>
             <span>Juan Ignacio Scheller</span>
           </div> */}
-
+        </div>
 
       </div>{/* /eco-mobile */}
     </div>

@@ -191,7 +191,7 @@ export function Component() {
 
           <ParallaxLayer
             sectionId="hero" layerIndex={1}
-            layer={{ type: 'image', src: ASSETS.hero, speed: PARALLAX.speed.hero, isHero: true, objectFit: 'cover' }}
+            layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'cover' }}
             position={{ top: '45px', left: '0', width: '100%', height: '648px', zIndex: 1 }}
           />
         </ParallaxSection>
@@ -200,7 +200,7 @@ export function Component() {
         <ParallaxSection id="intro-texts" style={{ minHeight: 'var(--h-intro)' }}>
           <ParallaxLayer
             sectionId="intro-texts" layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: 'var(--it-l-t)', left: 'var(--it-l-x)', width: 'var(--it-l-w)', height: 'auto', zIndex: 1 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
@@ -213,7 +213,7 @@ export function Component() {
 
           <ParallaxLayer
             sectionId="intro-texts" layerIndex={1}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: 'var(--it-r-t)', left: 'var(--it-r-x)', width: 'var(--it-r-w)', height: 'auto', zIndex: 1 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
@@ -243,7 +243,7 @@ export function Component() {
         <ParallaxSection id="statement" style={{ minHeight: 'var(--h-stmt)' }}>
           <ParallaxLayer
             sectionId="statement" layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: 'var(--stmt-t)', left: 'var(--stmt-x)', width: 'var(--stmt-w)', height: 'auto', zIndex: 1 }}
           >
             <h3 style={TITLE_STYLE} className="dw-h3">STATEMENT</h3>
@@ -290,7 +290,7 @@ export function Component() {
         <ParallaxSection id="paragraphs-carousel" style={{ minHeight: 'var(--h-pc)' }}>
           <ParallaxLayer
             sectionId="paragraphs-carousel" layerIndex={0}
-            layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
+            layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '160px', left: 'var(--pc-text-l)', width: '466px', height: 'auto', zIndex: 1 }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -451,44 +451,34 @@ export function Component() {
       {/* ── MOBILE ─────────────────────────────────────────────────── */}
       <div className="dw-mobile bg-obsidian overflow-hidden">
         {/* 1. HERO */}
-        <div data-project-image style={{ width: '100%', height: '750px', position: 'relative', overflow: 'hidden' }}>
-          <PI src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} speed={PARALLAX.speed.hero} />
+        <div data-project-image style={{ width: '100%', height: '750px', position: 'relative' }}>
+          <img src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
         {/* 2. INTRO */}
         <div style={{ position: 'relative', height: 'var(--h-intro)' }}>
           <div style={{ position: 'absolute', top: 'var(--it-l-t)', left: 'var(--it-l-x)', width: '350px' }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                En el marco de Design Week Mexico 2025, Argentina fue el país invitado.
-                Constanza Schwartz bajo la representación de Comité357, fue una de las artistas
-                seleccionadas para representar al país con Ensayo de Espejismo, híbrido entre
-                objeto espejo y escultura.
-              </div>
-            </ParallaxLayer>
+            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              En el marco de Design Week Mexico 2025, Argentina fue el país invitado.
+              Constanza Schwartz bajo la representación de Comité357, fue una de las artistas
+              seleccionadas para representar al país con Ensayo de Espejismo, híbrido entre
+              objeto espejo y escultura.
+            </div>
           </div>
           <div style={{ position: 'absolute', top: 'var(--it-r-t)', left: 'var(--it-r-x)', width: 'var(--it-r-w)' }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                <p>Título: Ensayo de Espejismo</p>
-                <p>Año: 2025</p>
-                <p>Materiales: Acero Pulido y Cromado, Madera.</p>
-                <p>Medidas: 2.10 x 0.72 x 0.30 x 0.16 mts.</p>
-              </div>
-            </ParallaxLayer>
+            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              <p>Título: Ensayo de Espejismo</p>
+              <p>Año: 2025</p>
+              <p>Materiales: Acero Pulido y Cromado, Madera.</p>
+              <p>Medidas: 2.10 x 0.72 x 0.30 x 0.16 mts.</p>
+            </div>
           </div>
         </div>
 
         {/* 3. COLLAGE-1 */}
         <div style={{ position: 'relative', height: 'var(--h-c1)' }}>
-          <PI src={ASSETS.img1} alt="" style={{ position: 'absolute', top: '-25px', left: '28.3%', width: 'var(--c1-b-w)', height: 'var(--c1-b-h)', objectFit: 'cover', zIndex: 2 }} speed={PARALLAX.speed.subtle} />
-          <PI src={ASSETS.img2} alt="" style={{ position: 'absolute', top: '122px', left: 'var(--c1-a-x)', width: 'var(--c1-a-w)', height: 'var(--c1-a-h)', objectFit: 'cover', zIndex: 1 }} speed={PARALLAX.speed.subtle} />
+          <img src={ASSETS.img1} alt="" style={{ position: 'absolute', top: '-25px', left: '28.3%', width: 'var(--c1-b-w)', height: 'var(--c1-b-h)', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img2} alt="" style={{ position: 'absolute', top: '122px', left: 'var(--c1-a-x)', width: 'var(--c1-a-w)', height: 'var(--c1-a-h)', objectFit: 'cover', zIndex: 1 }} />
         </div>
 
         {/* 4. STATEMENT */}
@@ -496,25 +486,15 @@ export function Component() {
           <div style={{ paddingTop: 'var(--stmt-t)' }}>
             <h3 style={TITLE_STYLE} className="dw-h3">STATEMENT</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', width: '350px', marginTop: '0' }}>
-              <ParallaxLayer
-                layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-                position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-              >
-                <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                  Pocas personas desconocen totalmente los órganos de los sentidos, pero no todas
-                  comprenden la magnitud que tienen en nuestra conexión con el mundo/ la realidad.
-                  Seguramente es diferente la propiocepción, sentido del que tenemos poca conciencia.
-                </div>
-              </ParallaxLayer>
-              <ParallaxLayer
-                layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-                position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-              >
-                <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                  Se podría decir entonces que un grupo de fantasmas (los sentidos) dirigen toda nuestra
-                  vida y desde ya nuestra conexión con el arte, el diseño.
-                </div>
-              </ParallaxLayer>
+              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+                Pocas personas desconocen totalmente los órganos de los sentidos, pero no todas
+                comprenden la magnitud que tienen en nuestra conexión con el mundo/ la realidad.
+                Seguramente es diferente la propiocepción, sentido del que tenemos poca conciencia.
+              </div>
+              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+                Se podría decir entonces que un grupo de fantasmas (los sentidos) dirigen toda nuestra
+                vida y desde ya nuestra conexión con el arte, el diseño.
+              </div>
             </div>
           </div>
         </div>
@@ -523,7 +503,7 @@ export function Component() {
         <div style={{ position: 'relative', height: 'var(--h-c2)' }}>
           <PI speed={PARALLAX.speed.subtle} src={ASSETS.img3} alt="" style={{ position: 'absolute', top: '-110px', left: 'var(--c2-a-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 2 }} />
           <PI speed={PARALLAX.speed.subtle} src={ASSETS.img4} alt="" style={{ position: 'absolute', top: '70px', left: 'var(--c2-b-x)', width: '182px', height: '274px', objectFit: 'cover', zIndex: 1 }} />
-          <div style={{ position: 'absolute', top: '290px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 10 }}>
+          <div style={{ position: 'absolute', top: '290px', left: 0, width: '100%', overflow: 'hidden', zIndex: 10 }}>
             <div className="marquee-track" style={{ animationDuration: `${111 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
@@ -541,25 +521,15 @@ export function Component() {
         {/* 6. PARAGRAPHS + CAROUSEL */}
         <div style={{ position: 'relative', height: 'var(--h-pc)' }}>
           <div style={{ position: 'absolute', top: '-390px', left: 'var(--pc-text-l)', width: '350px', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                Esta obra, híbrido entre objeto espejo y escultura, tiene el propósito de hacer
-                consiente para el participante de esta conexión oculta y trascendental.
-              </div>
-            </ParallaxLayer>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                Combinados testigos de acero pulido y cromados, su comportamiento en función a
-                sus efectos ópticos, relación con su entorno y efectos lumínicos, permite
-                establecer una posibilidad de diálogo donde una forma concreta desvanece sus límites.
-              </div>
-            </ParallaxLayer>
+            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              Esta obra, híbrido entre objeto espejo y escultura, tiene el propósito de hacer
+              consiente para el participante de esta conexión oculta y trascendental.
+            </div>
+            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              Combinados testigos de acero pulido y cromados, su comportamiento en función a
+              sus efectos ópticos, relación con su entorno y efectos lumínicos, permite
+              establecer una posibilidad de diálogo donde una forma concreta desvanece sus límites.
+            </div>
           </div>
           <div style={{ position: 'absolute', top: '-54px', left: 0, width: '100%', height: '330px', overflow: 'hidden' }}>
             <div style={{ display: 'flex', height: '330px', width: 'max-content', willChange: 'transform', WebkitAnimation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
@@ -573,24 +543,19 @@ export function Component() {
         {/* 7. FINAL PARAGRAPH */}
         <div style={{ position: 'relative', height: 'var(--h-fp)' }}>
           <div style={{ position: 'absolute', top: '-465px', left: 'var(--fp-text-l)', width: 'var(--fp-text-w)' }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                El espejo nos permite a veces intuir que el cuerpo está presente. En este caso, la
-                conformación de la estructura permite fragmentar las imágenes que se presentan ante él,
-                imágenes que suelen estar unidas pero que en este juego de repetición, de llenos y
-                de vacíos, es posible percibir un universo simbólico en una búsqueda por la dilución
-                de las líneas divisorias entre lo artístico y lo cotidiano, la imagen y el símbolo.
-              </div>
-            </ParallaxLayer>
+            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              El espejo nos permite a veces intuir que el cuerpo está presente. En este caso, la
+              conformación de la estructura permite fragmentar las imágenes que se presentan ante él,
+              imágenes que suelen estar unidas pero que en este juego de repetición, de llenos y
+              de vacíos, es posible percibir un universo simbólico en una búsqueda por la dilución
+              de las líneas divisorias entre lo artístico y lo cotidiano, la imagen y el símbolo.
+            </div>
           </div>
         </div>
 
         {/* 8. COLLAGE-3 + MARQUEE */}
         <div style={{ position: 'relative', height: 'var(--h-c3)', top: '-650px' }}>
-          <div style={{ position: 'absolute', top: '60px', left: 0, width: '100%', height: '40px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
+          <div style={{ position: 'absolute', top: '60px', left: 0, width: '100%', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${154 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
@@ -603,29 +568,24 @@ export function Component() {
               ))}
             </div>
           </div>
-          <PI speed={PARALLAX.speed.subtle} src={ASSETS.img5} alt="" style={{ position: 'absolute', top: '47px', left: 'var(--c3-a-x)', width: 'var(--c3-a-w)', height: 'var(--c3-a-h)', objectFit: 'cover', zIndex: 2 }} />
-          <PI speed={PARALLAX.speed.subtle} src={ASSETS.img6} alt="" style={{ position: 'absolute', top: '120px', left: 'var(--c3-b-x)', width: '390px', height: '261px', objectFit: 'contain', zIndex: 1 }} />
-          <PI speed={PARALLAX.speed.subtle} src={ASSETS.img7} alt="" style={{ position: 'absolute', top: '356px', left: 'var(--c3-c-x)', width: 'var(--c3-c-w)', height: 'var(--c3-c-h)', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img5} alt="" style={{ position: 'absolute', top: '47px', left: 'var(--c3-a-x)', width: 'var(--c3-a-w)', height: 'var(--c3-a-h)', objectFit: 'cover', zIndex: 2 }} />
+          <img src={ASSETS.img6} alt="" style={{ position: 'absolute', top: '120px', left: 'var(--c3-b-x)', width: '390px', height: '261px', objectFit: 'contain', zIndex: 1 }} />
+          <img src={ASSETS.img7} alt="" style={{ position: 'absolute', top: '356px', left: 'var(--c3-c-x)', width: 'var(--c3-c-w)', height: 'var(--c3-c-h)', objectFit: 'cover', zIndex: 2 }} />
         </div>
 
         {/* 9. FINISH */}
         <div style={{ marginTop: '-660px', width: '100%' }}>
           <div style={{ padding: '0 20px', width: 'var(--stmt-w)' }}>
-            <ParallaxLayer
-              layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-              position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
-            >
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
-                Con la utilización de espejos, se posibilita el juego de distorsión de la realidad
-                en un claro paralelismo e intento de mirada introspectiva sobre nuestra nueva
-                generación de diseño argentino; los materiales innovadores que pueden también
-                volver a resinificar formas y formatos de previas épocas gloriosas de experimentación
-                vanguardista, piezas únicas y el uso de la fragmentación representando la búsqueda
-                incesante de descubrir nuevas y diferentes facetas del diseño. Vínculos y
-                comportamientos como sociedad. Traspasar todo limite, libertad sin límites,
-                profundidad, amplitud, variabilidad de posibilidades.
-              </div>
-            </ParallaxLayer>
+            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              Con la utilización de espejos, se posibilita el juego de distorsión de la realidad
+              en un claro paralelismo e intento de mirada introspectiva sobre nuestra nueva
+              generación de diseño argentino; los materiales innovadores que pueden también
+              volver a resinificar formas y formatos de previas épocas gloriosas de experimentación
+              vanguardista, piezas únicas y el uso de la fragmentación representando la búsqueda
+              incesante de descubrir nuevas y diferentes facetas del diseño. Vínculos y
+              comportamientos como sociedad. Traspasar todo limite, libertad sin límites,
+              profundidad, amplitud, variabilidad de posibilidades.
+            </div>
           </div>
 
           <div style={{ height: '80px' }} />
@@ -636,7 +596,7 @@ export function Component() {
             <PI speed={PARALLAX.speed.subtle} src={ASSETS.img10} alt="" style={{ position: 'absolute', left: '238px', top: '290px', width: '140px', height: '209px', zIndex: 2 }} />
           </div>
 
-          <div style={{ width: '100%', height: '40px', overflow: 'hidden', marginTop: '39px', position: 'relative', zIndex: 10, mixBlendMode: 'difference' }}>
+          <div style={{ width: '100%', overflow: 'hidden', marginTop: '39px', position: 'relative', zIndex: 10, mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${116 * MARQUEE.secondsPerChar}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
