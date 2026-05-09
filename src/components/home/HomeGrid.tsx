@@ -305,41 +305,28 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       })
     })
 
-    // ── Cards fade-in triggered by intro timeline ────────────────────────
-    function fadeInCards() {
-      if (!containerRef.current) return
-      gsap.fromTo(
-        containerRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: DURATION.lg, ease: EASE.out }
-      )
-    }
-
-    // If intro already completed (back from project, refresh), show immediately
-    if (sessionStorage.getItem('introComplete')) {
-      if (containerRef.current) gsap.set(containerRef.current, { opacity: 1 })
-    } else if (window.__cardsReady) {
-      fadeInCards()
-    }
-
-    const onShowCards = () => fadeInCards()
-    window.addEventListener('intro:showCards', onShowCards)
-
     // ── Camera entrance animation ──────────────────────────────────────────
+    let interactionEnabled = !!sessionStorage.getItem('introComplete')
     const targetZ = mobile ? MOBILE_BASE_Z : BASE_Z
-    gsap.to(camera.position, {
-      z: targetZ,
-      duration: DURATION.xl,
-      ease: EASE.out,
-    })
+
+    const startEntrance = () => {
+      cameraTargetRotY = 0
+      gsap.to(camera.position, {
+        z: targetZ,
+        duration: DURATION.xl,
+        ease: EASE.out,
+        onStart: () => {
+          interactionEnabled = true
+        }
+      })
+    }
 
     // ── Pointer / drag tracking ─────────────────────────────────────────────
-    // Desktop = mouse-follow (parallax). Mobile = touch-and-drag (rotates camera
-    // by drag delta; no rotation when finger isn't pressed).
     const pointer = { x: 0, y: 0 }
     let cameraTargetRotY = 0
 
     const onMouseMove = (e: MouseEvent) => {
+      if (!interactionEnabled) return
       pointer.x = (e.clientX / window.innerWidth) * 2 - 1
       pointer.y = -(e.clientY / window.innerHeight) * 2 + 1
       cameraTargetRotY = -pointer.x * MOUSE_ROTATION_RANGE
@@ -349,6 +336,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     let didDrag = false
 
     const onTouchStart = (e: TouchEvent) => {
+      if (!interactionEnabled) return
       dragStart = {
         x: e.touches[0].clientX,
         y: e.touches[0].clientY,
@@ -357,7 +345,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       didDrag = false
     }
     const onTouchMove = (e: TouchEvent) => {
-      if (!dragStart) return
+      if (!interactionEnabled || !dragStart) return
       const dx = e.touches[0].clientX - dragStart.x
       const dy = e.touches[0].clientY - dragStart.y
       if (Math.abs(dx) > DRAG_TAP_THRESHOLD || Math.abs(dy) > DRAG_TAP_THRESHOLD) {
@@ -378,6 +366,41 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       window.addEventListener('touchmove', onTouchMove, { passive: true })
       window.addEventListener('touchend', onTouchEnd, { passive: true })
     }
+
+    // ── Cards fade-in triggered by intro timeline ────────────────────────
+    function fadeInCards() {
+      if (!containerRef.current) return
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 30, pointerEvents: 'none' },
+        { 
+          opacity: 1, 
+          y: 0, 
+          pointerEvents: 'auto',
+          duration: DURATION.lg, 
+          ease: EASE.out 
+        }
+      )
+    }
+
+    // ── Handle Entrance States ───────────────────────────────────────────
+    const onShowCards = () => {
+      fadeInCards()
+      startEntrance()
+    }
+
+    // If intro already completed (back from project, refresh), show immediately
+    if (sessionStorage.getItem('introComplete')) {
+      if (containerRef.current) gsap.set(containerRef.current, { opacity: 1, pointerEvents: 'auto' })
+      camera.position.z = targetZ
+      cameraTargetRotY = 0
+      interactionEnabled = true
+    } else {
+      // Start at initial far position if not complete
+      camera.position.z = -50
+    }
+
+    window.addEventListener('intro:showCards', onShowCards)
 
     // ── Raycaster for hover + click ───────────────────────────────────────
     const raycaster = new THREE.Raycaster()
