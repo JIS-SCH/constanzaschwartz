@@ -10,12 +10,12 @@ import { DURATION, EASE, STAGGER } from '@/src/motion/tokens'
 const PROJECT_ROWS = [
   [
     { name: 'MÁS ALLÁ DEL INFINITO', slug: 'mas-alla-del-infinito' },
-    { name: 'DESIGN WEEK MEXICO', slug: 'design-week-mexico' },
+    { name: 'ECO AL INFINITO', slug: 'eco-al-infinito' },
   ],
   [
+    { name: 'DESIGN WEEK MEXICO', slug: 'design-week-mexico' },
     { name: 'MUTEK', slug: 'mutek' },
-    { name: 'ECO AL INFINITO', slug: 'eco-al-infinito' },
-    { name: 'SILVESTRE Y LA NARANJA "ALTEREGO"', slug: 'silvestre-y-la-naranja-alterego' },
+    { name: 'SYLN "ALTEREGO"', slug: 'silvestre-y-la-naranja-alterego' },
   ]
 ]
 
@@ -174,7 +174,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                     background: 'none',
                     border: 'none',
                     color: (hoveredItem === item) ? '#FFDF00' : '#FFF',
-                    fontSize: isMobile ? '54px' : '90px',
+                    fontSize: isMobile ? '54px' : '128px',
                     fontWeight: 100,
                     letterSpacing: '0.04em',
                     cursor: 'pointer',
@@ -266,7 +266,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                 }}
                                 style={{
                                   color: '#fff',
-                                  fontSize: '32px',
+                                  fontSize: '40px',
                                   fontWeight: 100,
                                   textTransform: 'uppercase',
                                   fontFamily: '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif',
@@ -285,7 +285,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                 <span style={{
                                   color: '#fff',
                                   opacity: 0.4,
-                                  fontSize: '32px',
+                                  fontSize: '40px',
                                   fontWeight: 100,
                                   fontFamily: '"Helvetica Neue LT Std", sans-serif'
                                 }}>|</span>
