@@ -441,7 +441,7 @@ export function Component() {
         }}>
           <ParallaxLayer
             layer={{ type: 'text', content: '', speed: PARALLAX.speed.subtle }}
-            position={{ top: '0', left: '0', width: '100%', height: 'auto' }}
+            position={{ top: '0', left: '0', width: '100%', height: 'auto', zIndex: 1 }}
           >
             <div style={{
               color: '#FFF',

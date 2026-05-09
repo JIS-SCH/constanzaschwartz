@@ -69,7 +69,7 @@ interface ParallaxLayerProps {
     width?: string
     height?: string
     aspectRatio?: string
-    zIndex: number
+    zIndex?: number
     paddingBottom?: string
   }
   sectionId?: string
