@@ -445,17 +445,21 @@ const CSS = `
 
 .pr-list {
   font-family: "Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 26px;
-  line-height: 121%;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 114.99999999999999%;
   letter-spacing: 0;
   color: #fff;
-  padding: 30px 20px;
+  padding: 20px;
   margin: 0;
+  vertical-align: middle;
 }
 
 @media (min-width: 1024px) {
   .pr-list {
+    font-weight: 100;
+    font-size: 26px;
+    line-height: 121%;
     padding: 30px 0 30px calc(8.33% + 2px);
   }
 }
