@@ -1,13 +1,16 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import type { AppPhase } from '@/src/types/app'
-import { TunnelVideo } from '@/src/components/TunnelVideo'
-import { IntroScreen } from '@/src/components/IntroScreen'
-import { HomeGrid } from '@/src/components/HomeGrid'
-import { projects } from '@/src/data/projects'
-import { useTransition } from '@/src/context/TransitionContext'
-import type { OriginRect } from '@/src/context/TransitionContext'
+import { TunnelVideo } from '@/src/components/tunnel/TunnelVideo'
+import { HomeGrid } from '@/src/components/home/HomeGrid'
+import { projectList } from '@/src/projects/registry'
+import { useTransition } from '@/src/contexts/TransitionContext'
+import type { OriginRect } from '@/src/contexts/TransitionContext'
+import { isMobile } from '@/src/utils/detect'
+import { PAGE_SEO, BASE_URL } from '@/src/data/seo'
+import { JsonLd } from '@/src/components/layout/JsonLd'
+
 
 function getInitialPhase(): AppPhase {
   if (typeof window !== 'undefined' && sessionStorage.getItem('introComplete')) {
@@ -17,46 +20,48 @@ function getInitialPhase(): AppPhase {
 }
 
 export default function Home() {
-  const [phase, setPhase] = useState<AppPhase>(getInitialPhase)
+  const [phase, setPhase] = useState<AppPhase>('tunnel')
   const { start } = useTransition()
+  const [tunnelStarted, setTunnelStarted] = useState(true)
 
-  // Track if tunnel was ever started — if so, keep it mounted (hidden) to avoid
-  // React vs ScrollTrigger pin DOM conflict on unmount
-  const [tunnelStarted] = useState(() => phase === 'tunnel')
+  useEffect(() => {
+    if (sessionStorage.getItem('introComplete')) {
+      setPhase('home')
+      setTunnelStarted(false)
+    }
+  }, [])
 
   const handleProjectClick = useCallback(
     (index: number, rect: OriginRect) => {
-      const project = projects[index]
+      const project = projectList[index]
       if (!project) return
-      start({ slug: project.slug, imageSrc: project.image, rect })
+      const imageSrc = (isMobile() && project.mobileImage) ? project.mobileImage : project.image
+      start({ slug: project.slug, imageSrc, rect })
     },
     [start]
   )
 
   const handleTunnelComplete = useCallback(() => {
-    setPhase('intro')
-  }, [])
-
-  const handleIntroComplete = useCallback(() => {
     sessionStorage.setItem('introComplete', '1')
+    window.__cardsReady = true
+    window.dispatchEvent(new CustomEvent('intro:showCards'))
+    window.dispatchEvent(new CustomEvent('intro:navControls'))
+    window.dispatchEvent(new CustomEvent('intro:logoMoved'))
     setPhase('home')
   }, [])
 
   return (
     <div id="app-root">
+      <JsonLd data={PAGE_SEO.home} url={BASE_URL} />
+
       {/* Tunnel video — stays mounted once started (ScrollTrigger pin modifies DOM,
           unmounting causes React removeChild errors). It hides itself on complete. */}
       {tunnelStarted && (
         <TunnelVideo onComplete={handleTunnelComplete} />
       )}
 
-      {/* Intro overlay — starts after tunnel completes */}
-      {phase === 'intro' && (
-        <IntroScreen onComplete={handleIntroComplete} />
-      )}
-
       <HomeGrid
-        projects={projects}
+        projects={projectList}
         onProjectClick={handleProjectClick}
       />
     </div>

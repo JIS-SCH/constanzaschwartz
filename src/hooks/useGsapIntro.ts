@@ -2,6 +2,7 @@
 
 import { useEffect, type RefObject } from 'react'
 import gsap from 'gsap'
+import { DURATION, EASE } from '@/src/motion/tokens'
 
 declare global {
   interface Window {
@@ -30,8 +31,8 @@ export function useGsapIntro(
 
       introTl.to(monogram, {
         opacity: 1,
-        duration: 1,
-        ease: 'power2.out',
+        duration: DURATION.xl,
+        ease: EASE.out,
       })
 
       // ── Step 2: After 1.2s delay, reveal the rest ──────────────────────
@@ -40,8 +41,8 @@ export function useGsapIntro(
         {
           opacity: 1,
           scale: 1,
-          duration: 0.8,
-          ease: 'power2.out',
+          duration: DURATION.lg,
+          ease: EASE.out,
         },
         '+=1.2'
       )
@@ -50,7 +51,7 @@ export function useGsapIntro(
         line,
         {
           scaleX: 1,
-          duration: 0.6,
+          duration: DURATION.md,
           transformOrigin: 'left center',
         },
         '<'
@@ -61,8 +62,8 @@ export function useGsapIntro(
         {
           opacity: 0.3,
           scale: 1,
-          duration: 0.6,
-          ease: 'power2.out',
+          duration: DURATION.md,
+          ease: EASE.out,
           onComplete: () => {
             gsap.fromTo(
               scrollEl,
@@ -70,7 +71,7 @@ export function useGsapIntro(
               {
                 opacity: 1,
                 duration: 1.8,
-                ease: 'power2.inOut',
+                ease: EASE.inOut,
                 repeat: -1,
                 yoyo: true,
               }
@@ -96,9 +97,25 @@ export function useGsapIntro(
         const navTitle = document.querySelector<HTMLElement>('[data-nav-title]')
 
         if (!navMono || !navTitle) {
-          el!.style.visibility = 'hidden'
-          el!.style.pointerEvents = 'none'
-          onComplete()
+          // Logo as file — no fly-to-navbar animation, just fade out and reveal
+          const tl = gsap.timeline({
+            onComplete: () => {
+              el!.style.visibility = 'hidden'
+              el!.style.pointerEvents = 'none'
+              onComplete()
+            },
+          })
+          tl.to([line, scrollEl], { opacity: 0, duration: DURATION.xs, ease: EASE.out }, 0)
+          tl.to([monogram, title], { opacity: 0, duration: DURATION.sm, ease: EASE.out }, 0)
+          tl.to(el, { backgroundColor: 'rgba(0,0,0,0)', duration: DURATION.md, ease: 'power2.in' }, 0.2)
+          tl.call(() => {
+            window.__cardsReady = true
+            window.dispatchEvent(new CustomEvent('intro:showCards'))
+          }, [], 0.35)
+          tl.call(() => {
+            window.dispatchEvent(new CustomEvent('intro:navControls'))
+            window.dispatchEvent(new CustomEvent('intro:logoMoved'))
+          }, [], 0.55)
           return
         }
 
@@ -128,8 +145,8 @@ export function useGsapIntro(
         // t=0.0 — Fade out scroll text + line
         exitTl.to([line, scrollEl], {
           opacity: 0,
-          duration: 0.25,
-          ease: 'power2.out',
+          duration: DURATION.xs,
+          ease: EASE.out,
         }, 0)
 
         // t=0.0 — Logo flies toward navbar
@@ -137,22 +154,22 @@ export function useGsapIntro(
           x: monoDx,
           y: monoDy,
           scale: monoScale,
-          duration: 0.9,
-          ease: 'expo.inOut',
+          duration: DURATION.xl,
+          ease: EASE.sharp,
         }, 0)
 
         exitTl.to(title, {
           x: titleDx,
           y: titleDy,
           scale: titleScale,
-          duration: 0.9,
-          ease: 'expo.inOut',
+          duration: DURATION.xl,
+          ease: EASE.sharp,
         }, 0)
 
         // t=0.3 — Background fades to transparent
         exitTl.to(el, {
           backgroundColor: 'rgba(0,0,0,0)',
-          duration: 0.6,
+          duration: DURATION.md,
           ease: 'power2.in',
         }, 0.3)
 

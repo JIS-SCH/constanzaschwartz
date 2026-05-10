@@ -1,0 +1,12 @@
+// Parallax system components
+export { ParallaxSection } from './ParallaxSection'
+export { ParallaxLayer } from './ParallaxLayer'
+export { ScrollParallaxWrapper } from './ScrollParallaxWrapper'
+export { PI } from './ParallaxImg'
+export { ParallaxGallery } from './ParallaxGallery'
+export { ProjectPage } from './ProjectPage'
+export type { ParallaxConfig, Section, Layer, ParallaxEffect } from '@/src/types/parallax'
+export type { GalleryImage } from '@/src/types/parallax'
+export { useParallaxBg } from '@/src/hooks/useParallaxBg'
+export { useParallaxViewport } from '@/src/hooks/useParallaxViewport'
+export { useParallaxFloat } from '@/src/hooks/useParallaxFloat'

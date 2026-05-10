@@ -1,9 +1,195 @@
 @import "tailwindcss";
 
+@theme {
+  --color-obsidian: #0F0F0F;
+  --color-off-white: #ededed;
+  
+  --font-helvetica: "Helvetica Neue LT Std", Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  
+  --spacing-GAP: 220px;
+  --spacing-CH: 330px;
+  --spacing-TW: 32.4305%;
+}
+
+/* ─── MOTION TOKENS ─── */
+:root {
+  --motion-duration-sm: 0.35s;
+  --motion-duration-md: 0.6s;
+  --motion-duration-lg: 0.8s;
+
+  --motion-ease-out:   cubic-bezier(0.25, 1, 0.5, 1);
+  --motion-ease-inout: cubic-bezier(0.45, 0, 0.55, 1);
+  --motion-ease-sharp: cubic-bezier(0.19, 1, 0.22, 1);
+
+  --parallax-y: 60px;
+
+  --marquee-speed-slow:   30s;
+  --marquee-speed-medium: 20s;
+  --marquee-speed-fast:   12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-sm: 0.01s;
+    --motion-duration-md: 0.01s;
+    --motion-duration-lg: 0.01s;
+    --marquee-speed-slow:   9999s;
+    --marquee-speed-medium: 9999s;
+    --marquee-speed-fast:   9999s;
+  }
+}
+
+/* ─── TYPOGRAPHY TOKENS: Figma-exact values ─── */
+/* Mobile (≤768px) */
+:root {
+  --carousel-h: 330px;
+
+  --h1-size: 170px;
+  --h2-size: 57px;
+  --h3-size: 36px;
+  --h4-size: 28px;
+  --h5-size: 24px;
+  --list-size: 15px;
+  --p-size: 15px;
+
+  --h1-lh: 1;
+  --h2-lh: 1;
+  --h3-lh: 1;
+  --h4-lh: auto;
+  --h5-lh: 1;
+  --list-lh: 1.15;
+  --p-lh: 1.45;
+
+  --h1-ls: 0;
+  --h2-ls: 0;
+  --h3-ls: 0;
+  --h4-ls: 0.02em;
+  --h5-ls: 0;
+  --list-ls: 0;
+  --p-ls: 0;
+}
+
+/* Desktop (>768px) */
+@media (min-width: 769px) {
+  :root {
+    --h1-size: 280px;
+    --h2-size: 128px;
+    --h3-size: 56px;
+    --h4-size: 36px;
+    --h4-ls: 0.72px;
+    --list-size: 26px;
+    --p-size: 16px;
+
+    --list-lh: 1.21;
+    --p-lh: 1.5;
+    background-color: #0f0f0f;
+  }
+
+  /* Marquee Desktop (H4) */
+  .marquee-item {
+    font-size: var(--h4-size);
+    line-height: normal;
+    letter-spacing: 0.72px;
+    padding-right: 80px;
+    leading-trim: both;
+    text-edge: cap;
+    white-space: pre !important;
+      
+  }
+}
+
+/* ─── TYPOGRAPHY CLASSES ─── */
+/* Headings - Helvetica Neue LT Std Thin (100) */
+.h1, .h2, .h3 {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 100;
+}
+
+.h1 { font-size: var(--h1-size); line-height: var(--h1-lh); letter-spacing: var(--h1-ls); }
+.h2 { font-size: var(--h2-size); line-height: var(--h2-lh); letter-spacing: var(--h2-ls); }
+.h3 { font-size: var(--h3-size); line-height: var(--h3-lh); letter-spacing: var(--h3-ls); }
+.h4 {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--h4-size); line-height: var(--h4-lh); letter-spacing: var(--h4-ls);
+  font-weight: 250;
+}
+.h5 {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--h5-size); line-height: var(--h5-lh); letter-spacing: var(--h5-ls);
+  font-weight: 100;
+}
+
+/* List - Helvetica Neue LT Std Light (300) */
+.list {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: var(--list-size); line-height: var(--list-lh); letter-spacing: var(--list-ls);
+}
+
+/* Paragraph - Space Grotesk Light (300) */
+.p, p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+  font-size: var(--p-size); line-height: var(--p-lh); letter-spacing: var(--p-ls);
+}
+
+/* Helvetica Neue LT Std */
 @font-face {
-  font-family: 'HelveticaLTStd';
-  src: url('/HelveticaLTStd-Roman.woff') format('woff');
-  font-weight: normal;
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Th.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Th.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Lt.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Lt.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Roman.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Roman.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/Helvetica/HelveticaNeueLTStd-Md.woff2') format('woff2'),
+       url('/fonts/Helvetica/HelveticaNeueLTStd-Md.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Space Grotesk */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-Light.woff2') format('woff2'),
+       url('/fonts/SpaceGrotesk/SpaceGrotesk-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-Regular.woff2') format('woff2'),
+       url('/fonts/SpaceGrotesk/SpaceGrotesk-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk/SpaceGrotesk-Medium.woff2') format('woff2'),
+       url('/fonts/SpaceGrotesk/SpaceGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -14,11 +200,20 @@
   box-sizing: border-box;
 }
 
+/* ─── CUSTOM CURSOR RESET ─── */
+/* Hide native cursor on all elements when a mouse is used */
+@media (pointer: fine) {
+  html, body, a, button, [role="button"], canvas, input, textarea {
+    cursor: none !important;
+  }
+}
+
 html,
 body {
   overflow-x: hidden;
-  background: #0a0a0a;
+  background: #0F0F0F;
   color: #ededed;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 html.lenis,
@@ -38,10 +233,137 @@ html.lenis body {
   overflow: hidden;
 }
 
-#tunnel-container {
+#tunnel-container,
+.tunnel-scroll-container {
   position: relative;
+  height: 500vh;
+}
+
+@media (max-width: 768px) {
+  #tunnel-container,
+  .tunnel-scroll-container {
+    height: 700vh;
+  }
 }
 
 canvas {
   display: block;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll linear infinite;
+}
+
+.blend-difference {
+  mix-blend-mode: difference !important;
+  -webkit-mix-blend-mode: difference !important;
+}
+
+.marquee-set {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* Marquee */
+.marquee-item {
+  flex-shrink: 0;
+  font-family: 'Helvetica Neue LT Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 250;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: pre;
+  leading-trim: both;
+  text-edge: cap;
+  
+  font-size: var(--h5-size);
+  line-height: normal;
+  letter-spacing: var(--h5-ls);
+  padding-right: 40px;
+}
+
+.marquee-thin .marquee-item {
+  font-size: 12px;
+  font-weight: 100;
+  letter-spacing: 0.1em;
+  padding-right: 40px;
+}
+
+
+/* ─── COMPONENT CLASSES FOR INLINE STYLE MIGRATION ─── */
+/* Text block base */
+.text-block {
+  font-family: var(--font-space);
+  font-weight: 300;
+  font-size: var(--p-size);
+  line-height: var(--p-lh);
+  color: #fff;
+}
+
+/* Title base */
+.title-3 {
+  font-family: var(--font-helvetica);
+  font-weight: 100;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Project container base */
+.project-container {
+  width: 100%;
+  position: relative;
+  background-color: #0F0F0F;
+  margin-top: -80px;
+}
+
+/* Vimeo container */
+.vimeo-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Project Page Padding - Remove on mobile */
+@media (max-width: 768px) {
+  .project-page-padding {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Range input styling for video players */
+.video-timeline-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff !important;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.video-timeline-range:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+.video-timeline-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff !important;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.video-timeline-range:hover::-moz-range-thumb {
+  transform: scale(1.2);
 }

@@ -13,7 +13,7 @@ export function setupResize(
     camera.updateProjectionMatrix();
 
     renderer.setSize(width, height);
-    renderer.setPixelRatio(isMobile() ? 1 : Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(window.devicePixelRatio);
   }
 
   window.addEventListener('resize', onResize);

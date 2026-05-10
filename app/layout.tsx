@@ -1,18 +1,58 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
-import { ComingSoon } from "@/src/components/ComingSoon";
-// -- Temporarily hidden while Coming Soon is active --
-// import { Cursor } from "@/src/components/Cursor";
-// import { GsapProvider } from "@/src/components/GsapProvider";
-// import { TransitionProvider } from "@/src/context/TransitionContext";
-// import { TransitionOverlay } from "@/src/components/TransitionOverlay";
-// import { Navbar } from "@/src/components/Navbar";
+import { ComingSoon } from "@/src/components/home/ComingSoon";
+import { Cursor } from "@/src/components/layout/Cursor";
+import { GsapProvider } from "@/src/components/GsapProvider";
+import { ParallaxProvider } from "@/src/contexts/ParallaxContext";
+import { AudioProvider } from "@/src/contexts/AudioContext";
+import { TransitionProvider } from "@/src/contexts/TransitionContext";
+import { TransitionOverlay } from "@/src/components/layout/TransitionOverlay";
+import { NavController } from "@/src/components/layout/NavController";
+
+import { PAGE_SEO, BASE_URL } from "@/src/data/seo";
+import { JsonLd } from "@/src/components/layout/JsonLd";
+
+const seo = PAGE_SEO.home;
 
 export const metadata: Metadata = {
-  title: "Constanza Schwartz",
-  description: "Artist portfolio",
+  title: seo.title,
+  description: seo.description,
+  metadataBase: new URL(BASE_URL),
+  alternates: {
+    canonical: '/',
+  },
+  icons: {
+    icon: [
+      { url: "/CONSTANZASCHWARTZ_48X48_Favicon.png", sizes: "48x48", type: "image/png" },
+      { url: "/CONSTANZASCHWARTZ_FAVICON 192X192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "/CONSTANZASCHWARTZ_FAVICON 192X192.png", sizes: "192x192", type: "image/png" },
+    ],
+  },
+  openGraph: {
+    type: 'website',
+    title: seo.title,
+    description: seo.description,
+    url: BASE_URL,
+    images: [
+      {
+        url: seo.ogImage,
+        width: 1200,
+        height: 630,
+        alt: seo.title,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: seo.title,
+    description: seo.description,
+    images: [seo.ogImage],
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -20,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LBHSXVNS1R"
@@ -34,17 +74,20 @@ export default function RootLayout({
             gtag('config', 'G-LBHSXVNS1R');
           `}
         </Script>
-        <ComingSoon />
-        {/* -- Temporarily hidden while Coming Soon is active --
+        {/* <ComingSoon /> */}
         <GsapProvider>
-          <TransitionProvider>
-            <Navbar />
-            {children}
-            <TransitionOverlay />
-          </TransitionProvider>
+          <AudioProvider>
+            <ParallaxProvider>
+              <TransitionProvider>
+                <NavController />
+                {children}
+                <TransitionOverlay />
+              </TransitionProvider>
+            </ParallaxProvider>
+          </AudioProvider>
         </GsapProvider>
         <Cursor />
-        */}
+
       </body>
     </html>
   );

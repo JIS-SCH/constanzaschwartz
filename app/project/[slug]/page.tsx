@@ -1,22 +1,20 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { projects } from '@/src/data/projects'
-import { useTransition } from '@/src/context/TransitionContext'
+import { projectRegistry } from '@/src/projects/registry'
+import { useTransition } from '@/src/contexts/TransitionContext'
+import { ParallaxGallery } from '@/src/components/parallax/ParallaxGallery'
 
 export default function ProjectPage() {
   const params = useParams<{ slug: string }>()
   const router = useRouter()
   const { state, reveal } = useTransition()
-  const imageRef = useRef<HTMLDivElement>(null)
 
-  const project = projects.find((p) => p.slug === params.slug)
+  const mod = projectRegistry[params.slug]
 
-  // Trigger reveal once mounted, painted, and overlay is expanded
   useEffect(() => {
     if (state.phase === 'expanded') {
-      // Double rAF ensures the browser has actually painted the page
       const id = requestAnimationFrame(() => {
         requestAnimationFrame(() => reveal())
       })
@@ -24,7 +22,7 @@ export default function ProjectPage() {
     }
   }, [state.phase, reveal])
 
-  if (!project) {
+  if (!mod) {
     return (
       <div style={{ padding: '80px 24px', color: '#fff' }}>
         <p>Project not found.</p>
@@ -35,21 +33,16 @@ export default function ProjectPage() {
     )
   }
 
+  const { Component, gallery } = mod
+  const isWideCreditsProject = ['eco-al-infinito', 'mas-alla-del-infinito', 'alterego'].includes(params.slug)
+
   return (
-    <div style={{ minHeight: '100vh', background: '#000' }}>
-      <div
-        ref={imageRef}
-        data-project-image
-        style={{
-          width: 'calc(100% - 160px)',
-          maxWidth: '1200px',
-          aspectRatio: '16 / 9',
-          margin: '140px auto 0',
-          backgroundImage: `url(${project.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+    <div
+      className={'project-page-padding'}
+      style={{ minHeight: '100vh', color: '#fff', paddingTop: isWideCreditsProject ? 0 : '80px', paddingBottom: isWideCreditsProject ? 0 : undefined }}
+    >
+      <Component />
+      {gallery && <ParallaxGallery images={gallery} />}
     </div>
   )
 }
