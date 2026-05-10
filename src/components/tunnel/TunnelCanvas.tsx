@@ -67,7 +67,7 @@ export default function TunnelCanvas() {
 
   return (
     <>
-      <div id="tunnel-container" style={{ height: '500vh', position: 'relative' }}>
+      <div id="tunnel-container" className="tunnel-scroll-container">
         <canvas
           ref={canvasRef}
           style={{

@@ -51,18 +51,18 @@ export function VideoPlayer({
   subtitle,
   objectFit = 'cover',
 }: VideoPlayerProps) {
-  const videoRef      = useRef<HTMLVideoElement>(null)
-  const containerRef  = useRef<HTMLDivElement>(null)
-  const hideTimerRef  = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const { isMuted, activeVideoId, toggleMute, setActiveVideo } = useAudio()
 
-  const [isPlaying,       setIsPlaying]       = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [controlsVisible, setControlsVisible] = useState(false)
-  const [isFullscreen,    setIsFullscreen]     = useState(false)
-  const [progress,        setProgress]        = useState(0)
-  const [duration,        setDuration]        = useState(0)
-  const [currentTime,     setCurrentTime]     = useState(0)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [progress, setProgress] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
   const [isTimelineHovered, setIsTimelineHovered] = useState(false)
 
   const isVideoMuted = isMuted || activeVideoId !== id
@@ -75,7 +75,7 @@ export function VideoPlayer({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().then(() => setIsPlaying(true)).catch(() => {})
+          video.play().then(() => setIsPlaying(true)).catch(() => { })
         } else {
           video.pause()
           setIsPlaying(false)
@@ -87,6 +87,23 @@ export function VideoPlayer({
     observer.observe(video)
     return () => observer.disconnect()
   }, [autoPlay])
+
+  // Time and duration tracking
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleTimeUpdate = () => setCurrentTime(video.currentTime)
+    const handleLoadedMetadata = () => setDuration(video.duration)
+
+    video.addEventListener('timeupdate', handleTimeUpdate)
+    video.addEventListener('loadedmetadata', handleLoadedMetadata)
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate)
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+    }
+  }, [])
 
   // Sync mute state with global audio context
   useEffect(() => {
@@ -118,7 +135,7 @@ export function VideoPlayer({
 
     video.addEventListener('timeupdate', updateProgress)
     video.addEventListener('loadedmetadata', setVideoDuration)
-    
+
     return () => {
       video.removeEventListener('timeupdate', updateProgress)
       video.removeEventListener('loadedmetadata', setVideoDuration)
@@ -139,7 +156,7 @@ export function VideoPlayer({
     const video = videoRef.current
     if (!video) return
     if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {})
+      video.play().then(() => setIsPlaying(true)).catch(() => { })
     } else {
       video.pause()
       setIsPlaying(false)
@@ -169,20 +186,6 @@ export function VideoPlayer({
     revealControls()
   }, [revealControls])
 
-  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    const video = videoRef.current
-    const timeline = e.currentTarget
-    if (!video || !timeline) return
-
-    const rect = timeline.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const percentage = Math.max(0, Math.min(1, x / rect.width))
-    video.currentTime = percentage * video.duration
-    setProgress(percentage * 100)
-    revealControls()
-  }, [revealControls])
-
   const handleContainerClick = useCallback(() => {
     togglePlay()
   }, [togglePlay])
@@ -201,6 +204,28 @@ export function VideoPlayer({
     scheduleHide()
   }, [scheduleHide])
 
+  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const video = videoRef.current
+    const timeline = e.currentTarget
+    if (!video || !timeline || !duration) return
+
+    const rect = timeline.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const percentage = Math.max(0, Math.min(1, x / rect.width))
+    const newTime = percentage * duration
+    
+    video.currentTime = newTime
+    setCurrentTime(newTime)
+    setProgress(percentage * 100)
+    revealControls()
+  }, [duration, revealControls])
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
   return (
     <div
       ref={containerRef}
@@ -215,6 +240,7 @@ export function VideoPlayer({
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
       onTouchStart={revealControls}
+      onTouchEnd={scheduleHide}
     >
       <video
         ref={videoRef}
@@ -337,9 +363,9 @@ export function VideoPlayer({
                 style={iconStyle}
               />
             </button>
-            <span style={{ 
-              color: '#FFF', 
-              fontSize: '11px', 
+            <span style={{
+              color: '#FFF',
+              fontSize: '11px',
               fontFamily: 'monospace',
               opacity: 0.8,
               minWidth: 70

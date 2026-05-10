@@ -30,7 +30,7 @@ export function ParallaxSection({
         position: 'relative',
         width: '100%',
         overflow: overflowHidden ? 'hidden' : 'visible',
-        display: 'flow-root',
+        display: 'block',
         ...style,
       }}
     >

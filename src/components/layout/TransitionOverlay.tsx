@@ -3,7 +3,6 @@
 import { useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import gsap from 'gsap'
-import { Flip } from 'gsap/Flip'
 import { useTransition } from '@/src/contexts/TransitionContext'
 import { DURATION, EASE } from '@/src/motion/tokens'
 
@@ -13,8 +12,6 @@ export function TransitionOverlay() {
   const imageRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const ctxRef = useRef<gsap.Context | null>(null)
-
-  // ── Phase: expanding → animate card rect to fullscreen ──────────────────
 
   // ── Phase: expanding → animate card rect to hero-like position ────────────────
   useEffect(() => {
@@ -52,8 +49,6 @@ export function TransitionOverlay() {
     })
 
     const ctx = gsap.context(() => {
-      // Direct Navigation: We don't animate to fullscreen anymore.
-      // We jump straight to the navigation and let the 'revealing' phase handle the direct morph.
       router.push(`/project/${state.slug}`)
       setExpanded()
     })
@@ -83,7 +78,8 @@ export function TransitionOverlay() {
         height: '',
         opacity: 1,
         backgroundImage: '',
-        filter: 'none'
+        filter: 'none',
+        WebkitFilter: 'none'
       })
       setDone()
     }
@@ -93,8 +89,6 @@ export function TransitionOverlay() {
 
     const ctx = gsap.context(() => {
       if (hasRealTarget && targetRect && state.originRect) {
-
-
         const scaleX = state.originRect.width / targetRect.width
         const scaleY = state.originRect.height / targetRect.height
         const x = state.originRect.left - targetRect.left
@@ -115,7 +109,6 @@ export function TransitionOverlay() {
 
         const tl = gsap.timeline()
 
-        // 1. Morph directly to target using scale and translate (GPU)
         tl.to(el, {
           x: 0,
           y: 0,
@@ -124,40 +117,20 @@ export function TransitionOverlay() {
           borderRadius: '0px',
           duration: DURATION.lg,
           ease: 'power2.inOut',
-          filter: 'url(#liquid-morph)',
         }, 0)
-
-        // 2. Liquid effect during movement
-        const disp = document.querySelector('#liquid-morph feDisplacementMap')
-        if (disp) {
-          gsap.timeline()
-            .to(disp, {
-              attr: { scale: 15 }, // Reduced from 20 for Safari stability
-              duration: DURATION.lg * 0.4,
-              ease: 'power1.out',
-            })
-            .to(disp, {
-              attr: { scale: 0 },
-              duration: DURATION.lg * 0.6,
-              ease: 'power2.inOut',
-              onComplete: () => {
-                gsap.set(el, { filter: 'none' })
-              }
-            })
-        }
 
         tl.to(overlay, {
           opacity: 0,
-          duration: DURATION.sm,
+          duration: DURATION.md,
           ease: EASE.out,
-          delay: DURATION.lg * 0.1,
+          delay: DURATION.lg * 0.2,
           onComplete: cleanup,
         })
       } else {
         gsap.to(overlay, {
           opacity: 0,
           duration: DURATION.md,
-          ease: EASE.out,
+          ease: 'power2.inOut',
           onComplete: cleanup,
         })
       }
@@ -231,59 +204,30 @@ export function TransitionOverlay() {
   const isActive = !['idle', 'done'].includes(state.phase)
 
   return (
-    <>
-      {/* Liquid morph filter definition */}
-      <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none', visibility: 'hidden' }}>
-        <filter id="liquid-morph" x="-50%" y="-50%" width="200%" height="200%" filterUnits="userSpaceOnUse" colorInterpolationFilters="linearRGB">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.008 0.005"
-            numOctaves="1"
-            result="noise"
-          />
-          <feGaussianBlur in="noise" stdDeviation="4" result="blurredNoise" />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="blurredNoise"
-            scale="0"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </svg>
-
-      <div
-        ref={overlayRef}
+    <div
+      ref={overlayRef}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 100,
+        pointerEvents: isActive ? 'auto' : 'none',
+        visibility: 'hidden',
+        background: '#0F0F0F',
+      }}
+    >
+      <img
+        ref={imageRef as any}
+        alt=""
+        decoding="async"
         style={{
           position: 'fixed',
-          inset: 0,
-          zIndex: 100,
-          pointerEvents: isActive ? 'auto' : 'none',
           visibility: 'hidden',
-          background: '#0F0F0F',
-          isolation: 'isolate',
-          contain: 'strict',
+          objectFit: 'cover',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
+          willChange: 'transform',
         }}
-      >
-        <img
-          ref={imageRef as any}
-          alt=""
-          decoding="async"
-          style={{
-            position: 'fixed',
-            visibility: 'hidden',
-            objectFit: 'cover',
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            transformStyle: 'preserve-3d',
-            WebkitTransformStyle: 'preserve-3d',
-            filter: 'none',
-            transform: 'translate3d(0,0,0)',
-            willChange: 'width, height, left, top, filter',
-            WebkitFilter: 'drop-shadow(0 0 0 transparent)', // WebKit composition hack
-          }}
-        />
-      </div>
-    </>
+      />
+    </div>
   )
 }

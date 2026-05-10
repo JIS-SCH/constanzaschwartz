@@ -94,7 +94,8 @@ export function ParallaxGallery({ images }: ParallaxGalleryProps) {
   )
 
   // Container height: enough room for images + parallax travel
-  const containerHeight = Math.max(600, images.length * 350)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+  const containerHeight = isMobile ? Math.max(1200, images.length * 650) : Math.max(800, images.length * 480)
 
   return (
     <div

@@ -12,6 +12,8 @@ interface CustomVimeoPlayerProps {
 export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = true }: CustomVimeoPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
   const [volume, setVolumeState] = useState(1)
   const [isHovered, setIsHovered] = useState(false)
   const [isReady, setIsReady] = useState(false)
@@ -21,8 +23,6 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null)
   const [controlsVisible, setControlsVisible] = useState(true)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  const [duration, setDuration] = useState(0)
-  const [currentTime, setCurrentTime] = useState(0)
   const [isTimelineHovered, setIsTimelineHovered] = useState(false)
 
   const formatTime = (seconds: number) => {
@@ -51,6 +51,9 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
 
         player.on('play', () => setIsPlaying(true))
         player.on('pause', () => setIsPlaying(false))
+        player.on('loaded', () => {
+          player.getDuration().then((d: number) => setDuration(d))
+        })
         player.on('volumechange', (data: any) => {
           setVolumeState(data.volume)
         })
@@ -80,7 +83,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
       }, 100)
     }
 
-    return () => {}
+    return () => { }
   }, [videoUrl, visible])
 
   const scheduleHide = () => {
@@ -115,7 +118,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
     const rect = timeline.getBoundingClientRect()
     const x = e.clientX - rect.left
     const percentage = Math.max(0, Math.min(1, x / rect.width))
-    
+
     playerRef.current.getDuration().then((duration: number) => {
       playerRef.current.setCurrentTime(duration * percentage)
     })
@@ -172,12 +175,13 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
   const vimeoUrl = videoUrl.includes('?') ? `${videoUrl}&controls=0` : `${videoUrl}?controls=0`
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`custom-vimeo-player ${inline ? 'inline-mode' : ''}`}
       onMouseEnter={() => revealControls()}
       onMouseLeave={() => setControlsVisible(false)}
       onMouseMove={() => revealControls()}
+      onTouchStart={revealControls}
       style={{
         position: 'relative',
         width: '100%',
@@ -198,15 +202,15 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
       )}
 
       {/* Interaction Overlay */}
-      <div 
+      <div
         onClick={togglePlay}
         onTouchStart={revealControls}
-        style={{ position: 'absolute', inset: 0, zIndex: 5, cursor: 'pointer' }} 
+        style={{ position: 'absolute', inset: 0, zIndex: 5, cursor: 'pointer' }}
       />
 
       {/* Central Play Button */}
       {!isPlaying && (
-        <div 
+        <div
           style={{
             position: 'absolute',
             top: '50%',
@@ -224,7 +228,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
       )}
 
       {/* Bottom Controls Bar */}
-      <div 
+      <div
         style={{
           position: 'absolute',
           bottom: 0,
@@ -304,8 +308,8 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             {/* Play/Pause toggle */}
-            <button 
-              onClick={togglePlay} 
+            <button
+              onClick={togglePlay}
               style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               aria-label={isPlaying ? 'Pause' : 'Play'}
             >
@@ -315,9 +319,9 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
                 style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }}
               />
             </button>
-            <span style={{ 
-              color: '#FFF', 
-              fontSize: '11px', 
+            <span style={{
+              color: '#FFF',
+              fontSize: '11px',
               fontFamily: 'monospace',
               opacity: 0.8,
               minWidth: 70
@@ -328,8 +332,8 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             {/* Volume toggle */}
-            <button 
-              onClick={toggleMute} 
+            <button
+              onClick={toggleMute}
               style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               aria-label={volume === 0 ? 'Unmute' : 'Mute'}
             >
@@ -341,8 +345,8 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false, visible = t
             </button>
 
             {/* Fullscreen icon */}
-            <button 
-              onClick={toggleFullscreen} 
+            <button
+              onClick={toggleFullscreen}
               style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
             >
