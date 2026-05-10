@@ -206,7 +206,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                 <div style={{ overflow: 'hidden' }}>
                   <div
                     style={{
-                      paddingTop: isMobile ? '20px' : '44px',
+                      paddingTop: isMobile ? '20px' : '14px',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: '20px',

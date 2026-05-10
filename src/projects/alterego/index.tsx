@@ -91,7 +91,7 @@ export function Component() {
         {/* Marquee below hero  */}
         <div className="pt-[97px] pb-[97px]">
           <div className="overflow-hidden w-full">
-            <div className="marquee-track" style={{ animationDuration: '88s' }}>
+            <div className="marquee-track" style={{ animationDuration: `${38 * 0.68}s` }}>
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
