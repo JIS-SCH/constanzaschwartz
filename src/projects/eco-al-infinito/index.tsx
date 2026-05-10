@@ -855,6 +855,56 @@ function MobileContent() {
         </div>
       </div>
 
+      {/* Image pair (img36/img37) */}
+      <div style={{ position: 'relative', height: '340px', marginTop: '80px' }}>
+        <PI src={ASSETS.img36} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px', objectFit: 'cover' }} />
+        <PI src={ASSETS.img37} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '20px', top: '150px', width: '200px', height: '133px', objectFit: 'cover' }} />
+      </div>
+
+      {/* Image 38 - Full Width */}
+      <div style={{ width: '100%', marginTop: '80px' }}>
+        <img src={ASSETS.img38} alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      </div>
+
+      {/* Lyrics Section - Mobile */}
+      <div className="bg-obsidian" style={{ marginTop: '100px', padding: '60px 20px', textAlign: 'center' }}>
+        <div className="eco-h4 text-white uppercase tracking-[0.72px] leading-tight" style={{ fontSize: '20px' }}>
+          <div style={{ marginBottom: '30px' }}>BECAUSE A VISION SOFTLY CREEPING</div>
+          <div style={{ marginBottom: '30px' }}>LEFT ITS SEEDS WHILE I WAS SLEEPING</div>
+          <div style={{ marginBottom: '30px' }}>AND THE VISION THAT WAS PLANTED IN MY BRAIN</div>
+          <div style={{ marginBottom: '30px' }}>STILL REMAINS</div>
+          <div>WITHIN THE SOUND OF SILENCE</div>
+        </div>
+        <div className="text-white font-light text-[12px] leading-relaxed opacity-60" style={{ marginTop: '60px' }}>
+          Simon &amp; Garfunkel · 1964
+        </div>
+      </div>
+
+      {/* Credits - Mobile */}
+      <div style={{ padding: '0 20px 40px', backgroundColor: '#0F0F0F', marginTop: '100px' }}>
+        <p style={{ fontSize: '13px', lineHeight: '1.6', width: '100%', fontFamily: '"Helvetica Neue LT Std", sans-serif', fontWeight: 100, color: '#fff', margin: 0, textTransform: 'uppercase' }}>
+          <span style={{ fontWeight: 700 }}>"ECO AL INFINITO"</span> por Constanza Schwartz &nbsp;/&nbsp;
+          <span style={{ fontWeight: 700 }}>Realización: </span>
+          <span>Gastón Aliaga (INDIGO Lumieres) y Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>Instalación: </span>
+          <span>Mónica Mostajo + Franco Lavra (GOTA Arquigrafía) &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>Acompañamiento Curatorial: </span>
+          <span>Facundo López &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>Dirección Audiovisual: </span>
+          <span>Martín Rois &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>Composición Musical: </span>
+          <span>Francisco Rousset Osio &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>Registro Fotográfico: </span>
+          <span>Bianca Siffredi &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>2do en Cámara: </span>
+          <span>Felipe Malatesta &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>Co-Proyección y Modelado: </span>
+          <span>Francisca Gil Sosa &nbsp;/&nbsp;</span>
+          <span style={{ fontWeight: 700 }}>Colaboración Integral Post-Montaje: </span>
+          <span>Juan Ignacio Scheller</span>
+        </p>
+      </div>
+
       <style dangerouslySetInnerHTML={{
         __html: `
         @-webkit-keyframes eco-m-c1 {
