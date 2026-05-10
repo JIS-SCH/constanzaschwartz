@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsMobile } from '@/src/hooks/useMediaQuery'
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
@@ -39,8 +40,10 @@ const P_APELA =
   'Esta obra apela al lugar donde se operan las transformaciones. Identificar sentimientos que van desde la ambigüedad hasta la ansiedad, el temor, la angustia, ser descartable y reflexionar sobre las situaciones que debemos enfrentar permanentemente en la compleja modernidad de nuestros tiempos.'
 
 export function Component() {
+  const isMobile = useIsMobile()
+
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mutek-container -mt-20">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className={`mutek-container -mt-20 ${isMobile ? 'show-mobile' : 'show-desktop'}`}>
       <style dangerouslySetInnerHTML={{
         __html: `
         /* MUTEK overrides - precise client specs (no clamps) */
@@ -83,11 +86,13 @@ export function Component() {
           isolation: auto !important;
         }
 
-        .mutek-desktop { display: block; }
-        .mutek-mobile  { display: none; }
+        /* Show/hide based on isMobile state */
+        .show-desktop .mutek-desktop { display: block; }
+        .show-desktop .mutek-mobile { display: none; }
+        .show-mobile .mutek-desktop { display: none; }
+        .show-mobile .mutek-mobile { display: block; }
+
         @media (max-width: 1023px) {
-          .mutek-desktop { display: none; }
-          .mutek-mobile  { display: block; }
           .mutek-container .marquee-item {
             padding-right: 40px !important;
             font-size: 28px !important;

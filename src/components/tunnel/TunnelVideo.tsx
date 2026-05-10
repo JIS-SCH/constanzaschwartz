@@ -12,19 +12,19 @@ interface TunnelVideoProps {
 }
 
 const PX_PER_SEC_DESKTOP = 300
-const PX_PER_SEC_MOBILE  = 180
+const PX_PER_SEC_MOBILE = 180
 
 // Safari detection
 const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
 
 export function TunnelVideo({ onComplete }: TunnelVideoProps) {
-  const containerRef  = useRef<HTMLDivElement>(null)
-  const videoRef      = useRef<HTMLVideoElement>(null)
-  const logoRef       = useRef<HTMLDivElement>(null)
-  const scrollRef     = useRef<HTMLDivElement>(null)
-  const overlayRef    = useRef<HTMLDivElement>(null)
-  const stRef         = useRef<ScrollTrigger | undefined>(undefined)
-  const completedRef  = useRef(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const logoRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const stRef = useRef<ScrollTrigger | undefined>(undefined)
+  const completedRef = useRef(false)
   const [isReady, setIsReady] = useState(false)
 
   const killST = useCallback(() => {
@@ -42,21 +42,21 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
   }, [killST, onComplete])
 
   useEffect(() => {
-    const video     = videoRef.current
+    const video = videoRef.current
     const container = containerRef.current
-    const overlay   = overlayRef.current
-    const logo      = logoRef.current
+    const overlay = overlayRef.current
+    const logo = logoRef.current
     if (!video || !container || !overlay || !logo) return
 
-     video.src = isMobile()
-       ? '/Tunel_Interestellar_Vert_A_mobile_opt.mp4'
-       : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
+    video.src = isMobile()
+      ? '/Tunel_Interestellar_Vert_A_mobile_opt.mp4'
+      : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
 
     // Safari "wake up" decoder trick
     if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
       video.play().then(() => {
         video.pause()
-      }).catch(() => {})
+      }).catch(() => { })
     }
 
     video.load()
@@ -64,12 +64,12 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     const setupAnimation = () => {
       const pxPerSec = isMobile() ? PX_PER_SEC_MOBILE : PX_PER_SEC_DESKTOP
       const duration = video.duration
-      const videoPx  = Math.round(duration * pxPerSec)
+      const videoPx = Math.round(duration * pxPerSec)
 
       const logoStartS = isMobile() ? 1 : 1
-      const logoEndS   = isMobile() ? 4 : 5
+      const logoEndS = isMobile() ? 4 : 5
 
-      const logoStartPx    = logoStartS * pxPerSec
+      const logoStartPx = logoStartS * pxPerSec
       const logoDurationPx = (logoEndS - logoStartS) * pxPerSec
 
       const seekProxy = { t: 0 }

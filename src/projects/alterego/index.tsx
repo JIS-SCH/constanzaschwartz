@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsMobile } from '@/src/hooks/useMediaQuery'
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
@@ -48,15 +49,19 @@ function VideoSection({ id, src }: { id: string; src: string }) {
 }
 
 export function Component() {
+  const isMobile = useIsMobile()
+
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="alterego-container -mt-20">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className={`alterego-container -mt-20 ${isMobile ? 'show-mobile' : 'show-desktop'}`}>
       <style dangerouslySetInnerHTML={{
         __html: `
-        .alterego-desktop { display: block; }
-        .alterego-mobile  { display: none; }
+        /* Show/hide based on isMobile state */
+        .show-desktop .alterego-desktop { display: block; }
+        .show-desktop .alterego-mobile { display: none; }
+        .show-mobile .alterego-desktop { display: none; }
+        .show-mobile .alterego-mobile { display: block; }
+
         @media (max-width: 1023px) {
-          .alterego-desktop { display: none; }
-          .alterego-mobile  { display: block; }
         }
         .alterego-desktop > section + section { margin-top: 220px; }
         

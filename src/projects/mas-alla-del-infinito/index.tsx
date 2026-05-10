@@ -9,6 +9,7 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
 import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
+import { useIsMobile } from '@/src/hooks/useMediaQuery'
 import { ASSETS } from './assets'
 import { GAP, TW, TEXT_BLOCK_STYLE } from '../shared'
 
@@ -96,10 +97,10 @@ export { meta } from './meta'
 
 
 export function Component() {
-  // GSAP and Lenis are initialized globally in the layout or scrub.ts
+  const isMobile = useIsMobile()
 
   return (
-    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="mal-container -mt-20">
+    <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className={`mal-container ${isMobile ? 'show-mobile' : 'show-desktop'} -mt-20`}>
       <style dangerouslySetInnerHTML={{
         __html: `
         .mal-p {
@@ -198,12 +199,12 @@ export function Component() {
         .mal-desktop {
           display: block;
         }
-        .mal-mobile { display: none; }
+        .show-desktop .mal-desktop { display: block; }
+        .show-desktop .mal-mobile { display: none; }
+        .show-mobile .mal-desktop { display: none; }
+        .show-mobile .mal-mobile { display: block; }
         .mal-mobile { --carousel-h: 280px; }
         @media (max-width: 1023px) {
-          .mal-desktop { display: none; }
-          .mal-mobile { display: block; }
-          
           .mal-container {
             --p-size: 15px;
             --p-lh: 1.45;
@@ -228,14 +229,7 @@ export function Component() {
             <img src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
 
-          <style dangerouslySetInnerHTML={{
-            __html: `
-          .mal-hero-mobile { display: none !important; }
-          @media (max-width: 1023px) {
-            .mal-hero-desktop { display: none !important; }
-            .mal-hero-mobile { display: block !important; }
-          }
-        ` }} />
+          
         </ParallaxSection>
 
         {/* 2. INTRO: text right + web028 left + marquee-1 ─────────────── */}
@@ -386,6 +380,7 @@ export function Component() {
               <CustomVimeoPlayer
                 videoUrl="https://player.vimeo.com/video/1186767280?h=ef4894270a"
                 title="Más allá del Infinito - Video Arte"
+                visible={!isMobile}
               />
             </div>
           </div>
@@ -754,6 +749,7 @@ export function Component() {
             <CustomVimeoPlayer
               videoUrl="https://player.vimeo.com/video/1186767280?h=ef4894270a"
               title="Más allá del Infinito - Video Arte"
+              visible={isMobile}
             />
           </div>
         </div>
