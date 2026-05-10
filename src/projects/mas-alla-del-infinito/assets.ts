@@ -4,7 +4,7 @@ export const ASSETS = {
   // portada desktop
   hero: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_ko9vtv'),
   // portada mobile
-  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-mobile_szfnqm'),
+  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_dsfg26'),
   // imágenes
   img1: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-1_uaw9lv'),
   img2: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-2_muytic'),
@@ -24,7 +24,7 @@ export const ASSETS = {
   img16: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-16_vsyype'),
   img17: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-17_jmf1ms'),
   img18: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-18_t0fmko'),
-  img19: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-19_qjz7h1'),
+  img19: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-19_qjz7h1 q'),
   img20: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-20_m2dkmh'),
   img21: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-21_fdqruz'),
   img22: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-22_ynf7wj'),
