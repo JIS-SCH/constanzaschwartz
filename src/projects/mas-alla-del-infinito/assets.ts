@@ -2,9 +2,9 @@ import { cldImg } from '@/src/utils/cloudinary'
 
 export const ASSETS = {
   // portada desktop
-  hero: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_ko9vtv'),
+  hero: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_dsfg26'),
   // portada mobile
-  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_dsfg26'),
+  heroMobile: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-mobile_szfnqm'),
   // imágenes
   img1: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-1_uaw9lv'),
   img2: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-2_muytic'),
