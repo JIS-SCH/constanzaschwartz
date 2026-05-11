@@ -1,1 +1,0 @@
-curl -u dapjholek:E8Vm9v1n7t4mgGPDpsMJcf0LlEU https://api.cloudinary.com/v1_1/dapjholek/resources/folder
