@@ -2,7 +2,7 @@ import { cldImg } from '@/src/utils/cloudinary'
 
 export const ASSETS = {
   // portada desktop
-  hero: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_ko9vtv'),
+  hero: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-desktop_dsfg26'),
   // portada mobile
   heroMobile: cldImg('CONSTANZASCHWARTZ-projects-masalladelinfinito-portada-mobile_szfnqm'),
   // imágenes
