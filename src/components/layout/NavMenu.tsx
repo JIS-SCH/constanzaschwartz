@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, Fragment } from 'react'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 import gsap from 'gsap'
 import { cldImg } from '@/src/utils/cloudinary'
 import { DURATION, EASE, STAGGER } from '@/src/motion/tokens'
@@ -102,12 +101,10 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
         clipPath: 'inset(100% 0 0 0)',
       }}
     >
-      <Image
+      <img
         src={cldImg('CONSTANZA-SCHWARTZ_WEBSITE_BACKGROUND_xrkjoh')}
         alt=""
-        fill
-        style={{ objectFit: 'cover', objectPosition: 'center' }}
-        priority
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
       />
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
 

@@ -223,12 +223,6 @@ export function Component() {
           <div data-project-image className="mal-hero-desktop" style={{ position: 'absolute', top: '124px', left: '0', width: '100%', height: '648px', zIndex: 1 }}>
             <img src={IMG_HERO} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
-
-          {/* Hero Mobile - Static, no parallax */}
-          <div className="mal-hero-mobile" style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}>
-            <img src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-          </div>
-
           
         </ParallaxSection>
 
