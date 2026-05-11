@@ -218,24 +218,12 @@ export function Component() {
 
         {/* 1. HERO ─────────────────────────────────────────────────────── */}
         <ParallaxSection id="mal-hero" style={{ minHeight: '748px' }}>
-          {/* Hero Desktop - Static, no parallax */}
-          <div data-project-image className="mal-hero-desktop" style={{ position: 'absolute', top: '124px', left: '0', width: '100%', height: '648px', zIndex: 1 }}>
-            <img src={IMG_HERO} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </div>
-
-          {/* Hero Mobile - Static, no parallax */}
-          <div className="mal-hero-mobile" style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100vh', zIndex: 1 }}>
-            <img src={ASSETS.heroMobile} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-          </div>
-
-          <style dangerouslySetInnerHTML={{
-            __html: `
-          .mal-hero-mobile { display: none !important; }
-          @media (max-width: 1023px) {
-            .mal-hero-desktop { display: none !important; }
-            .mal-hero-mobile { display: block !important; }
-          }
-        ` }} />
+          <ParallaxLayer
+            sectionId="mal-hero"
+            layerIndex={0}
+            layer={{ type: 'image', src: IMG_HERO, speed: 0, isHero: true, objectFit: 'cover' }}
+            position={{ top: '124px', left: '0', width: '100%', height: '648px', zIndex: 1 }}
+          />
         </ParallaxSection>
 
         {/* 2. INTRO: text right + web028 left + marquee-1 ─────────────── */}
@@ -619,9 +607,13 @@ export function Component() {
       {/* ── MAS ALLA MOBILE ─────────────────────────────────────────────── */}
       <div className="mal-mobile" style={{ backgroundColor: '#0F0F0F', overflow: 'visible', paddingBottom: '40px' }}>
 
-        {/* HERO */}
-        <div data-project-image style={{ position: 'relative', height: '85vh', minHeight: '600px' }}>
-          <img src={ASSETS.heroMobile} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        {/* HERO — Standardized 669px height for premium editorial feel */}
+        <div data-project-image style={{ position: 'relative', width: '100%', height: '669px', isolation: 'isolate' }}>
+          <img 
+            src={ASSETS.heroMobile} 
+            alt="" 
+            style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', transform: 'translateZ(0)' }} 
+          />
         </div>
 
         {/* TEXT 1 */}

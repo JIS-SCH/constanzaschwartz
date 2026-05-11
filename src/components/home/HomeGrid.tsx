@@ -283,7 +283,11 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     })
 
     // ── Preload all images, then apply textures + fade in ────────────────
-    const uniqueUrls = [...new Set(projects.map((p) => p.image))]
+    const uniqueUrls = [...new Set(projects.flatMap((p) => {
+      const urls = [p.image]
+      if (p.mobileImage) urls.push(p.mobileImage)
+      return urls
+    }))]
     const texturePromises = uniqueUrls.map((url) => preloadTexture(url))
 
     Promise.all(texturePromises).then((textures) => {
@@ -292,7 +296,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
       // Apply loaded textures to card + reflection materials
       projects.forEach((p, i) => {
-        const tex = textureMap.get(p.image)
+        const url = (mobile && p.mobileImage) ? p.mobileImage : p.image
+        const tex = textureMap.get(url)
         if (!tex || !tex.image) return
 
         cardMats[i].map = tex

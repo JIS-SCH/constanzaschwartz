@@ -20,7 +20,7 @@ export const PAGE_SEO: Record<string, SEOData> = {
   home: {
     title: 'Constanza Schwartz',
     description: 'Sitio oficial de la artista multidisciplinaria',
-    ogImage: '/og/og-home.jpg',
+    ogImage: '/og/og-home-copy.jpg',
     schema: 'Person',
   },
   profile: {
