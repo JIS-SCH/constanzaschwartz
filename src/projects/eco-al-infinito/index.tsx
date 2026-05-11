@@ -90,7 +90,7 @@ export function Component() {
             layerIndex={0}
             layer={{ type: 'image', src: ASSETS.hero, speed: 0, isHero: true, objectFit: 'cover' }}
             position={{
-              top: '0', width: 'full', height: '648px', zIndex: 1
+              top: '0', width: '100%', height: '648px', zIndex: 1
             }}
           />
         </ParallaxSection>

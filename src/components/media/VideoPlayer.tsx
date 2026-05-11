@@ -27,11 +27,17 @@ const iconStyle: React.CSSProperties = {
 const btnStyle: React.CSSProperties = {
   background: 'none',
   border: 'none',
-  padding: 6,
+  padding: 11,
   cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+}
+
+function formatTime(s: number): string {
+  const m = Math.floor(s / 60)
+  const sec = String(Math.floor(s % 60)).padStart(2, '0')
+  return `${m}:${sec}`
 }
 
 export function VideoPlayer({
@@ -50,9 +56,12 @@ export function VideoPlayer({
 
   const { isMuted, activeVideoId, toggleMute, setActiveVideo } = useAudio()
 
-  const [isPlaying,       setIsPlaying]       = useState(false)
-  const [controlsVisible, setControlsVisible] = useState(false)
-  const [isFullscreen,    setIsFullscreen]     = useState(false)
+  const [isPlaying,        setIsPlaying]        = useState(false)
+  const [controlsVisible,  setControlsVisible]  = useState(false)
+  const [isFullscreen,     setIsFullscreen]      = useState(false)
+  const [currentTime,      setCurrentTime]       = useState(0)
+  const [duration,         setDuration]          = useState(0)
+  const [timelineHovered,  setTimelineHovered]   = useState(false)
 
   const isVideoMuted = isMuted || activeVideoId !== id
 
@@ -89,6 +98,23 @@ export function VideoPlayer({
     const handleChange = () => setIsFullscreen(!!document.fullscreenElement)
     document.addEventListener('fullscreenchange', handleChange)
     return () => document.removeEventListener('fullscreenchange', handleChange)
+  }, [])
+
+  // Track video time progress
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    const onTimeUpdate = () => {
+      setCurrentTime(video.currentTime)
+      setDuration(video.duration || 0)
+    }
+    const onLoadedMetadata = () => setDuration(video.duration || 0)
+    video.addEventListener('timeupdate', onTimeUpdate)
+    video.addEventListener('loadedmetadata', onLoadedMetadata)
+    return () => {
+      video.removeEventListener('timeupdate', onTimeUpdate)
+      video.removeEventListener('loadedmetadata', onLoadedMetadata)
+    }
   }, [])
 
   const scheduleHide = useCallback(() => {
@@ -134,6 +160,15 @@ export function VideoPlayer({
     }
     revealControls()
   }, [revealControls])
+
+  const handleSeek = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const video = videoRef.current
+    if (!video || !duration) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const ratio = (e.clientX - rect.left) / rect.width
+    video.currentTime = Math.max(0, Math.min(1, ratio)) * duration
+    revealControls()
+  }, [duration, revealControls])
 
   const handleContainerClick = useCallback(() => {
     togglePlay()
@@ -209,11 +244,10 @@ export function VideoPlayer({
           bottom: 0,
           left: 0,
           right: 0,
-          padding: '24px 8px 8px',
-          background: 'linear-gradient(transparent, rgba(0,0,0,0.55))',
+          padding: '32px 4px 0',
+          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
           opacity: controlsVisible ? 1 : 0,
           transition: 'opacity 0.25s ease',
           pointerEvents: controlsVisible ? 'auto' : 'none',
@@ -221,29 +255,70 @@ export function VideoPlayer({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button style={btnStyle} onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'}>
-          <img
-            src={isPlaying ? '/svgs/pause-1006-svgrepo-com.svg' : '/svgs/play-svgrepo-com.svg'}
-            alt=""
-            style={iconStyle}
-          />
-        </button>
+        {/* Timeline row */}
+        <div
+          style={{ padding: '6px 8px', cursor: 'pointer', position: 'relative' }}
+          onClick={handleSeek}
+          onMouseEnter={() => setTimelineHovered(true)}
+          onMouseLeave={() => setTimelineHovered(false)}
+        >
+          {/* Track */}
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: timelineHovered ? 6 : 4,
+            background: 'rgba(255,255,255,0.25)',
+            borderRadius: 3,
+            transition: 'height 0.15s ease',
+            overflow: 'visible',
+          }}>
+            {/* Filled portion */}
+            <div style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              height: '100%',
+              width: `${duration > 0 ? (currentTime / duration) * 100 : 0}%`,
+              background: '#fff',
+              borderRadius: 3,
+            }} />
+            {/* Scrubber dot */}
+            {timelineHovered && duration > 0 && (
+              <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: `${(currentTime / duration) * 100}%`,
+                transform: 'translate(-50%, -50%)',
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                background: '#fff',
+                pointerEvents: 'none',
+              }} />
+            )}
+          </div>
+        </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <button style={btnStyle} onClick={handleMute} aria-label={isVideoMuted ? 'Unmute' : 'Mute'}>
-            <img
-              src={isVideoMuted ? '/svgs/volume-svgrepo-com_off.svg' : '/svgs/volume-svgrepo-com_on.svg'}
-              alt=""
-              style={iconStyle}
-            />
-          </button>
-          <button style={btnStyle} onClick={handleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}>
-            <img
-              src="/svgs/fullscreen-alt-svgrepo-com.svg"
-              alt=""
-              style={iconStyle}
-            />
-          </button>
+        {/* Buttons row */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px 4px' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button style={btnStyle} onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'}>
+              <img src={isPlaying ? '/svgs/pause-1006-svgrepo-com.svg' : '/svgs/play-svgrepo-com.svg'} alt="" style={iconStyle} />
+            </button>
+            {duration > 0 && (
+              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 11, fontFamily: 'monospace', marginLeft: 2, pointerEvents: 'none' }}>
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            )}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button style={btnStyle} onClick={handleMute} aria-label={isVideoMuted ? 'Unmute' : 'Mute'}>
+              <img src={isVideoMuted ? '/svgs/volume-svgrepo-com_off.svg' : '/svgs/volume-svgrepo-com_on.svg'} alt="" style={iconStyle} />
+            </button>
+            <button style={btnStyle} onClick={handleFullscreen} aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}>
+              <img src="/svgs/fullscreen-alt-svgrepo-com.svg" alt="" style={iconStyle} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

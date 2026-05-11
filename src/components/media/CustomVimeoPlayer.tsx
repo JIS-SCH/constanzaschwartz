@@ -9,16 +9,18 @@ interface CustomVimeoPlayerProps {
 }
 
 export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVimeoPlayerProps) => {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const [volume, setVolumeState] = useState(1)
-  const [isHovered, setIsHovered] = useState(false)
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const playerRef = useRef<any>(null)
-  const hideTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const [isPlaying,       setIsPlaying]       = useState(false)
+  const [progress,        setProgress]        = useState(0)
+  const [duration,        setDuration]        = useState(0)
+  const [currentTime,     setCurrentTime]     = useState(0)
+  const [volume,          setVolumeState]     = useState(1)
   const [controlsVisible, setControlsVisible] = useState(true)
-  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isFullscreen,    setIsFullscreen]    = useState(false)
+  const [timelineHovered, setTimelineHovered] = useState(false)
+  const iframeRef    = useRef<HTMLIFrameElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const playerRef    = useRef<any>(null)
+  const hideTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -64,7 +66,9 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
         })
         player.on('timeupdate', (data: any) => {
           setProgress(data.percent * 100)
+          setCurrentTime(data.seconds)
         })
+        player.getDuration().then((d: number) => setDuration(d)).catch(() => {})
       }
     }
 
@@ -72,6 +76,22 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
       // Don't remove script as it might be used by other instances
     }
   }, [videoUrl])
+
+  const formatTime = (s: number): string => {
+    const m = Math.floor(s / 60)
+    const sec = String(Math.floor(s % 60)).padStart(2, '0')
+    return `${m}:${sec}`
+  }
+
+  const handleSeekClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!playerRef.current) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+    playerRef.current.getDuration().then((dur: number) => {
+      playerRef.current.setCurrentTime(dur * ratio)
+    })
+    revealControls()
+  }
 
   const scheduleHide = () => {
     if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
@@ -94,23 +114,6 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
       } else {
         playerRef.current.play()
       }
-    }
-  }
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(e.target.value)
-    if (playerRef.current) {
-      playerRef.current.getDuration().then((duration: number) => {
-        playerRef.current.setCurrentTime(duration * (val / 100))
-      })
-    }
-  }
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(e.target.value)
-    setVolumeState(val)
-    if (playerRef.current) {
-      playerRef.current.setVolume(val)
     }
   }
 
@@ -172,8 +175,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
       <iframe
         ref={iframeRef}
         src={vimeoUrl}
-        style={iframeStyles}
-        frameBorder="0"
+        style={{ ...iframeStyles, border: 'none' }}
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
         title={title}
       ></iframe>
@@ -205,17 +207,16 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
       )}
 
       {/* Bottom Controls Bar */}
-      <div 
+      <div
         style={{
           position: 'absolute',
           bottom: 0,
           left: 0,
           right: 0,
-          padding: '24px 8px 8px',
-          background: 'linear-gradient(transparent, rgba(0,0,0,0.55))',
+          padding: '32px 4px 0',
+          background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
           opacity: controlsVisible || !isPlaying ? 1 : 0,
           transition: 'opacity 0.25s ease',
           pointerEvents: controlsVisible || !isPlaying ? 'auto' : 'none',
@@ -223,45 +224,78 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Play/Pause toggle */}
-        <button 
-          onClick={togglePlay} 
-          style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-          aria-label={isPlaying ? 'Pause' : 'Play'}
+        {/* Timeline row */}
+        <div
+          style={{ padding: '6px 8px', cursor: 'pointer', position: 'relative' }}
+          onClick={handleSeekClick}
+          onMouseEnter={() => setTimelineHovered(true)}
+          onMouseLeave={() => setTimelineHovered(false)}
         >
-          <img
-            src={isPlaying ? '/svgs/pause-1006-svgrepo-com.svg' : '/svgs/play-svgrepo-com.svg'}
-            alt=""
-            style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }}
-          />
-        </button>
+          <div style={{
+            position: 'relative',
+            width: '100%',
+            height: timelineHovered ? 6 : 4,
+            background: 'rgba(255,255,255,0.25)',
+            borderRadius: 3,
+            transition: 'height 0.15s ease',
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              height: '100%',
+              width: `${progress}%`,
+              background: '#fff',
+              borderRadius: 3,
+            }} />
+            {timelineHovered && progress > 0 && (
+              <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: `${progress}%`,
+                transform: 'translate(-50%, -50%)',
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                background: '#fff',
+                pointerEvents: 'none',
+              }} />
+            )}
+          </div>
+        </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          {/* Volume toggle */}
-          <button 
-            onClick={toggleMute} 
-            style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-            aria-label={volume === 0 ? 'Unmute' : 'Mute'}
-          >
-            <img
-              src={volume === 0 ? '/svgs/volume-svgrepo-com_off.svg' : '/svgs/volume-svgrepo-com_on.svg'}
-              alt=""
-              style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }}
-            />
-          </button>
-
-          {/* Fullscreen icon */}
-          <button 
-            onClick={toggleFullscreen} 
-            style={{ background: 'none', border: 'none', padding: 6, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-            aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
-          >
-            <img
-              src="/svgs/fullscreen-alt-svgrepo-com.svg"
-              alt=""
-              style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }}
-            />
-          </button>
+        {/* Buttons row */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px 4px' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button
+              onClick={togglePlay}
+              style={{ background: 'none', border: 'none', padding: 11, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              aria-label={isPlaying ? 'Pause' : 'Play'}
+            >
+              <img src={isPlaying ? '/svgs/pause-1006-svgrepo-com.svg' : '/svgs/play-svgrepo-com.svg'} alt="" style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }} />
+            </button>
+            {duration > 0 && (
+              <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 11, fontFamily: 'monospace', marginLeft: 2, pointerEvents: 'none' }}>
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            )}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button
+              onClick={toggleMute}
+              style={{ background: 'none', border: 'none', padding: 11, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              aria-label={volume === 0 ? 'Unmute' : 'Mute'}
+            >
+              <img src={volume === 0 ? '/svgs/volume-svgrepo-com_off.svg' : '/svgs/volume-svgrepo-com_on.svg'} alt="" style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }} />
+            </button>
+            <button
+              onClick={toggleFullscreen}
+              style={{ background: 'none', border: 'none', padding: 11, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+              aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+            >
+              <img src="/svgs/fullscreen-alt-svgrepo-com.svg" alt="" style={{ width: 22, height: 22, display: 'block', pointerEvents: 'none' }} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -327,3 +327,16 @@ canvas {
     padding-bottom: 0 !important;
   }
 }
+
+/* Large screen: constrain project pages to 1440px centered */
+@media (min-width: 1441px) {
+  .project-container,
+  .eco-container,
+  .mal-container,
+  .mutek-container,
+  .alterego-container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
