@@ -38,7 +38,7 @@ const MOBILE_CARD_H = 5
 const MOBILE_REFLECTION_H = 1.2
 const MOBILE_CARD_SPACING = 11 // adjusted for wider cards
 const MOBILE_CARD_BASE_Z = -34    // radius = 14 from camera
-const MOBILE_BASE_Z = -12
+const MOBILE_BASE_Z = -8
 
 function getTitle(index: number): string {
   return `Project ${String(index + 1).padStart(2, '0')}`
@@ -46,64 +46,64 @@ function getTitle(index: number): string {
 
 // ─── Preload a single image and return a Three.js texture ────────────────────
 function preloadTexture(src: string): Promise<THREE.Texture> {
-   return new Promise((resolve) => {
-     const img = new Image()
-     img.crossOrigin = 'anonymous'
-     img.onload = () => {
-       const tex = new THREE.Texture(img)
-       tex.colorSpace = THREE.SRGBColorSpace
-       tex.flipY = true
-       // Mobile-specific texture filtering to avoid Safari downscaling issues
-       const mobile = typeof window !== 'undefined' && window.innerWidth < 768
-       tex.minFilter = mobile ? THREE.LinearFilter : THREE.LinearMipmapLinearFilter
-       tex.magFilter = THREE.LinearFilter
-       tex.generateMipmaps = !mobile // Disable mipmaps on mobile
-       tex.anisotropy = mobile ? 2 : 8 // Reduce anisotropy on mobile
-       tex.needsUpdate = true
-       resolve(tex)
-     }
-     img.onerror = () => {
-       const fallback = new THREE.Texture()
-       fallback.flipY = true
-       resolve(fallback)
-     }
-     img.src = src
-   })
- }
+  return new Promise((resolve) => {
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.onload = () => {
+      const tex = new THREE.Texture(img)
+      tex.colorSpace = THREE.SRGBColorSpace
+      tex.flipY = true
+      // Mobile-specific texture filtering to avoid Safari downscaling issues
+      const mobile = typeof window !== 'undefined' && window.innerWidth < 768
+      tex.minFilter = mobile ? THREE.LinearFilter : THREE.LinearMipmapLinearFilter
+      tex.magFilter = THREE.LinearFilter
+      tex.generateMipmaps = !mobile // Disable mipmaps on mobile
+      tex.anisotropy = mobile ? 2 : 8 // Reduce anisotropy on mobile
+      tex.needsUpdate = true
+      resolve(tex)
+    }
+    img.onerror = () => {
+      const fallback = new THREE.Texture()
+      fallback.flipY = true
+      resolve(fallback)
+    }
+    img.src = src
+  })
+}
 
 // ─── Build an overlay canvas texture (dark + text) ───────────────────────────
 function createOverlayTexture(project: ProjectMeta, index: number): THREE.CanvasTexture {
-   const w = 512
-   const h = 320
-   const mobile = typeof window !== 'undefined' && window.innerWidth < 768
-   const scale = mobile ? 2 : 1
-   const canvas = document.createElement('canvas')
-   canvas.width = w * scale
-   canvas.height = h * scale
-   const ctx = canvas.getContext('2d')!
-   ctx.scale(scale, scale)
+  const w = 512
+  const h = 320
+  const mobile = typeof window !== 'undefined' && window.innerWidth < 768
+  const scale = mobile ? 2 : 1
+  const canvas = document.createElement('canvas')
+  canvas.width = w * scale
+  canvas.height = h * scale
+  const ctx = canvas.getContext('2d')!
+  ctx.scale(scale, scale)
 
-   // Dark translucent fill
-   ctx.fillStyle = 'rgba(0,0,0,0.55)'
-   ctx.fillRect(0, 0, w, h)
+  // Dark translucent fill
+  ctx.fillStyle = 'rgba(0,0,0,0.55)'
+  ctx.fillRect(0, 0, w, h)
 
-   // Date — top left, 9px equivalent scaled to canvas
-   ctx.fillStyle = 'rgba(255,255,255,0.5)'
-   ctx.font = '300 20px sans-serif'
-   ctx.letterSpacing = '3px'
-   ctx.fillText(project.date, 20, 38)
+  // Date — top left, 9px equivalent scaled to canvas
+  ctx.fillStyle = 'rgba(255,255,255,0.5)'
+  ctx.font = '300 20px sans-serif'
+  ctx.letterSpacing = '3px'
+  ctx.fillText(project.date, 20, 38)
 
-   // Title — centered
-   ctx.fillStyle = '#ffffff'
-   ctx.font = '300 48px Georgia, serif'
-   ctx.textAlign = 'center'
-   ctx.textBaseline = 'middle'
-   ctx.fillText(getTitle(index), w / 2, h / 2)
+  // Title — centered
+  ctx.fillStyle = '#ffffff'
+  ctx.font = '300 48px Georgia, serif'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText(getTitle(index), w / 2, h / 2)
 
-   const tex = new THREE.CanvasTexture(canvas)
-   tex.colorSpace = THREE.SRGBColorSpace
-   tex.flipY = true
-   return tex
+  const tex = new THREE.CanvasTexture(canvas)
+  tex.colorSpace = THREE.SRGBColorSpace
+  tex.flipY = true
+  return tex
 }
 
 // ─── Project 3D card corners to screen rect ──────────────────────────────────
@@ -183,9 +183,9 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     // Tilt to center cards: -atan(camY / radius). radius=10 → -atan(0.05) ≈ -0.05
     camera.rotation.x = mobile ? -0.05 : CAMERA_TILT
 
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: 'high-performance' })
-      renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2))
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mobile, alpha: false, powerPreference: 'high-performance' })
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2))
 
     const cleanupResize = setupResize(camera, renderer)
 
@@ -296,7 +296,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
       // Apply loaded textures to card + reflection materials
       projects.forEach((p, i) => {
-        const url = (mobile && p.mobileImage) ? p.mobileImage : p.image
+        const url = p.image
         const tex = textureMap.get(url)
         if (!tex || !tex.image) return
 
@@ -378,12 +378,12 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
       gsap.fromTo(
         containerRef.current,
         { opacity: 0, y: 30, pointerEvents: 'none' },
-        { 
-          opacity: 1, 
-          y: 0, 
+        {
+          opacity: 1,
+          y: 0,
           pointerEvents: 'auto',
-          duration: DURATION.lg, 
-          ease: EASE.out 
+          duration: DURATION.lg,
+          ease: EASE.out
         }
       )
     }
@@ -425,20 +425,20 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
     function applyHover(group: THREE.Group) {
       // Pronounced premium hover: more lift and depth, slower and smoother
-      gsap.to(group.userData, { 
-        hoverZ: 1.2, 
-        hoverY: 0.6, 
-        duration: DURATION.md, 
-        ease: EASE.soft 
+      gsap.to(group.userData, {
+        hoverZ: 1.2,
+        hoverY: 0.6,
+        duration: DURATION.md,
+        ease: EASE.soft
       })
     }
 
     function removeHover(group: THREE.Group) {
-      gsap.to(group.userData, { 
-        hoverZ: 0, 
-        hoverY: 0, 
-        duration: DURATION.md, 
-        ease: EASE.soft 
+      gsap.to(group.userData, {
+        hoverZ: 0,
+        hoverY: 0,
+        duration: DURATION.md,
+        ease: EASE.soft
       })
     }
 
@@ -479,19 +479,19 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
 
         // 1. Capture exact projected rect at this moment
         const rect = getCardScreenRect(g, camera)
-        
+
         // 2. Hide the original card immediately (hand-off to DOM)
         g.visible = false
-        
+
         // 3. Fade out other cards
         cardGroups.forEach((other, i) => {
           if (i !== idx) {
-            gsap.to(other.scale, { 
-              x: 0, 
-              y: 0, 
-              z: 0, 
-              duration: 0.4, 
-              ease: "power2.inOut" 
+            gsap.to(other.scale, {
+              x: 0,
+              y: 0,
+              z: 0,
+              duration: 0.4,
+              ease: "power2.inOut"
             })
             overlayMats[i] && gsap.to(overlayMats[i], { opacity: 0, duration: 0.2 })
           }
