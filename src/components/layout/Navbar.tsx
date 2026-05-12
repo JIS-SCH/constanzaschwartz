@@ -28,7 +28,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
     const left = nav.querySelector<HTMLElement>('[data-nav-left]')
     const right = nav.querySelector<HTMLElement>('[data-nav-right]')
 
-    if (sessionStorage.getItem('introComplete')) {
+    if (sessionStorage.getItem('introComplete') || pathname !== '/') {
       gsap.set([logo, left, right].filter(Boolean), { opacity: 1 })
       return
     }
@@ -48,7 +48,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
       window.removeEventListener('intro:logoMoved', onLogoMoved)
       window.removeEventListener('intro:navControls', onNavControls)
     }
-  }, [])
+  }, [pathname])
 
   const handleLogoClick = () => {
     if (pathname !== '/') {
