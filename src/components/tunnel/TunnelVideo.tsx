@@ -61,13 +61,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
 
     video.load()
 
-    const setHeight = () => {
-      const h = window.visualViewport?.height ?? window.innerHeight
-      container.style.height = h + 'px'
-    }
-    setHeight()
-    window.visualViewport?.addEventListener('resize', setHeight)
-
 
     const setupAnimation = () => {
       const pxPerSec = isMobile() ? PX_PER_SEC_MOBILE : PX_PER_SEC_DESKTOP
@@ -189,7 +182,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
 
     return () => {
       video.removeEventListener('loadedmetadata', setupAnimation)
-      window.visualViewport?.removeEventListener('resize', setHeight)
       killST()
     }
   }, [doComplete, killST])
