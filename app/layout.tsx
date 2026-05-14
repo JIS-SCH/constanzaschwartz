@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { ComingSoon } from "@/src/components/home/ComingSoon";
@@ -13,6 +13,13 @@ import { PAGE_SEO, BASE_URL } from "@/src/data/seo";
 import { JsonLd } from "@/src/components/layout/JsonLd";
 
 const seo = PAGE_SEO.home;
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#0F0F0F',
+}
 
 export const metadata: Metadata = {
   title: seo.title,
