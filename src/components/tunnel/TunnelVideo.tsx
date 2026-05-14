@@ -61,6 +61,9 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
 
     video.load()
 
+    // Use the physical screen height so the tunnel covers behind the browser bars
+    // on iOS Safari/Android Chrome — dvh still leaves a gap in many versions
+    container.style.height = window.screen.height + 'px'
 
     const setupAnimation = () => {
       const pxPerSec = isMobile() ? PX_PER_SEC_MOBILE : PX_PER_SEC_DESKTOP
@@ -190,7 +193,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     <div
       ref={containerRef}
       className="relative w-full bg-black overflow-hidden"
-      style={{ height: '100dvh' }}
     >
       <video
         ref={videoRef}
