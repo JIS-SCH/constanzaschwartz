@@ -189,7 +189,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     <div
       ref={containerRef}
       className="relative w-full bg-black overflow-hidden"
-      style={{ height: '100svh' }}
+      style={{ height: '100dvh' }}
     >
       <video
         ref={videoRef}
