@@ -169,7 +169,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
               duration: 0.2,
               ease: 'none',
               onComplete: () => {
-                normalizer.kill()
+                normalizer?.kill()
                 doComplete()
               },
             })
