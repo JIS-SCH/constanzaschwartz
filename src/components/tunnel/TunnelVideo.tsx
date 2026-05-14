@@ -151,13 +151,15 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         videoPx * 0.92
       )
 
+      const normalizer = ScrollTrigger.normalizeScroll(true)
+
       stRef.current = ScrollTrigger.create({
         trigger: container,
         start: 'top top',
         end: `+=${videoPx}`,
         pin: true,
         anticipatePin: 1,
-        scrub: safari ? 1 : 1.5, // More smoothing for Safari
+        scrub: safari ? 1 : 1.5,
         animation: tl,
         onUpdate: (self) => {
           if (self.progress >= 0.97 && !completedRef.current) {
@@ -166,7 +168,10 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
               opacity: 1,
               duration: 0.2,
               ease: 'none',
-              onComplete: doComplete,
+              onComplete: () => {
+                normalizer.kill()
+                doComplete()
+              },
             })
           }
         },
