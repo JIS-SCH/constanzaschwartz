@@ -210,6 +210,7 @@
 
 html {
   scrollbar-width: none;
+  -webkit-tap-highlight-color: transparent;
 }
 html::-webkit-scrollbar {
   display: none;
