@@ -96,19 +96,10 @@ export function Component() {
           .mutek-p { line-height: 1.45; }
         }
 
-        /* Carousel — seamless loop */
-        @-webkit-keyframes mutek-carousel-scroll {
-          from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
-          to { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0); }
-        }
-        @keyframes mutek-carousel-scroll {
-          from { transform: translate3d(0,0,0); }
-          to { transform: translate3d(-50%,0,0); }
-        }
         .mutek-animate-carousel {
           will-change: transform;
-          -webkit-animation: mutek-carousel-scroll var(--carousel-duration, 20s) linear infinite;
-          animation: mutek-carousel-scroll var(--carousel-duration, 20s) linear infinite;
+          -webkit-animation: carousel-scroll var(--carousel-duration, 20s) linear infinite;
+          animation: carousel-scroll var(--carousel-duration, 20s) linear infinite;
         }
       `}} />
 
@@ -574,7 +565,7 @@ export function Component() {
         {/* 16. Carousel + Closing Title — Text overlaps carousel */}
         <div style={{ position: 'relative', marginTop: '105px', marginBottom: '105px', width: '100%', height: '331px' }}>
           <div style={{ width: '100%', height: '331px', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: `mutek-m-c ${7 * CAROUSEL.durationPerImage}s linear infinite`, animation: `mutek-m-c ${7 * CAROUSEL.durationPerImage}s linear infinite` }}>
+            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${7 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${7 * CAROUSEL.durationPerImage}s linear infinite` }}>
               {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7,
               ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
                 <img key={i} src={src} alt="" style={{ height: '331px', width: 'auto', display: 'block', flexShrink: 0 }} />
@@ -591,7 +582,6 @@ export function Component() {
             </div>
           </div>
         </div>
-        <style dangerouslySetInnerHTML={{ __html: `@-webkit-keyframes mutek-m-c { from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0) } to { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0) } } @keyframes mutek-m-c { from { transform: translate3d(0,0,0) } to { transform: translate3d(-50%,0,0) } }` }} />
 
 
 

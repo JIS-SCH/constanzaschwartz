@@ -168,14 +168,6 @@ export function Component() {
         .dw-desktop { display: block; }
         .dw-mobile  { display: none; }
 
-        @-webkit-keyframes dwm-carousel-scroll {
-          from { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-          to   { -webkit-transform: translate3d(-50%, 0, 0); transform: translate3d(-50%, 0, 0); }
-        }
-        @keyframes dwm-carousel-scroll {
-          from { transform: translate3d(0, 0, 0); }
-          to   { transform: translate3d(-50%, 0, 0); }
-        }
       `}} />
 
       <div className="dw-desktop">
@@ -312,7 +304,7 @@ export function Component() {
             position={{ top: '590px', left: '0', width: '100%', height: CH, zIndex: 2 }}
           >
             <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
+              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
                 {[
                   ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3,
                   ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6,
@@ -532,7 +524,7 @@ export function Component() {
             </div>
           </div>
           <div style={{ position: 'absolute', top: '-54px', left: 0, width: '100%', height: '330px', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', height: '330px', width: 'max-content', willChange: 'transform', WebkitAnimation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `dwm-carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
+            <div style={{ display: 'flex', height: '330px', width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
               {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6].map((src, i) => (
                 <img key={i} src={src} alt="" style={{ height: '330px', width: 'auto', display: 'block', flexShrink: 0 }} />
               ))}

@@ -17,10 +17,11 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
   const [controlsVisible, setControlsVisible] = useState(true)
   const [isFullscreen,    setIsFullscreen]    = useState(false)
   const [timelineHovered, setTimelineHovered] = useState(false)
-  const iframeRef    = useRef<HTMLIFrameElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const playerRef    = useRef<any>(null)
-  const hideTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const iframeRef       = useRef<HTMLIFrameElement>(null)
+  const containerRef    = useRef<HTMLDivElement>(null)
+  const playerRef       = useRef<any>(null)
+  const hideTimerRef    = useRef<NodeJS.Timeout | null>(null)
+  const touchRevealedRef = useRef(false)
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -97,7 +98,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
     if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
     hideTimerRef.current = setTimeout(() => {
       setControlsVisible(false)
-    }, 2500)
+    }, 4000)
   }
 
   const revealControls = () => {
@@ -105,8 +106,19 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
     scheduleHide()
   }
 
+  const handleOverlayTouchStart = () => {
+    if (!controlsVisible) {
+      touchRevealedRef.current = true
+    }
+    revealControls()
+  }
+
   const togglePlay = (e?: React.MouseEvent | React.TouchEvent) => {
     if (e) e.stopPropagation()
+    if (touchRevealedRef.current) {
+      touchRevealedRef.current = false
+      return
+    }
     revealControls()
     if (playerRef.current) {
       if (isPlaying) {
@@ -181,10 +193,10 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
       ></iframe>
 
       {/* Interaction Overlay */}
-      <div 
+      <div
         onClick={togglePlay}
-        onTouchStart={revealControls}
-        style={{ position: 'absolute', inset: 0, zIndex: 5, cursor: 'pointer' }} 
+        onTouchStart={handleOverlayTouchStart}
+        style={{ position: 'absolute', inset: 0, zIndex: 5, cursor: 'pointer' }}
       />
 
       {/* Central Play Button */}

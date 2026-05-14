@@ -170,21 +170,15 @@ function Marquee() {
   )
 }
 
-function Carousel({ images, id }: { images: string[]; id: string }) {
+function Carousel({ images }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
+  const duration = images.length * CAROUSEL.durationPerImage
 
   return (
     <div className="w-full h-[331px] overflow-hidden">
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes pr-anim-${id} {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-        `}} />
       <div
         className="flex h-[331px] w-max"
-        style={{ animation: `pr-anim-${id} ${images.length * CAROUSEL.durationPerImage}s linear infinite`, gap: 0 }}
+        style={{ WebkitAnimation: `carousel-scroll ${duration}s linear infinite`, animation: `carousel-scroll ${duration}s linear infinite`, gap: 0 }}
       >
         {doubled.map((src, i) => (
           <img

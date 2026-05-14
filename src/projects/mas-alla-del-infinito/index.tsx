@@ -59,23 +59,12 @@ const CAROUSEL_2 = [
 // ---------------------------------------------------------------------------
 // Carousel — CSS keyframe infinite scroll (same pattern across all projects)
 // ---------------------------------------------------------------------------
-function Carousel({ images, id }: { images: string[]; id: string }) {
+function Carousel({ images }: { images: string[]; id: string }) {
   const doubled = [...images, ...images]
   const duration = images.length * CAROUSEL.durationPerImage
   return (
     <div className="w-full h-[var(--carousel-h)] overflow-hidden">
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        @-webkit-keyframes mal-c-${id} {
-          from { -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
-          to   { -webkit-transform: translate3d(-50%,0,0); transform: translate3d(-50%,0,0); }
-        }
-        @keyframes mal-c-${id} {
-          from { transform: translate3d(0,0,0); }
-          to   { transform: translate3d(-50%,0,0); }
-        }
-      `}} />
-      <div className="flex h-[var(--carousel-h)] w-max" style={{ willChange: 'transform', WebkitAnimation: `mal-c-${id} ${duration}s linear infinite`, animation: `mal-c-${id} ${duration}s linear infinite` }}>
+      <div className="flex h-[var(--carousel-h)] w-max" style={{ willChange: 'transform', WebkitAnimation: `carousel-scroll ${duration}s linear infinite`, animation: `carousel-scroll ${duration}s linear infinite` }}>
         {doubled.map((src, i) => (
           <img key={i} src={src} alt="" className="h-[var(--carousel-h)] w-auto block shrink-0" />
         ))}
@@ -140,12 +129,13 @@ export function Component() {
 
 
 
-        .mal-container { 
-          isolation: isolate; 
+        .mal-container {
+          isolation: isolate;
           /* Text variables */
           --p-size: 20px;
           --p-lh: 1.5;
           --p-ls: 0;
+          --carousel-h: 333px;
 
           /* Mobile layout variables (missing previously) */
           --h-c1: 580px;
@@ -812,7 +802,7 @@ export function Component() {
             </TextBlock>
           </div>
 
-          <div style={{ position: 'relative', height: '540px', marginTop: '50px' }}>
+          <div style={{ position: 'relative', height: '540px', marginTop: '50px', overflow: 'hidden' }}>
             <PI src={IMG_WEB040} speed={PARALLAX.speed.depthMid} alt="" style={{ position: 'absolute', right: '20px', top: '0', width: '200px', height: '300px' }} />
             <PI src={IMG_WEB037} speed={PARALLAX.speed.depthHigh} alt="" style={{ position: 'absolute', left: '20px', top: '250px', width: '230px', height: '153px' }} />
 
@@ -829,7 +819,7 @@ export function Component() {
             </div>
           </div>
 
-          <div style={{ width: '100%', aspectRatio: '3/2', marginTop: '-50px' }}>
+          <div style={{ width: '100%', aspectRatio: '3/2', marginTop: '-50px', overflow: 'hidden' }}>
             <PI src={IMG_WEB054} speed={PARALLAX.speed.depthLow} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 

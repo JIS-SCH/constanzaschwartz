@@ -48,3 +48,8 @@ export const MARQUEE = {
   secondsPerChar: 0.68, // Base velocity: ~50s for 73 chars
   setRepeat: 4,
 } as const
+
+export const OVERLAY = {
+  duration: 0.9,
+  ease: 'power4.inOut',
+} as const

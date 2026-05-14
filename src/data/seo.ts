@@ -18,8 +18,8 @@ export const BASE_URL = getBaseUrl().replace(/\/$/, '');
 
 export const PAGE_SEO: Record<string, SEOData> = {
   home: {
-    title: 'Constanza Schwartz',
-    description: 'Sitio oficial de la artista multidisciplinaria',
+    title: 'Constanza Schwartz | Artista Multidisciplinaria',
+    description: 'Constanza Schwartz es una artista multidisciplinaria que explora la relación entre materia, luz y sonido, trabajando la percepción y el espacio desde prácticas contemporáneas.',
     ogImage: '/og/og-home.jpg',
     schema: 'Person',
   },

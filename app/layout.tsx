@@ -9,7 +9,6 @@ import { AudioProvider } from "@/src/contexts/AudioContext";
 import { TransitionProvider } from "@/src/contexts/TransitionContext";
 import { TransitionOverlay } from "@/src/components/layout/TransitionOverlay";
 import { NavController } from "@/src/components/layout/NavController";
-
 import { PAGE_SEO, BASE_URL } from "@/src/data/seo";
 import { JsonLd } from "@/src/components/layout/JsonLd";
 
@@ -20,15 +19,15 @@ export const metadata: Metadata = {
   description: seo.description,
   metadataBase: new URL(BASE_URL),
   alternates: {
-    canonical: '/',
+    canonical: 'https://constanzaschwartz.com',
   },
   icons: {
     icon: [
       { url: "/CONSTANZASCHWARTZ_48X48_Favicon.png", sizes: "48x48", type: "image/png" },
-      { url: "/CONSTANZASCHWARTZ_FAVICON 192X192.png", sizes: "192x192", type: "image/png" },
+      { url: "/CONSTANZASCHWARTZ_FAVICON_192X192.png", sizes: "192x192", type: "image/png" },
     ],
     apple: [
-      { url: "/CONSTANZASCHWARTZ_FAVICON 192X192.png", sizes: "192x192", type: "image/png" },
+      { url: "/CONSTANZASCHWARTZ_FAVICON_192X192.png", sizes: "192x192", type: "image/png" },
     ],
   },
   openGraph: {
@@ -60,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LBHSXVNS1R"
