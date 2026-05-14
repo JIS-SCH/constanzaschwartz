@@ -596,8 +596,8 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
         ref={canvasRef}
         style={{
           display: 'block',
-          width: '100vw',
-          height: '100vh',
+          width: '100%',
+          height: '100%',
         }}
       />
     </div>
