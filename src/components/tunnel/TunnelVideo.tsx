@@ -210,13 +210,12 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       {/* Fixed fullscreen container — JS sets width/height in px to lock against URL bar animation */}
       <div
         ref={containerRef}
-        className="overflow-hidden"
+        className="bg-black overflow-hidden"
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           zIndex: 50,
-          background: 'red',
         }}
       >
         <video
