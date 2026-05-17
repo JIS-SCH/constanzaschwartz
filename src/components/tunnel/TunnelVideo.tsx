@@ -64,6 +64,34 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     // Normalize scroll so iOS touch doesn't bypass the scrub
     const normalizer = ScrollTrigger.normalizeScroll(true)
 
+    // Lock container + video to the LARGEST stable viewport size.
+    // Using window.innerWidth/Height in pixels avoids iOS Safari quirks
+    // with vh/dvh/lvh on <video> + object-fit, and prevents jump on URL bar animation.
+    let lockedW = 0
+    let lockedH = 0
+    const updateLayout = () => {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      // Only grow — never shrink — so URL bar collapse/expand doesn't cause reflow.
+      if (w > lockedW) lockedW = w
+      if (h > lockedH) lockedH = h
+      container.style.width  = lockedW + 'px'
+      container.style.height = lockedH + 'px'
+      // Scale video to fully cover container (max of width/height ratios)
+      const vw = video.videoWidth  || 540
+      const vh = video.videoHeight || 960
+      const scale = Math.max(lockedW / vw, lockedH / vh)
+      const sW = vw * scale
+      const sH = vh * scale
+      video.style.width  = sW + 'px'
+      video.style.height = sH + 'px'
+      video.style.left   = ((lockedW - sW) / 2) + 'px'
+      video.style.top    = ((lockedH - sH) / 2) + 'px'
+    }
+    updateLayout()
+    window.addEventListener('resize', updateLayout)
+    window.addEventListener('orientationchange', updateLayout)
+
     const setupAnimation = () => {
       const pxPerSec = isMobile() ? PX_PER_SEC_MOBILE : PX_PER_SEC_DESKTOP
       const duration = video.duration
@@ -71,6 +99,9 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
 
       // The spacer creates the scrollable height — the container stays fixed
       spacer.style.height = videoPx + 'px'
+
+      // Now that videoWidth/Height are known, re-run layout so video is pixel-perfect
+      updateLayout()
 
       const logoStartPx    = (isMobile() ? 1 : 1) * pxPerSec
       const logoDurationPx = ((isMobile() ? 4 : 5) - 1) * pxPerSec
@@ -164,6 +195,8 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
 
     return () => {
       video.removeEventListener('loadedmetadata', setupAnimation)
+      window.removeEventListener('resize', updateLayout)
+      window.removeEventListener('orientationchange', updateLayout)
       normalizer?.kill()
       killST()
     }
@@ -174,7 +207,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       {/* Scroll spacer — creates scrollable height, never visible */}
       <div ref={spacerRef} />
 
-      {/* Fixed fullscreen container — never scrolls, always covers screen */}
+      {/* Fixed fullscreen container — JS sets width/height in px to lock against URL bar animation */}
       <div
         ref={containerRef}
         className="bg-black overflow-hidden"
@@ -182,25 +215,13 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
           position: 'fixed',
           top: 0,
           left: 0,
-          width: '100vw',
-          height: '100dvh',
           zIndex: 50,
         }}
       >
         <video
           ref={videoRef}
           className="absolute"
-          style={{
-            opacity: 0,
-            top: '50%',
-            left: '50%',
-            minWidth: '100%',
-            minHeight: '100%',
-            width: 'auto',
-            height: 'auto',
-            transform: 'translate(-50%, -50%)',
-            objectFit: 'cover',
-          }}
+          style={{ opacity: 0 }}
           preload="auto"
           muted
           playsInline
