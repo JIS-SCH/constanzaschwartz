@@ -178,12 +178,29 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       <div
         ref={containerRef}
         className="bg-black overflow-hidden"
-        style={{ position: 'fixed', inset: 0, zIndex: 50 }}
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100dvh',
+          zIndex: 50,
+        }}
       >
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0 }}
+          className="absolute"
+          style={{
+            opacity: 0,
+            top: '50%',
+            left: '50%',
+            minWidth: '100%',
+            minHeight: '100%',
+            width: 'auto',
+            height: 'auto',
+            transform: 'translate(-50%, -50%)',
+            objectFit: 'cover',
+          }}
           preload="auto"
           muted
           playsInline
