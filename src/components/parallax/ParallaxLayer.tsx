@@ -149,18 +149,16 @@ export function ParallaxLayer({ layer, position, sectionId, layerIndex = 0, chil
     triggerRef,
   })
 
-  if (effect === 'bg' && !isMedia) {
-    useParallaxBg(outerRef)
-  }
+  // Hooks must run unconditionally (Rules of Hooks) — gate via `enabled`.
+  useParallaxBg(outerRef, { enabled: effect === 'bg' && !isMedia })
 
-  if (effect === 'float') {
-    useParallaxFloat(outerRef, {
-      amplitude: layer.floatAmplitude ?? 12,
-      frequency: layer.floatFrequency ?? 0.5,
-      axis,
-      phaseOffset: (position.zIndex || 0) * 0.3,
-    })
-  }
+  useParallaxFloat(outerRef, {
+    enabled: effect === 'float',
+    amplitude: layer.floatAmplitude ?? 12,
+    frequency: layer.floatFrequency ?? 0.5,
+    axis,
+    phaseOffset: (position.zIndex || 0) * 0.3,
+  })
 
   const needsClip = isVideoBleedParallax || effect === 'bg'
   const positionStyle: React.CSSProperties = isStickyMarquee
