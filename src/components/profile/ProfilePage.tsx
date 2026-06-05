@@ -4,7 +4,8 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { cldImg } from '@/src/utils/cloudinary'
 import { useParallax } from '@/src/hooks/useParallax'
-import { MARQUEE, CAROUSEL } from '@/src/motion/tokens'
+import { Carousel } from '@/src/components/media/Carousel'
+import { MARQUEE } from '@/src/motion/tokens'
 
 const IMG_PORTRAIT = cldImg('CONSTANZASCHWARTZ_Profile_1_yx5v5r')
 const IMG_PORTRAIT_2 = cldImg('CONSTANZASCHWARTZ_Profile_2_uipjg1')
@@ -170,30 +171,6 @@ function Marquee() {
   )
 }
 
-function Carousel({ images }: { images: string[]; id: string }) {
-  const doubled = [...images, ...images]
-  const duration = images.length * CAROUSEL.durationPerImage
-
-  return (
-    <div className="w-full h-[331px] overflow-hidden">
-      <div
-        className="flex h-[331px] w-max"
-        style={{ WebkitAnimation: `carousel-scroll ${duration}s linear infinite`, animation: `carousel-scroll ${duration}s linear infinite`, gap: 0 }}
-      >
-        {doubled.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt=""
-            className="h-[331px] w-auto flex-shrink-0 block"
-            style={{ marginRight: '-1px' }}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 // ---------------------------------------------------------------------------
 // EventList
 // ---------------------------------------------------------------------------
@@ -226,7 +203,7 @@ function YearSection({ data }: { data: YearData }) {
 
       {/* Carousel overlaps bottom of year image */}
       <div className="pr-year-carousel">
-        <Carousel images={data.gallery} id={data.year} />
+        <Carousel images={data.gallery} height="331px" />
       </div>
 
       {/* Events list */}

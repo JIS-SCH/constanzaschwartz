@@ -1,12 +1,9 @@
+# NOTE: Primary hosting is migrating to Cloudflare Pages (static export → ./out).
+# This file is kept temporarily so a Netlify build still works as a fallback
+# during DNS cutover. It can be deleted once Cloudflare Pages is the live host.
+# The @netlify/plugin-nextjs runtime plugin was removed: the site is now a
+# static export (next.config.ts → output: 'export'), so no Next runtime is needed.
+
 [build]
   command = "npm run build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
-[context.production]
-  command = "npm run build"
-
-[context.preview]
-  command = "npm run build"
+  publish = "out"

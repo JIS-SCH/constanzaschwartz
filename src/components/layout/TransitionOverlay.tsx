@@ -3,7 +3,6 @@
 import { useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import gsap from 'gsap'
-import { Flip } from 'gsap/Flip'
 import { useTransition } from '@/src/contexts/TransitionContext'
 import { DURATION, EASE } from '@/src/motion/tokens'
 
@@ -61,17 +60,24 @@ export function TransitionOverlay() {
     ctxRef.current = ctx
   }, [state.phase, state.originRect, state.imageSrc, state.slug, router, setExpanded])
 
-  // ── Phase: revealing → morph to project image position, then fade ───────
+  // ── Phase: revealing → uniform-scale FLIP morph: card origin → hero ───────
+  // Pure transform (translate + UNIFORM scale) so it runs on the GPU and never
+  // distorts. object-fit:cover keeps the image proportional; the morph adapts to
+  // any hero rect, so every project behaves identically.
   useEffect(() => {
     if (state.phase !== 'revealing') return
     const el = imageRef.current
     const overlay = overlayRef.current
     if (!el || !overlay) return
 
-    // We DON'T revert here because we want to maintain the fullscreen state 
-    // reached in the 'expanding' phase for a continuous morph.
-
-    const target = document.querySelector<HTMLElement>('[data-project-image]')
+    // Pick the *visible* hero (desktop/mobile heroes share the attribute; the
+    // hidden one has a zero rect). This makes the morph land correctly on both.
+    const target = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-project-image]')
+    ).find((t) => {
+      const r = t.getBoundingClientRect()
+      return r.width > 0 && r.height > 0
+    })
 
     const cleanup = () => {
       gsap.set(overlay, { visibility: 'hidden', background: '#0F0F0F', opacity: 1 })
@@ -82,77 +88,51 @@ export function TransitionOverlay() {
         width: '',
         height: '',
         opacity: 1,
-        backgroundImage: '',
-        filter: 'none'
+        clearProps: 'transform',
       })
       setDone()
     }
 
-    const targetRect = target ? target.getBoundingClientRect() : null
-    const hasRealTarget = targetRect && targetRect.width > 0 && targetRect.height > 0
+    const targetRect = target?.getBoundingClientRect()
+    const o = state.originRect
+    const hasTarget = !!(targetRect && targetRect.width > 0 && targetRect.height > 0 && o)
 
     const ctx = gsap.context(() => {
-      if (hasRealTarget && targetRect && state.originRect) {
-
-
-        const scaleX = state.originRect.width / targetRect.width
-        const scaleY = state.originRect.height / targetRect.height
-        const x = state.originRect.left - targetRect.left
-        const y = state.originRect.top - targetRect.top
-
+      if (hasTarget && targetRect && o) {
+        // FINAL = the hero rect exactly (identity transform), cover-fitted.
         gsap.set(el, {
           left: targetRect.left,
           top: targetRect.top,
           width: targetRect.width,
           height: targetRect.height,
-          x,
-          y,
-          scaleX,
-          scaleY,
-          borderRadius: '2px',
-          transformOrigin: '0 0',
+          borderRadius: 0,
+          transformOrigin: 'center center',
+          force3D: true,
         })
 
-        const tl = gsap.timeline()
+        // INVERT = uniform scale that covers the card, centred on it. One scale
+        // factor for both axes → zero distortion.
+        const scale = Math.max(o.width / targetRect.width, o.height / targetRect.height)
+        const dx = o.left + o.width / 2 - (targetRect.left + targetRect.width / 2)
+        const dy = o.top + o.height / 2 - (targetRect.top + targetRect.height / 2)
+        gsap.set(el, { x: dx, y: dy, scale })
 
-        // 1. Morph directly to target using scale and translate (GPU)
+        // PLAY = back to identity, then reveal the real hero behind it.
+        const tl = gsap.timeline({ onComplete: cleanup })
         tl.to(el, {
           x: 0,
           y: 0,
-          scaleX: 1,
-          scaleY: 1,
-          borderRadius: '0px',
+          scale: 1,
           duration: DURATION.lg,
-          ease: 'power2.inOut',
-          filter: 'url(#liquid-morph)',
+          ease: 'power3.inOut',
         }, 0)
-
-        // 2. Liquid effect during movement
-        const disp = document.querySelector('#liquid-morph feDisplacementMap')
-        if (disp) {
-          gsap.timeline()
-            .to(disp, {
-              attr: { scale: 15 }, // Reduced from 20 for Safari stability
-              duration: DURATION.lg * 0.4,
-              ease: 'power1.out',
-            })
-            .to(disp, {
-              attr: { scale: 0 },
-              duration: DURATION.lg * 0.6,
-              ease: 'power2.inOut',
-              onComplete: () => {
-                gsap.set(el, { filter: 'none' })
-              }
-            })
-        }
-
+        // Start the reveal only once the image is essentially on the hero, so the
+        // overlay fade uncovers an identical real hero (no ghost / double image).
         tl.to(overlay, {
           opacity: 0,
-          duration: DURATION.sm,
+          duration: DURATION.md,
           ease: EASE.out,
-          delay: DURATION.lg * 0.1,
-          onComplete: cleanup,
-        })
+        }, DURATION.lg * 0.92)
       } else {
         gsap.to(overlay, {
           opacity: 0,
@@ -164,7 +144,7 @@ export function TransitionOverlay() {
     })
 
     ctxRef.current = ctx
-  }, [state.phase, setDone])
+  }, [state.phase, state.originRect, setDone])
 
   // ── Phase: closing → fade to black, then navigate home ──────────────────
   useEffect(() => {
@@ -232,26 +212,6 @@ export function TransitionOverlay() {
 
   return (
     <>
-      {/* Liquid morph filter definition */}
-      <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none', visibility: 'hidden' }}>
-        <filter id="liquid-morph" x="-50%" y="-50%" width="200%" height="200%" filterUnits="userSpaceOnUse" colorInterpolationFilters="linearRGB">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.008 0.005"
-            numOctaves="1"
-            result="noise"
-          />
-          <feGaussianBlur in="noise" stdDeviation="4" result="blurredNoise" />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="blurredNoise"
-            scale="0"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </svg>
-
       <div
         ref={overlayRef}
         style={{
@@ -275,12 +235,9 @@ export function TransitionOverlay() {
             objectFit: 'cover',
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
-            transformStyle: 'preserve-3d',
-            WebkitTransformStyle: 'preserve-3d',
-            filter: 'none',
             transform: 'translate3d(0,0,0)',
-            willChange: 'width, height, left, top, filter',
-            WebkitFilter: 'drop-shadow(0 0 0 transparent)', // WebKit composition hack
+            // Only transform/opacity animate → GPU-composited, no layout/paint.
+            willChange: 'transform, opacity',
           }}
         />
       </div>

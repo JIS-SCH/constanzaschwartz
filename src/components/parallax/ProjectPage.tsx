@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { VideoPlayer } from '@/src/components/media/VideoPlayer'
+import { Carousel } from '@/src/components/media/Carousel'
 import { OffsetLayout } from '@/src/components/parallax/sections/OffsetLayout'
 import { OverlayComposition } from '@/src/components/parallax/sections/OverlayComposition'
 import type { ParallaxConfig, Section, Layer } from '@/src/types/parallax'
@@ -94,37 +95,11 @@ function renderFullwidthVideo(section: Section) {
 }
 
 function renderCarouselSection(section: Section) {
-  const images = section.layers.filter((l) => l.type === 'image' && l.src)
-  const doubled = [...images, ...images]
-  const totalWidth = images.length * 588
+  const images = section.layers
+    .filter((l) => l.type === 'image' && l.src)
+    .map((l) => ({ src: l.src as string, alt: l.alt || '' }))
 
-  return (
-    <div style={{ width: '100%', height: '331px', overflow: 'hidden', position: 'relative' }}>
-      <style>{`
-        @keyframes cs-carousel-scroll {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-${totalWidth}px); }
-        }
-      `}</style>
-      <div
-        style={{
-          display: 'flex',
-          animation: `cs-carousel-scroll ${images.length * 3.5}s linear infinite`,
-          width: 'max-content',
-        }}
-      >
-        {doubled.map((layer, i) => (
-          <div key={i} style={{ width: '588px', height: '331px', flexShrink: 0 }}>
-            <img
-              src={layer.src}
-              alt={layer.alt || ''}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+  return <Carousel images={images} itemWidth={588} height="331px" durationPerImage={3.5} />
 }
 
 function renderOverlaySection(section: Section) {

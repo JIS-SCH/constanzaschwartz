@@ -1,5 +1,4 @@
 import type { ProjectMeta } from '../types'
-import { cldImg } from '@/src/utils/cloudinary'
 import { ALT } from './assets'
 
 export const meta: ProjectMeta = {
@@ -7,6 +6,6 @@ export const meta: ProjectMeta = {
   title: 'ALTEREGO . SILVESTRE Y LA NARANJA',
   date: '2025',
   category: 'Dirección de Arte y Efectos Lumínicos',
-  image: cldImg(ALT.portada),
-  mobileImage: cldImg(ALT.portadaMobile),
+  image: ALT.portada,
+  mobileImage: ALT.portadaMobile,
 }

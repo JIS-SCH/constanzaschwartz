@@ -55,18 +55,22 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       ? '/Tunel_Interestellar_Vert_A_mobile_opt.mp4'
       : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
 
-    video.load()
-    // Kick-start buffering for all browsers (primes Safari engine + forces Chrome private to buffer)
-    video.play().then(() => video.pause()).catch(() => {})
+    if (isSafari()) {
+      video.play().then(() => video.pause()).catch(() => {})
+    }
 
-    // Normalize scroll so iOS touch doesn't bypass the scrub
-    const normalizer = ScrollTrigger.normalizeScroll(true)
+    video.load()
+
+    // Normalize scroll for mobile only — on desktop Chrome this intercepts wheel events
+    // and causes the scroll to freeze partway through the tunnel
+    const normalizer = isMobile() ? ScrollTrigger.normalizeScroll(true) : undefined
 
     // Lock container + video to the LARGEST stable viewport size.
     // Using window.innerWidth/Height in pixels avoids iOS Safari quirks
     // with vh/dvh/lvh on <video> + object-fit, and prevents jump on URL bar animation.
     let lockedW = 0
     let lockedH = 0
+    let videoPx = 0
     const updateLayout = () => {
       const w = window.innerWidth
       const h = window.innerHeight
@@ -85,6 +89,12 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       video.style.height = sH + 'px'
       video.style.left   = ((lockedW - sW) / 2) + 'px'
       video.style.top    = ((lockedH - sH) / 2) + 'px'
+      // The container is fixed, so it consumes no scroll. The spacer must reserve
+      // the scrub distance (videoPx) PLUS one viewport — this replicates what
+      // ScrollTrigger's pin-spacer did before the pin was removed. Without the
+      // extra viewport, max scroll caps at videoPx - lockedH and progress never
+      // reaches the 0.97 completion threshold.
+      if (videoPx > 0) spacer.style.height = (videoPx + lockedH) + 'px'
     }
     updateLayout()
     window.addEventListener('resize', updateLayout)
@@ -93,12 +103,10 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     const setupAnimation = () => {
       const pxPerSec = isMobile() ? PX_PER_SEC_MOBILE : PX_PER_SEC_DESKTOP
       const duration = video.duration
-      const videoPx  = Math.round(duration * pxPerSec)
+      videoPx = Math.round(duration * pxPerSec)
 
-      // The spacer creates the scrollable height — the container stays fixed
-      spacer.style.height = videoPx + 'px'
-
-      // Now that videoWidth/Height are known, re-run layout so video is pixel-perfect
+      // Now that videoPx + videoWidth/Height are known, re-run layout so the
+      // video is pixel-perfect and the spacer reserves the full scroll height.
       updateLayout()
 
       const logoStartPx    = (isMobile() ? 1 : 1) * pxPerSec

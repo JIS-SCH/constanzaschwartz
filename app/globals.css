@@ -368,3 +368,27 @@ canvas {
   from { transform: translate3d(0, 0, 0); }
   to   { transform: translate3d(-50%, 0, 0); }
 }
+
+/* Carousel loading skeleton — shimmer shown until each image decodes */
+.carousel-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, #0a0a0a 30%, #1d1d1d 50%, #0a0a0a 70%);
+  background-size: 200% 100%;
+  -webkit-animation: carousel-skeleton-pulse 1.4s ease-in-out infinite;
+  animation: carousel-skeleton-pulse 1.4s ease-in-out infinite;
+}
+@-webkit-keyframes carousel-skeleton-pulse {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+@keyframes carousel-skeleton-pulse {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* Respect reduced-motion: stop the auto-scroll + skeleton shimmer */
+@media (prefers-reduced-motion: reduce) {
+  [style*="carousel-scroll"] { -webkit-animation: none !important; animation: none !important; }
+  .carousel-skeleton { -webkit-animation: none !important; animation: none !important; }
+}

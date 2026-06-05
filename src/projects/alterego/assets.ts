@@ -1,22 +1,38 @@
+import { projectR2 } from '@/src/utils/assets'
+
+// Images migrated to R2 (folder uses '_' as the stem separator). Width transforms
+// that the call sites used (w_2000 … w_400) are dropped — R2 serves a single
+// full-size WebP per image. TODO: add responsive variants to avoid shipping
+// large originals to small slots (mobile thumbs).
+const r2 = projectR2({
+  folder: 'SILVESTRE Y LA NARANJA _ALTEREGO',
+  stem: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego',
+  sep: '_',
+})
+
 export const ALT = {
-  portada: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_portada_desktop_l1yfg1',
-  1: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_1_pomaec',   // 4096x2160 — cone of light (teal)
-  2: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_2_dd0vyv',   // 4096x2160 — man crouching spotlight
-  3: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_3_he8yzc',   // 4096x2160 — woman in light
-  4: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_4_k0hhog',   // 4096x2160 — silhouette back / lyric
-  5: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_5_uplum8',   // 1600x843  — two figures beam
-  6: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_6_scxova',   // 1600x843  — man standing spotlight
-  7: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_7_ikyttd',   // 1080x1920 — orange airplane+band (portrait)
-  8: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_8_ptszmx',   // 1080x675  — purple band instruments
-  9: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_9_oezpde',   // 1080x675  — purple band stage
-  10: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_10_gqrn6m',  // 4096x2160 — red/pink faces close
-  11: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_11_uhiq0e',  // 4096x2160 — blue neon faces
-  12: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_12_alkmmk',  // 4096x2160 — blue neon hands
-  13: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_13_kbeyo9',  // 4096x2160 — orange warm abstract
-  14: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_14_tewhqd',  // 4096x2160 — blue purple neon
-  15: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_15_fpuxzt',  // 1080x1920 — B&W film strip (portrait)
-  16: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_16_nv8ht4',  // 1080x1920 — dark shadow shots (portrait)
-  17: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_17_w7aspo',
+  // images → R2
+  portada: r2.portada('desktop'),
+  portadaMobile: r2.portada('mobile'),
+  1: r2.img(1),
+  2: r2.img(2),
+  3: r2.img(3),
+  4: r2.img(4),
+  5: r2.img(5),
+  6: r2.img(6),
+  7: r2.img(7),
+  8: r2.img(8),
+  9: r2.img(9),
+  10: r2.img(10),
+  11: r2.img(11),
+  12: r2.img(12),
+  13: r2.img(13),
+  14: r2.img(14),
+  15: r2.img(15),
+  16: r2.img(16),
+  17: r2.img(17),
+  // videos → still on Cloudinary (passed through cldVideo at the call site);
+  // not uploaded to R2 yet.
   v1: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_1_nksue5',
   v2: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_2_xn8am8',
   v3: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_3_tjwnjv',
@@ -24,6 +40,4 @@ export const ALT = {
   v5: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_5_rhs2kx',
   v6: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_6_uqdkef',
   v7: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_7_rdclow',
-  // portada mobile
-  portadaMobile: 'CONSTANZASCHWARTZ_projects_silvestreylanaranja-alterego_portada_mobile_g3vg3j',
 } as const

@@ -4,8 +4,9 @@ import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { ASSETS } from './assets'
-import { TW, TEXT_BLOCK_STYLE, CH, GAP } from '../shared'
-import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
+import { TW, TEXT_BLOCK_STYLE, CH } from '../shared'
+import { Carousel } from '@/src/components/media/Carousel'
+import { MARQUEE, PARALLAX } from '@/src/motion/tokens'
 
 export { meta } from './meta'
 
@@ -94,12 +95,6 @@ export function Component() {
           }
           .mutek-list { line-height: 1.15; }
           .mutek-p { line-height: 1.45; }
-        }
-
-        .mutek-animate-carousel {
-          will-change: transform;
-          -webkit-animation: carousel-scroll var(--carousel-duration, 20s) linear infinite;
-          animation: carousel-scroll var(--carousel-duration, 20s) linear infinite;
         }
       `}} />
 
@@ -383,14 +378,11 @@ export function Component() {
         </ParallaxSection>
 
         <div style={{ position: 'relative', marginBottom: '190px', marginTop: '70px' }}>
-          <div className="w-full h-[var(--carousel-h)] overflow-hidden">
-            <div className="flex h-[var(--carousel-h)] w-max mutek-animate-carousel" style={{ '--carousel-duration': `${7 * CAROUSEL.durationPerImage}s` } as any}>
-              {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7,
-              ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
-                <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
-              ))}
-            </div>
-          </div>
+          <Carousel
+            images={[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7]}
+            height={CH}
+            priority
+          />
 
           {/* 13. FINAL TITLE — Positioned over the carousel */}
           <div style={{ position: 'absolute', bottom: '-95px', left: 0, width: '100%', zIndex: 10, pointerEvents: 'none' }}>
@@ -564,14 +556,10 @@ export function Component() {
 
         {/* 16. Carousel + Closing Title — Text overlaps carousel */}
         <div style={{ position: 'relative', marginTop: '105px', marginBottom: '105px', width: '100%', height: '331px' }}>
-          <div style={{ width: '100%', height: '331px', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${7 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${7 * CAROUSEL.durationPerImage}s linear infinite` }}>
-              {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7,
-              ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7].map((src, i) => (
-                <img key={i} src={src} alt="" style={{ height: '331px', width: 'auto', display: 'block', flexShrink: 0 }} />
-              ))}
-            </div>
-          </div>
+          <Carousel
+            images={[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel7]}
+            height="331px"
+          />
 
           {/* 17. Closing title — Absolute positioned over carousel */}
           <div style={{ position: 'absolute', top: '307px', left: '0', paddingLeft: '80px', zIndex: 10, pointerEvents: 'none' }}>

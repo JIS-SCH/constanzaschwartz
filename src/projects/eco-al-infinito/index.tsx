@@ -4,8 +4,9 @@ import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
+import { Carousel } from '@/src/components/media/Carousel'
 import { ASSETS } from './assets'
-import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
+import { MARQUEE, PARALLAX } from '@/src/motion/tokens'
 import { TW, CH } from '../shared'
 
 /** Consistent vertical gap between sections (px) */
@@ -452,14 +453,11 @@ export function Component() {
             layer={{ type: 'image', src: '' }}
             position={{ top: '2963px', left: '0', width: '100%', height: CH, zIndex: 2 }}
           >
-            <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${5 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${5 * CAROUSEL.durationPerImage}s linear infinite` }}>
-                {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5,
-                ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5].map((src, i) => (
-                  <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
-                ))}
-              </div>
-            </div>
+            <Carousel
+              images={[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5]}
+              height={CH}
+              priority
+            />
           </ParallaxLayer>
 
           {/* Final Reflective Text below carousel - BOTTOM ANCHOR */}
@@ -552,13 +550,11 @@ export function Component() {
 
         {/* 18. CAROUSEL 2 (carousel6-10) */}
         <ParallaxSection id="carousel-section-2" style={{ marginTop: GAP, marginBottom: '-60px' }}>
-          <div className="relative w-full h-[331px] z-2 overflow-hidden">
-            <div style={{ display: 'flex', height: '331px', width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
-              {[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11,
-              ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11].map((src, i) => (
-                <img key={i} src={src} alt="" style={{ height: '331px', width: 'auto', display: 'block', flexShrink: 0 }} />
-              ))}
-            </div>
+          <div className="relative z-2">
+            <Carousel
+              images={[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11]}
+              height="331px"
+            />
           </div>
         </ParallaxSection>
 
@@ -812,14 +808,11 @@ export function Component() {
 
 
         {/* Carousel 1 */}
-        <div style={{ marginTop: '-243px', width: '100%', height: CH, overflow: 'hidden' }}>
-          <div style={{ display: 'flex', height: CH, width: 'max-content', WebkitAnimation: `carousel-scroll ${5 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${5 * CAROUSEL.durationPerImage}s linear infinite` }}>
-            {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5,
-            ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5].map((src, i) => (
-              <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
-            ))}
-          </div>
-        </div>
+        <Carousel
+          images={[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5]}
+          height={CH}
+          style={{ marginTop: '-243px' }}
+        />
 
         <div className="eco-p" style={{
           color: '#fff',
@@ -883,14 +876,11 @@ export function Component() {
         </div>
 
         {/* Carousel 2 */}
-        <div style={{ marginTop: '122px', width: '100%', height: '331px', overflow: 'hidden' }}>
-          <div style={{ display: 'flex', height: '331px', width: 'max-content', WebkitAnimation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
-            {[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11,
-            ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11].map((src, i) => (
-              <img key={i} src={src} alt="" style={{ height: '331px', width: 'auto', display: 'block', flexShrink: 0 }} />
-            ))}
-          </div>
-        </div>
+        <Carousel
+          images={[ASSETS.carousel6, ASSETS.carousel7, ASSETS.carousel8, ASSETS.carousel9, ASSETS.carousel10, ASSETS.carousel11]}
+          height="331px"
+          style={{ marginTop: '122px' }}
+        />
 
         {/* Image pair (img36/img37) */}
         <div style={{ position: 'relative', height: '360px', marginTop: '80px' }}>

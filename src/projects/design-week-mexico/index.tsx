@@ -5,7 +5,8 @@ import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { ASSETS } from './assets'
 import { TEXT_BLOCK_STYLE, CH } from '../shared'
-import { PARALLAX, MARQUEE, CAROUSEL } from '@/src/motion/tokens'
+import { Carousel } from '@/src/components/media/Carousel'
+import { PARALLAX, MARQUEE } from '@/src/motion/tokens'
 
 export { meta } from './meta'
 
@@ -303,18 +304,14 @@ export function Component() {
             layer={{ type: 'image', src: '', speed: PARALLAX.speed.depthLow, effect: 'bg' }}
             position={{ top: '590px', left: '0', width: '100%', height: CH, zIndex: 2 }}
           >
-            <div style={{ width: '100%', height: CH, overflow: 'hidden' }}>
-              <div style={{ display: 'flex', height: CH, width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
-                {[
-                  ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3,
-                  ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6,
-                  ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3,
-                  ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6,
-                ].map((src, i) => (
-                  <img key={i} src={src} alt="" style={{ height: CH, width: 'auto', display: 'block', flexShrink: 0 }} />
-                ))}
-              </div>
-            </div>
+            <Carousel
+              images={[
+                ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3,
+                ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6,
+              ]}
+              height={CH}
+              priority
+            />
           </ParallaxLayer>
         </ParallaxSection>
 
@@ -523,13 +520,11 @@ export function Component() {
               establecer una posibilidad de diálogo donde una forma concreta desvanece sus límites.
             </div>
           </div>
-          <div style={{ position: 'absolute', top: '-54px', left: 0, width: '100%', height: '330px', overflow: 'hidden' }}>
-            <div style={{ display: 'flex', height: '330px', width: 'max-content', willChange: 'transform', WebkitAnimation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite`, animation: `carousel-scroll ${6 * CAROUSEL.durationPerImage}s linear infinite` }}>
-              {[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6, ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6].map((src, i) => (
-                <img key={i} src={src} alt="" style={{ height: '330px', width: 'auto', display: 'block', flexShrink: 0 }} />
-              ))}
-            </div>
-          </div>
+          <Carousel
+            images={[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6]}
+            height="330px"
+            style={{ position: 'absolute', top: '-54px', left: 0 }}
+          />
         </div>
 
         {/* 7. FINAL PARAGRAPH */}

@@ -8,7 +8,8 @@ import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
 import { CustomVimeoPlayer } from '@/src/components/media/CustomVimeoPlayer'
-import { MARQUEE, CAROUSEL, PARALLAX } from '@/src/motion/tokens'
+import { Carousel } from '@/src/components/media/Carousel'
+import { MARQUEE, PARALLAX } from '@/src/motion/tokens'
 import { ASSETS } from './assets'
 import { GAP, TW, TEXT_BLOCK_STYLE } from '../shared'
 
@@ -57,22 +58,6 @@ const CAROUSEL_2 = [
 ]
 
 // ---------------------------------------------------------------------------
-// Carousel — CSS keyframe infinite scroll (same pattern across all projects)
-// ---------------------------------------------------------------------------
-function Carousel({ images }: { images: string[]; id: string }) {
-  const doubled = [...images, ...images]
-  const duration = images.length * CAROUSEL.durationPerImage
-  return (
-    <div className="w-full h-[var(--carousel-h)] overflow-hidden">
-      <div className="flex h-[var(--carousel-h)] w-max" style={{ willChange: 'transform', WebkitAnimation: `carousel-scroll ${duration}s linear infinite`, animation: `carousel-scroll ${duration}s linear infinite` }}>
-        {doubled.map((src, i) => (
-          <img key={i} src={src} alt="" className="h-[var(--carousel-h)] w-auto block shrink-0" />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 const HFONT = '"Helvetica Neue LT Std", "Helvetica Neue", Helvetica, Arial, sans-serif'
 
 function TextBlock({ children }: { children: React.ReactNode }) {
@@ -490,7 +475,7 @@ export function Component() {
         <ParallaxSection id="mal-carousel-1" style={{ marginTop: '170px' }}>
           {/* ANCHOR: Carousel 1 */}
           <div style={{ position: 'relative', marginTop: '0', left: '0', width: '100%', height: '333px', zIndex: 1 }}>
-            <Carousel images={CAROUSEL_1} id="c1" />
+            <Carousel images={CAROUSEL_1} height="var(--carousel-h)" priority />
           </div>
         </ParallaxSection>
 
@@ -532,7 +517,7 @@ export function Component() {
         <ParallaxSection id="mal-finish-footer" overflowHidden={false} style={{ marginTop: '170px' }}>
           {/* ANCHOR: Carousel 2 */}
           <div style={{ position: 'relative', marginTop: '0', left: '0', width: '100%', height: '333px', zIndex: 1 }}>
-            <Carousel images={CAROUSEL_2} id="c2-final" />
+            <Carousel images={CAROUSEL_2} height="var(--carousel-h)" />
           </div>
 
           {/* ANCHOR 2: Quote */}
@@ -824,7 +809,7 @@ export function Component() {
           </div>
 
           <div style={{ marginTop: '80px' }}>
-            <Carousel images={CAROUSEL_2} id="c-mobile-final" />
+            <Carousel images={CAROUSEL_2} height="var(--carousel-h)" />
           </div>
 
           <div style={{ color: '#fff', marginTop: '80px', padding: '20px' }}>
