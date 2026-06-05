@@ -2,6 +2,9 @@ import type { MetadataRoute } from 'next'
 import { projectList } from '@/src/projects/registry'
 import { BASE_URL } from '@/src/data/seo'
 
+// Static export: render the sitemap once at build time.
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
