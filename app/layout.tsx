@@ -9,6 +9,7 @@ import { AudioProvider } from "@/src/contexts/AudioContext";
 import { TransitionProvider } from "@/src/contexts/TransitionContext";
 import { TransitionOverlay } from "@/src/components/layout/TransitionOverlay";
 import { NavController } from "@/src/components/layout/NavController";
+import { WheelScrollFix } from "@/src/components/layout/WheelScrollFix";
 import { PAGE_SEO, BASE_URL } from "@/src/data/seo";
 import { JsonLd } from "@/src/components/layout/JsonLd";
 
@@ -93,6 +94,7 @@ export default function RootLayout({
           </AudioProvider>
         </GsapProvider>
         <Cursor />
+        <WheelScrollFix />
 
       </body>
     </html>

@@ -40,12 +40,16 @@ function getPositionStyle(img: GalleryImage, index: number, totalImages: number)
   const topOffset = img.position === 'left' ? 2 : img.position === 'right' ? -2 : 0
   const top = slotHeight * index + topOffset
 
+  // Explicit height avoids Safari bug where aspect-ratio on position:absolute
+  // elements returns 0, causing ScrollTrigger to calculate wrong trigger points
+  const height = Math.round((width * 4) / 3)
+
   return {
     position: 'absolute' as const,
     left: `${left}%`,
     top: `${top}%`,
     width: `${width}px`,
-    aspectRatio: '3 / 4',
+    height: `${height}px`,
     overflow: 'hidden',
   }
 }
@@ -67,6 +71,14 @@ export function ParallaxGallery({ images }: ParallaxGalleryProps) {
       gsap.ticker.remove(tick)
     }
   }, [])
+
+  // Refresh ScrollTrigger after mount so positions are recalculated once the
+  // page is fully laid out (critical for Safari private mode where Cloudinary
+  // images above the gallery load without cache and shift the layout)
+  useEffect(() => {
+    const id = setTimeout(() => ScrollTrigger.refresh(), 300)
+    return () => clearTimeout(id)
+  }, [images])
 
   useGSAP(
     () => {

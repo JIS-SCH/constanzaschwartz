@@ -55,11 +55,9 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       ? '/Tunel_Interestellar_Vert_A_mobile_opt.mp4'
       : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
 
-    if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-      video.play().then(() => video.pause()).catch(() => {})
-    }
-
     video.load()
+    // Kick-start buffering for all browsers (primes Safari engine + forces Chrome private to buffer)
+    video.play().then(() => video.pause()).catch(() => {})
 
     // Normalize scroll so iOS touch doesn't bypass the scrub
     const normalizer = ScrollTrigger.normalizeScroll(true)
@@ -191,10 +189,29 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       }
     }
 
-    video.addEventListener('loadedmetadata', setupAnimation, { once: true })
+    let setupCalled = false
+    let skipTimeout: ReturnType<typeof setTimeout> | undefined
+
+    const handleLoadedMetadata = () => {
+      setupCalled = true
+      clearTimeout(skipTimeout)
+      setupAnimation()
+    }
+
+    // Fallback: if video metadata never loads (Chrome private, slow connection), skip the tunnel
+    skipTimeout = setTimeout(() => {
+      if (!setupCalled && !completedRef.current) {
+        video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+        normalizer?.kill()
+        doComplete()
+      }
+    }, 6000)
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata, { once: true })
 
     return () => {
-      video.removeEventListener('loadedmetadata', setupAnimation)
+      clearTimeout(skipTimeout)
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata)
       window.removeEventListener('resize', updateLayout)
       window.removeEventListener('orientationchange', updateLayout)
       normalizer?.kill()
@@ -216,7 +233,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
           top: 0,
           left: 0,
           zIndex: 50,
-          background: 'red',
+          background: '#000',
         }}
       >
         <video
