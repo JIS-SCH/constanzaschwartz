@@ -12,8 +12,8 @@ const r2 = projectR2({
 
 export const ALT = {
   // images → R2
-  portada: r2.portada('desktop'),
-  portadaMobile: r2.portada('mobile'),
+  portada: '/portadas/alterego-desktop.webp',
+  portadaMobile: '/portadas/alterego-mobile.webp',
   1: r2.img(1),
   2: r2.img(2),
   3: r2.img(3),

@@ -11,8 +11,8 @@ const r2 = projectR2({
 
 export const ASSETS = {
   // portadas
-  hero: r2.portada('desktop'),
-  heroMobile: r2.portada('mobile'),
+  hero: '/portadas/mas-alla-del-infinito-desktop.webp',
+  heroMobile: '/portadas/mas-alla-del-infinito-mobile.webp',
   // imágenes
   img1: r2.img(1),
   img2: r2.img(2),

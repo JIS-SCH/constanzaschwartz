@@ -7,7 +7,7 @@ const r2 = projectR2({
 })
 
 export const ASSETS = {
-  hero: r2.portada('desktop'),
+  hero: '/portadas/eco-al-infinito-desktop.webp',
   img1: r2.img(1),
   img2: r2.img(2),
   img3: r2.img(3),
@@ -63,5 +63,5 @@ export const ASSETS = {
   carousel10: r2.carouselGroup(2, 5),
   carousel11: r2.carouselGroup(2, 6),
   // mobile
-  heroMobile: r2.portada('mobile'),
+  heroMobile: '/portadas/eco-al-infinito-mobile.webp',
 } as const

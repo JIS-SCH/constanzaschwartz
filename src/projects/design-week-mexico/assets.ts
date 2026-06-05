@@ -7,8 +7,8 @@ const r2 = projectR2({
 })
 
 export const ASSETS = {
-  hero: r2.portada('desktop'),
-  heroMobile: r2.portada('mobile'),
+  hero: '/portadas/design-week-mexico-desktop.webp',
+  heroMobile: '/portadas/design-week-mexico-mobile.webp',
   img1: r2.img(1),
   img2: r2.img(2),
   img3: r2.img(3),
