@@ -27,7 +27,11 @@ interface NavMenuProps {
   onClose: () => void
 }
 
-export function NavMenu({ isOpen, onClose }: NavMenuProps) {
+export function NavMenu({
+  isOpen,
+  onClose,
+  onContactClick,
+}: NavMenuProps) {
   const router = useRouter()
   const overlayRef = useRef<HTMLDivElement>(null)
   const itemWrappers = useRef<(HTMLDivElement | null)[]>([])
@@ -50,7 +54,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
     if (tlRef.current) tlRef.current.kill()
 
     if (isOpen) {
-      setHoveredItem(null)
+      requestAnimationFrame(() => setHoveredItem(null))
       gsap.set(overlay, { visibility: 'visible', pointerEvents: 'auto' })
 
       tlRef.current = gsap.timeline()
@@ -164,7 +168,7 @@ export function NavMenu({ isOpen, onClose }: NavMenuProps) {
                   onClick={() => {
                     if (item === 'CONTACT') {
                       onClose()
-                      router.push('/contact')
+                      onContactClick?.()
                     } else if (item === 'PROFILE') {
                       onClose()
                       router.push('/profile')

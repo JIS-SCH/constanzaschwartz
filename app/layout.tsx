@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
-import { ComingSoon } from "@/src/components/home/ComingSoon";
 import { Cursor } from "@/src/components/layout/Cursor";
 import { GsapProvider } from "@/src/components/GsapProvider";
 import { ParallaxProvider } from "@/src/contexts/ParallaxContext";
@@ -11,7 +10,6 @@ import { TransitionOverlay } from "@/src/components/layout/TransitionOverlay";
 import { NavController } from "@/src/components/layout/NavController";
 import { WheelScrollFix } from "@/src/components/layout/WheelScrollFix";
 import { PAGE_SEO, BASE_URL } from "@/src/data/seo";
-import { JsonLd } from "@/src/components/layout/JsonLd";
 
 const seo = PAGE_SEO.home;
 
@@ -81,7 +79,6 @@ export default function RootLayout({
             gtag('config', 'G-LBHSXVNS1R');
           `}
         </Script>
-        {/* <ComingSoon /> */}
         <GsapProvider>
           <AudioProvider>
             <ParallaxProvider>

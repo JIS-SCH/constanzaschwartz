@@ -23,13 +23,15 @@ export function Cursor() {
         position: 'fixed',
         top: 0,
         left: 0,
-        width: '2px',
-        height: '2px',
+        width: '8px',
+        height: '8px',
+        marginLeft: '-4px',
+        marginTop: '-4px',
         borderRadius: '50%',
         background: '#fff',
         pointerEvents: 'none',
         zIndex: 9999,
-        willChange: 'transform',
+        willChange: 'left, top, transform',
       }}
     />
   )

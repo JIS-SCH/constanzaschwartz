@@ -8,6 +8,38 @@ interface CustomVimeoPlayerProps {
   inline?: boolean
 }
 
+type VimeoPlayer = {
+  play: () => Promise<void>
+  pause: () => Promise<void>
+  setVolume: (volume: number) => Promise<void>
+  setCurrentTime: (seconds: number) => Promise<number>
+  getDuration: () => Promise<number>
+  requestFullscreen?: () => Promise<void>
+  exitFullscreen?: () => Promise<void>
+  on: (event: string, callback: (data: VimeoEventData) => void) => void
+}
+
+type VimeoEventData = {
+  volume?: number
+  percent?: number
+  seconds?: number
+}
+
+type VimeoWindow = Window & {
+  Vimeo?: {
+    Player: new (iframe: HTMLIFrameElement) => VimeoPlayer
+  }
+}
+
+type WebKitFullscreenElement = HTMLDivElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void
+}
+
+type WebKitFullscreenDocument = Document & {
+  webkitFullscreenElement?: Element | null
+  webkitExitFullscreen?: () => Promise<void> | void
+}
+
 export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVimeoPlayerProps) => {
   const [isPlaying,       setIsPlaying]       = useState(false)
   const [progress,        setProgress]        = useState(0)
@@ -19,16 +51,21 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
   const [timelineHovered, setTimelineHovered] = useState(false)
   const iframeRef       = useRef<HTMLIFrameElement>(null)
   const containerRef    = useRef<HTMLDivElement>(null)
-  const playerRef       = useRef<any>(null)
+  const playerRef       = useRef<VimeoPlayer | null>(null)
   const hideTimerRef    = useRef<NodeJS.Timeout | null>(null)
   const touchRevealedRef = useRef(false)
 
   useEffect(() => {
     const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement)
+      const webkitDocument = document as WebKitFullscreenDocument
+      setIsFullscreen(!!document.fullscreenElement || !!webkitDocument.webkitFullscreenElement)
     }
     document.addEventListener('fullscreenchange', handleFullscreenChange)
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange)
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange)
+    }
   }, [])
 
   useEffect(() => {
@@ -42,12 +79,13 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
       script.onload = initPlayer
     } else {
       // If script is already there, check if Vimeo is available
-      if ((window as any).Vimeo) {
+      const vimeoWindow = window as VimeoWindow
+      if (vimeoWindow.Vimeo) {
         initPlayer()
       } else {
         // Wait for it to be available
         const checkVimeo = setInterval(() => {
-          if ((window as any).Vimeo) {
+          if ((window as VimeoWindow).Vimeo) {
             clearInterval(checkVimeo)
             initPlayer()
           }
@@ -56,18 +94,19 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
     }
 
     function initPlayer() {
-      if (iframeRef.current && (window as any).Vimeo) {
-        const player = new (window as any).Vimeo.Player(iframeRef.current)
+      const vimeoWindow = window as VimeoWindow
+      if (iframeRef.current && vimeoWindow.Vimeo) {
+        const player = new vimeoWindow.Vimeo.Player(iframeRef.current)
         playerRef.current = player
 
         player.on('play', () => setIsPlaying(true))
         player.on('pause', () => setIsPlaying(false))
-        player.on('volumechange', (data: any) => {
-          setVolumeState(data.volume)
+        player.on('volumechange', (data) => {
+          setVolumeState(data.volume ?? 0)
         })
-        player.on('timeupdate', (data: any) => {
-          setProgress(data.percent * 100)
-          setCurrentTime(data.seconds)
+        player.on('timeupdate', (data) => {
+          setProgress((data.percent ?? 0) * 100)
+          setCurrentTime(data.seconds ?? 0)
         })
         player.getDuration().then((d: number) => setDuration(d)).catch(() => {})
       }
@@ -139,16 +178,25 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
 
   const toggleFullscreen = (e: React.MouseEvent) => {
     e.stopPropagation()
-    const container = containerRef.current
+    const container = containerRef.current as WebKitFullscreenElement | null
+    const webkitDocument = document as WebKitFullscreenDocument
     if (container) {
-      if (!document.fullscreenElement) {
-        if (container.requestFullscreen) {
-          container.requestFullscreen()
-        } else if ((container as any).webkitRequestFullscreen) {
-          (container as any).webkitRequestFullscreen()
+      if (!document.fullscreenElement && !webkitDocument.webkitFullscreenElement) {
+        if (playerRef.current?.requestFullscreen) {
+          playerRef.current.requestFullscreen().then(() => setIsFullscreen(true)).catch(() => {})
+        } else if (container.requestFullscreen) {
+          container.requestFullscreen().catch(() => {})
+        } else if (container.webkitRequestFullscreen) {
+          container.webkitRequestFullscreen()
         }
       } else {
-        document.exitFullscreen()
+        if (playerRef.current?.exitFullscreen) {
+          playerRef.current.exitFullscreen().catch(() => {})
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {})
+        } else if (webkitDocument.webkitExitFullscreen) {
+          webkitDocument.webkitExitFullscreen()
+        }
       }
     }
     revealControls()
@@ -189,6 +237,7 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
         src={vimeoUrl}
         style={{ ...iframeStyles, border: 'none' }}
         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        allowFullScreen
         title={title}
       ></iframe>
 

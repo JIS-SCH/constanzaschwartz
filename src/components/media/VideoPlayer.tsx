@@ -14,6 +14,20 @@ interface VideoPlayerProps {
   objectFit?: 'cover' | 'contain'
 }
 
+type WebKitVideoElement = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void
+  webkitDisplayingFullscreen?: boolean
+}
+
+type WebKitDocument = Document & {
+  webkitFullscreenElement?: Element | null
+  webkitExitFullscreen?: () => Promise<void> | void
+}
+
+type FullscreenContainer = HTMLDivElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void
+}
+
 const ICON_SIZE = 22
 const HIDE_DELAY_MS = 2500
 
@@ -95,9 +109,22 @@ export function VideoPlayer({
 
   // Fullscreen change detection
   useEffect(() => {
-    const handleChange = () => setIsFullscreen(!!document.fullscreenElement)
+    const video = videoRef.current
+    const handleChange = () => {
+      const webkitDocument = document as WebKitDocument
+      const webkitVideo = videoRef.current as WebKitVideoElement | null
+      setIsFullscreen(!!document.fullscreenElement || !!webkitDocument.webkitFullscreenElement || !!webkitVideo?.webkitDisplayingFullscreen)
+    }
     document.addEventListener('fullscreenchange', handleChange)
-    return () => document.removeEventListener('fullscreenchange', handleChange)
+    document.addEventListener('webkitfullscreenchange', handleChange)
+    video?.addEventListener('webkitbeginfullscreen', handleChange)
+    video?.addEventListener('webkitendfullscreen', handleChange)
+    return () => {
+      document.removeEventListener('fullscreenchange', handleChange)
+      document.removeEventListener('webkitfullscreenchange', handleChange)
+      video?.removeEventListener('webkitbeginfullscreen', handleChange)
+      video?.removeEventListener('webkitendfullscreen', handleChange)
+    }
   }, [])
 
   // Track video time progress
@@ -151,13 +178,28 @@ export function VideoPlayer({
 
   const handleFullscreen = useCallback((e: React.MouseEvent) => {
     e.stopPropagation()
-    const container = containerRef.current
+    const container = containerRef.current as FullscreenContainer | null
+    const video = videoRef.current as WebKitVideoElement | null
     if (!container) return
+
     if (!document.fullscreenElement) {
-      container.requestFullscreen()
+      if (video?.webkitEnterFullscreen) {
+        video.webkitEnterFullscreen()
+        setIsFullscreen(true)
+      } else if (container.requestFullscreen) {
+        container.requestFullscreen().catch(() => {})
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen()
+      }
     } else {
-      document.exitFullscreen()
+      const webkitDocument = document as WebKitDocument
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {})
+      } else if (webkitDocument.webkitExitFullscreen) {
+        webkitDocument.webkitExitFullscreen()
+      }
     }
+
     revealControls()
   }, [revealControls])
 

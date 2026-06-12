@@ -36,10 +36,6 @@ export function ContactSection({ isOpen, onClose }: ContactSectionProps) {
     <div ref={overlayRef} className="cs-overlay">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
 
-      <video autoPlay loop muted playsInline className="cs-video">
-        <source src="/project5/04-azclip1.mp4" type="video/mp4" />
-      </video>
-
       <button onClick={onClose} className="cs-close" aria-label="Close contact">
         <CloseIcon size={24} color="#fff" />
       </button>
@@ -82,15 +78,6 @@ const CSS = `
   opacity: 0;
   visibility: hidden;
   overflow: hidden;
-}
-
-.cs-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.6;
 }
 
 .cs-close {

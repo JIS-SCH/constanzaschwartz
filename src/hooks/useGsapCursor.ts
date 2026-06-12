@@ -11,46 +11,66 @@ export function useGsapCursor(cursorRef: RefObject<HTMLElement | null>) {
     const el = cursorRef.current
     if (!el) return
 
+    gsap.set(el, { autoAlpha: 0 })
+    gsap.set(el, { scale: 1, transformOrigin: 'center center' })
+
     const ctx = gsap.context(() => {
-      // Smoother mouse follow
+      let hasPosition = false
+      let rafId: number | undefined
+      let nextX = 0
+      let nextY = 0
+      const boundTargets = new Set<HTMLElement>()
+
+      const renderPosition = () => {
+        rafId = undefined
+        el.style.left = `${nextX}px`
+        el.style.top = `${nextY}px`
+      }
+
       const onMouseMove = (e: MouseEvent) => {
-        gsap.to(el, {
-          x: e.clientX,
-          y: e.clientY,
-          xPercent: -50,
-          yPercent: -50,
-          duration: 0.15,
-          ease: 'power2.out',
-        })
+        nextX = e.clientX
+        nextY = e.clientY
+
+        if (!hasPosition) {
+          hasPosition = true
+          el.style.left = `${nextX}px`
+          el.style.top = `${nextY}px`
+          gsap.set(el, { autoAlpha: 1 })
+        } else {
+          gsap.set(el, { autoAlpha: 1 })
+        }
+
+        if (rafId === undefined) {
+          rafId = requestAnimationFrame(renderPosition)
+        }
       }
 
       const onMouseEnter = () => {
-        gsap.to(el, { 
-          scale: 4, 
-          duration: 0.4, 
-          ease: 'power3.out',
-          backgroundColor: '#fff' 
-        })
-        el.style.mixBlendMode = 'difference'
-      }
-
-      const onMouseLeave = () => {
-        gsap.to(el, { 
-          scale: 1, 
-          duration: 0.4, 
+        gsap.to(el, {
+          scale: 2,
+          duration: 0.4,
           ease: 'power3.out',
           backgroundColor: '#fff'
         })
-        el.style.mixBlendMode = ''
+      }
+
+      const onMouseLeave = () => {
+        gsap.to(el, {
+          scale: 1,
+          duration: 0.4,
+          ease: 'power3.out',
+          backgroundColor: '#fff'
+        })
       }
 
       const bindElements = () => {
         const targets = document.querySelectorAll('a, button, [role="button"], .project-card, canvas')
         targets.forEach((target) => {
-          if (!(target as HTMLElement).dataset.cursorBound) {
-            target.addEventListener('mouseenter', onMouseEnter)
-            target.addEventListener('mouseleave', onMouseLeave)
-            ;(target as HTMLElement).dataset.cursorBound = '1'
+          const element = target as HTMLElement
+          if (!boundTargets.has(element)) {
+            element.addEventListener('mouseenter', onMouseEnter)
+            element.addEventListener('mouseleave', onMouseLeave)
+            boundTargets.add(element)
           }
         })
       }
@@ -62,7 +82,12 @@ export function useGsapCursor(cursorRef: RefObject<HTMLElement | null>) {
       observer.observe(document.body, { childList: true, subtree: true })
 
       return () => {
+        if (rafId !== undefined) cancelAnimationFrame(rafId)
         window.removeEventListener('mousemove', onMouseMove)
+        boundTargets.forEach((target) => {
+          target.removeEventListener('mouseenter', onMouseEnter)
+          target.removeEventListener('mouseleave', onMouseLeave)
+        })
         observer.disconnect()
       }
     })
