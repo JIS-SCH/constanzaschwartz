@@ -594,6 +594,7 @@ export function HomeGrid({ projects, onProjectClick }: HomeGridProps) {
     >
       <canvas
         ref={canvasRef}
+        data-cursor-hover
         style={{
           display: 'block',
           width: '100%',

@@ -47,7 +47,7 @@ export function useGsapCursor(cursorRef: RefObject<HTMLElement | null>) {
 
       const onMouseEnter = () => {
         gsap.to(el, {
-          scale: 2,
+          scale: 4,
           duration: 0.4,
           ease: 'power3.out',
           backgroundColor: '#fff'
@@ -64,7 +64,7 @@ export function useGsapCursor(cursorRef: RefObject<HTMLElement | null>) {
       }
 
       const bindElements = () => {
-        const targets = document.querySelectorAll('a, button, [role="button"], .project-card, canvas')
+        const targets = document.querySelectorAll('a, button, [role="button"], .project-card, [data-cursor-hover]')
         targets.forEach((target) => {
           const element = target as HTMLElement
           if (!boundTargets.has(element)) {

@@ -124,14 +124,18 @@ export const CustomVimeoPlayer = ({ videoUrl, title, inline = false }: CustomVim
   }
 
   const handleSeekClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!playerRef.current) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
-    playerRef.current.getDuration().then((dur: number) => {
-      playerRef.current.setCurrentTime(dur * ratio)
-    })
-    revealControls()
-  }
+  const player = playerRef.current
+  if (!player) return
+
+  const rect = e.currentTarget.getBoundingClientRect()
+  const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+
+  player.getDuration().then((dur: number) => {
+    player.setCurrentTime(dur * ratio)
+  }).catch(() => {})
+
+  revealControls()
+}
 
   const scheduleHide = () => {
     if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
