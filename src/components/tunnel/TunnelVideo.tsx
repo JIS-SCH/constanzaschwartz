@@ -14,7 +14,9 @@ interface TunnelVideoProps {
 const PX_PER_SEC_DESKTOP = 300
 const PX_PER_SEC_MOBILE  = 180
 
-const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+const isCriOS = () => /CriOS/i.test(navigator.userAgent)
+const isSafari = () =>
+  /^((?!chrome|android|crios|fxios|edgios).)*safari/i.test(navigator.userAgent)
 
 export function TunnelVideo({ onComplete }: TunnelVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -61,9 +63,9 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
 
     video.load()
 
-    // Normalize scroll for mobile only — on desktop Chrome this intercepts wheel events
-    // and causes the scroll to freeze partway through the tunnel
-    const normalizer = isMobile() ? ScrollTrigger.normalizeScroll(true) : undefined
+    // Normalize only on mobile Safari. Chrome iOS can get stuck when
+    // normalizeScroll intercepts the address-bar scroll gesture during intro.
+    const normalizer = isMobile() && isSafari() ? ScrollTrigger.normalizeScroll(true) : undefined
 
     // Lock container + video to the LARGEST stable viewport size.
     // Using window.innerWidth/Height in pixels avoids iOS Safari quirks
@@ -130,6 +132,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       )
 
       const safari = isSafari()
+      const chromeIOS = isCriOS()
       const LERP_FACTOR    = safari ? 0.08 : 0.15
       const SEEK_THRESHOLD = safari ? 0.05 : 0.03
       let currentVideoTime = 0
@@ -166,6 +169,20 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       )
 
       // Trigger on the spacer — no pin needed, container is already fixed
+      const completeIntro = () => {
+        if (completedRef.current) return
+        completedRef.current = true
+        gsap.to(overlay, {
+          opacity: 1,
+          duration: 0.2,
+          ease: 'none',
+          onComplete: () => {
+            normalizer?.kill()
+            doComplete()
+          },
+        })
+      }
+
       stRef.current = ScrollTrigger.create({
         trigger: spacer,
         start: 'top top',
@@ -173,19 +190,12 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         scrub: safari ? 1 : 1.5,
         animation: tl,
         onUpdate: (self) => {
-          if (self.progress >= 0.97 && !completedRef.current) {
-            completedRef.current = true
-            gsap.to(overlay, {
-              opacity: 1,
-              duration: 0.2,
-              ease: 'none',
-              onComplete: () => {
-                normalizer?.kill()
-                doComplete()
-              },
-            })
+          const nearScrollEnd = window.scrollY >= videoPx * (chromeIOS ? 0.88 : 0.95)
+          if (self.progress >= 0.97 || nearScrollEnd) {
+            completeIntro()
           }
         },
+        onLeave: completeIntro,
       })
 
       setIsReady(true)
@@ -198,7 +208,6 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     }
 
     let setupCalled = false
-    let skipTimeout: ReturnType<typeof setTimeout> | undefined
 
     const handleLoadedMetadata = () => {
       setupCalled = true
@@ -207,7 +216,7 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     }
 
     // Fallback: if video metadata never loads (Chrome private, slow connection), skip the tunnel
-    skipTimeout = setTimeout(() => {
+    const skipTimeout = setTimeout(() => {
       if (!setupCalled && !completedRef.current) {
         video.removeEventListener('loadedmetadata', handleLoadedMetadata)
         normalizer?.kill()

@@ -393,7 +393,7 @@ export function Component() {
             <VideoPlayer id="m-v5" src={cldVideo(ALT.v5)} autoPlay loop={false} objectFit="cover" style={{ width: '100%', height: '100%' }} />
           </div>
           <PI src={ALT[11]} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthMid}
-            style={{ position: 'absolute', top: '226px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
+            style={{ position: 'absolute', top: '282px', right: '20px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10, pointerEvents: 'none' }} />
           <PI src={ALT[12]} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthHigh}
             style={{ position: 'absolute', top: '340px', left: '108px', width: '140px', height: '74px', objectFit: 'cover', zIndex: 10 }} />
           <PI src={ALT[13]} alt="" loading="lazy" decoding="async" speed={PARALLAX.speed.depthMid}

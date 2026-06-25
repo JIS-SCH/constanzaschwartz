@@ -203,7 +203,7 @@ function YearSection({ data }: { data: YearData }) {
 
       {/* Carousel overlaps bottom of year image */}
       <div className="pr-year-carousel">
-        <Carousel images={data.gallery} height="331px" />
+        <Carousel images={data.gallery} height="331px" priority />
       </div>
 
       {/* Events list */}

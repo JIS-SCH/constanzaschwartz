@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { CAROUSEL } from '@/src/motion/tokens'
 import { LQIP } from '@/src/data/lqip'
 
@@ -43,16 +43,20 @@ function CarouselItem({
   alt,
   height,
   itemWidth,
+  measuredWidth,
   placeholderRatio,
   eager,
+  forceVisible = false,
 }: {
   src: string
   alt: string
   height: string
   itemWidth?: number
+  measuredWidth?: number
   placeholderRatio: number
   /** Only request the full image once the carousel is near the viewport. */
   eager: boolean
+  forceVisible?: boolean
 }) {
   const [loaded, setLoaded] = useState(false)
   const cover = itemWidth != null
@@ -71,6 +75,8 @@ function CarouselItem({
   //   to zero width on cold load; falls back to aspect-ratio if height is a CSS var.
   const boxWidth: React.CSSProperties = cover
     ? { width: `${itemWidth}px` }
+    : measuredWidth
+      ? { width: `${measuredWidth}px` }
     : blur
       ? {}
       : loaded
@@ -114,7 +120,7 @@ function CarouselItem({
           />
         )
       ) : (
-        !loaded && <span className="carousel-skeleton" aria-hidden />
+        !loaded && !forceVisible && <span className="carousel-skeleton" aria-hidden />
       )}
 
       {eager && (
@@ -133,8 +139,8 @@ function CarouselItem({
             width: cover ? '100%' : (blur ? '100%' : 'auto'),
             objectFit: 'cover',
             display: 'block',
-            opacity: loaded ? 1 : 0,
-            transition: 'opacity 0.5s ease',
+            opacity: forceVisible || loaded ? 1 : 0,
+            transition: forceVisible ? undefined : 'opacity 0.5s ease',
           }}
         />
       )}
@@ -164,7 +170,9 @@ export function Carousel({
   style,
 }: CarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(priority)
+  const [ratios, setRatios] = useState<Record<string, number>>({})
 
   useEffect(() => {
     if (priority) return
@@ -188,9 +196,65 @@ export function Carousel({
     return () => io.disconnect()
   }, [priority])
 
-  const items = images.map(normalize)
+  const items = useMemo(() => images.map(normalize), [images])
   const doubled = [...items, ...items]
   const duration = items.length * durationPerImage
+  const shouldPremeasure = priority && itemWidth == null
+  const heightPx = Number.parseInt(height, 10)
+  const canUseMeasuredWidths = shouldPremeasure && Number.isFinite(heightPx)
+  const measuredReady = !canUseMeasuredWidths || items.every((it) => ratios[it.src])
+  const measuredLoopWidth = canUseMeasuredWidths && measuredReady
+    ? items.reduce((total, it) => total + Math.round(heightPx * ratios[it.src]), 0)
+    : 0
+
+  useEffect(() => {
+    if (!canUseMeasuredWidths || typeof window === 'undefined') return
+
+    let cancelled = false
+
+    Promise.all(
+      items.map((it) => (
+        new Promise<[string, number]>((resolve) => {
+          const img = new Image()
+          img.onload = () => {
+            const ratio = img.naturalWidth && img.naturalHeight
+              ? img.naturalWidth / img.naturalHeight
+              : placeholderRatio
+            resolve([it.src, ratio])
+          }
+          img.onerror = () => resolve([it.src, placeholderRatio])
+          img.src = it.src
+        })
+      ))
+    ).then((entries) => {
+      if (cancelled) return
+      setRatios(Object.fromEntries(entries))
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [canUseMeasuredWidths, items, placeholderRatio])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track || !measuredLoopWidth) return
+
+    let raf = 0
+    const startedAt = performance.now()
+    const pixelsPerSecond = measuredLoopWidth / duration
+
+    const tick = (now: number) => {
+      const elapsed = (now - startedAt) / 1000
+      const x = -((elapsed * pixelsPerSecond) % measuredLoopWidth)
+      track.style.transform = `translate3d(${x}px, 0, 0)`
+      raf = requestAnimationFrame(tick)
+    }
+
+    raf = requestAnimationFrame(tick)
+
+    return () => cancelAnimationFrame(raf)
+  }, [duration, measuredLoopWidth])
 
   return (
     <div
@@ -199,13 +263,18 @@ export function Carousel({
       style={{ width: '100%', height, overflow: 'hidden', ...style }}
     >
       <div
+        ref={trackRef}
         style={{
           display: 'flex',
           height: '100%',
           width: 'max-content',
           willChange: 'transform',
-          WebkitAnimation: `carousel-scroll ${duration}s linear infinite`,
-          animation: `carousel-scroll ${duration}s linear infinite`,
+          transform: 'translate3d(0, 0, 0)',
+          WebkitAnimation: measuredLoopWidth ? undefined : `carousel-scroll ${duration}s linear infinite`,
+          animation: measuredLoopWidth ? undefined : `carousel-scroll ${duration}s linear infinite`,
+          WebkitAnimationPlayState: measuredLoopWidth || measuredReady ? 'running' : 'paused',
+          animationPlayState: measuredLoopWidth || measuredReady ? 'running' : 'paused',
+          opacity: measuredReady ? 1 : 0,
         }}
       >
         {doubled.map((it, i) => (
@@ -215,8 +284,10 @@ export function Carousel({
             alt={it.alt}
             height={height}
             itemWidth={itemWidth}
+            measuredWidth={canUseMeasuredWidths ? Math.round(heightPx * (ratios[it.src] ?? placeholderRatio)) : undefined}
             placeholderRatio={placeholderRatio}
             eager={inView}
+            forceVisible={canUseMeasuredWidths && measuredReady}
           />
         ))}
       </div>
