@@ -2,10 +2,9 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 import { isMobile } from '@/src/utils/detect'
+import { createTunnelDiagnostics } from './tunnelDiagnostics'
 
-gsap.registerPlugin(ScrollTrigger)
 
 interface TunnelVideoProps {
   onComplete: () => void
@@ -14,7 +13,6 @@ interface TunnelVideoProps {
 const PX_PER_SEC_DESKTOP = 300
 const PX_PER_SEC_MOBILE  = 180
 
-const isCriOS = () => /CriOS/i.test(navigator.userAgent)
 const isSafari = () =>
   /^((?!chrome|android|crios|fxios|edgios).)*safari/i.test(navigator.userAgent)
 
@@ -25,25 +23,17 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
   const logoRef      = useRef<HTMLDivElement>(null)
   const scrollRef    = useRef<HTMLDivElement>(null)
   const overlayRef   = useRef<HTMLDivElement>(null)
-  const stRef        = useRef<ScrollTrigger | undefined>(undefined)
   const completedRef = useRef(false)
   const [isReady, setIsReady] = useState(false)
 
-  const killST = useCallback(() => {
-    if (!stRef.current) return
-    stRef.current.kill()
-    stRef.current = undefined
-  }, [])
-
   const doComplete = useCallback(() => {
-    killST()
     const container = containerRef.current
     const spacer    = spacerRef.current
     if (container) container.style.display = 'none'
     if (spacer)    spacer.style.display = 'none'
     window.scrollTo(0, 0)
     onComplete()
-  }, [killST, onComplete])
+  }, [onComplete])
 
   useEffect(() => {
     const video     = videoRef.current
@@ -52,20 +42,60 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     const overlay   = overlayRef.current
     const logo      = logoRef.current
     if (!video || !container || !spacer || !overlay || !logo) return
+    const diagnostics = createTunnelDiagnostics(video)
+    completedRef.current = false
+    let cleanupAnimation: (() => void) | undefined
+    let startAnimation: (() => void) | undefined
+    let requestedStart = false
+    let finishTimer: ReturnType<typeof setTimeout> | undefined
+    let finishTween: gsap.core.Tween | undefined
+    let delivered = false
+    const deliverHome = () => {
+      if (delivered) return
+      delivered = true
+      clearTimeout(finishTimer)
+      doComplete()
+    }
+    const completeIntro = () => {
+      if (completedRef.current) return
+      completedRef.current = true
+      clearTimeout(finishTimer)
+      cleanupAnimation?.()
+      video.pause()
+      if (diagnostics) diagnostics.state.phase = 'completed'
+      diagnostics?.record('intro-complete')
+      finishTween = gsap.to(overlay, { opacity: 1, duration: 0.2, onComplete: deliverHome })
+      // The Home remains reachable even if the animation ticker stops.
+      finishTimer = setTimeout(deliverHome, 500)
+    }
+    const requestStart = () => {
+      if (requestedStart || completedRef.current) return
+      requestedStart = true
+      diagnostics?.record('intro-gesture')
+      startAnimation?.()
+    }
+    let touchY = 0
+    const onTouchStart = (event: TouchEvent) => { touchY = event.touches[0]?.clientY ?? 0 }
+    const onTouchMove = (event: TouchEvent) => {
+      if (touchY - (event.touches[0]?.clientY ?? touchY) > 12) requestStart()
+    }
+    const onWheel = (event: WheelEvent) => { if (event.deltaY > 4) requestStart() }
+    const onKey = (event: KeyboardEvent) => {
+      if (['ArrowDown', 'PageDown', ' ', 'End'].includes(event.key)) requestStart()
+    }
+    const onScroll = () => { if (window.scrollY > 12) requestStart() }
+    const onVideoError = () => { diagnostics?.record('video-error-exit'); completeIntro() }
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: true })
+    window.addEventListener('wheel', onWheel, { passive: true })
+    window.addEventListener('keydown', onKey)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    video.addEventListener('error', onVideoError)
 
     video.src = isMobile()
       ? '/Tunel_Interestellar_Vert_A_mobile_opt.mp4'
       : '/tunel/final/tunnel_1080p_g1_30fps.mp4'
 
-    if (isSafari()) {
-      video.play().then(() => video.pause()).catch(() => {})
-    }
-
-    video.load()
-
-    // Normalize only on mobile Safari. Chrome iOS can get stuck when
-    // normalizeScroll intercepts the address-bar scroll gesture during intro.
-    const normalizer = isMobile() && isSafari() ? ScrollTrigger.normalizeScroll(true) : undefined
 
     // Lock container + video to the LARGEST stable viewport size.
     // Using window.innerWidth/Height in pixels avoids iOS Safari quirks
@@ -91,12 +121,8 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       video.style.height = sH + 'px'
       video.style.left   = ((lockedW - sW) / 2) + 'px'
       video.style.top    = ((lockedH - sH) / 2) + 'px'
-      // The container is fixed, so it consumes no scroll. The spacer must reserve
-      // the scrub distance (videoPx) PLUS one viewport — this replicates what
-      // ScrollTrigger's pin-spacer did before the pin was removed. Without the
-      // extra viewport, max scroll caps at videoPx - lockedH and progress never
-      // reaches the 0.97 completion threshold.
-      if (videoPx > 0) spacer.style.height = (videoPx + lockedH) + 'px'
+      // Reserve a small native scroll range for keyboard and scroll gestures.
+      spacer.style.height = (lockedH + 32) + 'px'
     }
     updateLayout()
     window.addEventListener('resize', updateLayout)
@@ -105,10 +131,10 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
     const setupAnimation = () => {
       const pxPerSec = isMobile() ? PX_PER_SEC_MOBILE : PX_PER_SEC_DESKTOP
       const duration = video.duration
+      if (!Number.isFinite(duration) || duration <= 0) return
       videoPx = Math.round(duration * pxPerSec)
 
-      // Now that videoPx + videoWidth/Height are known, re-run layout so the
-      // video is pixel-perfect and the spacer reserves the full scroll height.
+      // Recalculate the video dimensions after metadata is available.
       updateLayout()
 
       const logoStartPx    = (isMobile() ? 1 : 1) * pxPerSec
@@ -132,22 +158,35 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
       )
 
       const safari = isSafari()
-      const chromeIOS = isCriOS()
       const LERP_FACTOR    = safari ? 0.08 : 0.15
       const SEEK_THRESHOLD = safari ? 0.05 : 0.03
       let currentVideoTime = 0
       let targetVideoTime  = 0
       let rafId: number
+      let previousFrame = performance.now()
 
       const lerpLoop = () => {
-        if (Math.abs(targetVideoTime - currentVideoTime) > SEEK_THRESHOLD) {
-          currentVideoTime += (targetVideoTime - currentVideoTime) * LERP_FACTOR
-          if (video.readyState >= 2 && !video.seeking) {
-            if (typeof video.fastSeek === 'function') {
-              video.fastSeek(currentVideoTime)
-            } else {
-              video.currentTime = currentVideoTime
-            }
+        if (completedRef.current) return
+        const now = performance.now()
+        const delta = Math.min((now - previousFrame) / 1000, 0.1)
+        previousFrame = now
+        if (diagnostics) {
+          diagnostics.state.rafAt = performance.now()
+          diagnostics.state.rafCount++
+          diagnostics.state.target = targetVideoTime
+        }
+        if (Math.abs(targetVideoTime - video.currentTime) > SEEK_THRESHOLD &&
+            video.readyState >= 2 && !video.seeking) {
+          // Advance from the media's real position only when it accepts a seek.
+          const alpha = 1 - Math.pow(1 - LERP_FACTOR, delta * 60)
+          currentVideoTime = video.currentTime + (targetVideoTime - video.currentTime) * alpha
+          currentVideoTime = Math.max(0, Math.min(duration - 0.001, currentVideoTime))
+          if (diagnostics) diagnostics.state.internal = currentVideoTime
+          try {
+            if (diagnostics) diagnostics.state.requested = currentVideoTime
+            video.currentTime = currentVideoTime
+          } catch (error) {
+            diagnostics?.record('seek-rejected', String(error))
           }
         }
         rafId = requestAnimationFrame(lerpLoop)
@@ -168,73 +207,73 @@ export function TunnelVideo({ onComplete }: TunnelVideoProps) {
         videoPx * 0.92
       )
 
-      // Trigger on the spacer — no pin needed, container is already fixed
-      const completeIntro = () => {
+      tl.eventCallback('onComplete', completeIntro)
+      startAnimation = () => {
         if (completedRef.current) return
-        completedRef.current = true
-        gsap.to(overlay, {
-          opacity: 1,
-          duration: 0.2,
-          ease: 'none',
-          onComplete: () => {
-            normalizer?.kill()
-            doComplete()
-          },
-        })
+        if (diagnostics) diagnostics.state.phase = 'playing'
+        tl.timeScale(pxPerSec).play()
+        finishTimer = setTimeout(() => {
+          diagnostics?.record('transition-timeout')
+          completeIntro()
+        }, (duration + 4) * 1000)
       }
 
-      stRef.current = ScrollTrigger.create({
-        trigger: spacer,
-        start: 'top top',
-        end: `+=${videoPx}`,
-        scrub: safari ? 1 : 1.5,
-        animation: tl,
-        onUpdate: (self) => {
-          const nearScrollEnd = window.scrollY >= videoPx * (chromeIOS ? 0.88 : 0.95)
-          if (self.progress >= 0.97 || nearScrollEnd) {
-            completeIntro()
-          }
-        },
-        onLeave: completeIntro,
-      })
+      if (diagnostics) {
+        diagnostics.state.phase = 'waiting-for-gesture'
+        diagnostics.setProgressReader(() => ({
+          scrollProgress: requestedStart ? 1 : 0,
+          timelineProgress: tl.progress(),
+        }))
+      }
 
       setIsReady(true)
+      if (requestedStart) startAnimation()
 
       return () => {
         cancelAnimationFrame(rafId)
-        video.removeEventListener('loadedmetadata', setupAnimation)
-        killST()
+        tl.kill()
       }
     }
 
     let setupCalled = false
 
     const handleLoadedMetadata = () => {
+      if (setupCalled || !Number.isFinite(video.duration) || video.duration <= 0) return
       setupCalled = true
       clearTimeout(skipTimeout)
-      setupAnimation()
+      cleanupAnimation = setupAnimation()
     }
 
     // Fallback: if video metadata never loads (Chrome private, slow connection), skip the tunnel
     const skipTimeout = setTimeout(() => {
       if (!setupCalled && !completedRef.current) {
+        diagnostics?.record('metadata-timeout')
         video.removeEventListener('loadedmetadata', handleLoadedMetadata)
-        normalizer?.kill()
-        doComplete()
+        completeIntro()
       }
     }, 6000)
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata, { once: true })
+    video.load()
 
     return () => {
+      diagnostics?.dispose()
+      cleanupAnimation?.()
+      video.pause()
+      clearTimeout(finishTimer)
+      finishTween?.kill()
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('scroll', onScroll)
+      video.removeEventListener('error', onVideoError)
       clearTimeout(skipTimeout)
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
       window.removeEventListener('resize', updateLayout)
       window.removeEventListener('orientationchange', updateLayout)
-      normalizer?.kill()
-      killST()
     }
-  }, [doComplete, killST])
+  }, [doComplete])
 
   return (
     <>
