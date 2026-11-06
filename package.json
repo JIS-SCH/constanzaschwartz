@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:i18n": "node --test scripts/check-i18n.mjs",
     "gen:lqip": "node scripts/gen-lqip.mjs"
   },
   "dependencies": {

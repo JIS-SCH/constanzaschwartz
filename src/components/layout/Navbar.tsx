@@ -8,6 +8,8 @@ import { useTransition } from '@/src/contexts/TransitionContext'
 import { useAudio } from '@/src/contexts/AudioContext'
 import { CloseIcon } from '@/src/components/icons/CloseIcon'
 import { WaveformIcon } from '@/src/components/icons/WaveformIcon'
+import { LanguageSelector } from './LanguageSelector'
+import { useLanguage } from '@/src/i18n/LanguageProvider'
 
 interface NavbarProps {
   menuOpen: boolean
@@ -17,6 +19,8 @@ interface NavbarProps {
 export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
   const navRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
+  const { localizedPath } = useLanguage()
+  const homePath = localizedPath('/')
   const { close } = useTransition()
   const { isMuted, toggleMute } = useAudio()
 
@@ -28,7 +32,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
     const left = nav.querySelector<HTMLElement>('[data-nav-left]')
     const right = nav.querySelector<HTMLElement>('[data-nav-right]')
 
-    if (sessionStorage.getItem('introComplete') || pathname !== '/') {
+    if (sessionStorage.getItem('introComplete') || pathname !== homePath) {
       gsap.set([logo, left, right].filter(Boolean), { opacity: 1 })
       return
     }
@@ -48,20 +52,21 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
       window.removeEventListener('intro:logoMoved', onLogoMoved)
       window.removeEventListener('intro:navControls', onNavControls)
     }
-  }, [pathname])
+  }, [pathname, homePath])
 
   const handleLogoClick = () => {
-    if (pathname !== '/') {
+    if (pathname !== homePath) {
       close()
     } else {
       sessionStorage.removeItem('introComplete')
-      window.location.href = '/'
+      window.location.href = homePath
     }
   }
 
   return (
     <nav
       ref={navRef}
+      data-site-navigation
       className="h-[60px] md:h-[80px]"
       style={{
         position: 'fixed',
@@ -141,7 +146,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         style={{
           background: 'none',
           border: 'none',
-          cursor: pathname !== '/' ? 'pointer' : 'default',
+          cursor: pathname !== homePath ? 'pointer' : 'default',
           padding: 0,
           opacity: 0,
           display: 'flex',
@@ -163,6 +168,7 @@ export function Navbar({ menuOpen, onMenuToggle }: NavbarProps) {
         />
       </button>
 
+      <LanguageSelector />
       {/* Right — waveform + MUTE/SOUND */}
       <button
         data-nav-right

@@ -5,10 +5,12 @@ import { useRouter } from 'next/navigation'
 import gsap from 'gsap'
 import { useTransition } from '@/src/contexts/TransitionContext'
 import { DURATION, EASE } from '@/src/motion/tokens'
+import { useLanguage } from '@/src/i18n/LanguageProvider'
 
 export function TransitionOverlay() {
   const { state, setExpanded, setDone, setClosed, reset } = useTransition()
   const router = useRouter()
+  const { localizedPath } = useLanguage()
   const imageRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
   const ctxRef = useRef<gsap.Context | null>(null)
@@ -53,12 +55,12 @@ export function TransitionOverlay() {
     const ctx = gsap.context(() => {
       // Direct Navigation: We don't animate to fullscreen anymore.
       // We jump straight to the navigation and let the 'revealing' phase handle the direct morph.
-      router.push(`/project/${state.slug}`)
+      router.push(localizedPath(`/project/${state.slug}`))
       setExpanded()
     })
 
     ctxRef.current = ctx
-  }, [state.phase, state.originRect, state.imageSrc, state.slug, router, setExpanded])
+  }, [state.phase, state.originRect, state.imageSrc, state.slug, router, setExpanded, localizedPath])
 
   // ── Phase: revealing → uniform-scale FLIP morph: card origin → hero ───────
   // Pure transform (translate + UNIFORM scale) so it runs on the GPU and never
@@ -167,14 +169,14 @@ export function TransitionOverlay() {
         duration: DURATION.md,
         ease: EASE.inOut,
         onComplete: () => {
-          router.push('/')
+          router.push(localizedPath('/'))
           setClosed()
         },
       })
     })
 
     ctxRef.current = ctx
-  }, [state.phase, router, setClosed])
+  }, [state.phase, router, setClosed, localizedPath])
 
   // ── Phase: closed → home arrived, fade out black overlay ────────────────
   useEffect(() => {

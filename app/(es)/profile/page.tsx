@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: seo.description,
   alternates: {
     canonical: '/profile',
+    languages: { es: '/profile', en: '/en/profile', 'x-default': '/profile' },
   },
   openGraph: {
     type: 'website',
@@ -44,4 +45,3 @@ export default function ProfileRoute() {
     </>
   )
 }
-

@@ -23,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: data.description,
     alternates: {
       canonical: url,
+      languages: { es: url, en: `/en${url}`, 'x-default': url },
     },
     openGraph: {
       type: 'website',

@@ -1,5 +1,7 @@
 'use client'
 
+import { TranslatedText } from '@/src/i18n/LanguageProvider'
+
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
@@ -103,9 +105,9 @@ export function Component() {
             {[0, 1].map((setIdx) => (
               <div key={setIdx} className="marquee-set">
                 {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
-                  <span key={i} className="marquee-item eco-marquee">
+                  <span key={i} className="marquee-item eco-marquee"><TranslatedText id="approved.55">
                     ESCULTURA COLGANTE SITE-SPECIFIC/
-                  </span>
+                  </TranslatedText></span>
                 ))}
               </div>
             ))}
@@ -117,12 +119,12 @@ export function Component() {
           {/* Text Block - THE TOP ANCHOR (Relative pushes the height) */}
           <div className="relative z-10" style={{ marginLeft: 'calc(58.33% + 12px)', width: TW }}>
             <div className="eco-p">
-              <p style={{ marginBottom: '1.5rem' }}>
+              <p style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.56">
                 Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
-              </p>
-              <p>
+              </TranslatedText></p>
+              <p><TranslatedText id="approved.57">
                 No es más ese conjunto de neuronas que no cede en su lucha por mantenernos vivos. Ha pasado años sumergido en las incontables marejadas de tecnología que nos abruma sin piedad desde que pusimos un caballo delante de un arado.
-              </p>
+              </TranslatedText></p>
             </div>
           </div>
 
@@ -161,9 +163,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
-                    <span key={i} className="marquee-item eco-marquee">
+                    <span key={i} className="marquee-item eco-marquee"><TranslatedText id="approved.56">
                       Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -175,9 +177,9 @@ export function Component() {
         <ParallaxSection id="text-collage-2" className="relative" style={{ marginTop: '190px' }}>
           {/* TOP ANCHOR: Left text in flow */}
           <div className="relative z-10" style={{ marginTop: '130px', marginLeft: 'calc(8.33% + 3px)', width: TW }}>
-            <div className="eco-p">
+            <div className="eco-p"><TranslatedText id="approved.59">
               Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
-            </div>
+            </TranslatedText></div>
           </div>
 
           {/* Right portrait image (Img 5) - Floating */}
@@ -227,9 +229,9 @@ export function Component() {
               ['leadingTrim' as any]: 'both',
               ['textEdge' as any]: 'cap',
               color: '#fff'
-            }}>
+            }}><TranslatedText id="approved.60">
               Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos<br /> de su obra.
-            </div>
+            </TranslatedText></div>
           </div>
         </ParallaxSection>
 
@@ -300,9 +302,9 @@ export function Component() {
 
           {/* Paragraph below staircase - Flow Anchor */}
           <div className="relative z-10" style={{ marginTop: '1020px', marginLeft: 'calc(8.33% + 3px)', width: TW }}>
-            <div className="eco-p">
+            <div className="eco-p"><TranslatedText id="approved.61">
               La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
-            </div>
+            </TranslatedText></div>
           </div>
 
           {/* Img 17 (Shadows) - Floating */}
@@ -324,9 +326,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
-                    <span key={i} className="marquee-item eco-marquee">
+                    <span key={i} className="marquee-item eco-marquee"><TranslatedText id="approved.62">
                       SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -372,7 +374,7 @@ export function Component() {
 
           {/* Concluding Paragraph - Flow Anchor */}
           <div className="relative z-10" style={{ marginTop: '1780px', marginLeft: 'calc(58.33% + 12px)', width: TW }}>
-            <div className="eco-p">
+            <div className="eco-p"><TranslatedText id="approved.63">
               Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo.
               Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son
               las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por
@@ -382,7 +384,7 @@ export function Component() {
               de un extenso<br />universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos.
               Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos.
               Es nuestro universo…
-            </div>
+            </TranslatedText></div>
           </div>
 
           <ParallaxLayer
@@ -403,9 +405,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
-                    <span key={i} className="marquee-item eco-marquee">
+                    <span key={i} className="marquee-item eco-marquee"><TranslatedText id="approved.64">
                       SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ ·
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -462,13 +464,13 @@ export function Component() {
 
           {/* Final Reflective Text below carousel - BOTTOM ANCHOR */}
           <div className="relative z-10" style={{ marginTop: '2500px', marginLeft: 'calc(8% + 12px)', width: TW, paddingBottom: '100px' }}>
-            <div className="eco-p">
+            <div className="eco-p"><TranslatedText id="approved.65">
               Sí, claro. Todavía no conocemos muchos universos, pero puede ser que los haya.
               Y dentro de ellos, siempre habrá un lugar para el arte que expande nuestra
               posibilidad de entender y percibir lo diferente. Tal vez nos aterra que esa
               posibilidad desaparezca. Pero no lo hará. Porque las cosas existen también en
               nuestras memorias. Quizá aún más intensamente.
-            </div>
+            </TranslatedText></div>
           </div>
         </ParallaxSection>
 
@@ -501,9 +503,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: MARQUEE.setRepeat }, (_, i) => (
-                    <span key={i} className="marquee-item eco-marquee">
+                    <span key={i} className="marquee-item eco-marquee"><TranslatedText id="approved.66">
                       SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER  ·
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -651,8 +653,8 @@ export function Component() {
 
         {/* Para 1 */}
         <div className="eco-p" style={{ color: '#fff', marginTop: '50px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-          <p style={{ marginBottom: '1rem' }}>Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.</p>
-          <p>No es más ese conjunto de neuronas que no cede en su lucha por mantenernos vivos. Ha pasado años sumergido en las incontables marejadas de tecnología que nos abruma sin piedad desde que pusimos un caballo delante de un arado.</p>
+          <p style={{ marginBottom: '1rem' }}><TranslatedText id="approved.56">Si nombramos al nuevo cerebro, es porque él cambió. Y mucho.</TranslatedText></p>
+          <p><TranslatedText id="approved.57">No es más ese conjunto de neuronas que no cede en su lucha por mantenernos vivos. Ha pasado años sumergido en las incontables marejadas de tecnología que nos abruma sin piedad desde que pusimos un caballo delante de un arado.</TranslatedText></p>
         </div>
 
         {/* 3-image cluster (staggered) */}
@@ -668,16 +670,16 @@ export function Component() {
 
           <div style={{ position: 'absolute', top: '44px', left: 0, width: '100%', height: '30px', overflow: 'hidden', zIndex: 10, mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${59 * MARQUEE.secondsPerChar}s` }}>
-              <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
-              <div className="marquee-set"><span className="marquee-item eco-marquee">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</span></div>
+              <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.58">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</TranslatedText></span></div>
+              <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.58">SI NOMBRAMOS AL NUEVO CEREBRO, ES PORQUE ÉL CAMBIÓ. Y MUCHO. ·</TranslatedText></span></div>
             </div>
           </div>
         </div>
 
         {/* Para 2 */}
-        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}><TranslatedText id="approved.59">
           Constanza Schwartz tampoco cede, y contestará a la tecnología con más esfuerzo humano. De este modo, surgirán espacios que realmente nos transportan a sitios dentro de nuestro universo a los que no llegamos a menudo. Solo lo haremos guiados por la creatividad y su inclemente convocatoria de presencias arcaicas y míticas, figuras atemporales, intensas, al mismo tiempo, conmovedoras y abstractas.
-        </div>
+        </TranslatedText></div>
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '320px', marginTop: '80px' }}>
@@ -709,9 +711,9 @@ export function Component() {
           WebkitFontSmoothing: 'antialiased',
           ['leadingTrim' as any]: 'both',
           ['textEdge' as any]: 'cap'
-        }}>
+        }}><TranslatedText id="approved.60">
           Al desplazarnos por vacíos y llenos, imposibles convergencias, nos conmovemos al tiempo que nos transformamos en cultores y espectadores participativos de su obra.
-        </div>
+        </TranslatedText></div>
 
         {/* Image pair staggered */}
         <div style={{ position: 'relative', height: '240px', marginTop: '80px' }}>
@@ -743,9 +745,9 @@ export function Component() {
         </div>
 
         {/* Para 4 */}
-        <div className="eco-p" style={{ color: '#fff', marginTop: '156px', marginBottom: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+        <div className="eco-p" style={{ color: '#fff', marginTop: '156px', marginBottom: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}><TranslatedText id="approved.61">
           La potencia de esta creación no da lugar a ausentarse. Participamos sin descanso, metro a metro, de las síntesis sensibles que reavivan las fraguas más ardientes de la memoria para trasladarnos a espacios libres donde sus elementales e infinitas combinaciones se reproducen y rebobinan en nuestra mente, aunando pasados, presentes y futuros que resurgen ante nuestro caminar buscando un sentido. Hay muchos.
-        </div>
+        </TranslatedText></div>
 
         {/* Image pair */}
         <div style={{ position: 'relative', height: '470px', marginTop: '80px' }}>
@@ -756,8 +758,8 @@ export function Component() {
         {/* Marquee */}
         <div style={{ position: 'relative', zIndex: 5, marginTop: '40px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
           <div className="marquee-track" style={{ animationDuration: `${74 * MARQUEE.secondsPerChar}s` }}>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.62">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</TranslatedText></span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.62">SE REPRODUCEN Y REBOBINAN EN NUESTRA MENTE, AUNANDO PASADOS, PRESENTES Y FUTUROS ·</TranslatedText></span></div>
           </div>
         </div>
 
@@ -774,9 +776,9 @@ export function Component() {
         <img src={ASSETS.img22} alt="" style={{ display: 'block', width: '100%', height: '260px', objectFit: 'cover', marginTop: '228px' }} />
 
         {/* Para 5 */}
-        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
+        <div className="eco-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}><TranslatedText id="approved.63">
           Una plenitud sin alarmas nos tranquiliza desde la convicción de que este es nuestro universo. Aquí, unidos a Constanza, seguimos caminando sin dudar. Aceptamos ser guiados porque son las formas con las que hemos construido el mundo. Así dejamos huella de nuestro paso por la Tierra. Nos traslada a los inicios, mientras nos apoyamos confiados en las formas abiertas y fundamentales de nuestro alfabeto de formas. No importa el siglo de nuestra ubicación defensiva. Seguiremos dudando hasta que realmente nos reconozcamos allí. Somos habitantes de un extenso universo que nunca podrá ser resumido a tres o cuatro números. Son infinitos. Son un Eco al Infinito. Que se reitera, se reitera, se reitera hasta que logremos ubicarnos. Es nuestro universo…
-        </div>
+        </TranslatedText></div>
 
         {/* Image pair offset */}
         <div style={{ position: 'relative', height: '400px', marginTop: '80px' }}>
@@ -787,8 +789,8 @@ export function Component() {
         {/* Marquee */}
         <div style={{ position: 'relative', zIndex: 5, marginTop: '-370px', marginBottom: '515px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
           <div className="marquee-track" style={{ animationDuration: `${60 * MARQUEE.secondsPerChar}s` }}>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.64">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </TranslatedText></span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.64">SEGUIREMOS DUDANDO HASTA QUE REALMENTE NOS RECONOZCAMOS ALLÍ. </TranslatedText></span></div>
           </div>
         </div>
 
@@ -828,7 +830,7 @@ export function Component() {
           WebkitFontSmoothing: 'antialiased',
           ['leadingTrim' as any]: 'both',
           ['textEdge' as any]: 'cap'
-        }}>
+        }}><TranslatedText id="approved.65">
           Sí, claro. Todavía no conocemos muchos<br />
           universos, pero puede ser que los haya. Y<br />
           dentro de ellos, siempre habrá un lugar para el<br />
@@ -838,7 +840,7 @@ export function Component() {
           lo hará. Porque las cosas existen también en<br />
           nuestras memorias. Quizá aún más<br />
           intensamente.
-        </div>
+        </TranslatedText></div>
 
         <div style={{ position: 'relative', height: '300px', marginTop: '80px' }}>
           <img src={ASSETS.img30} alt="" style={{ position: 'absolute', right: '0px', top: '0', width: '200px', height: '133px', objectFit: 'cover', zIndex: 2 }} />
@@ -854,8 +856,8 @@ export function Component() {
         {/* Marquee */}
         <div style={{ position: 'relative', zIndex: 5, marginTop: '-302px', marginBottom: '394px', height: '30px', overflow: 'hidden', mixBlendMode: 'difference' }}>
           <div className="marquee-track" style={{ animationDuration: `${75 * MARQUEE.secondsPerChar}s` }}>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
-            <div className="marquee-set"><span className="marquee-item eco-marquee">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.66">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </TranslatedText></span></div>
+            <div className="marquee-set"><span className="marquee-item eco-marquee"><TranslatedText id="approved.66">SIEMPRE HABRÁ UN LUGAR PARA EL ARTE QUE EXPANDE NUESTRA POSIBILIDAD DE ENTENDER · </TranslatedText></span></div>
           </div>
         </div>
 

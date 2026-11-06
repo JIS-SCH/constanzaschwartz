@@ -1,6 +1,9 @@
+/* eslint-disable @next/next/no-head-element -- Shared App Router root document, not a Pages Router component. */
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import "./globals.css";
+import "@/app/globals.css";
+import { LanguageProvider } from "@/src/i18n/LanguageProvider";
+import type { Locale } from "@/src/i18n/locale";
 import { Cursor } from "@/src/components/layout/Cursor";
 import { GsapProvider } from "@/src/components/GsapProvider";
 import { ParallaxProvider } from "@/src/contexts/ParallaxContext";
@@ -9,6 +12,7 @@ import { TransitionProvider } from "@/src/contexts/TransitionContext";
 import { TransitionOverlay } from "@/src/components/layout/TransitionOverlay";
 import { NavController } from "@/src/components/layout/NavController";
 import { WheelScrollFix } from "@/src/components/layout/WheelScrollFix";
+import { LANGUAGE_TRANSITION_BOOTSTRAP, LANGUAGE_TRANSITION_STYLES } from '@/src/i18n/languageTransition';
 import { PAGE_SEO, BASE_URL } from "@/src/data/seo";
 
 const seo = PAGE_SEO.home;
@@ -26,6 +30,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   alternates: {
     canonical: 'https://constanzaschwartz.com',
+    languages: { es: '/', en: '/en', 'x-default': '/' },
   },
   icons: {
     icon: [
@@ -59,13 +64,19 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({
+export default function SiteLayout({
   children,
+  locale,
 }: Readonly<{
   children: React.ReactNode;
+  locale: Locale;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: LANGUAGE_TRANSITION_STYLES }} />
+        <script dangerouslySetInnerHTML={{ __html: LANGUAGE_TRANSITION_BOOTSTRAP }} />
+      </head>
       <body>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LBHSXVNS1R"
@@ -79,6 +90,7 @@ export default function RootLayout({
             gtag('config', 'G-LBHSXVNS1R');
           `}
         </Script>
+        <LanguageProvider locale={locale}>
         <GsapProvider>
           <AudioProvider>
             <ParallaxProvider>
@@ -92,8 +104,10 @@ export default function RootLayout({
         </GsapProvider>
         <Cursor />
         <WheelScrollFix />
+        </LanguageProvider>
 
       </body>
     </html>
   );
 }
+

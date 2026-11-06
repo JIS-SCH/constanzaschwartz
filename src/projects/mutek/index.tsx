@@ -1,5 +1,7 @@
 'use client'
 
+import { TranslatedText } from '@/src/i18n/LanguageProvider'
+
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
@@ -119,9 +121,9 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '0', left: '8.47%', width: '466px', height: 'auto', zIndex: 2 }}
           >
-            <div style={TEXT_BLOCK_STYLE} className="mutek-p">
+            <div style={TEXT_BLOCK_STYLE} className="mutek-p"><TranslatedText id="approved.74">
               En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
-            </div>
+            </TranslatedText></div>
           </ParallaxLayer>
 
           {/* Image 1 — left, tall */}
@@ -139,10 +141,10 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '499px', left: '54.9%', width: '466px', height: 'auto', zIndex: 2 }}
           >
-            <h2 style={TITLE_STYLE} className="mutek-h3">RITUAL AL VACÍO</h2>
-            <div style={{ ...TEXT_BLOCK_STYLE, marginTop: '2.5rem' }} className="mutek-p">
+            <h2 style={TITLE_STYLE} className="mutek-h3"><TranslatedText id="approved.75">RITUAL AL VACÍO</TranslatedText></h2>
+            <div style={{ ...TEXT_BLOCK_STYLE, marginTop: '2.5rem' }} className="mutek-p"><TranslatedText id="approved.76">
               Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
-            </div>
+            </TranslatedText></div>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -161,7 +163,7 @@ export function Component() {
             position={{ top: '0', left: '54.9%', width: TW, height: '80', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_CAVE}
+              <TranslatedText id="approved.77">{P_CAVE}</TranslatedText>
             </div>
           </ParallaxLayer>
 
@@ -184,7 +186,7 @@ export function Component() {
             position={{ top: '0', left: '12.7%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
-              {P_VACIO}
+              <TranslatedText id="approved.78">{P_VACIO}</TranslatedText>
             </div>
           </ParallaxLayer>
 
@@ -202,7 +204,7 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item mutek-h4">COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE, ENVUELTA EN PROYECCIONES TRASLÚCIDAS DE LUZ.</span>
+                    <span key={i} className="marquee-item mutek-h4"><TranslatedText id="approved.79">COMO UNA CAVERNA SUSPENDIDA EN LO INVISIBLE, ENVUELTA EN PROYECCIONES TRASLÚCIDAS DE LUZ.</TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -236,7 +238,7 @@ export function Component() {
             position={{ top: '240px', left: '42.3%', width: '466px', height: 'auto', zIndex: 2 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
-              {P_RITUAL}
+              <TranslatedText id="mutek.ritual">{P_RITUAL}</TranslatedText>
             </div>
           </ParallaxLayer>
         </ParallaxSection>
@@ -266,9 +268,9 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '865px', left: '46.4%', width: TW, height: 'auto', zIndex: 4 }}
           >
-            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p">
+            <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line' }} className="mutek-p"><TranslatedText id="approved.85">
               ¿Y qué es un ritual cuando ya no convoca, cuando no transforma, cuando sólo queda la forma vacía como una piel transparente, invisible colgando del tiempo?
-            </div>
+            </TranslatedText></div>
           </ParallaxLayer>
         </ParallaxSection>
 
@@ -290,7 +292,7 @@ export function Component() {
             position={{ top: '103px', left: '183px', width: '466px', height: '700px', zIndex: 2 }}
           >
             <div style={{ ...TEXT_BLOCK_STYLE, whiteSpace: 'pre-line', marginTop: '100px' }} className="mutek-p ">
-              {P_MENTE}
+              <TranslatedText id="approved.86">{P_MENTE}</TranslatedText>
             </div>
           </ParallaxLayer>
 
@@ -300,7 +302,7 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item mutek-h4">EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO.</span>
+                    <span key={i} className="marquee-item mutek-h4"><TranslatedText id="approved.87">EL VACÍO NO ES ALGO INEXISTENTE, SINO UN ELEMENTO EMINENTEMENTE DINÁMICO Y ACTIVO.</TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -325,7 +327,7 @@ export function Component() {
             position={{ top: '0px', left: '12.7%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_APELA}
+              <TranslatedText id="approved.88">{P_APELA}</TranslatedText>
             </div>
           </ParallaxLayer>
         </ParallaxSection>
@@ -349,7 +351,7 @@ export function Component() {
             position={{ top: '220px', left: '59.2%', width: TW, height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_UMBRAL}
+              <TranslatedText id="approved.89">{P_UMBRAL}</TranslatedText>
             </div>
           </ParallaxLayer>
         </ParallaxSection>
@@ -372,7 +374,7 @@ export function Component() {
             position={{ top: 'calc(60vh + 290px)', left: '8.47%', width: '40%', height: 'auto', zIndex: 2 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="mutek-p">
-              {P_CAVERNA}
+              <TranslatedText id="approved.90">{P_CAVERNA}</TranslatedText>
             </div>
           </ParallaxLayer>
         </ParallaxSection>
@@ -387,10 +389,10 @@ export function Component() {
           {/* 13. FINAL TITLE — Positioned over the carousel */}
           <div style={{ position: 'absolute', bottom: '-95px', left: 0, width: '100%', zIndex: 10, pointerEvents: 'none' }}>
             <div className="pr-[46.5%] w-full">
-              <h2 style={{ ...TITLE_STYLE, marginLeft: '600px' }} className="mutek-h3">
-                Y AÚN APAGADA,<br />
+              <h2 style={{ ...TITLE_STYLE, marginLeft: '600px' }} className="mutek-h3"><TranslatedText id="approved.91">
+                Y AÚN APAGADA,</TranslatedText><br /><TranslatedText id="approved.92">
                 ESPERA, AL PRÓXIMO RITUAL.
-              </h2>
+              </TranslatedText></h2>
             </div>
           </div>
         </div>
@@ -405,9 +407,9 @@ export function Component() {
         </div>
 
         {/* 2. Intro para */}
-        <div className="mutek-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px' }}>
+        <div className="mutek-p" style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px' }}><TranslatedText id="approved.74">
           En el marco del festival internacional Mutek dedicada a la promoción de la música electrónica y las artes digitales en Argentina, como Sideshow, Constanza Schwartz en dupla con Francisco Rousset Osio, crearon un show de música e iluminación ao vivo para los espectadores participativos que se adentraban a la instalación. Convocados por COMITÉ357, este proyecto fue promovido por ARTLAB.
-        </div>
+        </TranslatedText></div>
 
         {/* 3. First image pair + title + sub-text — absolute layout per Figma */}
         <div style={{ position: 'relative', height: '674px', marginTop: '80px' }}>
@@ -427,18 +429,18 @@ export function Component() {
             leadingTrim: 'both',
             textEdge: 'cap',
             zIndex: 10
-          } as any}>
+          } as any}><TranslatedText id="approved.75">
             Ritual al Vacío
-          </h3>
+          </TranslatedText></h3>
           <PI src={ASSETS.img2} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', right: '20px', top: '374px', width: '200px', height: '300px', objectFit: 'cover', zIndex: 0 }} />
-          <div className="mutek-p" style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10 }}>
+          <div className="mutek-p" style={{ color: '#fff', position: 'absolute', top: '298px', left: '20px', width: '350px', zIndex: 10 }}><TranslatedText id="approved.76">
             Desde nuestros comienzos, protegidos por las cavernas, las llamas danzantes proyectaban juegos de luces sobre las paredes envueltas en imágenes con anhelos de permanencia, creando un mundo de formas efímeras que parecían moverse con vida propia.
-          </div>
+          </TranslatedText></div>
         </div>
 
         {/* 4. P_CAVE — 80px after image container */}
         <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-          {P_CAVE}
+          <TranslatedText id="approved.77">{P_CAVE}</TranslatedText>
         </div>
 
         {/* 5. Video */}
@@ -450,7 +452,7 @@ export function Component() {
 
         {/* 6. P_VACIO */}
         <div style={{ color: '#fff', marginTop: '80px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-          {P_VACIO}
+          <TranslatedText id="approved.78">{P_VACIO}</TranslatedText>
         </div>
 
         {/* 7. Stills + marquee + DSC3353 + P_RITUAL + Still 15 + Still 126 — absolute layout */}
@@ -465,9 +467,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item">
+                    <span key={i} className="marquee-item"><TranslatedText id="approved.79">
                       Como una caverna suspendida en lo invisible, estas formas translúcidas no buscan encerrar, sino evocar.
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -478,16 +480,16 @@ export function Component() {
           <PI src={ASSETS.img5} speed={PARALLAX.speed.depthLow} alt="" style={{ position: 'absolute', left: '0px', top: '342px', width: '280px', height: '187px', objectFit: 'cover' }} />
 
           {/* P_RITUAL — right-indented, nowrap per Figma */}
-          <div className="mutek-p" style={{
+          <div className="mutek-p mutek-ritual-lines" style={{
             position: 'absolute', top: '496px', left: 'calc(25% + 12.5px)',
             color: '#fff', whiteSpace: 'nowrap',
           }}>
-            <p style={{ margin: 0 }}>La luz se apaga, todo se disuelve.</p>
-            <p style={{ margin: 0 }}>La caverna desaparece,</p>
-            <p style={{ margin: 0 }}>el ritmo se interrumpe.</p>
-            <p style={{ margin: 0 }}>Y en ese vaivén constante,</p>
-            <p style={{ margin: 0 }}>se funda un nuevo ritual:</p>
-            <p style={{ margin: 0 }}>un Ritual al Vacío.</p>
+            <p style={{ margin: 0 }}><TranslatedText id="approved.80">La luz se apaga, todo se disuelve.</TranslatedText></p>
+            <p style={{ margin: 0 }}><TranslatedText id="approved.81">La caverna desaparece,</TranslatedText></p>
+            <p style={{ margin: 0 }}><TranslatedText id="approved.82">el ritmo se interrumpe.</TranslatedText></p>
+            <p style={{ margin: 0 }}><TranslatedText id="mutek.sway">Y en ese vaivén constante,</TranslatedText></p>
+            <p style={{ margin: 0 }}><TranslatedText id="mutek.founded">se funda un nuevo ritual:</TranslatedText></p>
+            <p style={{ margin: 0 }}><TranslatedText id="approved.84">un Ritual al Vacío.</TranslatedText></p>
           </div>
 
           {/* Still 15 — right-aligned */}
@@ -499,12 +501,12 @@ export function Component() {
 
         {/* 8. P_QUESTION */}
         <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-          {P_QUESTION}
+          <TranslatedText id="approved.85">{P_QUESTION}</TranslatedText>
         </div>
 
         {/* 9. P_MENTE */}
         <div className="mutek-p text-white" style={{ marginTop: '100px', width: '350px', marginLeft: '20px' }}>
-          {P_MENTE}
+          <TranslatedText id="approved.86">{P_MENTE}</TranslatedText>
         </div>
 
         {/* 10. Second image pair + Marquee 2 — absolute layout */}
@@ -517,9 +519,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item">
+                    <span key={i} className="marquee-item"><TranslatedText id="approved.87">
                       El vacío no es algo inexistente, sino un elemento eminentemente dinámico y activo.
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -531,7 +533,7 @@ export function Component() {
 
         {/* 11. P_APELA */}
         <div style={{ color: '#fff', marginTop: '100px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-          {P_APELA}
+          <TranslatedText id="approved.88">{P_APELA}</TranslatedText>
         </div>
 
         {/* 12. Full-width image (Still 122) 390×572 */}
@@ -541,7 +543,7 @@ export function Component() {
 
         {/* 13. P_UMBRAL */}
         <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-          {P_UMBRAL}
+          <TranslatedText id="approved.89">{P_UMBRAL}</TranslatedText>
         </div>
 
         {/* 14. Still 111 — centered, 350×197 */}
@@ -551,7 +553,7 @@ export function Component() {
 
         {/* 15. P_CAVERNA */}
         <div style={{ color: '#fff', marginTop: '105px', width: '350px', marginLeft: '20px', fontSize: 'var(--p-size)', fontFamily: '"Space Grotesk", sans-serif', fontWeight: 300, lineHeight: 1.45 }}>
-          {P_CAVERNA}
+          <TranslatedText id="approved.90">{P_CAVERNA}</TranslatedText>
         </div>
 
         {/* 16. Carousel + Closing Title — Text overlaps carousel */}
@@ -564,9 +566,9 @@ export function Component() {
           {/* 17. Closing title — Absolute positioned over carousel */}
           <div style={{ position: 'absolute', top: '307px', left: '0', paddingLeft: '80px', zIndex: 10, pointerEvents: 'none' }}>
             <div className="mutek-h4" style={{ fontWeight: 100 }}>
-              <div>Y aún apagada,</div>
-              <div>espera,</div>
-              <div>al próximo ritual.</div>
+              <div><TranslatedText id="approved.91">Y aún apagada,</TranslatedText></div>
+              <div><TranslatedText id="mutek.awaits">espera,</TranslatedText></div>
+              <div><TranslatedText id="mutek.next">al próximo ritual.</TranslatedText></div>
             </div>
           </div>
         </div>

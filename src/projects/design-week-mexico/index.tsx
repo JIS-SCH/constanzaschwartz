@@ -1,5 +1,7 @@
 'use client'
 
+import { TranslatedText } from '@/src/i18n/LanguageProvider'
+
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
@@ -196,12 +198,12 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: 'var(--it-l-t)', left: 'var(--it-l-x)', width: 'var(--it-l-w)', height: 'auto', zIndex: 1 }}
           >
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.38">
               En el marco de Design Week Mexico 2025, Argentina fue el país invitado.
               Constanza Schwartz bajo la representación de Comité357, fue una de las artistas
               seleccionadas para representar al país con Ensayo de Espejismo, híbrido entre
               objeto espejo y escultura.
-            </div>
+            </TranslatedText></div>
           </ParallaxLayer>
 
           <ParallaxLayer
@@ -210,10 +212,10 @@ export function Component() {
             position={{ top: 'var(--it-r-t)', left: 'var(--it-r-x)', width: 'var(--it-r-w)', height: 'auto', zIndex: 1 }}
           >
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
-              <p>Título: Ensayo de Espejismo</p>
-              <p>Año: 2025</p>
-              <p>Materiales: Acero Pulido y Cromado, Madera.</p>
-              <p>Medidas: 2.10 x 0.72 x 0.30 x 0.16 mts.</p>
+              <p><TranslatedText id="approved.39">Título: Ensayo de Espejismo</TranslatedText></p>
+              <p><TranslatedText id="approved.40">Año: 2025</TranslatedText></p>
+              <p><TranslatedText id="approved.41">Materiales: Acero Pulido y Cromado, Madera.</TranslatedText></p>
+              <p><TranslatedText id="approved.42">Medidas: 2.10 x 0.72 x 0.30 x 0.16 mts.</TranslatedText></p>
             </div>
           </ParallaxLayer>
         </ParallaxSection>
@@ -241,15 +243,15 @@ export function Component() {
           >
             <h3 style={TITLE_STYLE} className="dw-h3">STATEMENT</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '468px', marginTop: '40px' }}>
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.44">
                 Pocas personas desconocen totalmente los órganos de los sentidos, pero no todas
                 comprenden la magnitud que tienen en nuestra conexión con el mundo/ la realidad.
                 Seguramente es diferente la propiocepción, sentido del que tenemos poca conciencia.
-              </div>
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              </TranslatedText></div>
+              <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.45">
                 Se podría decir entonces que un grupo de fantasmas (los sentidos) dirigen toda nuestra
                 vida y desde ya nuestra conexión con el arte, el diseño.
-              </div>
+              </TranslatedText></div>
             </div>
           </ParallaxLayer>
         </ParallaxSection>
@@ -271,7 +273,7 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item">UN GRUPO DE FANTASMAS (LOS SENTIDOS) DIRIGEN TODA NUESTRA VIDA Y DESDE YA NUESTRA CONEXIÓN CON EL ARTE, EL DISEÑO.</span>
+                    <span key={i} className="marquee-item"><TranslatedText id="approved.46">UN GRUPO DE FANTASMAS (LOS SENTIDOS) DIRIGEN TODA NUESTRA VIDA Y DESDE YA NUESTRA CONEXIÓN CON EL ARTE, EL DISEÑO.</TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -287,15 +289,15 @@ export function Component() {
             position={{ top: '160px', left: 'var(--pc-text-l)', width: '466px', height: 'auto', zIndex: 1 }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.47">
                 Esta obra, híbrido entre objeto espejo y escultura, tiene el propósito de hacer
                 consiente para el participante de esta conexión oculta y trascendental.
-              </div>
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              </TranslatedText></div>
+              <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.48">
                 Combinados testigos de acero pulido y cromados, su comportamiento en función a
                 sus efectos ópticos, relación con su entorno y efectos lumínicos, permite
                 establecer una posibilidad de diálogo donde una forma concreta desvanece sus límites.
-              </div>
+              </TranslatedText></div>
             </div>
           </ParallaxLayer>
 
@@ -322,13 +324,13 @@ export function Component() {
             layer={{ type: 'text', content: '', speed: 0 }}
             position={{ top: '140px', left: 'var(--fp-text-l)', width: '466px', height: 'auto', zIndex: 1 }}
           >
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.49">
               El espejo nos permite a veces intuir que el cuerpo está presente. En este caso, la
               conformación de la estructura permite fragmentar las imágenes que se presentan ante él,
               imágenes que suelen estar unidas pero que en este juego de repetición, de llenos y
               de vacíos, es posible percibir un universo simbólico en una búsqueda por la dilución
               de las líneas divisorias entre lo artístico y lo cotidiano, la imagen y el símbolo.
-            </div>
+            </TranslatedText></div>
           </ParallaxLayer>
         </ParallaxSection>
 
@@ -339,7 +341,7 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item">ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.</span>
+                    <span key={i} className="marquee-item"><TranslatedText id="approved.50">ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.</TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -366,7 +368,7 @@ export function Component() {
         <section id="finish" style={{ position: 'relative', width: '100%', marginTop: '-100px' }}>
           {/* Text paragraph */}
           <div style={{ paddingLeft: '12.5305%', paddingRight: '55%', marginTop: '-70px' }} className="dw-paragraph-container">
-            <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '466px' }} className="dw-p">
+            <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '466px' }} className="dw-p"><TranslatedText id="approved.51">
               Con la utilización de espejos, se posibilita el juego de distorsión de la realidad
               en un claro paralelismo e intento de mirada introspectiva sobre nuestra nueva
               generación de diseño argentino; los materiales innovadores que pueden también
@@ -375,7 +377,7 @@ export function Component() {
               incesante de descubrir nuevas y diferentes facetas del diseño. Vínculos y
               comportamientos como sociedad. Traspasar todo limite, libertad sin límites,
               profundidad, amplitud, variabilidad de posibilidades.
-            </div>
+            </TranslatedText></div>
           </div>
 
           {/* 220px gap */}
@@ -400,9 +402,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item">
+                    <span key={i} className="marquee-item"><TranslatedText id="approved.52">
                       INTENTA FRACTURAR LA COMPLACENCIA CON LA INDUSTRIALIZACIÓN Y LA TECNIFICACIÓN QUE TOMAMOS POR NATURALEZA DEL SIGLO XXI
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -414,12 +416,12 @@ export function Component() {
 
           {/* Closing text */}
           <div style={{ paddingLeft: '13%', paddingRight: '30%', marginTop: '60px', marginBottom: '110px', }} className="dw-closing-container">
-            <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '466px' }} className="dw-p">
+            <div style={{ ...TEXT_BLOCK_STYLE, maxWidth: '466px' }} className="dw-p"><TranslatedText id="approved.53">
               Ensayo de Espejismo busca apelar a varios sentidos en simultáneo. Asimismo, intenta
               fracturar la complacencia con la industrialización y la tecnificación que tomamos
               por naturaleza del siglo XXI. Esta es una obra que resalta la confusión de un acabado
               &quot;de máquina&quot;, &quot;perfecto&quot; cuando su proceso es único y enteramente artesanal.
-            </div>
+            </TranslatedText></div>
           </div>
 
           <style dangerouslySetInnerHTML={{
@@ -447,19 +449,19 @@ export function Component() {
         {/* 2. INTRO */}
         <div style={{ position: 'relative', height: 'var(--h-intro)' }}>
           <div style={{ position: 'absolute', top: 'var(--it-l-t)', left: 'var(--it-l-x)', width: '350px' }}>
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.38">
               En el marco de Design Week Mexico 2025, Argentina fue el país invitado.
               Constanza Schwartz bajo la representación de Comité357, fue una de las artistas
               seleccionadas para representar al país con Ensayo de Espejismo, híbrido entre
               objeto espejo y escultura.
-            </div>
+            </TranslatedText></div>
           </div>
           <div style={{ position: 'absolute', top: 'var(--it-r-t)', left: 'var(--it-r-x)', width: 'var(--it-r-w)' }}>
             <div style={TEXT_BLOCK_STYLE} className="dw-p">
-              <p>Título: Ensayo de Espejismo</p>
-              <p>Año: 2025</p>
-              <p>Materiales: Acero Pulido y Cromado, Madera.</p>
-              <p>Medidas: 2.10 x 0.72 x 0.30 x 0.16 mts.</p>
+              <p><TranslatedText id="approved.39">Título: Ensayo de Espejismo</TranslatedText></p>
+              <p><TranslatedText id="approved.40">Año: 2025</TranslatedText></p>
+              <p><TranslatedText id="approved.41">Materiales: Acero Pulido y Cromado, Madera.</TranslatedText></p>
+              <p><TranslatedText id="approved.42">Medidas: 2.10 x 0.72 x 0.30 x 0.16 mts.</TranslatedText></p>
             </div>
           </div>
         </div>
@@ -475,15 +477,15 @@ export function Component() {
           <div style={{ paddingTop: 'var(--stmt-t)' }}>
             <h3 style={TITLE_STYLE} className="dw-h3">STATEMENT</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', width: '350px', marginTop: '0' }}>
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.44">
                 Pocas personas desconocen totalmente los órganos de los sentidos, pero no todas
                 comprenden la magnitud que tienen en nuestra conexión con el mundo/ la realidad.
                 Seguramente es diferente la propiocepción, sentido del que tenemos poca conciencia.
-              </div>
-              <div style={TEXT_BLOCK_STYLE} className="dw-p">
+              </TranslatedText></div>
+              <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.45">
                 Se podría decir entonces que un grupo de fantasmas (los sentidos) dirigen toda nuestra
                 vida y desde ya nuestra conexión con el arte, el diseño.
-              </div>
+              </TranslatedText></div>
             </div>
           </div>
         </div>
@@ -497,9 +499,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item" style={{ fontSize: '28px' }}>
+                    <span key={i} className="marquee-item" style={{ fontSize: '28px' }}><TranslatedText id="approved.46">
                       UN GRUPO DE FANTASMAS (LOS SENTIDOS) DIRIGEN TODA NUESTRA VIDA Y DESDE YA NUESTRA CONEXIÓN CON EL ARTE, EL DISEÑO.
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -510,15 +512,15 @@ export function Component() {
         {/* 6. PARAGRAPHS + CAROUSEL */}
         <div style={{ position: 'relative', height: 'var(--h-pc)' }}>
           <div style={{ position: 'absolute', top: '-390px', left: 'var(--pc-text-l)', width: '350px', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.47">
               Esta obra, híbrido entre objeto espejo y escultura, tiene el propósito de hacer
               consiente para el participante de esta conexión oculta y trascendental.
-            </div>
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            </TranslatedText></div>
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.48">
               Combinados testigos de acero pulido y cromados, su comportamiento en función a
               sus efectos ópticos, relación con su entorno y efectos lumínicos, permite
               establecer una posibilidad de diálogo donde una forma concreta desvanece sus límites.
-            </div>
+            </TranslatedText></div>
           </div>
           <Carousel
             images={[ASSETS.carousel1, ASSETS.carousel2, ASSETS.carousel3, ASSETS.carousel4, ASSETS.carousel5, ASSETS.carousel6]}
@@ -530,13 +532,13 @@ export function Component() {
         {/* 7. FINAL PARAGRAPH */}
         <div style={{ position: 'relative', height: 'var(--h-fp)' }}>
           <div style={{ position: 'absolute', top: '-465px', left: 'var(--fp-text-l)', width: 'var(--fp-text-w)' }}>
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.49">
               El espejo nos permite a veces intuir que el cuerpo está presente. En este caso, la
               conformación de la estructura permite fragmentar las imágenes que se presentan ante él,
               imágenes que suelen estar unidas pero que en este juego de repetición, de llenos y
               de vacíos, es posible percibir un universo simbólico en una búsqueda por la dilución
               de las líneas divisorias entre lo artístico y lo cotidiano, la imagen y el símbolo.
-            </div>
+            </TranslatedText></div>
           </div>
         </div>
 
@@ -547,9 +549,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item" style={{ fontSize: '28px' }}>
+                    <span key={i} className="marquee-item" style={{ fontSize: '28px' }}><TranslatedText id="approved.50">
                       ES POSIBLE PERCIBIR UN UNIVERSO SIMBÓLICO EN UNA BÚSQUEDA POR LA DILUCIÓN DE LAS LÍNEAS DIVISORIAS ENTRE LO ARTÍSTICO Y LO COTIDIANO, LA IMAGEN Y EL SÍMBOLO.
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -563,7 +565,7 @@ export function Component() {
         {/* 9. FINISH */}
         <div style={{ marginTop: '-660px', width: '100%' }}>
           <div style={{ padding: '0 20px', width: 'var(--stmt-w)' }}>
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.51">
               Con la utilización de espejos, se posibilita el juego de distorsión de la realidad
               en un claro paralelismo e intento de mirada introspectiva sobre nuestra nueva
               generación de diseño argentino; los materiales innovadores que pueden también
@@ -572,7 +574,7 @@ export function Component() {
               incesante de descubrir nuevas y diferentes facetas del diseño. Vínculos y
               comportamientos como sociedad. Traspasar todo limite, libertad sin límites,
               profundidad, amplitud, variabilidad de posibilidades.
-            </div>
+            </TranslatedText></div>
           </div>
 
           <div style={{ height: '80px' }} />
@@ -588,9 +590,9 @@ export function Component() {
               {[0, 1].map((setIdx) => (
                 <div key={setIdx} className="marquee-set">
                   {Array.from({ length: 4 }, (_, i) => (
-                    <span key={i} className="marquee-item" style={{ fontSize: '28px' }}>
+                    <span key={i} className="marquee-item" style={{ fontSize: '28px' }}><TranslatedText id="approved.52">
                       INTENTA FRACTURAR LA COMPLACENCIA con la INDUSTRIALIZACIÓN Y LA TECNIFICACIÓN QUE TOMAMOS POR NATURALEZA DEL SIGLO XXI
-                    </span>
+                    </TranslatedText></span>
                   ))}
                 </div>
               ))}
@@ -600,12 +602,12 @@ export function Component() {
           <div style={{ height: '80px' }} />
 
           <div style={{ paddingLeft: '20px', width: '400px', height: '179px', marginBottom: '36px' }}>
-            <div style={TEXT_BLOCK_STYLE} className="dw-p">
+            <div style={TEXT_BLOCK_STYLE} className="dw-p"><TranslatedText id="approved.53">
               Ensayo de Espejismo busca apelar a varios sentidos en simultáneo. Asimismo, intenta
               fracturar la complacencia con la industrialización y la tecnificación que tomamos
               por naturaleza del siglo XXI. Esta es una obra que resalta la confusión de un acabado
               &quot;de máquina&quot;, &quot;perfecto&quot; cuando su proceso es único y enteramente artesanal.
-            </div>
+            </TranslatedText></div>
           </div>
         </div>
       </div>

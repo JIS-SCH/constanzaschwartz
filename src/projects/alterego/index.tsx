@@ -1,5 +1,7 @@
 'use client'
 
+import { useLanguage } from '@/src/i18n/LanguageProvider'
+
 import { ParallaxSection } from '@/src/components/parallax/ParallaxSection'
 import { ParallaxLayer } from '@/src/components/parallax/ParallaxLayer'
 import { PI } from '@/src/components/parallax/ParallaxImg'
@@ -48,6 +50,7 @@ function VideoSection({ id, src }: { id: string; src: string }) {
 }
 
 export function Component() {
+  const { t } = useLanguage()
   return (
     <div style={{ width: '100%', position: 'relative', backgroundColor: '#0F0F0F' }} className="alterego-container -mt-20">
       <style dangerouslySetInnerHTML={{
@@ -301,7 +304,7 @@ export function Component() {
               <span key={i}>
                 {i > 0 && <span style={{ fontWeight: 200 }}>{' / '}</span>}
                 <span style={{ fontWeight: 700 }}>
-                  {entry.role}:
+                  {t(`alterego.credit.${i}`, entry.role)}:
                 </span>
                 <span style={{ fontWeight: 200 }}> {' '}{entry.name}</span>
               </span>
@@ -450,7 +453,7 @@ export function Component() {
           {CREDITS.map((entry, i) => (
             <span key={i}>
               {i > 0 && <span style={{ fontWeight: 200 }}>{' / '}</span>}
-              <span style={{ fontWeight: 700 }}>{entry.role}:</span>
+              <span style={{ fontWeight: 700 }}>{t(`alterego.credit.${i}`, entry.role)}:</span>
               <span style={{ fontWeight: 200 }}> {entry.name}</span>
             </span>
           ))}

@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: seo.description,
   alternates: {
     canonical: '/contact',
+    languages: { es: '/contact', en: '/en/contact', 'x-default': '/contact' },
   },
   openGraph: {
     type: 'website',
@@ -43,4 +44,3 @@ export default function ContactRoute() {
     </>
   )
 }
-

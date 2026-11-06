@@ -1,5 +1,7 @@
 'use client'
 
+import { TranslatedText, useLanguage } from '@/src/i18n/LanguageProvider'
+
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -70,6 +72,7 @@ export { meta } from './meta'
 
 
 export function Component() {
+  const { t } = useLanguage()
   // GSAP and Lenis are initialized globally in the layout or scrub.ts
 
   return (
@@ -207,7 +210,7 @@ export function Component() {
           <ParallaxLayer
             layer={{
               type: 'marquee',
-              content: 'DIRECCIÓN CREATIVA Y EJECUTIVA  /   ESCENOGRAFÍA  /   DISEÑO LUMÍNICO DE ESPECTÁCULOS  /   DISEÑO SONORO QUINTAFÓNICO  /   DIRECCIÓN DE OBRA',
+              content: t('approved.14', 'DIRECCIÓN CREATIVA Y EJECUTIVA  /   ESCENOGRAFÍA  /   DISEÑO LUMÍNICO DE ESPECTÁCULOS  /   DISEÑO SONORO QUINTAFÓNICO  /   DIRECCIÓN DE OBRA'),
               speed: 0,
               className: 'mal-h4',
               duration: 143 * MARQUEE.secondsPerChar
@@ -218,12 +221,12 @@ export function Component() {
           {/* ANCHOR: Intro text (determines section height) */}
           <div style={{ position: 'relative', marginTop: '264px', marginLeft: '59.2%', width: '467px', zIndex: 2 }}>
             <TextBlock>
-              <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
+              <p className="mal-p" style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.15">
                 Dado que la objetividad es un proyecto inalcanzable, Constanza Schwartz crea con el subjetivismo escénico experiencias intensamente subjetivas por las que el espectador participativo puede ir cambiando su inserción y su influencia en su entorno.
-              </p>
-              <p className="mal-p">
+              </TranslatedText></p>
+              <p className="mal-p"><TranslatedText id="beyond.responsibility">
                 Somos responsables de los mundos que creamos pero solo en la medida en que aceptamos que nuestra contribución y nuestra influencia va a estar guiada por una extrema subjetividad. La ambición de tratar de ser objetivos nos ha traído demasiadas dificultades y las más diversas guerras. Es necesario para cada uno de nosotros, expandir el territorio de su subjetividad para dar sentido a lo que realmente importa.
-              </p>
+              </TranslatedText></p>
             </TextBlock>
           </div>
 
@@ -236,7 +239,7 @@ export function Component() {
           <ParallaxLayer
             layer={{
               type: 'marquee',
-              content: 'Somos responsables de los mundos que creamos',
+              content: t('approved.18', 'Somos responsables de los mundos que creamos'),
               speed: 0,
               className: 'mal-marquee-blend mal-h4',
               duration: 44 * MARQUEE.secondsPerChar
@@ -270,12 +273,12 @@ export function Component() {
             position={{ top: '222px', left: '21.1%', width: '32.4%', height: 'auto', zIndex: 2 }}
           >
             <TextBlock>
-              <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
+              <p className="mal-p" style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.19">
                 La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
-              </p>
-              <p className="mal-p">
+              </TranslatedText></p>
+              <p className="mal-p"><TranslatedText id="approved.20">
                 Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy. Los horrores de su existencia son velozmente atenuados por un bosque de acrílico, sitar en homenaje a nuestros orígenes. En el abismo entre estas dos escenas pueden brotar cuestiones acerca de la validez de nuestro modo de vivir. Esta obra nos permite acercarnos a estímulos con los que cohabitamos diariamente desde planos de conciencia más sensibles que lo que permite el diario trajinar por nuestra civilización industrializada.
-              </p>
+              </TranslatedText></p>
             </TextBlock>
           </ParallaxLayer>
 
@@ -293,13 +296,13 @@ export function Component() {
           {/* Text 3 — SECOND ANCHOR */}
           <div style={{ position: 'relative', marginTop: '390px', marginLeft: '59.2%', width: '32.4%', zIndex: 2 }}>
             <TextBlock>
-              <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
+              <p className="mal-p" style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.21">
                 Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
-              </p>
-              <p className="mal-p" style={{ marginBottom: '1.5rem' }}>
+              </TranslatedText></p>
+              <p className="mal-p" style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.22">
                 ¿De dónde viene la electricidad que fluye hacia las pantallas de nuestros televisores, notebooks, computadoras, teléfonos?
-              </p>
-              <p className="mal-p">Tan familiares.</p>
+              </TranslatedText></p>
+              <p className="mal-p"><TranslatedText id="approved.23">Tan familiares.</TranslatedText></p>
             </TextBlock>
           </div>
         </ParallaxSection>
@@ -310,7 +313,7 @@ export function Component() {
           <ParallaxLayer
             layer={{
               type: 'marquee',
-              content: 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.',
+              content: t('approved.24', 'DERRIBAR LAS BARRERAS RACIONALES QUE impiden fluir nuestra creatividad.'),
               speed: 0,
               className: 'mal-marquee-blend mal-h4',
               duration: 71 * MARQUEE.secondsPerChar
@@ -365,7 +368,7 @@ export function Component() {
           <ParallaxLayer
             layer={{
               type: 'marquee',
-              content: '¿CÓMO SEGUIR HABITANDO EL PLANETA?',
+              content: t('approved.25', '¿CÓMO SEGUIR HABITANDO EL PLANETA?'),
               speed: 0,
               className: 'mal-marquee-blend mal-h4',
               duration: 34 * MARQUEE.secondsPerChar
@@ -379,9 +382,9 @@ export function Component() {
           {/* ANCHOR: Text 4 right */}
           <div style={{ position: 'relative', marginTop: '-120px', marginLeft: '59.02%', width: '467px', zIndex: 2, marginBottom: '-56px' }}>
             <TextBlock>
-              <p className="mal-p">
+              <p className="mal-p"><TranslatedText id="approved.26">
                 Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Requiere, sin duda, de una integración de nuestro sentir y pensar. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético, la literatura y las computadoras y por qué no, las magníficas y aterradoras creaciones de la inteligencia artificial.
-              </p>
+              </TranslatedText></p>
             </TextBlock>
           </div>
         </ParallaxSection>
@@ -435,9 +438,9 @@ export function Component() {
           {/* ANCHOR: Paragraph left */}
           <div style={{ position: 'relative', marginTop: '230px', marginLeft: '10.69%', width: '467px', zIndex: 1 }}>
             <TextBlock>
-              <p className="mal-p">
+              <p className="mal-p"><TranslatedText id="approved.27">
                 De esas raíces y las tensiones de nuestra vida cotidiana, nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde de algunas plantitas traviesas que asoman en un balcón.
-              </p>
+              </TranslatedText></p>
             </TextBlock>
           </div>
 
@@ -445,7 +448,7 @@ export function Component() {
           <ParallaxLayer
             layer={{
               type: 'marquee',
-              content: 'NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA',
+              content: t('approved.28', 'NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA'),
               speed: 0,
               className: 'mal-marquee-blend mal-h4',
               duration: 84 * MARQUEE.secondsPerChar
@@ -485,9 +488,9 @@ export function Component() {
           {/* ANCHOR: Text 6 - Right aligned */}
           <div style={{ position: 'relative', marginTop: '-10px', marginLeft: '59.16%', width: '467px', zIndex: 1 }}>
             <TextBlock>
-              <p className="mal-p">
+              <p className="mal-p"><TranslatedText id="approved.29">
                 La ciencia y la técnica han triunfado hasta participar de la construcción completa de los paisajes de nuestras ciudades. "Más allá del infinito" es una alerta cruda e implacable que subraya los aspectos amenazantes de esta victoria.
-              </p>
+              </TranslatedText></p>
             </TextBlock>
           </div>
 
@@ -499,9 +502,9 @@ export function Component() {
           {/* ANCHOR 3: Text 7 - Left aligned */}
           <div style={{ position: 'relative', marginTop: '200px', marginLeft: '26.67%', width: '467px', zIndex: 1 }}>
             <TextBlock>
-              <p className="mal-p">
+              <p className="mal-p"><TranslatedText id="approved.30">
                 La vibración de esta obra persiste en nuestros sentidos, nos impulsa a buscar nuevas respuestas que tal vez están asociadas a las notas de nostalgia distribuidas con inclemencia en diversos rincones de la muestra. Nuestros afectos y la ternura que suele acompañar a la nostalgia serán solo una parte de la respuesta emocional a esta apelación al amor y la cordura.
-              </p>
+              </TranslatedText></p>
             </TextBlock>
           </div>
         </ParallaxSection>
@@ -533,9 +536,9 @@ export function Component() {
                 maxWidth: '850px',
                 marginLeft: '45%',
                 textAlign: 'left'
-              }}>
-                SI TIENES APEGO A TU<br />CORDURA, NO ENTRES.
-              </p>
+              }}><TranslatedText id="beyond.warning1">
+                SI TIENES APEGO A TU</TranslatedText><br /><TranslatedText id="beyond.warning2">CORDURA, NO ENTRES.
+              </TranslatedText></p>
             </div>
           </div>
 
@@ -563,11 +566,11 @@ export function Component() {
               maxWidth: 'none',
               display: 'block',
             }}>
-              <span style={{ fontWeight: 500 }}>“MÁS ALLÁ DEL INFINITO”</span> por Constanza Schwartz<br />
-              <span style={{ fontWeight: 500 }}>Acompañamiento Conceptual:</span> Graciela Peyrú &nbsp;&nbsp;/&nbsp;&nbsp;
-              <span style={{ fontWeight: 500 }}>Composición Sonora:</span> Francisco Rousset Osio &nbsp;&nbsp;/&nbsp;&nbsp;
-              <span style={{ fontWeight: 500 }}>Diseño Lumínico:</span> Renzo Salces &nbsp;&nbsp;/&nbsp;&nbsp;
-              <span style={{ fontWeight: 500 }}>Registro Audiovisual:</span> Martín Rois &nbsp;&nbsp;/&nbsp;&nbsp;
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.title">“MÁS ALLÁ DEL INFINITO”</TranslatedText></span> <TranslatedText id="beyond.by">por Constanza Schwartz</TranslatedText><br />
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit1">Acompañamiento Conceptual:</TranslatedText></span> Graciela Peyrú &nbsp;&nbsp;/&nbsp;&nbsp;
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit2">Composición Sonora:</TranslatedText></span> Francisco Rousset Osio &nbsp;&nbsp;/&nbsp;&nbsp;
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit3">Diseño Lumínico:</TranslatedText></span> Renzo Salces &nbsp;&nbsp;/&nbsp;&nbsp;
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit4">Registro Audiovisual:</TranslatedText></span> Martín Rois &nbsp;&nbsp;/&nbsp;&nbsp;
               <span style={{ fontWeight: 500 }}>Coproducción <br></br>lumínica de Árboles de Acrílico:</span> Matías Kroitor &nbsp;&nbsp;/&nbsp;&nbsp;
               <span style={{ fontWeight: 500 }}>Coproducción de Escenas y Diseño Lumínico:</span> Manuela Ihan &nbsp;/&nbsp;
               <span style={{ fontWeight: 500 }}>Project Management:</span> Marina Kucbart &nbsp;/&nbsp;
@@ -594,12 +597,12 @@ export function Component() {
         {/* TEXT 1 */}
         <div style={{ color: '#fff', marginTop: '80px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
           <TextBlock>
-            <p style={{ marginBottom: '1.5rem' }}>
+            <p style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.15">
               Dado que la objetividad es un proyecto inalcanzable, Constanza Schwartz crea con el subjetivismo escénico experiencias intensamente subjetivas por las que el espectador participativo puede ir cambiando su inserción y su influencia en su entorno.
-            </p>
-            <p>
+            </TranslatedText></p>
+            <p><TranslatedText id="approved.16">
               Somos responsables de los mundos que creamos pero solo en la medida en que aceptamos que nuestra contribución y nuestra influencia va a estar guiada por una extrema subjetividad.
-            </p>
+            </TranslatedText></p>
           </TextBlock>
         </div>
 
@@ -621,7 +624,7 @@ export function Component() {
                   letterSpacing: '0.56px',
                   textTransform: 'uppercase',
                   color: '#FFF'
-                } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS </span>
+                } as any}><TranslatedText id="approved.18">SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS </TranslatedText></span>
               </div>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
@@ -631,7 +634,7 @@ export function Component() {
                   letterSpacing: '0.56px',
                   textTransform: 'uppercase',
                   color: '#FFF'
-                } as any}>SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS </span>
+                } as any}><TranslatedText id="approved.18">SOMOS RESPONSABLES DE LOS MUNDOS QUE CREAMOS </TranslatedText></span>
               </div>
             </div>
           </div>
@@ -650,12 +653,12 @@ export function Component() {
         {/* TEXT 2 */}
         <div style={{ color: '#fff', marginTop: '255px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
           <TextBlock>
-            <p style={{ marginBottom: '1.5rem' }}>
+            <p style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.19">
               La obra de Constanza, instaura el horror en la apelación estática a derribar las barreras racionales que impiden fluir nuestra creatividad.
-            </p>
-            <p>
+            </TranslatedText></p>
+            <p><TranslatedText id="approved.20">
               Un reactor nuclear hiperrealista permite acercar nuestro cuerpo, y con él nuestra sensibilidad a una distancia de la fuente radioactiva prohibida hasta hoy. Los horrores de su existencia son velozmente atenuados por un bosque de acrílico, altar en homenaje a nuestros orígenes.
-            </p>
+            </TranslatedText></p>
           </TextBlock>
         </div>
         {/* THIRD PAIR: img5 (WEB025) + img6 (GIF1) */}
@@ -669,10 +672,10 @@ export function Component() {
         {/* TEXT 3 */}
         <div style={{ color: '#fff', marginTop: '-130px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
           <TextBlock>
-            <p style={{ marginBottom: '1.5rem' }}>
+            <p style={{ marginBottom: '1.5rem' }}><TranslatedText id="approved.21">
               Extraños testigos de metal espejados nos acompañan incólumes a lo largo de toda esta instalación siendo una compañía fiel entre las múltiples simbolizaciones abstractas que nos rodean.
-            </p>
-            <p>¿De dónde viene la electricidad que fluye hacia las pantallas?</p>
+            </TranslatedText></p>
+            <p><TranslatedText id="approved.22">¿De dónde viene la electricidad que fluye hacia las pantallas?</TranslatedText></p>
           </TextBlock>
         </div>
 
@@ -693,7 +696,7 @@ export function Component() {
                   letterSpacing: '0.56px',
                   textTransform: 'uppercase',
                   color: '#FFF'
-                } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD </span>
+                } as any}><TranslatedText id="approved.24">DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD </TranslatedText></span>
               </div>
               <div className="marquee-set">
                 <span className="marquee-item" style={{
@@ -703,7 +706,7 @@ export function Component() {
                   letterSpacing: '0.56px',
                   textTransform: 'uppercase',
                   color: '#FFF'
-                } as any}>DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD </span>
+                } as any}><TranslatedText id="approved.24">DERRIBAR LAS BARRERAS RACIONALES QUE IMPIDEN FLUIR NUESTRA CREATIVIDAD </TranslatedText></span>
               </div>
             </div>
           </div>
@@ -733,14 +736,14 @@ export function Component() {
           <div style={{ position: 'absolute', top: '20px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference' }}>
             <div className="marquee-track" style={{ animationDuration: `${34 * MARQUEE.secondsPerChar}s` }}>
               <div className="marquee-set">
-                <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>
+                <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}><TranslatedText id="approved.25">
                   ¿CÓMO SEGUIR HABITANDO EL PLANETA?
-                </span>
+                </TranslatedText></span>
               </div>
               <div className="marquee-set">
-                <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>
+                <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}><TranslatedText id="approved.25">
                   ¿CÓMO SEGUIR HABITANDO EL PLANETA?
-                </span>
+                </TranslatedText></span>
               </div>
             </div>
           </div>
@@ -749,9 +752,9 @@ export function Component() {
         {/* TEXT 4 */}
         <div style={{ color: '#fff', marginTop: '40px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
           <TextBlock>
-            <p>
+            <p><TranslatedText id="approved.26">
               Numerosas cuestiones sobre cómo seguir habitando el planeta quedan abiertas directamente a nuestra sensibilidad sin mediación de palabras. Ciudadana del siglo XXI, Constanza Schwartz, impregna sus raíces en la ambigüedad que nuestra cultura manifiesta entre lo orgánico y lo sintético.
-            </p>
+            </TranslatedText></p>
           </TextBlock>
         </div>
 
@@ -781,9 +784,9 @@ export function Component() {
 
           <div style={{ color: '#fff', marginTop: '80px', width: 'calc(100% - 40px)', marginLeft: '20px' }}>
             <TextBlock>
-              <p>
+              <p><TranslatedText id="approved.27">
                 De esas raíces y las tensiones de nuestra vida cotidiana, nuestra cultura sumerge nuestra vida diaria en el triunfo de la ciencia y la técnica excepcionalmente interrumpidas por el verde de algunas plantitas traviesas que asoman en un balcón.
-              </p>
+              </TranslatedText></p>
             </TextBlock>
           </div>
 
@@ -795,10 +798,10 @@ export function Component() {
             <div style={{ position: 'absolute', top: '360px', left: 0, width: '100%', height: '40px', overflow: 'hidden', mixBlendMode: 'difference', zIndex: 3 }}>
               <div className="marquee-track" style={{ animationDuration: `${85 * MARQUEE.secondsPerChar}s` }}>
                 <div className="marquee-set">
-                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span>
+                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}><TranslatedText id="approved.28">NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </TranslatedText></span>
                 </div>
                 <div className="marquee-set">
-                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </span>
+                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}><TranslatedText id="approved.28">NUESTRA CULTURA SUMERGE NUESTRA VIDA DIARIA EN EL TRIUNFO DE LA CIENCIA Y LA TÉCNICA </TranslatedText></span>
                 </div>
               </div>
             </div>
@@ -816,10 +819,10 @@ export function Component() {
             <div style={{ marginTop: '0px', height: '40px', overflow: 'hidden' }}>
               <div className="marquee-track" style={{ animationDuration: `${41 * MARQUEE.secondsPerChar}s` }}>
                 <div className="marquee-set">
-                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span>
+                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}><TranslatedText id="approved.31">SI TIENES APEGO A TU CORDURA NO ENTRES · </TranslatedText></span>
                 </div>
                 <div className="marquee-set">
-                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}>SI TIENES APEGO A TU CORDURA NO ENTRES · </span>
+                  <span className="marquee-item" style={{ fontFamily: '"Helvetica Neue LT Std", sans-serif', fontSize: '28px', fontWeight: 250, letterSpacing: '0.56px', textTransform: 'uppercase', color: '#FFF' } as any}><TranslatedText id="approved.31">SI TIENES APEGO A TU CORDURA NO ENTRES · </TranslatedText></span>
                 </div>
               </div>
             </div>
@@ -832,11 +835,11 @@ export function Component() {
               fontWeight: 300,
               opacity: 0.8
             }}>
-              <span style={{ fontWeight: 500 }}>“MÁS ALLÁ DEL INFINITO”</span> por Constanza Schwartz<br />
-              <span style={{ fontWeight: 500 }}>Acompañamiento Conceptual:</span> Graciela Peyrú<br />
-              <span style={{ fontWeight: 500 }}>Composición Sonora:</span> Francisco Rousset Osio<br />
-              <span style={{ fontWeight: 500 }}>Diseño Lumínico:</span> Renzo Salces<br />
-              <span style={{ fontWeight: 500 }}>Registro Audiovisual:</span> Martín Rois
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.title">“MÁS ALLÁ DEL INFINITO”</TranslatedText></span> <TranslatedText id="beyond.by">por Constanza Schwartz</TranslatedText><br />
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit1">Acompañamiento Conceptual:</TranslatedText></span> Graciela Peyrú<br />
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit2">Composición Sonora:</TranslatedText></span> Francisco Rousset Osio<br />
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit3">Diseño Lumínico:</TranslatedText></span> Renzo Salces<br />
+              <span style={{ fontWeight: 500 }}><TranslatedText id="beyond.credit4">Registro Audiovisual:</TranslatedText></span> Martín Rois
             </p>
           </div>
         </div>

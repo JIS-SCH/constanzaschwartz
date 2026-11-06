@@ -1,5 +1,7 @@
 'use client'
 
+import { TranslatedText, useLanguage } from '@/src/i18n/LanguageProvider'
+
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { cldImg } from '@/src/utils/cloudinary'
@@ -145,14 +147,15 @@ const YEARS: YearData[] = [
 // ---------------------------------------------------------------------------
 function Marquee() {
   const trackRef = useRef<HTMLDivElement>(null)
-  const text = 'Es posible que la objetividad sea un proyecto inalcanzable de la modernidad.'
+  const { t } = useLanguage()
+  const text = t('approved.4', 'Es posible que la objetividad sea un proyecto inalcanzable de la modernidad.')
 
   useEffect(() => {
     if (!trackRef.current) return
     const duration = text.length * MARQUEE.secondsPerChar
     const tl = gsap.to(trackRef.current, { xPercent: -50, ease: 'none', duration, repeat: -1 })
     return () => { tl.kill() }
-  }, [])
+  }, [text])
 
   return (
     <div className="overflow-hidden w-full">
@@ -251,21 +254,21 @@ export function ProfilePage() {
         {/* STATEMENT */}
         <div className="pr-statement">
           <p className="pr-p pr-p--label">STATEMENT</p>
-          <p className="pr-p">
+          <p className="pr-p"><TranslatedText id="approved.2">
             Como humanista, celebro el poder de las palabras y también me permito extenderme a las
             imágenes, los aromas, las texturas, los sonidos y la iluminación de lo que voy creando.
             Me conmueve la idea medieval de museo que podía llamarse simultáneamente estudio, teatro,
             microcosmos, archivo, biblioteca, casino, gabinete, galería y por sobre todo, un lugar para
             llenar. Cornucopia que media entre un espacio privado y un espacio público.
-          </p>
-          <p className="pr-p">
+          </TranslatedText></p>
+          <p className="pr-p"><TranslatedText id="approved.3">
             Bondini dice: &ldquo;los lugares en que se venera a las musas deben ser llamados
             museos.&rdquo; Estos son además un espacio que hace de nexo entre las distintas
             disciplinas. Imagino poseer una lupa polisensorial que resalta la singularidad de cada
             percepción y cada artista. Creo que la descripción de mi obra se encuadra adecuadamente
             dentro de la denominación &ldquo;subjetivismo escénico&rdquo;. Busco el máximo contacto
             posible con las emociones evocadas en el espectador participativo.
-          </p>
+          </TranslatedText></p>
         </div>
 
         {/* Marquee */}
@@ -275,13 +278,13 @@ export function ProfilePage() {
 
         {/* Quote */}
         <div className="pr-quote">
-          <p className="pr-p">
+          <p className="pr-p"><TranslatedText id="approved.5">
             Es posible que la objetividad sea un proyecto inalcanzable de la modernidad. Somos
             responsables de los mundos que creamos pero solo en la medida en que admitimos que nuestra
             contribución y nuestra influencia va a estar guiada por la subjetividad. Es necesario para
             cada uno de nosotros, expandir el territorio de su subjetividad para dar sentido a las
             cosas más trascendentales de este mundo.
-          </p>
+          </TranslatedText></p>
         </div>
 
         {/* Second portrait */}
@@ -296,19 +299,19 @@ export function ProfilePage() {
 
         {/* Text 2 */}
         <div className="pr-text2">
-          <p className="pr-p">
+          <p className="pr-p"><TranslatedText id="approved.6">
             Yo no soy el traje que llevo puesto, soy lo que cada uno experimenta en las puestas en
             escena que voy realizando. ¿Son puestas? ¿Son escenas? ¿Son escenografías? ¿Son
             instalaciones? ¿Son esculturas? ¿Son obras de teatro? ¿Son homenajes al cine? ¿Son guiños
             a la arquitectura? ¿Son…? ¿Qué son?
-          </p>
-          <p className="pr-p">
+          </TranslatedText></p>
+          <p className="pr-p"><TranslatedText id="approved.7">
             Los animales habitan medio ambientes. Las personas creamos y construimos mundos. No acepto
             las fronteras rígidas entre las distintas formas y ramas del arte. Mis creaciones son
             inclusivas y trabajan con herramientas de los más diversos lenguajes artísticos. Mi
             objetivo es crear una experiencia distinta dentro de la vida cotidiana y conmover las
             bases mismas en que cada uno concibe su interacción con otros y el planeta.
-          </p>
+          </TranslatedText></p>
         </div>
 
         {/* BIO rotated label */}
@@ -322,12 +325,12 @@ export function ProfilePage() {
             <span className="uppercase">Constanza Schwartz</span>
             {' '}(Buenos Aires, 1999).
           </p>
-          <p className="pr-p">
+          <p className="pr-p"><TranslatedText id="approved.10">
             Licenciada en Diseño de Espectáculos en Escenografía y Dirección Cinematográfica en
             Dirección de Arte (Universidad de Palermo) recibiendo premiación por Suma y Magna Cum
             Laude en ambas carreras.
-          </p>
-          <p className="pr-p">
+          </TranslatedText></p>
+          <p className="pr-p"><TranslatedText id="approved.11">
             Su producción trabaja en un espacio intermedio que incluye, pero también desafía la
             &ldquo;realidad&rdquo; de las percepciones ordinarias. Es una artista que busca crear
             obras de arte experienciales e interactivas. Desarrolla un lenguaje visual que atraviesa
@@ -335,13 +338,13 @@ export function ProfilePage() {
             el video, el diseño lumínico, el diseño sonoro y los aromas. Su foco es generar
             espectáculos totales en los cuales el espectador pueda vivir una experiencia singular
             y única.
-          </p>
-          <p className="pr-p">
+          </TranslatedText></p>
+          <p className="pr-p"><TranslatedText id="approved.12">
             Participó en diversas clínicas y talleres entre los que se cuentan: Taller de Desarrollo
             de Proyectos Curatoriales con Victoria Noorthoorn, Espacio Munar con la de clínica de
             obra y taller de escultura Luis María Terán, taller con Diego Bianchi en el CCK,
             intercambios con Max Gomez Canle, taller de fotografía Lupe Jelena, entre otros.
-          </p>
+          </TranslatedText></p>
         </div>
 
       </div>{/* /pr-intro */}

@@ -2,12 +2,14 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLanguage } from '@/src/i18n/LanguageProvider'
 import { projectRegistry } from '@/src/projects/registry'
 import { useTransition } from '@/src/contexts/TransitionContext'
 import { ParallaxGallery } from '@/src/components/parallax/ParallaxGallery'
 
 export function ProjectView({ slug }: { slug: string }) {
   const router = useRouter()
+  const { localizedPath } = useLanguage()
   const { state, reveal } = useTransition()
 
   const mod = projectRegistry[slug]
@@ -25,7 +27,7 @@ export function ProjectView({ slug }: { slug: string }) {
     return (
       <div style={{ padding: '80px 24px', color: '#fff' }}>
         <p>Project not found.</p>
-        <button onClick={() => router.push('/')} style={{ color: '#999', marginTop: 16 }}>
+        <button onClick={() => router.push(localizedPath('/'))} style={{ color: '#999', marginTop: 16 }}>
           Back
         </button>
       </div>

@@ -388,6 +388,47 @@ canvas {
 }
 
 /* Respect reduced-motion: stop the auto-scroll + skeleton shimmer */
+.language-selector {
+  position: absolute;
+  left: 88px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  color: #fff;
+  pointer-events: auto;
+  font-family: HelveticaLTStd, 'Helvetica Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.language-selector a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 25px;
+  min-height: 32px;
+  color: inherit;
+  opacity: 0.45;
+  text-decoration: none;
+}
+.language-selector a[aria-current='true'],
+.language-selector a:hover,
+.language-selector a:focus-visible { opacity: 1; }
+.language-selector a:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+.language-divider { opacity: 0.45; }
+
+@media (max-width: 767px) {
+  html[lang='en'] .mutek-p,
+  html[lang='en'] .eco-p {
+    max-width: calc(100vw - 40px);
+  }
+  html[lang='en'] .mutek-ritual-lines {
+    width: calc(75vw - 32.5px);
+    white-space: normal !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   [style*="carousel-scroll"] { -webkit-animation: none !important; animation: none !important; }
   .carousel-skeleton { -webkit-animation: none !important; animation: none !important; }

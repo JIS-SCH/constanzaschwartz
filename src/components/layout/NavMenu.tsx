@@ -6,6 +6,7 @@ import Image from 'next/image'
 import gsap from 'gsap'
 import { cldImg } from '@/src/utils/cloudinary'
 import { DURATION, EASE, STAGGER } from '@/src/motion/tokens'
+import { useLanguage } from '@/src/i18n/LanguageProvider'
 
 const PROJECT_ROWS = [
   [
@@ -33,6 +34,7 @@ export function NavMenu({
   onContactClick,
 }: NavMenuProps) {
   const router = useRouter()
+  const { localizedPath, t } = useLanguage()
   const overlayRef = useRef<HTMLDivElement>(null)
   const itemWrappers = useRef<(HTMLDivElement | null)[]>([])
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
@@ -171,7 +173,7 @@ export function NavMenu({
                       onContactClick?.()
                     } else if (item === 'PROFILE') {
                       onClose()
-                      router.push('/profile')
+                      router.push(localizedPath('/profile'))
                     }
                   }}
                   style={{
@@ -228,7 +230,7 @@ export function NavMenu({
                           onClick={(e) => {
                             e.stopPropagation()
                             onClose()
-                            router.push(`/project/${p.slug}`)
+                            router.push(localizedPath(`/project/${p.slug}`))
                           }}
                           style={{
                             color: '#fff',
@@ -245,7 +247,7 @@ export function NavMenu({
                             padding: '5px 0',
                           }}
                         >
-                          {p.name}
+                          {t(`project.${p.slug}`, p.name)}
                         </span>
                       ))
                     ) : (
@@ -266,7 +268,7 @@ export function NavMenu({
                                 onClick={(e) => {
                                   e.stopPropagation()
                                   onClose()
-                                  router.push(`/project/${p.slug}`)
+                                  router.push(localizedPath(`/project/${p.slug}`))
                                 }}
                                 style={{
                                   color: '#fff',
@@ -283,7 +285,7 @@ export function NavMenu({
                                 onMouseEnter={(e) => (e.currentTarget.style.color = '#FFDF00')}
                                 onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}
                               >
-                                {p.name}
+                                {t(`project.${p.slug}`, p.name)}
                               </span>
                               {idx < row.length - 1 && (
                                 <span style={{

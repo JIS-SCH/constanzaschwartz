@@ -34,5 +34,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }))
 
-  return [...staticRoutes, ...projectRoutes]
+  return [...staticRoutes, ...projectRoutes].flatMap((route) => {
+    const path = route.url.slice(BASE_URL.length)
+    const englishUrl = `${BASE_URL}/en${path}`
+    const alternates = { languages: { es: route.url, en: englishUrl } }
+    return [{ ...route, alternates }, { ...route, url: englishUrl, alternates }]
+  })
 }
